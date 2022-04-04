@@ -7,19 +7,19 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-  public apiURL = 'http://localhost:3000/employees';
+  private apiURL = 'http://localhost:8080/employee';
 
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiURL);
+    return this.http.get<Employee[]>(`${this.apiURL}`);
   }
 
   findById(id: number): Observable<any> {
     return this.http.get<Employee[]>(this.apiURL + '/' + id);
   }
 
-  updateCustomer(id: number, employee: Employee): Observable<any> {
+  updateEmployee(id: number, employee: Employee): Observable<any> {
     return this.http.patch<Employee[]>(this.apiURL + '/' + id, employee);
   }
 }

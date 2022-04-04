@@ -40,10 +40,14 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.employeeService.updateEmployee(this.employeeForm.value.id, this.employeeForm.value).subscribe((data) => {
+      console.log(data);
+      this.employee = data['content'];
+    });
   }
 
   updateEmployee() {
-    this.employeeService.updateCustomer(this.employeeForm.value.id, this.employeeForm.value).subscribe();
+    this.employeeService.updateEmployee(this.employeeForm.value.id, this.employeeForm.value).subscribe();
     this.router.navigate(['/employee']);
   }
 }
