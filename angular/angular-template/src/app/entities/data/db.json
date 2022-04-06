@@ -1,0 +1,40 @@
+{
+  "entities": [
+    {
+      "entitiesId": "L001",
+      "inDate": "02-18-2000",
+      "outDate": "02-18-2000",
+      "status": "123456789",
+      "weight": "3",
+      "isDelete": "0",
+      "cage": "1"
+    },
+    {
+      "entitiesId": "L002",
+      "inDate": "02-18-2000",
+      "outDate": "02-18-2000",
+      "status": "123456789",
+      "weight": "3",
+      "isDelete": "0",
+      "cage": "2"
+    },
+    {
+      "entitiesId": "L003",
+      "inDate": "02-18-2000",
+      "outDate": "02-18-2000",
+      "status": "123456789",
+      "weight": "3",
+      "isDelete": "0",
+      "cage": "2"
+    },
+    {
+      "entitiesId": "L004",
+      "inDate": "02-18-2000",
+      "outDate": "02-18-2000",
+      "status": "123456789",
+      "weight": "3",
+      "isDelete": "0",
+      "cage": "2"
+    }
+  ]
+}
