@@ -10,20 +10,43 @@ import {Employee} from "../../model/employee";
 })
 export class EmployeeListComponent implements OnInit {
 
-  employeeList = [];
+  // employeeList = [];
+  private page:number= 0;
+  employeePage:Array<any>;
+  pages:Array<number>;
 
   constructor(private employeeService: EmployeeService, private router: Router){
-    employeeService.findAll().subscribe(next => {
-
-      this.employeeList = next;
-    });
+    // employeeService.findAll().subscribe(next => {
+    //   this.employeeList = next;
+    // });
   }
 
   ngOnInit(): void {
-    this.employeeService.findAll().subscribe((data) => {
-      console.log(data);
-      this.employeeList = data['content'];
-    });
+    this.findAllPageable()
+
+    // this.employeeService.findAll().subscribe((data) => {
+    //   console.log(data);
+    //   this.employeeList = data['content'];
+    // });
+
+  }
+
+  findAllPageable(){
+    this.employeeService.findAllPageable(this.page).subscribe(
+      data=>{
+        this.employeePage=data['content']
+        this.pages=new Array(data['totalPages'])
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+    )
+  }
+
+  setPage(i, event: any) {
+    event.preventDefault();
+    this.page= i;
+    this.findAllPageable();
   }
 
   detailCustomer(employee: any) {
@@ -33,4 +56,6 @@ export class EmployeeListComponent implements OnInit {
   updateEmployee(employee: any) {
     this.router.navigate(['/employee/update', employee.id]);
   }
+
+
 }

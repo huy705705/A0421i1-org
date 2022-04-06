@@ -15,11 +15,15 @@ export class EmployeeService {
     return this.http.get<Employee[]>(`${this.apiURL}`);
   }
 
+  findAllPageable(page:number){
+    return this.http.get(this.apiURL+'?page='+page);
+  }
+
   findById(id: number): Observable<any> {
     return this.http.get<Employee[]>(this.apiURL + '/' + id);
   }
 
   updateEmployee(id: number, employee: Employee): Observable<any> {
-    return this.http.patch<Employee[]>(this.apiURL + '/' + id, employee);
+    return this.http.patch<Employee[]>(this.apiURL + '/update' + id, employee);
   }
 }

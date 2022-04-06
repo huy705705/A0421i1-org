@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -21,8 +20,7 @@
       </li>
     </ul>
     <div class="dropleft">
-      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>
+      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>
         <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>
@@ -65,159 +63,166 @@
       </div>
     </div>
     <div class="col-lg-9 ">
-      <div style="margin-left: auto; margin-right: auto; width: auto;">
-        <div class=" container1">
-          <div class="card" style="width: 85%;">
-            <ul class="list-group list-group-flush">
-              <li class="h2"><h2>Chỉnh sửa thông tin nhân viên</h2></li>
-              <li class="list-group-item">
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                  <form class=" container1" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
-                    <div class="mb-3 row">
-                      <label for="id" class="col-sm-3 col-form-label">Mã NV:</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="id" disabled formControlName="employeeId">
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="name" class="col-sm-3 col-form-label">Họ và Tên:</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" formControlName="employeeId">
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="accName" class="col-sm-3 col-form-label">Tên tài khoản:</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="accName" placeholder="" value="VienNguyen04">
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="password" class="col-sm-3 col-form-label">Mật khẩu:</label>
-                      <div class="col-sm-9">
-                        <input type="password" class="form-control" id="password" placeholder="" value="matkhau02">
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="password2" class="col-sm-3 col-form-label">Xác nhận mật khẩu:</label>
-                      <div class="col-sm-9">
-                        <input type="password" class="form-control" id="password2" placeholder="" value="matkhau02">
-                        <span id="" class="form-text" style="color: red">
-                                                      Phải trùng với mật khẩu trên.
-                                                    </span>
-                      </div>
 
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="email" class="col-sm-3 col-form-label">Email:</label>
-                      <div class="col-sm-9">
-                        <input type="email" class="form-control" id="email" placeholder="" value="NguyenVien@gmail.com">
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="date" class="col-sm-3 col-form-label">Ngày sinh:</label>
-                      <div class="col-sm-9">
-                        <input type="date" class="form-control" id="date" placeholder="" value="02/02/1995">
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label class="col-sm-3 col-form-label">Giới tính:</label>
-                      <div class="col-sm-9">
-                        <input type="radio" checked placeholder="">Nam
-                        <input type="radio" placeholder="">Nữ
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="idCard" class="col-sm-3 col-form-label">CMND:</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="idCard" >
-                        <span class="form-text" style="color: red">
-                                                    </span>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <div class="col-sm-12" style="text-align: center">
-                        <button type="submit" class="btn btn-info" style="margin-right: 50px">Chỉnh sửa</button>
-                        <button type="button" class="btn btn-primary" [routerLink]="['/employee']">Quay lại</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </li>
-            </ul>
+      <strong class="SL">Cập nhật danh sách nhân viên</strong>
+
+      <hr/>
+      <form style="max-width: 700px;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
+        <div class="container-fluid">
+
+          <div class="form-group row">
+            <label  class="col-form-label ml-3" style="width: 150px;">Mã nhân viên<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp1" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="employeeId">
+                <span style="color: red;">Mã phải đúng định dạng: NVXXX với XXX là số nguyên dương!</span>
+              </div>
+            </div>
           </div>
+
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Tên nhân viên<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp2" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="employeeName">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="accountName">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Email<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp6" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="email">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label  class="col-form-label ml-3" style="width: 150px;">Ngày sinh<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp7" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="date" formControlName="birthday">
+                <span style="color: red;">Hãy chọn ngày trước ngày hiện tại !</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label  class="col-form-label ml-3" style="width: 150px;">Giới tính<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp9" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <select formControlName="gender">
+                  <option value="1" [selected]="employeeForm.value.gender === '1'">Male</option>
+                  <option value="0" [selected]="employeeForm.value.gender === '0'">Female</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Địa chỉ<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp10" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="idCard">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-warning m-2">Cập nhật</button>
+            <button type="button" class="btn btn-success m-2" [routerLink]="['/employee']">Huỷ bỏ</button>
+          </div>
+
         </div>
-      </div>
+      </form>
     </div>
   </div>
-</div>
-<footer class="">
-  <div class="container py-5">
-    <div class="row py-4">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
-        <p class="font-italic text-muted">Kết nối với chúng tôi.</p>
-        <ul class="list-inline mt-4">
-          <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i
-            class="fa fa-twitter i-footer"></i></a></li>
-          <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i
-            class="fa fa-facebook i-footer"></i></a></li>
-          <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i
-            class="fa fa-instagram i-footer"></i></a></li>
-          <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i
-            class="fa fa-pinterest i-footer"></i></a></li>
-          <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i
-            class="fa fa-vimeo i-footer"></i></a></li>
-        </ul>
-      </div>
-      <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-        <h6 class="text-uppercase font-weight-bold mb-4">Sản phẩm</h6>
-        <ul class="list-unstyled mb-0">
-          <li class="mb-2"><a href="#" class="text-muted">Thức Ăn</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Thuốc</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Giống</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Cá Thể</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-        <h6 class="text-uppercase font-weight-bold mb-4">Hệ thống</h6>
-        <ul class="list-unstyled mb-0">
-          <li class="mb-2"><a href="#" class="text-muted">Đăng nhập</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Đăn ký</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-lg-0">
-        <h6 class="text-uppercase font-weight-bold mb-4">Gửi ý kiến</h6>
-        <p class="text-muted mb-4">Mọi thắc mắc xin liên hệ cho chúng tôi.</p>
-        <div class="p-1 rounded border">
-          <div class="input-group">
-            <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1"
-                   class="form-control border-0 shadow-0">
-            <div class="input-group-append">
-              <button id="button-addon1" type="submit" class="btn btn-link"><i
-                class="fa fa-paper-plane"></i></button>
+  <footer class="">
+    <div class="container py-5">
+      <div class="row py-4">
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+          <p class="font-italic text-muted">Kết nối với chúng tôi.</p>
+          <ul class="list-inline mt-4">
+            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo i-footer"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Sản phẩm</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Thức Ăn</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Thuốc</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Giống</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Cá Thể</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Hệ thống</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Đăng nhập</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Đăn ký</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Gửi ý kiến</h6>
+          <p class="text-muted mb-4">Mọi thắc mắc xin liên hệ cho chúng tôi.</p>
+          <div class="p-1 rounded border">
+            <div class="input-group">
+              <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Copyrights -->
-  <div class="bg-light py-4">
-    <div class="container text-center">
-      <p class="text-muted mb-0 py-2">© 2019 Bootstrapious All rights reserved.</p>
+    <!-- Copyrights -->
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-muted mb-0 py-2">© 2019 Bootstrapious All rights reserved.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
+</div>

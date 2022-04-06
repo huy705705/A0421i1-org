@@ -104,18 +104,18 @@
               </thead>
 
               <tbody>
-              <tr *ngFor="let employee of employeeList">
+              <tr *ngFor="let employee of employeePage">
                 <td>{{employee.employeeId}}</td>
                 <td>{{employee.employeeName| uppercase}}</td>
                 <td>{{employee.accountId}}</td>
                 <td>{{employee.email}}</td>
                 <td>{{employee.birthday | date: "yyyy-MM-dd"}}</td>
-                <td *ngIf="employee.gender == true">Male</td>
-                <td *ngIf="employee.gender != true">Female</td>
+                <td *ngIf="employee.gender == true">Nam</td>
+                <td *ngIf="employee.gender != true">Nữ</td>
                 <td>{{employee.idCard}}</td>
                 <td>{{employee.address}}</td>
                 <td>
-                  <i class="fa-solid fa-pen-clip" style="color: blue;" (click)="updateEmployee(employee)"></i>
+                  <button class="btn" (click)="updateEmployee(employee)"><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>
                 </td>
                 <td>
                   <i class="fa-solid fa-trash-can" style="color: red;"></i>
@@ -133,25 +133,39 @@
             </div>
             <div class="col-sm-12 col-md-7">
               <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                <ul class="pagination"><li class="paginate_button page-item previous" id="dataTable_previous">
-                  <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Trước</a>
-                </li>
-                  <li class="paginate_button page-item ">
-                    <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                  </li>
-                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                  </li>
-                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                  </li>
-                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                  </li>
-                  <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                  </li>
-                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next">
 
-                    <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Sau</a>
+                <ul class="nav nav-pills">
+<!--                  <div>-->
+<!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
+<!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
+<!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
+<!--                  </div>-->
+                  <li class="nav-item" *ngFor="let p of pages;let i=index">
+<!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
+                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}</a>
                   </li>
                 </ul>
+
+
+<!--                <ul class="pagination"><li class="paginate_button page-item previous" id="dataTable_previous">-->
+<!--                  <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Trước</a>-->
+<!--                </li>-->
+<!--                  <li class="paginate_button page-item ">-->
+<!--                    <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>-->
+<!--                  </li>-->
+<!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>-->
+<!--                  </li>-->
+<!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>-->
+<!--                  </li>-->
+<!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>-->
+<!--                  </li>-->
+<!--                  <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>-->
+<!--                  </li>-->
+<!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next">-->
+
+<!--                    <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Sau</a>-->
+<!--                  </li>-->
+<!--                </ul>-->
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {EmployeeModule} from "./employee/employee.module";
 import {HttpClientModule} from "@angular/common/http";
+import {EmployeeService} from "./service/employee.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
