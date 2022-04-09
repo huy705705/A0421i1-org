@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-entities-delete',
@@ -10,6 +11,7 @@ export class EntitiesDeleteComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

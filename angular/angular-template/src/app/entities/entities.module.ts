@@ -6,13 +6,15 @@ import { EntitiesCreateComponent } from './entities-create/entities-create.compo
 import { EntitiesListComponent } from './entities-list/entities-list.component';
 import { EntitiesEditComponent } from './entities-edit/entities-edit.component';
 import { EntitiesDeleteComponent } from './entities-delete/entities-delete.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [EntitiesCreateComponent, EntitiesListComponent, EntitiesEditComponent, EntitiesDeleteComponent],
-  imports: [
-    CommonModule,
-    EntitiesRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        EntitiesRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class EntitiesModule { }
