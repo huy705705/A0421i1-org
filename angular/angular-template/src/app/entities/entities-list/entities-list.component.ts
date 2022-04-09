@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EntitiesService} from "../../service/entities.service";
 import {Router} from "@angular/router";
 import {Entities} from "../../model/entities";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-entities-list',
@@ -9,6 +10,7 @@ import {Entities} from "../../model/entities";
   styleUrls: ['./entities-list.component.css']
 })
 export class EntitiesListComponent implements OnInit {
+  entitiesForm:FormGroup;
   private page:number=0;
    entities2:Array<any>;
   pages:Array<number>;
@@ -46,5 +48,13 @@ export class EntitiesListComponent implements OnInit {
     event.preventDefault();
     this.page= i;
     this.findAllPageable();
+  }
+
+  updateEntities(entity: any) {
+
+  }
+
+  searchEntities() {
+
   }
 }

@@ -25,4 +25,9 @@ export class EntitiesDeleteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteEntities(id: string) {
+    console.log(id)
+    this.entitiesService.deleteEntitiesById(id).subscribe();
+    this.router.navigate(["entities"]);
+  }
 }

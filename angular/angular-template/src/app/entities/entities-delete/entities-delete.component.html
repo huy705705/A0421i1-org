@@ -146,12 +146,11 @@
             </div>
             <div class="modal-body" *ngIf="entity !== null" >
               <p>Bạn có chắc muốn xóa cá thể có mã là {{entity.entitiesId}} </p>
-              <p [attr.id]="entity" >{{entity.entitiesId}}</p>
               <h6>(Hành động này sẽ không thể hoàn tác)</h6>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Có </button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+              <button type="button" class="btn btn-primary" (click)="deleteEntities(entity.entitiesId)">Có </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" [routerLink]="['/entities']">Không</button>
             </div>
           </div>
         </div>
