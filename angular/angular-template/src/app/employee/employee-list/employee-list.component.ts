@@ -10,25 +10,24 @@ import {Employee} from "../../model/employee";
 })
 export class EmployeeListComponent implements OnInit {
 
-  // employeeList = [];
   private page:number= 0;
   employeePage:Array<any>;
   pages:Array<number>;
+  currentPage: number;
+  public searchName ="";
+  public searchId   ="";
+
 
   constructor(private employeeService: EmployeeService, private router: Router){
-    // employeeService.findAll().subscribe(next => {
-    //   this.employeeList = next;
-    // });
   }
 
   ngOnInit(): void {
-    this.findAllPageable()
-
+    this.findAllPageable();
+    this.search();
     // this.employeeService.findAll().subscribe((data) => {
     //   console.log(data);
     //   this.employeeList = data['content'];
     // });
-
   }
 
   findAllPageable(){
@@ -36,6 +35,7 @@ export class EmployeeListComponent implements OnInit {
       data=>{
         this.employeePage=data['content']
         this.pages=new Array(data['totalPages'])
+        this.currentPage= data['pageNumber']
       },
       (error) => {
         console.log(error.error.message);
@@ -50,12 +50,23 @@ export class EmployeeListComponent implements OnInit {
   }
 
   detailCustomer(employee: any) {
-    this.router.navigate(['/employee', employee.id]);
+    this.router.navigate(['/employee', employee.employeeId]);
   }
 
   updateEmployee(employee: any) {
-    this.router.navigate(['/employee/update', employee.id]);
+    this.router.navigate(['/employee/update', employee.employeeId]);
   }
 
-
+  search() {
+    this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim()).toPromise().then(data => {
+      console.log(data);
+        this.employeePage=data['content']
+        this.pages=new Array(data['totalPages'])
+        this.currentPage= data['pageNumber']
+    },
+      (error) => {
+        console.log(error.error.message);
+      }
+      );
+  }
 }

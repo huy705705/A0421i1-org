@@ -19,11 +19,16 @@ export class EmployeeService {
     return this.http.get(this.apiURL+'?page='+page);
   }
 
-  findById(id: number): Observable<any> {
-    return this.http.get<Employee[]>(this.apiURL + '/' + id);
+  findById(id: string): Observable<any> {
+    return this.http.get<Employee[]>(this.apiURL + '/update/' + id);
   }
 
   updateEmployee(id: number, employee: Employee): Observable<any> {
-    return this.http.patch<Employee[]>(this.apiURL + '/update' + id, employee);
+    return this.http.patch<Employee[]>(this.apiURL + '/update/' + id, employee);
+  }
+
+  findAllEmployeeName(searchName: string, searchId: string): Observable<any>{
+    console.log(searchName+ "   " + searchId);
+    return this.http.get<any>(this.apiURL + '?searchName=' + searchName + '&searchId=' + searchId);
   }
 }

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="employee-edit.component.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,15 +68,14 @@
       <strong class="SL">Cập nhật danh sách nhân viên</strong>
 
       <hr/>
-      <form style="max-width: 700px;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
+      <form style="max-width: 700px;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()" *ngIf="employeeForm">
         <div class="container-fluid">
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 150px;">Mã nhân viên<span class="text-danger">*</span></label>
+            <label class="col-form-label ml-3" style="width: 150px;">Mã nhân viên<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp1" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="text" formControlName="employeeId">
-                <span style="color: red;">Mã phải đúng định dạng: NVXXX với XXX là số nguyên dương!</span>
+                <input disabled class="span2 form-control" size="16" type="text" formControlName="employeeId">
               </div>
             </div>
           </div>
@@ -86,7 +86,19 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp2" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="text" formControlName="employeeName">
-                <span style="color: red;"></span>
+                <small class="text-danger" *ngIf="employeeForm.controls.emlpoyeeName.errors?.required && employeeForm.controls.emlpoyeeName.touched">
+                  Không được để trống!
+                </small>
+                <small class="text-danger"
+                       *ngIf="employeeForm.controls.emlpoyeeName.errors?.pattern && employeeForm.controls.emlpoyeeName.touched"
+                       class="text-danger">
+                  Tên không được là số hoặc ký tự đặc biệt!
+                </small>
+                <small class="text-danger"
+                       *ngIf="employeeForm.get('employeeName').hasError('maxlength') && employeeForm.controls.name.touched"
+                       class="text-danger">
+                  Tên không được dài hơn 40 ký tự!
+                </small>
               </div>
             </div>
           </div>
@@ -95,7 +107,7 @@
             <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="text" formControlName="accountName">
+                <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">
                 <span style="color: red;"></span>
               </div>
             </div>
@@ -136,30 +148,63 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp7" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="date" formControlName="birthday">
-                <span style="color: red;">Hãy chọn ngày trước ngày hiện tại !</span>
+                <small class="text-danger" *ngIf="employeeForm.get('birthday').hasError('ageNotEnough')
+                                               && employeeForm.controls.birthday.touched">
+                  Ngày sinh phải lớn hơn 18 và nhỏ hơn 100!
+                </small>
               </div>
             </div>
           </div>
 
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 150px;">Giới tính<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-append date" id="dp9" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <select formControlName="gender">
-                  <option value="1" [selected]="employeeForm.value.gender === '1'">Male</option>
-                  <option value="0" [selected]="employeeForm.value.gender === '0'">Female</option>
-                </select>
+            <div class="col-sm-7">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio1" value="Nam">
+                <label class="form-check-label" for="inlineRadio1">Nam</label>
               </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2" value="Nữ">
+                <label class="form-check-label" for="inlineRadio2">Nữ</label>
+              </div>
+<!--              <div class="form-check" id="dp9">-->
+<!--                <select formControlName="gender">-->
+<!--                  <option value="Nam" [selected]="employeeForm.value.gender">Nam</option>-->
+<!--                  <option value="Nữ" [selected]="employeeForm.value.gender">Nữ</option>-->
+<!--                </select>-->
+<!--              </div>-->
             </div>
 
           </div>
 
           <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Địa chỉ<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" style="width: 150px;">CMND<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp10" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="text" formControlName="idCard">
-                <span style="color: red;"></span>
+                <small class="text-danger" style="clear: both" *ngIf="employeeForm.controls.idCard.errors?.required && employeeForm.controls.idCard.touched" class="text-danger">
+                  Không được để trống!
+                </small>
+                <small class="text-danger" style="clear: both" *ngIf="employeeForm.controls.idCard.errors?.pattern && employeeForm.controls.idCard.touched" class="text-danger">
+                  CMND phải là 9 số!
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Địa chỉ<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp11" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="address">
+                <small class="text-danger" *ngIf="employeeForm.controls.address.errors?.required && employeeForm.controls.address.touched">
+                  Không được để trống!
+                </small>
+                <small class="text-danger"
+                       *ngIf="employeeForm.get('address').hasError('maxlength') && employeeForm.controls.address.touched"
+                       class="text-danger">
+                  Địa chỉ không được dài hơn 40 ký tự!
+                </small>
               </div>
             </div>
           </div>
@@ -176,7 +221,7 @@
   <footer class="">
     <div class="container py-5">
       <div class="row py-4">
-        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
           <p class="font-italic text-muted">Kết nối với chúng tôi.</p>
           <ul class="list-inline mt-4">
             <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter i-footer"></i></a></li>

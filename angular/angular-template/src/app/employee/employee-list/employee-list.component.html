@@ -35,9 +35,9 @@
 </nav>
 <div class="container-fluid" id="content">
   <div class="row">
-    <div class="col-lg-3 ml-0">
+    <div class="col-lg-2">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 245px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
@@ -63,26 +63,23 @@
         <!-- Sidebar -->
       </div>
     </div>
-    <div class="col-lg-9 ">
+    <div class="col-lg-10">
       <div class="card shadow ">
         <div class="card-header py-3">
           <div class="d-flex flex-row  d-flex justify-content-center">
-
-            <div class="col-4">
+            <div class="col-6">
               <div class="input-group">
                 <div class="form-outline">
-                  <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Nhập mã nhân viên" />
-
+                  <input (keyup.enter)="search()" (change)="searchId = $event.target.value" type="search" class="form-control" placeholder="Nhập mã nhân viên" />
                 </div>
-                <button type="button" class="btn btn-primary">
+                <div class="form-outline">
+                  <input (keyup.enter)="search()" (change)="searchName = $event.target.value" type="search" class="form-control" placeholder="Nhập tên nhân viên" />
+                </div>
+                <button type="button" (click)="search()" class="btn btn-primary">
                   Tìm kiếm
                 </button>
               </div>
-
             </div>
-
-
-
           </div>
         </div>
         <div class="card-body">
@@ -108,14 +105,16 @@
                 <td>{{employee.employeeId}}</td>
                 <td>{{employee.employeeName| uppercase}}</td>
                 <td>{{employee.accountId}}</td>
+                <td hidden>{{employee.accountName}}</td>
+                <td hidden>{{employee.avartar}}</td>
                 <td>{{employee.email}}</td>
                 <td>{{employee.birthday | date: "yyyy-MM-dd"}}</td>
-                <td *ngIf="employee.gender == true">Nam</td>
-                <td *ngIf="employee.gender != true">Nữ</td>
+                <td>{{employee.gender}}</td>
                 <td>{{employee.idCard}}</td>
                 <td>{{employee.address}}</td>
+                <td hidden>{{employee.isDelete}}</td>
                 <td>
-                  <button class="btn" (click)="updateEmployee(employee)"><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>
+                  <button class="btn"(click)="updateEmployee(employee)"><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>
                 </td>
                 <td>
                   <i class="fa-solid fa-trash-can" style="color: red;"></i>
@@ -125,6 +124,7 @@
               </tbody>
             </table>
           </div>
+
           <div class="row">
             <div class="col-sm-12 col-md-5">
               <a href="./create.html">
@@ -135,15 +135,11 @@
               <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
 
                 <ul class="nav nav-pills">
-<!--                  <div>-->
-<!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
-<!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
-<!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
-<!--                  </div>-->
+                  <li class="nav-link">Trang</li>
                   <li class="nav-item" *ngFor="let p of pages;let i=index">
-<!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
-                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}</a>
+                    <a class="nav-link " selected href="" (click)="setPage(i,$event)">{{i+1}}</a>
                   </li>
+<!--                  <a class="nav-link " href="" (click)="setPage(,$event)">Sau</a>-->
                 </ul>
 
 
@@ -178,7 +174,7 @@
 <footer class="">
   <div class="container py-5">
     <div class="row py-4">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
         <p class="font-italic text-muted">Kết nối với chúng tôi.</p>
         <ul class="list-inline mt-4">
           <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter i-footer"></i></a></li>

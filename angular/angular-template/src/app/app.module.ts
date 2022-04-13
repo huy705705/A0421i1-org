@@ -19,7 +19,7 @@ import {EmployeeService} from "./service/employee.service";
     HttpClientModule,
     NgbModule
   ],
-  providers: [EmployeeService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
