@@ -37,9 +37,9 @@
 </nav>
 <div class="container-fluid" id="content">
   <div class="row">
-    <div class="col-lg-3 ml-0">
+    <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 260px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"/>
@@ -71,12 +71,11 @@
         <!-- Sidebar -->
       </div>
     </div>
-    <div class="col-lg-9 ">
+    <div class="col-lg-10 ">
       <div class="card shadow ">
         <div class="card-header py-3">
           <div class="d-flex flex-row  d-flex justify-content-center">
-
-            <div class="col-4">
+            <div class="col-6">
               <div class="input-group">
                 <!--                <div class="form-outline">-->
                 <!--                  <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Nhập mã cá thể" />-->
@@ -85,22 +84,31 @@
                 <!--                <button type="button" class="btn btn-primary">-->
                 <!--                  Tìm kiếm-->
                 <!--                </button>-->
-                <form [formGroup]="entitiesForm" (ngSubmit)="searchEntities()">
-                  <div class="form-outline">
-                    <input id="search-focus" type="search" id="form1" class="form-control" formControlName=""
-                           placeholder="Nhập mã cá thể"/>
-                  </div>
-                  <button type="submit" class="btn btn-primary">
-                    Tìm kiếm
-                  </button>
-                </form>
+                <div class="form-outline">
+                  <input type="search" class="form-control" [(ngModel)]="inDate"
+                         placeholder="Nhập ngày vào"/>
+                </div>
+                <div class="form-outline"style="margin-left: 10px;" >
+                  <input type="search" class="form-control" [(ngModel)]="cage"
+                         placeholder="Nhập mã chuồng nuôi"/>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="search()" style="margin-left: 10px;">
+                  Tìm kiếm
+                </button>
               </div>
-
             </div>
-
-
           </div>
         </div>
+
+        <div *ngIf="isSubmitted then submited else notSubmited"></div>
+        <ng-template #notSubmited>
+          <h3>Không có kết quả nào để hiển thị</h3>
+        </ng-template>
+        <ng-template #submited>
+          <h1>Tìm ra kết quả</h1>
+        </ng-template>
+
+
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

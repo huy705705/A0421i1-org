@@ -13,22 +13,29 @@ export class EntitiesService {
 
   constructor(private http: HttpClient) {
   }
+
   findAll(): Observable<Entities[]> {
     return this.http.get<Entities[]>(this.apiURL);
   }
-  findAllPageable(page:number){
-    return this.http.get(this.apiURL+'?page='+page);
-  }
-  findById(id: string): Observable<Entities>  {
-    return this.http.get<Entities>(this.apiURL+"/delete/"+id);
+
+  findAllPageable(page: number) {
+    return this.http.get(this.apiURL + '?page=' + page);
   }
 
-  deleteEntitiesById(id: string){
-    console.log("2: "+id)
+  findById(id: string): Observable<Entities> {
+    return this.http.get<Entities>(this.apiURL + "/delete/" + id);
+  }
+
+  deleteEntitiesById(id: string) {
+    console.log("2: " + id)
     // let entities:Observable<Entities>;
     // entities =this.findById(id);
-    return this.http.patch(this.apiURL+"/delete/"+id,null);
+    return this.http.patch(this.apiURL + "/delete/" + id, null);
 
 
+  }
+
+  searchEntities(inDate: string,cageId: string) {
+    return this.http.get(this.apiURL + "/search?inDate="+inDate+"&cage="+cageId );
   }
 }

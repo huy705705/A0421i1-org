@@ -42,3 +42,6 @@ footer{
 body{
   text-align: center;
 }
+element.style {
+  margin-left: 10px;
+}
