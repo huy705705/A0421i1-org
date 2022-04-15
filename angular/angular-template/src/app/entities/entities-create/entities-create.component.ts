@@ -47,6 +47,7 @@ export class EntitiesCreateComponent implements OnInit {
   }
   constructor(private entitiesService: EntitiesService, private router: Router ) {
     this.entitiesService.getListCage().subscribe((data)=>{
+
     this.cageList=data;
       this.entitiesForm = new FormGroup({
         entitiesId: new FormControl("",
