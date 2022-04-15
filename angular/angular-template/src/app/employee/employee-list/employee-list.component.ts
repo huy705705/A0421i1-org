@@ -13,9 +13,12 @@ export class EmployeeListComponent implements OnInit {
   private page:number= 0;
   employeePage:Array<any>;
   pages:Array<number>;
-  currentPage: number;
+  currentPage:number;
   public searchName ="";
   public searchId   ="";
+  emptyMessenger = '';
+  isTrue = false;
+  isSubmitted:boolean;
 
 
   constructor(private employeeService: EmployeeService, private router: Router){
@@ -60,9 +63,11 @@ export class EmployeeListComponent implements OnInit {
   search() {
     this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim()).toPromise().then(data => {
       console.log(data);
-        this.employeePage=data['content']
-        this.pages=new Array(data['totalPages'])
-        this.currentPage= data['pageNumber']
+      if (data) {
+        this.employeePage = data['content']
+        this.pages = new Array(data['totalPages'])
+        this.currentPage = data['pageNumber']
+      }
     },
       (error) => {
         console.log(error.error.message);

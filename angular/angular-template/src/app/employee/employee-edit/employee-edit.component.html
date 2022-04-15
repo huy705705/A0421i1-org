@@ -75,7 +75,7 @@
             <label class="col-form-label ml-3" style="width: 150px;">Mã nhân viên<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp1" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input disabled class="span2 form-control" size="16" type="text" formControlName="employeeId">
+                <input class="span2 form-control" size="16" type="text" formControlName="employeeId">
               </div>
             </div>
           </div>
@@ -86,52 +86,52 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp2" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="text" formControlName="employeeName">
-                <small class="text-danger" *ngIf="employeeForm.controls.emlpoyeeName.errors?.required && employeeForm.controls.emlpoyeeName.touched">
-                  Không được để trống!
-                </small>
-                <small class="text-danger"
-                       *ngIf="employeeForm.controls.emlpoyeeName.errors?.pattern && employeeForm.controls.emlpoyeeName.touched"
-                       class="text-danger">
-                  Tên không được là số hoặc ký tự đặc biệt!
-                </small>
-                <small class="text-danger"
-                       *ngIf="employeeForm.get('employeeName').hasError('maxlength') && employeeForm.controls.name.touched"
-                       class="text-danger">
-                  Tên không được dài hơn 40 ký tự!
-                </small>
+<!--                <span class="text-danger" *ngIf="employeeForm.controls.emlpoyeeName.errors?.required && employeeForm.controls.emlpoyeeName.touched">-->
+<!--                  Không được để trống!-->
+<!--                </span>-->
+<!--                <span class="text-danger"-->
+<!--                       *ngIf="employeeForm.get('employeeName').hasError('pattern') && employeeForm.controls.emlpoyeeName.touched"-->
+<!--                       class="text-danger">-->
+<!--                  Tên không được là số hoặc ký tự đặc biệt!-->
+<!--                </span>-->
+<!--                <span class="text-danger"-->
+<!--                       *ngIf="employeeForm.get('employeeName').hasError('maxlength') && employeeForm.controls.name.touched"-->
+<!--                       class="text-danger">-->
+<!--                  Tên không được dài hơn 40 ký tự!-->
+<!--                </span>-->
               </div>
             </div>
           </div>
 
-          <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">
-                <span style="color: red;"></span>
-              </div>
-            </div>
-          </div>
+<!--          <div class="form-group row" >-->
+<!--            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>-->
+<!--            <div class="col-sm-8">-->
+<!--              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+<!--                <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">-->
+<!--                <span style="color: red;"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">
-                <span style="color: red;"></span>
-              </div>
-            </div>
-          </div>
+<!--          <div class="form-group row" >-->
+<!--            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>-->
+<!--            <div class="col-sm-8">-->
+<!--              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+<!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
+<!--                <span style="color: red;"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">
-                <span style="color: red;"></span>
-              </div>
-            </div>
-          </div>
+<!--          <div class="form-group row" >-->
+<!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
+<!--            <div class="col-sm-8">-->
+<!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+<!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
+<!--                <span style="color: red;"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Email<span class="text-danger">*</span></label>
@@ -148,10 +148,10 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp7" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="date" formControlName="birthday">
-                <small class="text-danger" *ngIf="employeeForm.get('birthday').hasError('ageNotEnough')
-                                               && employeeForm.controls.birthday.touched">
-                  Ngày sinh phải lớn hơn 18 và nhỏ hơn 100!
-                </small>
+<!--                <small class="text-danger" *ngIf="employeeForm.get('birthday').hasError('ageNotEnough')-->
+<!--                                               && employeeForm.controls.birthday.touched">-->
+<!--                  Ngày sinh phải lớn hơn 18 và nhỏ hơn 100!-->
+<!--                </small>-->
               </div>
             </div>
           </div>
@@ -182,12 +182,12 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp10" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="text" formControlName="idCard">
-                <small class="text-danger" style="clear: both" *ngIf="employeeForm.controls.idCard.errors?.required && employeeForm.controls.idCard.touched" class="text-danger">
-                  Không được để trống!
-                </small>
-                <small class="text-danger" style="clear: both" *ngIf="employeeForm.controls.idCard.errors?.pattern && employeeForm.controls.idCard.touched" class="text-danger">
-                  CMND phải là 9 số!
-                </small>
+<!--                <small class="text-danger" style="clear: both" *ngIf="employeeForm.controls.idCard.errors?.required && employeeForm.controls.idCard.touched" class="text-danger">-->
+<!--                  Không được để trống!-->
+<!--                </small>-->
+<!--                <small class="text-danger" style="clear: both" *ngIf="employeeForm.controls.idCard.errors?.pattern && employeeForm.controls.idCard.touched" class="text-danger">-->
+<!--                  CMND phải là 9 số!-->
+<!--                </small>-->
               </div>
             </div>
           </div>
@@ -197,14 +197,14 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp11" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="text" formControlName="address">
-                <small class="text-danger" *ngIf="employeeForm.controls.address.errors?.required && employeeForm.controls.address.touched">
-                  Không được để trống!
-                </small>
-                <small class="text-danger"
-                       *ngIf="employeeForm.get('address').hasError('maxlength') && employeeForm.controls.address.touched"
-                       class="text-danger">
-                  Địa chỉ không được dài hơn 40 ký tự!
-                </small>
+<!--                <small class="text-danger" *ngIf="employeeForm.controls.address.errors?.required && employeeForm.controls.address.touched">-->
+<!--                  Không được để trống!-->
+<!--                </small>-->
+<!--                <small class="text-danger"-->
+<!--                       *ngIf="employeeForm.get('address').hasError('maxlength') && employeeForm.controls.address.touched"-->
+<!--                       class="text-danger">-->
+<!--                  Địa chỉ không được dài hơn 40 ký tự!-->
+<!--                </small>-->
               </div>
             </div>
           </div>

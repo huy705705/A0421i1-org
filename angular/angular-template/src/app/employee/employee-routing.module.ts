@@ -9,9 +9,7 @@ const routesEmployee: Routes = [
     path: 'employee',
     children: [
       {path: '', component: EmployeeListComponent},
-      // {path: ':id',component: },
-      {path: 'update/:employeeId', component: EmployeeEditComponent},
-      {path: 'update', component: EmployeeEditComponent}
+      {path: 'update/:employeeId', component: EmployeeEditComponent}
     ]
   },
 ];

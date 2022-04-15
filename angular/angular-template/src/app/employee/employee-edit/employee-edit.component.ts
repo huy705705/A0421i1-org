@@ -12,34 +12,41 @@ import {Employee} from "../../model/employee";
 })
 export class EmployeeEditComponent implements OnInit {
 
-  employee: any;
+  employee: Employee;
   employeeId;
   employeeForm: FormGroup;
-  employeeList: Employee[];
+
+  validationMessages = {
+
+  }
+
 
   constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private employeeService: EmployeeService,
               private router: Router) {
+
     this.activatedRoute.paramMap.subscribe(next => {
-      const id = next.get('employeeId');
-      console.log(id);
+      this.employeeId = next.get('employeeId');
+      console.log(this.employeeId);
       // tslint:disable-next-line:no-shadowed-variable
-      employeeService.findById(id).subscribe( next => {
+      employeeService.findById(this.employeeId).subscribe( next => {
         this.employee = next;
-        console.log(next);
+        console.log(this.employee);
         this.employeeForm = new FormGroup({
-          employeeId      : new FormControl("", [Validators.required]),
+          employeeId      : new FormControl({value: '', disabled: true}, [Validators.required]),
           employeeName    : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
             'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
             Validators.maxLength(40)]),
-          accountId       : new FormControl(),
+          // accountId       : new FormControl(),
           birthday        : new FormControl('', [Validators.required, birthdayValidator()]),
+          avartar         : new FormControl(),
           email           : new FormControl('', [Validators.required]),
           // email           : new FormControl('', [Validators.required, checkDuplicateEmail(this.employeeList, this.employee)]),
           gender          : new FormControl(),
           idCard          : new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
           address         : new FormControl('', [Validators.required, Validators.maxLength(40)]),
+          isDelete        : new FormControl(),
 
         });
         this.employeeForm.patchValue(this.employee);
@@ -77,10 +84,12 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   updateEmployee() {
-    this.employeeService.updateEmployee(this.employeeForm.value.id, this.employeeForm.value).subscribe((data) => {
+    console.log(this.employeeId);
+    console.log(this.employeeForm.value);
+    this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe((data) => {
       console.log(data);
       this.employee = data['content'];
+      this.router.navigate(['/employee']);
     });
-    this.router.navigate(['/employee']);
   }
 }

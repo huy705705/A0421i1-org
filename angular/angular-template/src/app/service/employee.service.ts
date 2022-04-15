@@ -23,8 +23,8 @@ export class EmployeeService {
     return this.http.get<Employee[]>(this.apiURL + '/update/' + id);
   }
 
-  updateEmployee(id: number, employee: Employee): Observable<any> {
-    return this.http.patch<Employee[]>(this.apiURL + '/update/' + id, employee);
+  updateEmployee(id: string, employee: Employee): Observable<any> {
+    return this.http.patch<Employee>(this.apiURL + '/update/' + id, employee);
   }
 
   findAllEmployeeName(searchName: string, searchId: string): Observable<any>{
