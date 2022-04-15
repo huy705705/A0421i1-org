@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+
 
 import { EntitiesRoutingModule } from './entities-routing.module';
 import { EntitiesCreateComponent } from './entities-create/entities-create.component';
@@ -11,11 +12,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [EntitiesCreateComponent, EntitiesListComponent, EntitiesEditComponent, EntitiesDeleteComponent],
+  exports: [
+    EntitiesListComponent
+  ],
   imports: [
     CommonModule,
     EntitiesRoutingModule,
+
     ReactiveFormsModule,
     FormsModule
   ]
 })
-export class EntitiesModule { }
+export class EntitiesModule {
+}
