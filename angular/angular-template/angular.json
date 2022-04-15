@@ -124,6 +124,6 @@
   },
   "defaultProject": "angular-template",
   "cli": {
-    "analytics": false
+    "analytics": "4886e4b0-cf1d-4f56-b47f-648ec602526a"
   }
 }
