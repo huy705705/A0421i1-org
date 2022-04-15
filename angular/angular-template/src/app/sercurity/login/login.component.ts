@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   accountName: string;
   roles: string[] = [];
+  actualRole: string [] = [];
   private shareService: ShareService;
 
 
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.authService.isLoggedIn = true;
       this.roles = this.tokenStorageService.getUser().roles;
-      this.accountName = this.tokenStorageService.getUser().username;
+      this.accountName = this.tokenStorageService.getUser().name;
     }
   }
 
@@ -63,20 +64,27 @@ export class LoginComponent implements OnInit {
         }
 
         this.authService.isLoggedIn = true;
-        this.accountName = this.tokenStorageService.getUser().username;
+        this.accountName = this.tokenStorageService.getUser().name;
         this.roles = this.tokenStorageService.getUser().roles;
         this.formGroup.reset();
 
+
+        for (let role of this.roles){
+          this.actualRole.push(role['authority']);
+        }
+
+
         // navigate to url depend on which role user log in
-        // if (this.roles.indexOf('ROLE_EMPLOYEE') !== -1) {
-        //   this.router.navigate(['employee/entities/list']);
-        //   this.shareService.sendClickEvent();
-        // } else {
+        if (this.actualRole.indexOf("ROLE_EMPLOYEE") !== -1) {
+          this.router.navigate(['/employee/entities']);
+          // this.shareService.sendClickEvent();
+        }
+        // else {
         //   this.router.navigate(['admin/employee/list']);
         //   this.shareService.sendClickEvent();
         // }
 
-        this.router.navigateByUrl("") /* url to homepage*/
+        // this.router.navigateByUrl("") /* url to homepage*/
       },
       error => {
         this.authService.isLoggedIn = false;

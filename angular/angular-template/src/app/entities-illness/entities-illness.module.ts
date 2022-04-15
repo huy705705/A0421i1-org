@@ -6,13 +6,15 @@ import { EnititiesIllnessListComponent } from './enitities-illness-list/enititie
 import { EntitiesIllnessCreateComponent } from './entities-illness-create/entities-illness-create.component';
 import { EntitiesIllnessEditComponent } from './entities-illness-edit/entities-illness-edit.component';
 import { EntitiesIllnessDeleteComponent } from './entities-illness-delete/entities-illness-delete.component';
+import {EntitiesRoutingModule} from "../entities/entities-routing.module";
 
 
 @NgModule({
   declarations: [EnititiesIllnessListComponent, EntitiesIllnessCreateComponent, EntitiesIllnessEditComponent, EntitiesIllnessDeleteComponent],
   imports: [
     CommonModule,
-    EntitiesIllnessRoutingModule
+    EntitiesIllnessRoutingModule,
+    EntitiesRoutingModule,
   ]
 })
 export class EntitiesIllnessModule { }
