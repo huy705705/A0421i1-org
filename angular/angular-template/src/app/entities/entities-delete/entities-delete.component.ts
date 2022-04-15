@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {Entities} from "../../model/entities";
+import {EntitiesService} from "../../service/entities.service";
+
 
 @Component({
   selector: 'app-entities-delete',
@@ -6,10 +10,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entities-delete.component.css']
 })
 export class EntitiesDeleteComponent implements OnInit {
+  entity: Entities
 
-  constructor() { }
+  constructor(private entitiesService:EntitiesService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(next => {
+      const id = next.get("id");
+      console.log(id)
+      console.log(entitiesService.findByIdToDelete(id))
+      entitiesService.findByIdToDelete(id).subscribe(next => {
+        this.entity = next;
+      });
+    });
+  };
 
   ngOnInit(): void {
+
   }
 
+  deleteEntities(id: string) {
+    console.log(id)
+    this.entitiesService.deleteEntitiesById(id).subscribe();
+    this.router.navigate(["entities"]);
+  }
 }
