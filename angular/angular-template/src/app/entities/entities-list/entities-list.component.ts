@@ -80,9 +80,6 @@ export class EntitiesListComponent implements OnInit {
           this.isTrue2=true;
 
 
-        } else {
-          this.isSubmitted=false;
-          this.emptyMessenger = 'Không tìm thấy từ khoá';
         }
       },
       (error) => {

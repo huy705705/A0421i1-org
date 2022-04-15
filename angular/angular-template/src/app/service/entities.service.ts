@@ -36,6 +36,7 @@ export class EntitiesService {
   }
 
   getEntitiesId(cageId: String): Observable<Number> {
+    console.log(cageId);
     return this.http.get<Number>(this.apiURL + "/createId/" + cageId);
   }
 

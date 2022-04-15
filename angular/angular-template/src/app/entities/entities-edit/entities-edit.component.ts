@@ -79,8 +79,7 @@ export class EntitiesEditComponent implements OnInit {
             Validators.required,
             Validators.maxLength(2)
           ]),
-          isDelete: new FormControl(0, [
-          ])
+          isDelete: new FormControl(false)
         })
 
         this.entitiesForm.patchValue(this.entities);

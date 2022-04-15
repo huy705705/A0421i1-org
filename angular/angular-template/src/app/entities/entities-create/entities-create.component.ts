@@ -41,7 +41,7 @@ export class EntitiesCreateComponent implements OnInit {
     cageId:[
       {type: 'required',message: 'Mã chuồng không được trống!'},
       {type: 'minlength',message: 'Trạng thái không nhỏ hơn 3 kí tự !'}
-    ]
+    ],
   }
   constructor(private entitiesService: EntitiesService, private router: Router ) {
     this.entitiesService.getListCage().subscribe((data)=>{
@@ -74,6 +74,7 @@ export class EntitiesCreateComponent implements OnInit {
           Validators.required,
           Validators.minLength(1)
         ]),
+        isDelete: new FormControl(false)
       })
 
     })
