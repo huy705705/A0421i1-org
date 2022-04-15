@@ -67,8 +67,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./home.html" class="nav-link active" aria-current="page">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+            <a href="/entities" class="nav-link active" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="/entities"/></svg>
               Quản lý cá thể
             </a>
           </li>
@@ -81,10 +81,10 @@
     </div>
     <div class="col-lg-9 ">
 
-      <strong>Khởi tạo thông tin vật nuôi</strong>
+      <strong style="font-size: larger;margin-top: 10px; height: 20px">Cập nhật thông tin cá thể: {{entities.entitiesId}}</strong>
 
       <hr/>
-      <form style="max-width: 700px;" [formGroup]="entitiesForm" *ngIf="entitiesForm" (ngSubmit)="updateEntities()" class="bg-light">
+      <form style="max-width: 100%;" [formGroup]="entitiesForm" *ngIf="entitiesForm" (ngSubmit)="updateEntities()" class="bg-light">
         <div class="container-fluid">
 
           <div class="form-group row">
@@ -93,17 +93,21 @@
               <select class="span2 form-control" formControlName="cageId">
                 <option class="span2 form-control" size="16" *ngFor="let cage of cageList">{{cage}}</option>
               </select>
-                <span style="color: red;">Mã phải đúng định dạng: CHXXX với XXX là số nguyên dương !</span>
-
+              <div *ngFor="let validation of validationMessages.cageId">
+              <span style="color: red;", *ngIf="entitiesForm.get('cageId').hasError(validation.type) && (entitiesForm.get('cageId').dirty || entitiesForm.get('cageId').touched)">
+              {{validation.message}}</span>
+              </div>
             </div>
           </div>
-
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 130px;">Mã vật nuôi<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" style="width: 130px;"hidden>Mã vật nuôi<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="text" value="CH01" formControlName="entitiesId">
-                <span style="color: red;">Mã phải đúng định dạng: NVXXX với XXX là số nguyên dương!</span>
+                <input class="span2 form-control" size="16" type="text" hidden  formControlName="entitiesId" disabled>
+                <div style="color: red;"  *ngFor="let validation of validationMessages.entitiesId">
+              <span *ngIf="entitiesForm.get('entitiesId').hasError(validation.type) && (entitiesForm.get('entitiesId').dirty || entitiesForm.get('entitiesId').touched)">
+              {{validation.message}}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -111,9 +115,13 @@
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 130px;">Ngày vào chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
-              <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+              <div class="input-append date" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="date" value="12/02/2012" formControlName="inDate">
-                <span style="color: red;">Hãy chọn ngày trước ngày hiện tại !</span>
+                <div style="color: red;"  *ngFor="let validation of validationMessages.inDate">
+              <span *ngIf="entitiesForm.get('inDate').hasError(validation.type) && (entitiesForm.get('inDate').dirty || entitiesForm.get('inDate').touched|| entitiesForm.get('inDate').untouched)">
+              {{validation.message}}</span>
+                  <span *ngIf="entitiesForm.get('inDate').hasError('flag')">Ngày vào chuồng không được lớn hơn ngày hiện tại</span>
+                </div>
               </div>
             </div>
           </div>
@@ -121,9 +129,12 @@
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 130px;">Ngày ra chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
-              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+              <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="date" value="12/02/2012"formControlName="outDate" >
-                <span style="color: red;">Hãy chọn ngày trước ngày tạo chuồng!</span>
+                <div style="color: red;"  *ngFor="let validation of validationMessages.outDate">
+              <span *ngIf="entitiesForm.get('outDate').hasError(validation.type) && (entitiesForm.get('outDate').dirty || entitiesForm.get('outDate').touched || entitiesForm.get('outDate').untouched)">{{validation.message}}</span>
+                  <span *ngIf="entitiesForm.get('outDate').hasError('flag')">Ngày vào chuồng quá lớn!</span>
+                </div>
               </div>
             </div>
           </div>
@@ -138,24 +149,30 @@
                   <span class="input-group-text" id="basic-addon2">kg</span>
                 </div>
               </div>
-              <span style="color: red;">Hãy điền khối lượng của cá thể!</span>
+              <div style="color: red;"  *ngFor="let validation of validationMessages.weight">
+              <span *ngIf="entitiesForm.get('weight').hasError(validation.type) && (entitiesForm.get('weight').dirty || entitiesForm.get('weight').touched)">
+              {{validation.message}}</span>
+              </div>
 
             </div>
           </div>
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 130px;">Status<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" style="width: 130px;">Trạng thái<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
                 <input type="text" class="form-control" min="1" type="text" value="" formControlName="status">
               </div>
-              <span style="color: red;">Hãy điền trạng thái cá thể!</span>
+              <div style="color: red;"  *ngFor="let validation of validationMessages.status">
+              <span *ngIf="entitiesForm.get('status').hasError(validation.type) && (entitiesForm.get('status').dirty || entitiesForm.get('status').touched)">
+              {{validation.message}}</span>
+              </div>
 
             </div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-info m-2">Cập nhật</button>
-            <button type="button" class="btn btn-success m-2">Huỷ bỏ</button>
+            <button type="button" class="btn btn-success m-2" [routerLink]="['/entities/']">Huỷ bỏ</button>
           </div>
         </div>
       </form>
