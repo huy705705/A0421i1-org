@@ -166,15 +166,31 @@ input[type="password"] {
   background-color: #41B675
 }
 
-.link {
-  margin-top: 30px
+.below-contain{
+  margin-top: 30px;
+  display: flex;
 }
 
+.check-remember{
+  margin-right: 20%;
+}
 
-.link p a {
-  color: blue;
+.check-remember span{
+  margin-left: 3px;
+  color: #262525;
+}
+
+.link a {
+  color: #262525;
   text-decoration: none;
-  cursor: pointer
+  cursor: pointer;
+}
+
+.copyright-text{
+  text-align: center;
+  font-size: small;
+  color: #449e6c;
+  margin-top: 26%;
 }
 
 .warning {
@@ -191,9 +207,7 @@ input[type="password"] {
 
 
 @media (max-width: 720px) {
-  /*.container {*/
-  /*  height: auto;*/
-  /*}  */
+
   .container__modal {
     height: auto;
   }
@@ -210,12 +224,26 @@ input[type="password"] {
     width: 100%;
     height: auto;
   }
+
+  .below-contain{
+    margin-top: 30px;
+    display: flex;
+    position: relative;
+  }
+
+  .link {
+    position: absolute;
+    right: 0;
+  }
+
+  .copyright-text{
+    margin-top: 20%;
+  }
+
 }
 
-@media (min-width: 740px) {
-  /*.container {*/
-  /*  height: auto;*/
-  /*}*/
+@media (min-width: 735px) {
+
   .container__modal {
     height: auto;
   }
@@ -246,6 +274,12 @@ input[type="password"] {
     height: auto;
   }
 
+}
+
+@media (max-width: 1500px){
+  .copyright-text{
+    margin-top: 16%;
+  }
 }
 
 

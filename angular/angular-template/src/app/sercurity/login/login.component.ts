@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {AuthenticationService} from "../../service/authentication.service";
 import {TokenStorageService} from "../../service/token-storage.service";
+import {ShareService} from "../../service/share.service";
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,8 @@ import {TokenStorageService} from "../../service/token-storage.service";
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   accountName: string;
-  // errorMessage = '';
   roles: string[] = [];
+  private shareService: ShareService;
 
 
   constructor(private formBuild: FormBuilder,
@@ -27,10 +28,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formGroup = new FormGroup({
-      accountName: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
-    })
+    // this.formGroup = new FormGroup({
+    //   accountName: new FormControl('', [Validators.required]),
+    //   password: new FormControl('', [Validators.required]),
+    // })
+
+    this.formGroup = this.formBuild.group({
+      accountName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      remember_account: false
+    });
+
 
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
@@ -43,17 +51,34 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.formGroup.value).subscribe(
       next => {
-        this.tokenStorageService.saveTokenSession(next.accessToken);
-        this.tokenStorageService.saveUserLocal(next);
+        // this.tokenStorageService.saveTokenSession(next.accessToken);
+        // this.tokenStorageService.saveUserLocal(next);
+
+        if (this.formGroup.value.remember_account === true) {
+          this.tokenStorageService.saveTokenLocal(next.accessToken);
+          this.tokenStorageService.saveUserLocal(next);
+        } else {
+          this.tokenStorageService.saveTokenSession(next.accessToken);
+          this.tokenStorageService.saveUserSession(next);
+        }
 
         this.authService.isLoggedIn = true;
         this.accountName = this.tokenStorageService.getUser().username;
         this.roles = this.tokenStorageService.getUser().roles;
         this.formGroup.reset();
+
+        // navigate to url depend on which role user log in
+        // if (this.roles.indexOf('ROLE_EMPLOYEE') !== -1) {
+        //   this.router.navigate(['employee/entities/list']);
+        //   this.shareService.sendClickEvent();
+        // } else {
+        //   this.router.navigate(['admin/employee/list']);
+        //   this.shareService.sendClickEvent();
+        // }
+
         this.router.navigateByUrl("") /* url to homepage*/
       },
       error => {
-        // this.errorMessage = error.error().message;
         this.authService.isLoggedIn = false;
         this.toastr.error("Tên đăng nhập hoặc mật khẩu không đúng", "Đăng nhập thất bại", {
           timeOut: 3000,

@@ -33,9 +33,14 @@ export class TokenStorageService {
     }
   }
 
-  public saveUserLocal(user){
+  public saveUserLocal(user: any){
     window.localStorage.removeItem(USER_KEY);
     window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
+
+  saveUserSession(user: any) {
+    sessionStorage.removeItem(USER_KEY);
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(){
@@ -45,4 +50,6 @@ export class TokenStorageService {
       return JSON.parse(sessionStorage.getItem(USER_KEY));
     }
   }
+
+
 }

@@ -42,11 +42,10 @@ export class ForgotPasswordComponent implements OnInit {
       },
       err => {
         this.toastr.warning("Nếu email của bạn đúng, sẽ có một email xác nhận được gửi đến. Vui lòng kiểm tra email của bạn!", "Cảnh báo: ", {
-          timeOut: 3000,
+          timeOut: 5000,
           extendedTimeOut: 1500
         });
-        setTimeout(() => this.router.navigateByUrl("/login"), 4000)
-
+        setTimeout(() => this.router.navigateByUrl("/login"), 5000)
       }
     );
   }
