@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Entities} from "../../model/entities";
 import {EntitiesService} from "../../service/entities.service";
 
+
 @Component({
   selector: 'app-entities-delete',
   templateUrl: './entities-delete.component.html',
@@ -15,14 +16,15 @@ export class EntitiesDeleteComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(next => {
       const id = next.get("id");
       console.log(id)
-      console.log(entitiesService.findById(id))
-      entitiesService.findById(id).subscribe(next => {
+      console.log(entitiesService.findByIdToDelete(id))
+      entitiesService.findByIdToDelete(id).subscribe(next => {
         this.entity = next;
       });
     });
   };
 
   ngOnInit(): void {
+
   }
 
   deleteEntities(id: string) {

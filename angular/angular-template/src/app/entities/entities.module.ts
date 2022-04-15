@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {EntitiesRoutingModule} from './entities-routing.module';
-import {EntitiesCreateComponent} from './entities-create/entities-create.component';
-import {EntitiesListComponent} from './entities-list/entities-list.component';
-import {EntitiesEditComponent} from './entities-edit/entities-edit.component';
-import {EntitiesDeleteComponent} from './entities-delete/entities-delete.component';
+
+import { EntitiesRoutingModule } from './entities-routing.module';
+import { EntitiesCreateComponent } from './entities-create/entities-create.component';
+import { EntitiesListComponent } from './entities-list/entities-list.component';
+import { EntitiesEditComponent } from './entities-edit/entities-edit.component';
+import { EntitiesDeleteComponent } from './entities-delete/entities-delete.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -18,8 +18,9 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     CommonModule,
     EntitiesRoutingModule,
-    FormsModule,
+
     ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class EntitiesModule {

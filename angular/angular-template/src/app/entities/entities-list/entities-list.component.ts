@@ -22,6 +22,7 @@ export class EntitiesListComponent implements OnInit {
   isTrue=false;
   isTrue2=true;
 
+
   constructor(private entitiesService: EntitiesService, private router: Router) {
     // this.entitiesService.findAll().subscribe((data) => {
     //   console.log(data);
@@ -39,8 +40,8 @@ export class EntitiesListComponent implements OnInit {
   findAllPageable() {
 
 
+    this.isTrue2 = true;
 
-    this.isTrue2=true;
     this.entitiesService.findAllPageable(this.page).subscribe(
       data => {
         this.entities2 = data['content']
@@ -52,17 +53,11 @@ export class EntitiesListComponent implements OnInit {
       }
     )
   }
-
-  deleteEntities(id: number) {
-    // this.entitiesService.deleteEntitiesById(id).subscribe(()=>{
-    //   this.findAllPageable()
-    // })
-  }
-
   setPage(i, event: any) {
     event.preventDefault();
     this.page = i;
     this.findAllPageable();
+
   }
 
   updateEntities(entity: any) {
@@ -73,6 +68,7 @@ export class EntitiesListComponent implements OnInit {
     this.isTrue=true;
     console.log(this.isTrue)
     console.log(this.isSubmitted)
+
     console.log(this.inDate)
     this.entitiesService.searchEntities(this.inDate, this.cage).subscribe(
       data => {
@@ -82,6 +78,7 @@ export class EntitiesListComponent implements OnInit {
           this.pages = new Array(data['totalPages'])
           this.isSubmitted=true;
           this.isTrue2=true;
+
 
         } else {
           this.isSubmitted=false;
@@ -93,7 +90,6 @@ export class EntitiesListComponent implements OnInit {
         this.isTrue2=false;
         console.log(error.error.message);
       }
-
     );
   }
 }

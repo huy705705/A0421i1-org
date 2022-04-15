@@ -5,10 +5,10 @@ export class Entities {
   private _outDate: string;
   private _status: string;
   private _weight: string;
-  private _isDelete: string;
+  private _isDelete: boolean;
   private _cage: string
 
-  constructor(entitiesId: string, inDate: String, outDate: string, status: string, weight: string, isDelete: string, cage: string) {
+  constructor(entitiesId: string, inDate: String, outDate: string, status: string, weight: string, isDelete: boolean, cage: string) {
     this._entitiesId = entitiesId;
     this._inDate = inDate;
     this._outDate = outDate;
@@ -58,11 +58,11 @@ export class Entities {
     this._weight = value;
   }
 
-  get isDelete(): string {
+  get isDelete(): boolean {
     return this._isDelete;
   }
 
-  set isDelete(value: string) {
+  set isDelete(value: boolean) {
     this._isDelete = value;
   }
 
@@ -72,5 +72,6 @@ export class Entities {
 
   set cage(value: string) {
     this._cage = value;
+
   }
 }
