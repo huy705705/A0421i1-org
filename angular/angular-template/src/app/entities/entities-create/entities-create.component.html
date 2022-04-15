@@ -129,11 +129,12 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Ngày ra chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="date" value="12/02/2012"formControlName="outDate" >
+                <input class="span2 form-control" size="16" type="date" value="12/02/2012"formControlName="outDate"  (change)="compare()">
                 <div style="color: red; text-align: left"  *ngFor="let validation of validationMessages.outDate">
               <span *ngIf="entitiesForm.get('outDate').hasError(validation.type) && (entitiesForm.get('outDate').dirty || entitiesForm.get('outDate').touched || entitiesForm.get('outDate').untouched)">
               {{validation.message}}</span>
                   <span *ngIf="entitiesForm.get('outDate').hasError('flag')">Ngày ra chuồng quá lớn</span>
+                  <span *ngIf="more==true">Ngày ra phải lớn hơn ngày vào chuồng</span>
                 </div>
               </div>
             </div>

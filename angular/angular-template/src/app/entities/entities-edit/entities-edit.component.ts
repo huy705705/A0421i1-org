@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {throwError} from "rxjs";
 import {checkInDate} from "../../validator/check-indate";
 import {checkOutDate} from "../../validator/check-outDate";
+import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-entities-edit',
@@ -82,7 +83,10 @@ export class EntitiesEditComponent implements OnInit {
         })
 
         this.entitiesForm.patchValue(this.entities);
-      })
+      }),
+      (error)=>{
+
+      }
     })
 
   }

@@ -17,6 +17,8 @@ export class EntitiesCreateComponent implements OnInit {
   entities : Entities;
   cageList=[];
   entitiesId :string ;
+  more :boolean=false;
+
   validationMessages= {
     entitiesId:[
       {type: 'required',message: 'Id người ta đã render ra rồi dô sửa hả mày ai rảnh!!!'}
@@ -116,5 +118,15 @@ export class EntitiesCreateComponent implements OnInit {
     this.entitiesForm.patchValue({
       entitiesId:this.entitiesId,
     })
+  }
+  compare(){
+    console.log(Date.parse(this.entitiesForm.value.inDate));
+    console.log(Date.parse(this.entitiesForm.value.outDate));
+    if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
+      this.more=true;
+    }
+    else {
+      this.more=false;
+    }
   }
 }
