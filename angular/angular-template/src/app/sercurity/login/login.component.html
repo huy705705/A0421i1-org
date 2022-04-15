@@ -1,48 +1,58 @@
-<!--<div class="container">-->
-<!--  <div class="row">-->
 <div class="body">
-    <div class="col-sm-9 col-md-9 col-lg-6 ">
+  <div class="col-sm-9 col-md-9 col-lg-6 ">
 
-      <div class="container__modal">
-        <div class="card">
+    <div class="container__modal">
+      <div class="card">
 
-          <div class="user signin_form">
-            <div class="image-box"><img src="../../../assets/image/bg.jpeg"/></div>
-            <div class="form">
-              <!--              <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">&times;</button>-->
+        <div class="user signin_form">
 
-              <div class="text_signin">
-                <h2>Đăng nhập</h2>
+          <div class="image-box"><img src="../../../assets/image/bg.jpeg"/></div>
 
-              </div>
-              <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-                <div class="input-text-signin">
-                  <input type="text" required formControlName="accountName">
-                  <i class="fa fa-user"></i>
-                  <label>Tên đăng nhập</label>
-                </div>
+          <div class="form">
 
-                <div class="input-text-signin">
-                  <input type="password" id="password_input_signin" formControlName="password" required>
-                  <i id="visibility" class="fa fa-eye-slash change_eye"></i>
-                  <label>Mật khẩu</label>
-                </div>
-
-                <div class="signin-button">
-                  <button type="submit">Đăng nhập</button>
-                </div>
-              </form>
-              <div class="link">
-                <a href="" routerLink="/forgot-password">Quên mật khẩu?</a>
-              </div>
+            <div class="text_signin">
+              <h2>Đăng nhập</h2>
             </div>
+
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+              <div class="input-text-signin">
+                <input type="text" required formControlName="accountName">
+                <i class="fa fa-user"></i>
+                <label>Tên đăng nhập</label>
+              </div>
+
+              <div class="input-text-signin">
+                <input type="password" id="password_input_signin" formControlName="password" required>
+                <i id="visibility" class="fa fa-eye-slash change_eye"></i>
+                <label>Mật khẩu</label>
+              </div>
+
+              <div class="signin-button">
+                <button type="submit">Đăng nhập</button>
+              </div>
+              <!--            </form>-->
+              <div class="below-contain">
+
+                <div class="check-remember">
+                  <input type="checkbox" id="checkbox-1" class="checkbox" formControlName="remember_account"/>
+                  <span id="remember">Nhớ tài khoản</span>
+                </div>
+
+                <div class="link">
+                  <a href="" routerLink="/forgot-password">Quên mật khẩu?</a>
+                </div>
+              </div>
+              <div class="copyright-text">
+                <p> © 2021-2022 Toàn bộ bản quyền thuộc A0421I1.</p>
+              </div>
+            </form>
           </div>
-
         </div>
-      </div>
 
+      </div>
     </div>
-<!--  </div>-->
-<!--</div>-->
+
+  </div>
+
 
 </div>
