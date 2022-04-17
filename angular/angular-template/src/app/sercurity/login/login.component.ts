@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   accountName: string;
   roles: string[] = [];
-  actualRole: string [] = [];
+
   private shareService: ShareService;
 
 
@@ -29,10 +29,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.formGroup = new FormGroup({
-    //   accountName: new FormControl('', [Validators.required]),
-    //   password: new FormControl('', [Validators.required]),
-    // })
 
     this.formGroup = this.formBuild.group({
       accountName: ['', [Validators.required]],
@@ -41,50 +37,51 @@ export class LoginComponent implements OnInit {
     });
 
 
-    if (this.tokenStorageService.getToken()) {
-      const user = this.tokenStorageService.getUser();
+    if (this.tokenStorageService.getUser()) {
       this.authService.isLoggedIn = true;
       this.roles = this.tokenStorageService.getUser().roles;
       this.accountName = this.tokenStorageService.getUser().name;
     }
+
   }
 
   onSubmit() {
     this.authService.login(this.formGroup.value).subscribe(
       next => {
-        // this.tokenStorageService.saveTokenSession(next.accessToken);
-        // this.tokenStorageService.saveUserLocal(next);
-
         if (this.formGroup.value.remember_account === true) {
-          this.tokenStorageService.saveTokenLocal(next.accessToken);
           this.tokenStorageService.saveUserLocal(next);
+          this.tokenStorageService.saveTokenLocal(next.accessToken);
         } else {
-          this.tokenStorageService.saveTokenSession(next.accessToken);
           this.tokenStorageService.saveUserSession(next);
+          this.tokenStorageService.saveTokenSession(next.accessToken);
         }
 
         this.authService.isLoggedIn = true;
         this.accountName = this.tokenStorageService.getUser().name;
         this.roles = this.tokenStorageService.getUser().roles;
+
         this.formGroup.reset();
 
-
+        // actualRole contains all role of user from token storage
+        const actualRole: string [] = [];
         for (let role of this.roles){
-          this.actualRole.push(role['authority']);
+          actualRole.push(role['authority']);
         }
 
+        console.log("accountName: "+ this.accountName + " role: " + actualRole )
 
         // navigate to url depend on which role user log in
-        if (this.actualRole.indexOf("ROLE_EMPLOYEE") !== -1) {
+        if (actualRole.includes("ROLE_ADMIN")) {
+          this.router.navigate(['admin/employee/list']);
+          // this.shareService.sendClickEvent();
+        }
+        else {
           this.router.navigate(['/employee/entities']);
           // this.shareService.sendClickEvent();
         }
-        // else {
-        //   this.router.navigate(['admin/employee/list']);
-        //   this.shareService.sendClickEvent();
-        // }
 
-        // this.router.navigateByUrl("") /* url to homepage*/
+        // clear all role in the array for the next log in
+        actualRole.length = 0;
       },
       error => {
         this.authService.isLoggedIn = false;

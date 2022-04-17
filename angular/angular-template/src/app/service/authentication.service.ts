@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 const AUTH_API = 'http://localhost:8080/api/public/';
 
@@ -12,7 +13,8 @@ export class AuthenticationService {
   httpOptions: any;
   isLoggedIn: boolean;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              public jwtHelper: JwtHelperService) {
     this.httpOptions = {
       headers: new HttpHeaders({
         'ContentType': 'application/json'
@@ -41,12 +43,6 @@ export class AuthenticationService {
     }, this.httpOptions);
   }
 
-  // resetPassword(accountName: string): Observable<any>{
-  //   return this.http.post(AUTH_API + 'forgot-password', {
-  //     accountName: accountName
-  //   }, this.httpOptions);
-  // }
-
   doResetPassword(password: string, token: string): Observable<any>{
     return this.http.post(AUTH_API + 'do-reset-password', {
       password: password,
@@ -54,4 +50,8 @@ export class AuthenticationService {
     }, this.httpOptions);
   }
 
+  // this function is used for checking expiration of forgot password token
+  public isAuthenticated(token: string): boolean {
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 }

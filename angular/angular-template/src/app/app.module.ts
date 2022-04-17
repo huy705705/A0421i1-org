@@ -11,7 +11,6 @@ import {CommonModule} from "@angular/common";
 import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +24,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     CommonModule,
     EntitiesModule,
-    SecurityModule
+    SecurityModule,
+
   ],
   bootstrap: [AppComponent]
 })
