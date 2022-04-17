@@ -9,6 +9,7 @@ import { VerifyPasswordComponent } from './verify-password/verify-password.compo
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {JwtModule} from "@auth0/angular-jwt";
 
 
 @NgModule({
@@ -23,6 +24,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem("access_token");
+            },
+            allowedDomains: ["localhost:4200"],
+          },
+        })
     ]
 })
 export class SecurityModule { }

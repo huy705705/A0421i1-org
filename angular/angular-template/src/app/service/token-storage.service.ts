@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -8,7 +9,7 @@ const USER_KEY = 'auth-user';
 })
 export class TokenStorageService {
 
-  constructor() { }
+  constructor(private jwtHelper: JwtHelperService) { }
 
   public logOut(){
     window.localStorage.clear();
@@ -19,37 +20,40 @@ export class TokenStorageService {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.setItem(TOKEN_KEY, token);
   }
-
-  public saveTokenSession(token: string){
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
-  }
-
-  public getToken(): string{
-    if (localStorage.getItem(TOKEN_KEY) != null){
-      return localStorage.getItem(TOKEN_KEY);
-    } else {
-      return sessionStorage.getItem(TOKEN_KEY)
-    }
-  }
-
   public saveUserLocal(user: any){
     window.localStorage.removeItem(USER_KEY);
     window.localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
+  public saveTokenSession(token: string){
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
+  }
   public saveUserSession(user: any) {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  public getUser(){
-    if (localStorage.getItem(USER_KEY) != null){
-      return JSON.parse(localStorage.getItem(USER_KEY));
+  public getToken(): string{
+    if (sessionStorage.getItem(TOKEN_KEY) != null){
+      return sessionStorage.getItem(TOKEN_KEY);
     } else {
-      return JSON.parse(sessionStorage.getItem(USER_KEY));
+      return localStorage.getItem(TOKEN_KEY)
     }
   }
 
 
+  public getUser(): any {
+    if (window.sessionStorage.getItem(USER_KEY) !== null) {
+      return JSON.parse(window.sessionStorage.getItem(USER_KEY));
+    } else {
+      return JSON.parse(window.localStorage.getItem(USER_KEY));
+    }
+  }
+
+  // this function is used to check all token that access to the app
+  public isAuthenticated(): boolean {
+    const token = this.getUser().token;
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 }
