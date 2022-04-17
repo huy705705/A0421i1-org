@@ -12,6 +12,10 @@ export class NewListComponent implements OnInit {
   private page:number= 0;
   newsPage:Array<any>;
   pages:Array<number>;
+  private pageHl:number= 0;
+  newsPageHl:Array<any>;
+  pagesHL:Array<number>;
+
   private name:String = '';
   searchForm: FormGroup;
   userInput = new FormControl();
@@ -21,6 +25,7 @@ export class NewListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.findAllPageable()
+    this.findAllPageableHl()
     // this.searchForm = new FormGroup({newsName: new FormControl})
     this.registerForm = this.fb.group({
       email: [''],
@@ -34,6 +39,22 @@ findAllPageable(){
       
       this.pages=new Array(data['totalPages'])
       console.log(data['totalPages']);
+      
+    },
+    (error) => {
+      console.log(error.error.message);
+    }
+  )
+
+}
+findAllPageableHl(){
+  this.newsService.findAllHightLight(this.pageHl).subscribe(
+    data=>{
+      this.newsPageHl=data['content']
+      console.log(data);
+      
+      this.pagesHL=new Array(data['totalPages'])
+      // console.log(data['totalPages']);
       
     },
     (error) => {
@@ -60,6 +81,13 @@ setPage(i: number, event: any) {
   event.preventDefault();
   this.page= i;
   this.findAllPageable();
+}
+setPageHL(i: number , event: any) {
+  event.preventDefault();
+  this.pageHl = i;
+  this.findAllPageableHl();
+  console.log(this.pageHl );
+  
 }
 setName(name: String, event: any) {
   event.preventDefault();

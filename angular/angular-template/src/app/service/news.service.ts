@@ -24,6 +24,10 @@ export class NewsService {
   findByName(name: String): Observable<any> {
     return this.http.get<News[]>(this.apiURL +'?seacrch='+ name);
   }
-
+  findAllHightLight(page:number): Observable<News[]> {
+    console.log((this.apiURL+ '/hl?page='+page));
+    
+    return this.http.get<News[]>(`${this.apiURL+ '/hl?page='+page}`);
+  }
 
 }

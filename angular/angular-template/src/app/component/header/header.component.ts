@@ -13,11 +13,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   pageCustomer() {
+    console.log(this.router.navigate(['/customer']) );
+    
     this.router.navigate(['/customer'])
   }
   
   pageEmployee() {
     this.router.navigate(['/employee'])
+    console.log(this.router.navigate(['/employee']));
+    
   }
   pageEntities() {
     this.router.navigate(['/entities'])
