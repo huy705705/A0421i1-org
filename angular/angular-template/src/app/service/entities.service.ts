@@ -23,7 +23,7 @@ export class EntitiesService {
 
 
   findById(id: String): Observable<any> {
-    return this.http.get<Entities>(this.apiURL + "/update/" + id);
+    return this.http.get<any>(this.apiURL + "/update/" + id);
   }
 
 

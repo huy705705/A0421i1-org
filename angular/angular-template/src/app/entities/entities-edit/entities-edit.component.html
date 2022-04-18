@@ -116,7 +116,7 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Ngày vào chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="date" value="12/02/2012" formControlName="inDate">
+                <input class="span2 form-control" size="16" type="date"(change)="compare()" formControlName="inDate">
                 <div style="color: red;"  *ngFor="let validation of validationMessages.inDate">
               <span *ngIf="entitiesForm.get('inDate').hasError(validation.type) && (entitiesForm.get('inDate').dirty || entitiesForm.get('inDate').touched|| entitiesForm.get('inDate').untouched)">
               {{validation.message}}</span>
@@ -130,10 +130,11 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Ngày ra chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="date" value="12/02/2012"formControlName="outDate" >
+                <input class="span2 form-control" size="16" type="date" (change)="compare()" formControlName="outDate" >
                 <div style="color: red;"  *ngFor="let validation of validationMessages.outDate">
               <span *ngIf="entitiesForm.get('outDate').hasError(validation.type) && (entitiesForm.get('outDate').dirty || entitiesForm.get('outDate').touched || entitiesForm.get('outDate').untouched)">{{validation.message}}</span>
-                  <span *ngIf="entitiesForm.get('outDate').hasError('flag')">Ngày vào chuồng quá lớn!</span>
+                  <span *ngIf="entitiesForm.get('outDate').hasError('flag')">Ngày ra chuồng quá lớn!</span>
+                  <span *ngIf="more==true">Ngày ra phải lớn hơn ngày vào chuồng</span>
                 </div>
               </div>
             </div>
