@@ -10,6 +10,7 @@ import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ComponentModule} from "./component/component.module";
 
 @NgModule({
   declarations: [
@@ -18,13 +19,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   providers: [EntitiesService],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
     EntitiesModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ComponentModule,
+    AppRoutingModule,
   ],
 
   bootstrap: [AppComponent]

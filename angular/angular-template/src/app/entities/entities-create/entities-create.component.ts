@@ -17,9 +17,12 @@ export class EntitiesCreateComponent implements OnInit {
   entities : Entities;
   cageList=[];
   entitiesId :string ;
+  more :boolean=false;
+  wasEdit : boolean=false;
+
   validationMessages= {
     entitiesId:[
-      {type: 'required',message: 'Id người ta đã render ra rồi dô sửa hả mày ai rảnh!!!'}
+      {type: 'required',message: ''}
     ],
     inDate:[
       {type: 'required',message: 'Ngày vào chuồng không được trống!'}
@@ -45,6 +48,7 @@ export class EntitiesCreateComponent implements OnInit {
   }
   constructor(private entitiesService: EntitiesService, private router: Router ) {
     this.entitiesService.getListCage().subscribe((data)=>{
+
     this.cageList=data;
       this.entitiesForm = new FormGroup({
         entitiesId: new FormControl("",
@@ -114,8 +118,20 @@ export class EntitiesCreateComponent implements OnInit {
   }
 
   destroyHacker() {
-    this.entitiesForm.patchValue({
-      entitiesId:this.entitiesId,
+    this.wasEdit=true;
+      this.entitiesForm.patchValue({
+      entitiesId:this.entitiesId
     })
+
+  }
+  compare(){
+    console.log(Date.parse(this.entitiesForm.value.inDate));
+    console.log(Date.parse(this.entitiesForm.value.outDate));
+    if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
+      this.more=true;
+    }
+    else {
+      this.more=false;
+    }
   }
 }
