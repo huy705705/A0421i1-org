@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EntitiesService} from "../../service/entities.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {Entities} from "../../model/entities";
+import {checkInDate} from "../../validator/check-indate";
+import {checkOutDate} from "../../validator/check-outDate";
+import validate = WebAssembly.validate;
 
 @Component({
   selector: 'app-entities-create',
@@ -6,8 +13,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entities-create.component.css']
 })
 export class EntitiesCreateComponent implements OnInit {
-<<<<<<< Updated upstream
-=======
+
   entitiesForm: FormGroup;
   entities : Entities;
   cageList=[];
@@ -71,11 +77,46 @@ export class EntitiesCreateComponent implements OnInit {
         ]),
         isDelete: new FormControl(false)
       })
->>>>>>> Stashed changes
+      })
 
-  constructor() { }
+
+  }
 
   ngOnInit(): void {
   }
 
+  createEntities() {
+    this.entitiesService.createEntities(this.entitiesForm.value).subscribe((data) => {
+      this.entities = data['content'];
+      this.router.navigateByUrl("/entities");
+    });
+  }
+  getEntitiesId() {
+    this.entitiesService.getEntitiesId(this.entitiesForm.value.cageId).subscribe((data) => {
+      console.log(this.entitiesForm.value.cageId);
+      if(data<10){
+        this.entitiesId=this.entitiesForm.value.cageId+"-000"+data;
+      }
+      else if(data<100) {
+        this.entitiesId = this.entitiesForm.value.cageId+"-00" + data;
+      }
+      else if(data<1000) {
+        this.entitiesId = this.entitiesForm.value.cageId+"-0" + data;
+      }
+      else {
+        this.entitiesId = this.entitiesForm.value.cageId+"-"+data;
+      }
+      if(data!=null){
+        this.entitiesForm.patchValue({
+          entitiesId:this.entitiesId,
+        })
+      }
+    })
+  }
+
+  destroyHacker() {
+    this.entitiesForm.patchValue({
+      entitiesId:this.entitiesId,
+    })
+  }
 }
