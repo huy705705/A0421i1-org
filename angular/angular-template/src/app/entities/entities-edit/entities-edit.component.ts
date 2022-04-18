@@ -44,6 +44,7 @@ export class EntitiesEditComponent implements OnInit {
   }
 
   constructor(private entitiesService: EntitiesService, private route: Router, private activatedRoute: ActivatedRoute) {
+
     console.log("messsageArray:" + this.validationMessages);
     this.entitiesService.getListCage().subscribe(cage => {
       this.cageList = cage;
@@ -52,43 +53,43 @@ export class EntitiesEditComponent implements OnInit {
       const id = next.get("id");
       console.log(id);
       this.entitiesService.findById(id).subscribe((data) => {
-        this.entities = data;
-        console.log(this.entities);
-        this.entitiesForm = new FormGroup({
-          entitiesId: new FormControl("",
-            [Validators.required]),
-          inDate: new FormControl("", [
-            Validators.required,
-            checkInDate
-          ]),
-          outDate: new FormControl("", [
-            Validators.required,
-            checkOutDate
-          ]),
-          status: new FormControl("", [
-            Validators.required,
-            Validators.maxLength(50),
-            Validators.minLength(3),
-            Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")
-          ]),
-          weight: new FormControl("", [
-            Validators.required,
-            Validators.max(500),
-            Validators.min(0.01),
-          ]),
-          cageId: new FormControl("", [
-            Validators.required,
-            Validators.maxLength(2)
-          ]),
-          isDelete: new FormControl(0, [
-          ])
+
+          this.entities = data;
+          console.log(this.entities);
+          this.entitiesForm = new FormGroup({
+            entitiesId: new FormControl("",
+              [Validators.required]),
+            inDate: new FormControl("", [
+              Validators.required,
+              checkInDate
+            ]),
+            outDate: new FormControl("", [
+              Validators.required,
+              checkOutDate
+            ]),
+            status: new FormControl("", [
+              Validators.required,
+              Validators.maxLength(50),
+              Validators.minLength(3),
+              Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")
+            ]),
+            weight: new FormControl("", [
+              Validators.required,
+              Validators.max(500),
+              Validators.min(0.01),
+            ]),
+            cageId: new FormControl("", [
+              Validators.required,
+              Validators.maxLength(2)
+            ]),
+            isDelete: new FormControl(0, [])
+          })
+          this.entitiesForm.patchValue(this.entities);
+      },
+        (error)=>{
+          console.log(error.message);
+          this.route.navigateByUrl("/404")
         })
-
-        this.entitiesForm.patchValue(this.entities);
-      }),
-      (error)=>{
-
-      }
     })
 
   }
@@ -99,8 +100,7 @@ export class EntitiesEditComponent implements OnInit {
   updateEntities() {
     this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
       this.entities = data['content'];
-
-      this.route.navigateByUrl("/entities")
+        this.route.navigateByUrl("/entities");
     });
   }
 
