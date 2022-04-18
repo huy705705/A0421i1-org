@@ -17,6 +17,7 @@ export class EntitiesEditComponent implements OnInit {
   entitiesForm: FormGroup;
   entities: Entities;
   cageList: String[];
+  more :boolean=false;
   validationMessages = {
     entitiesId: [
       {type: 'required', message: 'Id không được trống!'}
@@ -102,6 +103,16 @@ export class EntitiesEditComponent implements OnInit {
       this.entities = data['content'];
         this.route.navigateByUrl("/entities");
     });
+  }
+  compare(){
+    console.log(Date.parse(this.entitiesForm.value.inDate));
+    console.log(Date.parse(this.entitiesForm.value.outDate));
+    if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
+      this.more=true;
+    }
+    else {
+      this.more=false;
+    }
   }
 
 }

@@ -103,9 +103,10 @@
             <div class="col-sm-8">
               <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="text" formControlName="entitiesId" disabled (change)="destroyHacker()">
-                <div style="color: red;"  *ngFor="let validation of validationMessages.entitiesId">
+                <div style="color: red; text-align: left"  *ngFor="let validation of validationMessages.entitiesId">
               <span *ngIf="entitiesForm.get('entitiesId').hasError(validation.type) && (entitiesForm.get('entitiesId').dirty || entitiesForm.get('entitiesId').touched)">
               {{validation.message}}</span>
+                  <span *ngIf="wasEdit==true">Trường này không cho chỉnh sửa!</span>
                 </div>
               </div>
             </div>
