@@ -8,6 +8,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    EntitiesModule
+    EntitiesModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
 
   bootstrap: [AppComponent]
