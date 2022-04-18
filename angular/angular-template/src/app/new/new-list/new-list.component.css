@@ -1,4 +1,24 @@
 #btnSearch{}
 .card:hover{
-    /* background-color: rgb(209, 248, 255); */
+    background-color: #EDEDED;
+}
+.card{
+    
+}
+.news-hightlight-name, .name-new-left{
+    color: black ;
+}
+.news-hightlight-name, .name-new-left:hover{
+    text-decoration: none;
+}
+.list-news-left:hover{
+    background-color: #EDEDED;
+    
+}
+.btn-outline-search{
+    background-color: #66c992;
+}
+.btn-outline-search:hover{
+    background-color: #F47F24;
+    /* border: 1px solid #192030 */
 }

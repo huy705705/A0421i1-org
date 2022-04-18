@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NewRoutingModule } from './new-routing.module';
 import { NewListComponent } from './new-list/new-list.component';
 import { NewCreateComponent } from './new-create/new-create.component';
@@ -15,7 +15,8 @@ import {NewsService} from '../service/news.service'
   ],
   imports: [
     CommonModule,
-    NewRoutingModule
+    NewRoutingModule,
+    ReactiveFormsModule, FormsModule
   ],
   providers:[NewsService]
 })

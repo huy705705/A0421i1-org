@@ -16,19 +16,16 @@ export class NewListComponent implements OnInit {
   newsPageHl:Array<any>;
   pagesHL:Array<number>;
 
-  private name:String = '';
   searchForm: FormGroup;
-  userInput = new FormControl();
-  // name = new FormControl('');
-  registerForm: FormGroup;
+
+  private name:String = '';
   constructor(private newsService: NewsService, private router: Router, private fb: FormBuilder){
   }
   ngOnInit(): void {
     this.findAllPageable()
     this.findAllPageableHl()
-    // this.searchForm = new FormGroup({newsName: new FormControl})
-    this.registerForm = this.fb.group({
-      email: [''],
+    this.searchForm = this.fb.group({
+      nameInput: [''],
     });
 }
 findAllPageable(){
@@ -73,6 +70,8 @@ findAllName(){
       
     },
     (error) => {
+      // this.newsPage=[]
+      // this.pages = null
       console.log(error.error.message);
     }
   )
@@ -94,7 +93,13 @@ setName(name: String, event: any) {
   this.name= name;
   this.findAllPageable();
 }
+searchName(){
+  console.log("hehe");
+  
+}
 onSubmit() {
-  console.log(this.registerForm);
+  this.name= this.searchForm.value.nameInput;
+  this.findAllName()
+  console.log(this.searchForm.value.nameInput);
 }
 }
