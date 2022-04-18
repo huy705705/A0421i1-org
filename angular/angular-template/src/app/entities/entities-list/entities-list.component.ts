@@ -3,6 +3,7 @@ import {EntitiesService} from "../../service/entities.service";
 import {Router} from "@angular/router";
 import {Entities} from "../../model/entities";
 import {FormGroup} from "@angular/forms";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-entities-list',
@@ -21,9 +22,10 @@ export class EntitiesListComponent implements OnInit {
   isSubmitted=false;
   isTrue=false;
   isTrue2=true;
+  
 
 
-  constructor(private entitiesService: EntitiesService, private router: Router) {
+  constructor(private entitiesService: EntitiesService, private router: Router, private tokenStorageService: TokenStorageService) {
     // this.entitiesService.findAll().subscribe((data) => {
     //   console.log(data);
     //   this.entities = data['content'];
@@ -91,5 +93,11 @@ export class EntitiesListComponent implements OnInit {
         console.log(error.error.message);
       }
     );
+  }
+
+
+  logOut() {
+    this.tokenStorageService.logOut();
+    this.router.navigate(['/login']);
   }
 }

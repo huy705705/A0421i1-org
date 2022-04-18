@@ -8,7 +8,7 @@ import {Entities} from "../model/entities";
   providedIn: 'root'
 })
 export class EntitiesService {
-  public apiURL = 'http://localhost:8080/entities';
+  public apiURL = 'http://localhost:8080/employee/entities';
   entitiesList = [];
 
 

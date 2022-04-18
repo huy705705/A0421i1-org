@@ -10,13 +10,18 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ComponentModule} from "./component/component.module";
+import { authInterceptorProviders } from './sercurity/auth.interceptor ';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
 
-  providers: [EntitiesService],
+  providers: [
+    EntitiesService,
+    authInterceptorProviders,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +30,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     EntitiesModule,
     SecurityModule,
+    ComponentModule,
 
   ],
   bootstrap: [AppComponent]

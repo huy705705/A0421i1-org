@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {TokenStorageService} from "./token-storage.service";
 
 const AUTH_API = 'http://localhost:8080/api/public/';
 
@@ -13,13 +14,26 @@ export class AuthenticationService {
   httpOptions: any;
   isLoggedIn: boolean;
 
-  constructor(private http: HttpClient,
-              public jwtHelper: JwtHelperService) {
+  // constructor(private http: HttpClient,
+  //             private tokenStorageService: TokenStorageService,
+  //             public jwtHelper: JwtHelperService) {
+  //   this.httpOptions = {
+  //     headers: new HttpHeaders({
+  //       ['ContentType']: 'application/json',
+  //       ['Authorization']: `Bearer ` + this.tokenStorageService.getToken()
+  //     }),
+  //     'Access-Control-Allow-Origin': 'http://localhost:4200',
+  //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  //   };
+  // }
+
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService, public jwtHelper: JwtHelperService) {
     this.httpOptions = {
       headers: new HttpHeaders({
-        'ContentType': 'application/json'
-      }),
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ` + this.tokenStorage.getToken()
+      })
+      , 'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
     };
   }

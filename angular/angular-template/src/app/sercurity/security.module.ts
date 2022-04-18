@@ -28,8 +28,7 @@ import {JwtModule} from "@auth0/angular-jwt";
           config: {
             tokenGetter: () => {
               return localStorage.getItem("access_token");
-            },
-            allowedDomains: ["localhost:4200"],
+            }
           },
         })
     ]

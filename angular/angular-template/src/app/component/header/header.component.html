@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -19,33 +20,58 @@
         <a class="nav-link text-uppercase" href="#">Liên Hệ</a>
       </li>
     </ul>
-    <div class="dropleft">
-      <button type="button" class="btn btn-login"
-              data-toggle="modal" data-target="#myModal" aria-haspopup="true" aria-expanded="false">Đăng xuất
-      </button>
-    </div>
+<!--    <div class="dropleft">-->
+      <div *ngIf="isLoggedIn then  loggedIn else notLogIn"></div>
+
+      <ng-template #notLogIn>
+        <div class="dropleft">
+          <button type="button" [routerLink]="['/login']">
+            Đăng nhập <i class="fa-solid fa-circle-user"></i>
+          </button>
+        </div>
+      </ng-template>
+
+
+      <ng-template #loggedIn>
+        <div class="dropleft">
+        <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">{{username}} <i class="fa-solid fa-circle-user"></i>
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>
+          <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>
+          <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>
+          <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>
+          <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>
+          <a class="dropdown-item" type="button" data-toggle="modal" data-target="#myModal"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+        </div>
+        </div>
+      </ng-template>
+
+<!--    </div>-->
   </div>
 </nav>
 
-<!--&lt;!&ndash; Modal &ndash;&gt;-->
-<!--<div id="myModal" class="modal fade">-->
-<!--  <div class="modal-dialog modal-dialog-centered modal-confirm">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header flex-column">-->
-<!--        <div class="icon-box">-->
-<!--          &lt;!&ndash;                    <i class="material-icons">&#xE5CD;</i>&ndash;&gt;-->
-<!--          <i class="fa-solid fa-right-from-bracket"></i>-->
-<!--        </div>-->
-<!--        <h4 class="modal-title w-100">Xác Nhận Đăng Xuất</h4>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Bạn có chắc muốn đăng xuất khỏi tài khoản này không?</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer justify-content-center">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>-->
-<!--        <button type="button" class="btn btn-danger" (click)="logOut()">Đăng xuất</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<!-- Modal -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+        <h4 class="modal-title w-100">Xác Nhận Đăng Xuất</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc muốn đăng xuất khỏi tài khoản này không?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" (click)="logOut()" >Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+</div>
+

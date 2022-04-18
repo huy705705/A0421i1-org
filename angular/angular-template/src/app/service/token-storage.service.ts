@@ -35,12 +35,13 @@ export class TokenStorageService {
   }
 
   public getToken(): string{
-    if (sessionStorage.getItem(TOKEN_KEY) != null){
-      return sessionStorage.getItem(TOKEN_KEY);
-    } else {
-      return localStorage.getItem(TOKEN_KEY)
+    if(window.localStorage.getItem(TOKEN_KEY)!==null){
+      return window.localStorage.getItem(TOKEN_KEY);
+    }else {
+      return window.sessionStorage.getItem(TOKEN_KEY);
     }
   }
+
 
 
   public getUser(): any {

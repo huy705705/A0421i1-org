@@ -12,7 +12,6 @@ import {AuthGuard} from "../auth.guard";
 })
 export class VerifyPasswordComponent implements OnInit {
   formGroup: FormGroup;
-  isSendMail = true;
   isSuccessful: boolean;
   token: string;
 
@@ -41,7 +40,6 @@ export class VerifyPasswordComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       let token = params['token'];
       if (token == null) {
-        this.isSendMail = false;
         this.isSuccessful = false;
       // mới thêm
       }else if (!this.authService.isAuthenticated(token)){
@@ -53,7 +51,6 @@ export class VerifyPasswordComponent implements OnInit {
 
 
       } else {
-        this.isSendMail = true;
         this.isSuccessful = false;
         this.authService.verifyPassword(token).subscribe(
           data => {

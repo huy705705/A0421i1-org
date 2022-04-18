@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   accountName: string;
   roles: string[] = [];
+  isLoggedIn: boolean;
 
   private shareService: ShareService;
 
@@ -50,10 +51,10 @@ export class LoginComponent implements OnInit {
       next => {
         if (this.formGroup.value.remember_account === true) {
           this.tokenStorageService.saveUserLocal(next);
-          this.tokenStorageService.saveTokenLocal(next.accessToken);
+          this.tokenStorageService.saveTokenLocal(next.token);
         } else {
           this.tokenStorageService.saveUserSession(next);
-          this.tokenStorageService.saveTokenSession(next.accessToken);
+          this.tokenStorageService.saveTokenSession(next.token);
         }
 
         this.authService.isLoggedIn = true;
@@ -69,14 +70,17 @@ export class LoginComponent implements OnInit {
         }
 
         console.log("accountName: "+ this.accountName + " role: " + actualRole )
-
+        let token = this.tokenStorageService.getToken();
+        console.log("getToken: " + token) ;
         // navigate to url depend on which role user log in
         if (actualRole.includes("ROLE_ADMIN")) {
           this.router.navigate(['admin/employee/list']);
+          this.isLoggedIn = true;
           // this.shareService.sendClickEvent();
         }
         else {
           this.router.navigate(['/employee/entities']);
+          this.isLoggedIn = true;
           // this.shareService.sendClickEvent();
         }
 
