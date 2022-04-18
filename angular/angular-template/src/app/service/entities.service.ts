@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Entities} from "../model/entities";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {retry} from "rxjs/operators";
+import {Entities} from "../model/entities";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntitiesService {
+  public apiURL = 'http://localhost:8080/entities';
+  entitiesList = [];
 
-  public apiURL = "http://localhost:8080/entities";
 
   constructor(private http: HttpClient) {
   }
+
 
   createEntities(value: Entities): Observable<any> {
     console.log(value);
@@ -44,6 +46,11 @@ export class EntitiesService {
   findAllPageable(page: number) {
     return this.http.get(this.apiURL + '?page=' + page);
   }
+
+  findByIdToDelete(id: string): Observable<Entities> {
+    return this.http.get<Entities>(this.apiURL + "/delete/" + id);
+  }
+
 
   deleteEntitiesById(id: string) {
     console.log("2: " + id)

@@ -18,7 +18,10 @@ export class EntitiesListComponent implements OnInit {
   inDate = '';
   emptyMessenger = '';
   cage = '';
-  isSubmitted:boolean;
+  isSubmitted=false;
+  isTrue=false;
+  isTrue2=true;
+
 
   constructor(private entitiesService: EntitiesService, private router: Router) {
     // this.entitiesService.findAll().subscribe((data) => {
@@ -30,9 +33,15 @@ export class EntitiesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllPageable()
+    console.log(this.isTrue)
+
   }
 
   findAllPageable() {
+
+
+    this.isTrue2 = true;
+
     this.entitiesService.findAllPageable(this.page).subscribe(
       data => {
         this.entities2 = data['content']
@@ -44,18 +53,11 @@ export class EntitiesListComponent implements OnInit {
       }
     )
   }
-
-  deleteEntities(id: number) {
-    // this.entitiesService.deleteEntitiesById(id).subscribe(()=>{
-    //   this.findAllPageable()
-    // })
-  }
-
   setPage(i, event: any) {
     event.preventDefault();
     this.page = i;
     this.findAllPageable();
-    this.search();
+
   }
 
   updateEntities(entity: any) {
@@ -63,6 +65,10 @@ export class EntitiesListComponent implements OnInit {
   }
 
   search() {
+    this.isTrue=true;
+    console.log(this.isTrue)
+    console.log(this.isSubmitted)
+
     console.log(this.inDate)
     this.entitiesService.searchEntities(this.inDate, this.cage).subscribe(
       data => {
@@ -71,10 +77,18 @@ export class EntitiesListComponent implements OnInit {
           this.entities2 = data['content']
           this.pages = new Array(data['totalPages'])
           this.isSubmitted=true;
+          this.isTrue2=true;
+
+
         } else {
           this.isSubmitted=false;
           this.emptyMessenger = 'Không tìm thấy từ khoá';
         }
+      },
+      (error) => {
+        this.isSubmitted=false;
+        this.isTrue2=false;
+        console.log(error.error.message);
       }
     );
   }
