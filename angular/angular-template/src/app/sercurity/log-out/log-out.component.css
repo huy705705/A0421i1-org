@@ -18,10 +18,10 @@ body {
 }
 .modal-confirm {
   color: #636363;
-  width: 400px;
+  /*width: 400px;*/
 }
 .modal-confirm .modal-content {
-  padding: 20px;
+  padding: 0;
   border-radius: 5px;
   border: none;
   text-align: center;
@@ -49,7 +49,7 @@ body {
   text-align: center;
   border-radius: 5px;
   font-size: 13px;
-  padding: 10px 15px 25px;
+  /*padding: 10px 15px 25px;*/
 }
 .modal-confirm .modal-footer a {
   color: #999;
@@ -97,5 +97,6 @@ body {
   display: inline-block;
   margin: 100px auto;
 }
+
 
 

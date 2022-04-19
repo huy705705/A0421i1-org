@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from "../../service/token-storage.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/share.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {LogOutComponent} from "../../sercurity/log-out/log-out.component";
+
 
 @Component({
   selector: 'app-header',
@@ -12,10 +15,12 @@ export class HeaderComponent implements OnInit {
   username: string;
   role: string;
   isLoggedIn: boolean;
-
+  dialogRef: MatDialogRef<LogOutComponent>
   constructor(private router: Router,
               private tokenStorageService: TokenStorageService,
-              private shareService : ShareService) {
+              private shareService : ShareService,
+              public dialog: MatDialog
+  ) {
     this.shareService.getClickEvent().subscribe(() => {
       this.loadHeader();
     })
@@ -25,16 +30,26 @@ export class HeaderComponent implements OnInit {
     this.loadHeader()
   }
 
-  logOut() {
-      this.tokenStorageService.logOut();
-      this.router.navigate(['/login']);
-      this.ngOnInit();
-  }
-
   private loadHeader():void {
     if (this.tokenStorageService.getUser() !== null) {
       this.username = this.tokenStorageService.getUser().name;
+    }else {
+      this.username = null;
     }
     this.isLoggedIn = (this.username !== null);
+  }
+
+
+  openDialog() {
+
+    this.dialogRef = this.dialog.open(LogOutComponent, {
+      width: '450px',
+
+    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.ngOnInit();
+      }
+    });
   }
 }

@@ -12,6 +12,9 @@ import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ComponentModule} from "./component/component.module";
 import { authInterceptorProviders } from './sercurity/auth.interceptor ';
+import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { authInterceptorProviders } from './sercurity/auth.interceptor ';
     EntitiesModule,
     SecurityModule,
     ComponentModule,
+    MatDialogModule,
+    BrowserAnimationsModule
 
   ],
   bootstrap: [AppComponent]

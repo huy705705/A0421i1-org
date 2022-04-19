@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {AuthenticationService} from "../../service/authentication.service";
 import {AuthGuard} from "../auth.guard";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-verify-password',
@@ -28,7 +29,8 @@ export class VerifyPasswordComponent implements OnInit {
               private authService: AuthenticationService,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
-              private router: Router) {
+              private router: Router,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -62,6 +64,8 @@ export class VerifyPasswordComponent implements OnInit {
         );
       }
     });
+
+
   }
 
   onSubmit() {

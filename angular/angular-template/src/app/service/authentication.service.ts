@@ -14,24 +14,11 @@ export class AuthenticationService {
   httpOptions: any;
   isLoggedIn: boolean;
 
-  // constructor(private http: HttpClient,
-  //             private tokenStorageService: TokenStorageService,
-  //             public jwtHelper: JwtHelperService) {
-  //   this.httpOptions = {
-  //     headers: new HttpHeaders({
-  //       ['ContentType']: 'application/json',
-  //       ['Authorization']: `Bearer ` + this.tokenStorageService.getToken()
-  //     }),
-  //     'Access-Control-Allow-Origin': 'http://localhost:4200',
-  //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-  //   };
-  // }
-
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService, public jwtHelper: JwtHelperService) {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ` + this.tokenStorage.getToken()
+        'Authorization': `Bearer ` + this.tokenStorage.getToken()
       })
       , 'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'

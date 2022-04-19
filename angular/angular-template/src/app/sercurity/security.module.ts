@@ -10,10 +10,12 @@ import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JwtModule} from "@auth0/angular-jwt";
+import {ComponentModule} from "../component/component.module";
+import { LogOutComponent } from './log-out/log-out.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, ForgotPasswordComponent, VerifyPasswordComponent],
+  declarations: [LoginComponent, ForgotPasswordComponent, VerifyPasswordComponent, LogOutComponent],
   exports: [
     LoginComponent
   ],
@@ -25,12 +27,13 @@ import {JwtModule} from "@auth0/angular-jwt";
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem("access_token");
-            }
-          },
-        })
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem("access_token");
+                }
+            },
+        }),
+        ComponentModule
     ]
 })
 export class SecurityModule { }
