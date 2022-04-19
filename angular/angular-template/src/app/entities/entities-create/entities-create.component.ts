@@ -89,7 +89,7 @@ export class EntitiesCreateComponent implements OnInit {
   createEntities() {
     this.entitiesService.createEntities(this.entitiesForm.value).subscribe((data) => {
       this.entities = data['content'];
-      this.router.navigateByUrl("/entities");
+      this.router.navigateByUrl("/employee/entities");
     });
   }
   getEntitiesId() {

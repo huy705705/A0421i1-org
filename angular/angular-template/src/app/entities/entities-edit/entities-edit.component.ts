@@ -102,7 +102,7 @@ export class EntitiesEditComponent implements OnInit {
   updateEntities() {
     this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
       this.entities = data['content'];
-        this.route.navigateByUrl("/entities");
+        this.route.navigateByUrl("/employee/entities");
     });
   }
   compare(){
