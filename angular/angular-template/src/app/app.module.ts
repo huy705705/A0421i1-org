@@ -3,13 +3,14 @@ import {NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {EmployeeModule} from "./employee/employee.module";
 import {EntitiesModule} from "./entities/entities.module";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ComponentModule} from "./component/component.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -19,13 +20,14 @@ import {ReactiveFormsModule} from "@angular/forms";
   providers: [EntitiesService],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    EmployeeModule,
-    NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    EntitiesModule
+    EntitiesModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ComponentModule,
+    AppRoutingModule,
   ],
 
   bootstrap: [AppComponent]

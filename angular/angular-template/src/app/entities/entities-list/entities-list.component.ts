@@ -3,6 +3,8 @@ import {EntitiesService} from "../../service/entities.service";
 import {Router} from "@angular/router";
 import {Entities} from "../../model/entities";
 import {FormGroup} from "@angular/forms";
+import {EntitiesDeleteComponent} from "../entities-delete/entities-delete.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-entities-list',
@@ -11,6 +13,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class EntitiesListComponent implements OnInit {
   entitiesForm: FormGroup;
+  dialogRef: MatDialogRef<EntitiesDeleteComponent>;
   private page: number = 0;
   entities2: Array<any>;
   pages: Array<number>;
@@ -21,9 +24,28 @@ export class EntitiesListComponent implements OnInit {
   isSubmitted=false;
   isTrue=false;
   isTrue2=true;
+  deleteMessenger;
 
 
-  constructor(private entitiesService: EntitiesService, private router: Router) {
+
+
+  openDialog(id) {
+    console.log("Id "+id)
+    this.dialogRef = this.dialog.open(EntitiesDeleteComponent, {
+      width: '600px',
+      data: id,
+    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteMessenger = 'Nhân viên ' + id + ' đã được xoá thành công';
+        this.page = 0;
+        this.ngOnInit();
+      }
+    });
+  }
+
+
+  constructor(private entitiesService: EntitiesService, private router: Router, public dialog: MatDialog) {
     // this.entitiesService.findAll().subscribe((data) => {
     //   console.log(data);
     //   this.entities = data['content'];
@@ -80,15 +102,12 @@ export class EntitiesListComponent implements OnInit {
           this.isTrue2=true;
 
 
-        } else {
-          this.isSubmitted=false;
-          this.emptyMessenger = 'Không tìm thấy từ khoá';
         }
       },
       (error) => {
+        console.log(error.message)
         this.isSubmitted=false;
         this.isTrue2=false;
-        console.log(error.error.message);
       }
     );
   }

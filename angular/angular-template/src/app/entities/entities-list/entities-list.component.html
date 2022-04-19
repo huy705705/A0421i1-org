@@ -84,8 +84,8 @@
                 <!--                  Tìm kiếm-->
                 <!--                </button>-->
                 <div class="form-outline">
-                  <input type="search" class="form-control" [(ngModel)]="inDate"
-                         placeholder="Nhập ngày vào"/>
+                  <input type="date" class="form-control" [(ngModel)]="inDate"
+                         placeholder="Nhập ngày vào" />
                 </div>
                 <div class="form-outline"style="margin-left: 10px;" >
                   <input type="search" class="form-control" [(ngModel)]="cage"
@@ -130,8 +130,8 @@
               <tr *ngFor="let entity of entities2">
                 <td>{{entity.entitiesId}}</td>
                 <td>{{entity.cageId}}</td>
-                <td>{{entity.inDate}}</td>
-                <td>{{entity.outDate}}</td>
+                <td>{{entity.inDate |date:"dd-MM-yyyy"}}</td>
+                <td>{{entity.outDate |date:"dd-MM-yyyy"}}</td>
                 <td>{{entity.status}}</td>
                 <td>{{entity.weight}}</td>
 
@@ -144,8 +144,9 @@
                 <!--                  -->
                 <!--                  <i class="fa-solid fa-trash-can" style="color: red;"></i>-->
                 <!--                </td>-->
+<!--                [routerLink]="['delete/'+entity.entitiesId]"-->
                 <td>
-                  <button class="btn" [routerLink]="['delete/'+entity.entitiesId]"><i class="fa-solid fa-trash-can"
+                  <button class="btn" (click)="openDialog(entity.entitiesId)"><i class="fa-solid fa-trash-can"
                                                                                       style="color: red;"></i></button>
                 </td>
 

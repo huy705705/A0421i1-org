@@ -23,7 +23,7 @@ export class EntitiesService {
 
 
   findById(id: String): Observable<any> {
-    return this.http.get<Entities>(this.apiURL + "/update/" + id);
+    return this.http.get<any>(this.apiURL + "/update/" + id);
   }
 
 
@@ -36,6 +36,7 @@ export class EntitiesService {
   }
 
   getEntitiesId(cageId: String): Observable<Number> {
+    console.log(cageId);
     return this.http.get<Number>(this.apiURL + "/createId/" + cageId);
   }
 
