@@ -5,6 +5,8 @@ import {Entities} from "../../model/entities";
 import {FormGroup} from "@angular/forms";
 import {EntitiesDeleteComponent} from "../entities-delete/entities-delete.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {TokenStorageService} from "../../service/token-storage.service";
+
 
 @Component({
   selector: 'app-entities-list',
@@ -46,10 +48,6 @@ export class EntitiesListComponent implements OnInit {
 
 
   constructor(private entitiesService: EntitiesService, private router: Router, public dialog: MatDialog) {
-    // this.entitiesService.findAll().subscribe((data) => {
-    //   console.log(data);
-    //   this.entities = data['content'];
-    // });
 
   }
 
@@ -111,4 +109,5 @@ export class EntitiesListComponent implements OnInit {
       }
     );
   }
+
 }
