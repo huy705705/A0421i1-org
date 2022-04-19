@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: "entities/create", component: EntitiesCreateComponent},
   {path: "entities/update/:id", component: EntitiesEditComponent},
   {path: '404', component: Error404Component},
-  {path: "**", redirectTo: "/404"},
+  // {path: "**", redirectTo: "/404"},
 
 ];
 
