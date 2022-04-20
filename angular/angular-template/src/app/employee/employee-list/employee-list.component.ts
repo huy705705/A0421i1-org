@@ -63,11 +63,11 @@ export class EmployeeListComponent implements OnInit {
   search() {
     this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim()).toPromise().then(data => {
       console.log(data);
-      if (data) {
+      // if (data) {
         this.employeePage = data['content']
         this.pages = new Array(data['totalPages'])
         this.currentPage = data['pageNumber']
-      }
+      // }
     },
       (error) => {
         console.log(error.error.message);

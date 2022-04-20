@@ -17,9 +17,49 @@ export class EmployeeEditComponent implements OnInit {
   employeeForm: FormGroup;
 
   validationMessages = {
+    employeeName: [
+      {type: 'required', message: 'Tên nhân viên không được trống!'},
+      {type: 'maxlength', message: 'Tên nhân viên không dài hơn 40 kí tự !'},
+      {type: 'minlength', message: 'Tên nhân viên không nhỏ hơn 3 kí tự !'},
+      {type: 'pattern', message: 'Tên nhân viên không được chứa ký tự đặc biệt!'}
+    ],
+    birthday: [
+      {type: 'required', message: 'Ngày sinh không được trống!'}
+
+    ],
+    email: [
+      {type: 'required', message: 'Email không được trống!'},
+      {type: 'email', message: 'Email chưa đúng dịnh dạng!'}
+    ],
+    idCard: [
+      {type: 'required', message: 'CMND không được trống!'},
+      {type: 'pattern', message: 'CMND phải là 9 số!'}
+    ],
+    address: [
+      {type: 'required', message: 'Địa chỉ không được trống!'},
+      {type: 'maxlength', message: 'Địa chỉ không dài hơn 40 kí tự !'}
+    ],
 
   }
 
+  genderList = [
+    {
+      id:1,
+      name:'gender',
+      value:'Nam',
+      label:'Nam'
+    },{
+      id:2,
+      name:'gender',
+      value:'Nữ',
+      label:'Nữ'
+    },{
+      id:3,
+      name:'gender',
+      value:'Khác',
+      label:'Khác'
+    }
+  ]
 
   constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -29,23 +69,34 @@ export class EmployeeEditComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(next => {
       this.employeeId = next.get('employeeId');
       console.log(this.employeeId);
+      console.log("messsageArray:" + this.validationMessages);
       // tslint:disable-next-line:no-shadowed-variable
       employeeService.findById(this.employeeId).subscribe( next => {
         this.employee = next;
         console.log(this.employee);
         this.employeeForm = new FormGroup({
           employeeId      : new FormControl({value: '', disabled: true}, [Validators.required]),
-          employeeName    : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
+          employeeName    : new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
             'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
             Validators.maxLength(40)]),
-          // accountId       : new FormControl(),
-          birthday        : new FormControl('', [Validators.required, birthdayValidator()]),
+          accountId       : new FormControl(),
+          birthday        : new FormControl('', [
+            Validators.required,
+            birthdayValidator()]),
           avartar         : new FormControl(),
-          email           : new FormControl('', [Validators.required]),
-          // email           : new FormControl('', [Validators.required, checkDuplicateEmail(this.employeeList, this.employee)]),
+          email           : new FormControl('', [
+            Validators.required,
+            Validators.email]),
           gender          : new FormControl(),
-          idCard          : new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
-          address         : new FormControl('', [Validators.required, Validators.maxLength(40)]),
+          idCard          : new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[0-9]{9}$')]),
+          address         : new FormControl('', [
+            Validators.required,
+            Validators.maxLength(40)]),
           isDelete        : new FormControl(),
 
         });
@@ -59,33 +110,9 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.employeeForm = this.formBuilder.group({
-    //   employeeId      : new FormControl("", [Validators.required]),
-    //   employeeName    : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
-    //     'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
-    //     Validators.maxLength(40)]),
-    //   accountId       : new FormControl(),
-    //   birthday        : new FormControl('', [Validators.required, birthdayValidator()]),
-    //   email           : new FormControl('', [Validators.required]),
-    //   // email           : new FormControl('', [Validators.required, checkDuplicateEmail(this.employeeList, this.employee)]),
-    //   gender          : new FormControl(),
-    //   idCard          : new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
-    //   address         : new FormControl('', [Validators.required, Validators.maxLength(40)]),
-    //
-    // });
-    //
-    // this.activatedRoute.paramMap.subscribe((data :ParamMap) => {
-    //   this.employeeId = data.get('employeeId');
-    //   this.employeeService.findById(this.employeeId).subscribe(data => {
-    //     this.employee = data;
-    //     this.employeeForm.patchValue(data);
-    //   });
-    // });
   }
 
   updateEmployee() {
-    console.log(this.employeeId);
-    console.log(this.employeeForm.value);
     this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe((data) => {
       console.log(data);
       this.employee = data['content'];
