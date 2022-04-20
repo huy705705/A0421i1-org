@@ -155,22 +155,14 @@
             <label  class="col-form-label ml-3" style="width: 150px;">Giới tính<span class="text-danger">*</span></label>
             <div class="col-sm-7">
 <!--              <div class="form-check form-check-inline">-->
-<!--                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio1" value="Nam">-->
-<!--                <label class="form-check-label" for="inlineRadio1">Nam</label>-->
-<!--              </div>-->
-<!--              <div class="form-check form-check-inline">-->
 <!--                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2" value="Nữ">-->
 <!--                <label class="form-check-label" for="inlineRadio2">Nữ</label>-->
 <!--              </div>-->
-<!--              <div class="form-check form-check-inline">-->
-<!--                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio3" value="Khác">-->
-<!--                <label class="form-check-label" for="inlineRadio2">Khác</label>-->
-<!--              </div>-->
 
               <div class="form-check form-check-inline" *ngFor="let gender of genderList">
-                <input id="sport-{{gender.id}}" type="radio" value="{{gender.value}}" name="{{gender.name}}"
+                <input class="form-check-input" id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
                        formControlName="{{gender.name}}">
-                <label for="sport-{{gender.id}}">{{gender.label}}</label>
+                <label class="form-check-input" for="gender-{{gender.id}}">{{gender.label}}</label>
               </div>
 
             </div>

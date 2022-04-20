@@ -82,7 +82,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
             'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
             Validators.maxLength(40)]),
-          // accountId       : new FormControl(),
+          accountId       : new FormControl(),
           birthday        : new FormControl('', [
             Validators.required,
             birthdayValidator()]),
