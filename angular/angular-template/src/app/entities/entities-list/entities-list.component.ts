@@ -31,6 +31,7 @@ export class EntitiesListComponent implements OnInit {
 
   openDialog(id) {
     console.log("Id "+id)
+
     this.dialogRef = this.dialog.open(EntitiesDeleteComponent, {
       width: '600px',
       data: id,
