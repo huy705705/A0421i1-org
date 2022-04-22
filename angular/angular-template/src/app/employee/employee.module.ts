@@ -11,6 +11,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [EmployeeListComponent, EmployeeCreateComponent, EmployeeEditComponent, EmployeeDeleteComponent],
+  exports: [
+    EmployeeListComponent
+  ],
     imports: [
         CommonModule,
         EmployeeRoutingModule,

@@ -16,9 +16,9 @@ export class EmployeeListComponent implements OnInit {
   currentPage:number;
   public searchName ="";
   public searchId   ="";
-  emptyMessenger = '';
-  isTrue = false;
-  isSubmitted:boolean;
+  isSubmitted=false;
+  isTrue=false;
+  isTrue2=true;
 
 
   constructor(private employeeService: EmployeeService, private router: Router){
@@ -34,6 +34,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   findAllPageable(){
+
+    this.isTrue2 = true;
+
     this.employeeService.findAllPageable(this.page).subscribe(
       data=>{
         this.employeePage=data['content']
@@ -53,24 +56,31 @@ export class EmployeeListComponent implements OnInit {
   }
 
   detailCustomer(employee: any) {
-    this.router.navigate(['/employee', employee.employeeId]);
+    this.router.navigate(['/admin/employee', employee.employeeId]);
   }
 
   updateEmployee(employee: any) {
-    this.router.navigate(['/employee/update', employee.employeeId]);
+    this.router.navigate(['/admin/employee/update', employee.employeeId]);
   }
 
   search() {
+    this.isTrue=true;
+    console.log(this.isTrue)
+    console.log(this.isSubmitted)
     this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim()).toPromise().then(data => {
       console.log(data);
-      // if (data) {
+      if (data) {
         this.employeePage = data['content']
         this.pages = new Array(data['totalPages'])
         this.currentPage = data['pageNumber']
-      // }
+        this.isSubmitted=true;
+        this.isTrue2=true;
+      }
     },
       (error) => {
         console.log(error.error.message);
+        this.isSubmitted=false;
+        this.isTrue2=false;
       }
       );
   }

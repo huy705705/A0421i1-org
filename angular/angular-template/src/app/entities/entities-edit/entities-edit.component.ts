@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {throwError} from "rxjs";
 import {checkInDate} from "../../validator/check-indate";
 import {checkOutDate} from "../../validator/check-outDate";
+import {error} from "@angular/compiler/src/util";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-entities-edit',
@@ -16,6 +18,7 @@ export class EntitiesEditComponent implements OnInit {
   entitiesForm: FormGroup;
   entities: Entities;
   cageList: String[];
+  more :boolean=false;
   validationMessages = {
     entitiesId: [
       {type: 'required', message: 'Id không được trống!'}
@@ -42,7 +45,8 @@ export class EntitiesEditComponent implements OnInit {
     ]
   }
 
-  constructor(private entitiesService: EntitiesService, private route: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private entitiesService: EntitiesService, private route: Router, private activatedRoute: ActivatedRoute, private toast: ToastrService) {
+
     console.log("messsageArray:" + this.validationMessages);
     this.entitiesService.getListCage().subscribe(cage => {
       this.cageList = cage;
@@ -51,40 +55,44 @@ export class EntitiesEditComponent implements OnInit {
       const id = next.get("id");
       console.log(id);
       this.entitiesService.findById(id).subscribe((data) => {
-        this.entities = data;
-        console.log(this.entities);
-        this.entitiesForm = new FormGroup({
-          entitiesId: new FormControl("",
-            [Validators.required]),
-          inDate: new FormControl("", [
-            Validators.required,
-            checkInDate
-          ]),
-          outDate: new FormControl("", [
-            Validators.required,
-            checkOutDate
-          ]),
-          status: new FormControl("", [
-            Validators.required,
-            Validators.maxLength(50),
-            Validators.minLength(3),
-            Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")
-          ]),
-          weight: new FormControl("", [
-            Validators.required,
-            Validators.max(500),
-            Validators.min(0.01),
-          ]),
-          cageId: new FormControl("", [
-            Validators.required,
-            Validators.maxLength(2)
-          ]),
-          isDelete: new FormControl(0, [
-          ])
-        })
 
-        this.entitiesForm.patchValue(this.entities);
-      })
+
+          this.entities = data;
+          console.log(this.entities);
+          this.entitiesForm = new FormGroup({
+            entitiesId: new FormControl("",
+              [Validators.required]),
+            inDate: new FormControl("", [
+              Validators.required,
+              checkInDate
+            ]),
+            outDate: new FormControl("", [
+              Validators.required,
+              checkOutDate
+            ]),
+            status: new FormControl("", [
+              Validators.required,
+              Validators.maxLength(50),
+              Validators.minLength(3),
+              Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")
+            ]),
+            weight: new FormControl("", [
+              Validators.required,
+              Validators.max(500),
+              Validators.min(0.01),
+            ]),
+            cageId: new FormControl("", [
+              Validators.required,
+              Validators.maxLength(2)
+            ]),
+            isDelete: new FormControl(0, [])
+          })
+          this.entitiesForm.patchValue(this.entities);
+      },
+        (error)=>{
+          console.log(error.message);
+          this.route.navigateByUrl("/404")
+        })
     })
 
   }
@@ -95,9 +103,22 @@ export class EntitiesEditComponent implements OnInit {
   updateEntities() {
     this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
       this.entities = data['content'];
-
-      this.route.navigateByUrl("/entities")
+        this.route.navigate(['/employee/entities']);
+        this.toast.success("Cập nhật cá thể thành công!", "Thành công: ", {
+          timeOut: 4000,
+          extendedTimeOut: 1000
+        })
     });
+  }
+  compare(){
+    console.log(Date.parse(this.entitiesForm.value.inDate));
+    console.log(Date.parse(this.entitiesForm.value.outDate));
+    if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
+      this.more=true;
+    }
+    else {
+      this.more=false;
+    }
   }
 
 }

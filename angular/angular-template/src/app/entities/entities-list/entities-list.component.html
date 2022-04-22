@@ -1,66 +1,61 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"-->
+<!--          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link text-uppercase" href="#">Tin tức</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>
-      </li>
-    </ul>
-    <div class="dropleft">
-      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>
-        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>
-        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>
-        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>
-        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>
-        <a class="dropdown-item" href="#"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
-      </div>
-    </div>
-  </div>
-</nav>
+<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
+<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <div class="dropleft">-->
+<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"-->
+<!--              aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
+<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
+<!--        <a class="dropdown-item" (click)="logOut()"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
 <div class="container-fluid" id="content">
   <div class="row">
     <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 260px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"/>
-          </svg>
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              <svg class="bi me-2" width="16" height="16">
-                <use xlink:href="#home"/>
-              </svg>
-              Quản lý cá thể
+            <a [routerLink]="['/admin/employee']" class="nav-link" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Quản lý nhân viên
             </a>
           </li>
+
           <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16">
-                <use xlink:href="#speedometer2"/>
-              </svg>
-              Quản lý thông báo
+            <a [routerLink]="['/employee/entities']"class="nav-link active">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+              Quản lý cá thể
             </a>
           </li>
 
@@ -70,7 +65,7 @@
         <!-- Sidebar -->
       </div>
     </div>
-    <div class="col-lg-10 ">
+    <div class="col-lg-10">
       <div class="card shadow ">
         <div class="card-header py-3">
           <div class="d-flex flex-row  d-flex justify-content-center">
@@ -84,8 +79,8 @@
                 <!--                  Tìm kiếm-->
                 <!--                </button>-->
                 <div class="form-outline">
-                  <input type="search" class="form-control" [(ngModel)]="inDate"
-                         placeholder="Nhập ngày vào"/>
+                  <input type="date" class="form-control" [(ngModel)]="inDate"
+                         placeholder="Nhập ngày vào" />
                 </div>
                 <div class="form-outline"style="margin-left: 10px;" >
                   <input type="search" class="form-control" [(ngModel)]="cage"
@@ -130,8 +125,8 @@
               <tr *ngFor="let entity of entities2">
                 <td>{{entity.entitiesId}}</td>
                 <td>{{entity.cageId}}</td>
-                <td>{{entity.inDate}}</td>
-                <td>{{entity.outDate}}</td>
+                <td>{{entity.inDate |date:"dd-MM-yyyy"}}</td>
+                <td>{{entity.outDate |date:"dd-MM-yyyy"}}</td>
                 <td>{{entity.status}}</td>
                 <td>{{entity.weight}}</td>
 
@@ -144,8 +139,9 @@
                 <!--                  -->
                 <!--                  <i class="fa-solid fa-trash-can" style="color: red;"></i>-->
                 <!--                </td>-->
+<!--                [routerLink]="['delete/'+entity.entitiesId]"-->
                 <td>
-                  <button class="btn" [routerLink]="['delete/'+entity.entitiesId]"><i class="fa-solid fa-trash-can"
+                  <button class="btn" (click)="openDialog(entity.entitiesId)"><i class="fa-solid fa-trash-can"
                                                                                       style="color: red;"></i></button>
                 </td>
 
@@ -157,7 +153,7 @@
           <div class="row">
             <div class="col-sm-12 col-md-5">
 
-              <a href="/entities/create">
+              <a routerLink="/employee/entities/create">
                 <button class="btn btn-primary">Khởi tạo</button>
               </a>
             </div>
@@ -209,7 +205,7 @@
 <footer class="">
   <div class="container py-5">
     <div class="row py-4">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="" alt="" width="180" class="mb-3">
         <p class="font-italic text-muted">Kết nối với chúng tôi.</p>
         <ul class="list-inline mt-4">
           <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i
@@ -263,3 +259,5 @@
     </div>
   </div>
 </footer>
+
+

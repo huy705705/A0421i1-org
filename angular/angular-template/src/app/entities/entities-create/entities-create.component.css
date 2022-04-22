@@ -3032,7 +3032,7 @@ input[type="button"].btn-block {
 
 .dropup,
 .dropright,
-.dropdown,
+.dropleft,
 .dropleft {
   position: relative;
 }
@@ -9601,7 +9601,7 @@ button.bg-dark:focus {
   text-transform: lowercase !important;
 }
 
-.text-uppercase, .dropdown .dropdown-menu .dropdown-header, .sidebar .sidebar-heading {
+.text-uppercase, .dropleft .dropdown-menu .dropdown-header, .sidebar .sidebar-heading {
   text-transform: uppercase !important;
 }
 
@@ -10152,22 +10152,22 @@ a:focus {
   transform: rotate(-15deg);
 }
 
-.dropdown .dropdown-menu {
+.dropleft .dropdown-menu {
   font-size: 0.85rem;
 }
 
-.dropdown .dropdown-menu .dropdown-header {
+.dropleft .dropdown-menu .dropdown-header {
   font-weight: 800;
   font-size: 0.65rem;
   color: #b7b9cc;
 }
 
-.dropdown.no-arrow .dropdown-toggle::after {
+.dropleft.no-arrow .dropdown-toggle::after {
   display: none;
 }
 
-.sidebar .nav-item.dropdown .dropdown-toggle::after,
-.topbar .nav-item.dropdown .dropdown-toggle::after {
+.sidebar .nav-item.dropleft .dropdown-toggle::after,
+.topbar .nav-item.dropleft .dropdown-toggle::after {
   width: 1rem;
   text-align: center;
   float: right;
@@ -10178,8 +10178,8 @@ a:focus {
   font-family: 'Font Awesome 5 Free';
 }
 
-.sidebar .nav-item.dropdown.show .dropdown-toggle::after,
-.topbar .nav-item.dropdown.show .dropdown-toggle::after {
+.sidebar .nav-item.dropleft.show .dropdown-toggle::after,
+.topbar .nav-item.dropleft.show .dropdown-toggle::after {
   content: '\f107';
 }
 
@@ -10251,11 +10251,11 @@ a:focus {
   outline: none;
 }
 
-.topbar .dropdown {
+.topbar .dropleft {
   position: static;
 }
 
-.topbar .dropdown .dropdown-menu {
+.topbar .dropleft .dropdown-menu {
   width: calc(100% - 1.5rem);
   right: 0.75rem;
 }
@@ -10316,10 +10316,10 @@ a:focus {
 }
 
 @media (min-width: 576px) {
-  .topbar .dropdown {
+  .topbar .dropleft {
     position: relative;
   }
-  .topbar .dropdown .dropdown-menu {
+  .topbar .dropleft .dropdown-menu {
     width: auto;
     right: 0;
   }
@@ -10826,11 +10826,11 @@ a:focus {
   padding: 0.5rem 1rem;
 }
 
-.card .card-header .dropdown {
+.card .card-header .dropleft {
   line-height: 1;
 }
 
-.card .card-header .dropdown .dropdown-menu {
+.card .card-header .dropleft .dropdown-menu {
   line-height: 1.5;
 }
 

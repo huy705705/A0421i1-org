@@ -4,6 +4,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../service/employee.service';
 import {birthdayValidator, checkDuplicateEmail} from "../validate";
 import {Employee} from "../../model/employee";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-employee-edit',
@@ -46,25 +47,26 @@ export class EmployeeEditComponent implements OnInit {
     {
       id:1,
       name:'gender',
-      value:'Nam',
-      label:'Nam'
+      value:'nam',
+      label:'nam'
     },{
       id:2,
       name:'gender',
-      value:'Nữ',
-      label:'Nữ'
+      value:'nữ',
+      label:'nữ'
     },{
       id:3,
       name:'gender',
-      value:'Khác',
-      label:'Khác'
+      value:'khác',
+      label:'khác'
     }
   ]
 
   constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private employeeService: EmployeeService,
-              private router: Router) {
+              private router: Router,
+              private toast : ToastrService) {
 
     this.activatedRoute.paramMap.subscribe(next => {
       this.employeeId = next.get('employeeId');
@@ -80,7 +82,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.required,
             Validators.minLength(3),
             Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
-            'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
+              'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
             Validators.maxLength(40)]),
           accountId       : new FormControl(),
           birthday        : new FormControl('', [
@@ -116,7 +118,12 @@ export class EmployeeEditComponent implements OnInit {
     this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe((data) => {
       console.log(data);
       this.employee = data['content'];
-      this.router.navigate(['/employee']);
+      this.router.navigate(['/admin/employee']);
+      this.toast.success("Cập nhật nhân viên thành công!", "Thành công: ", {
+        timeOut: 4000,
+        extendedTimeOut: 1000
+      })
     });
   }
 }
+

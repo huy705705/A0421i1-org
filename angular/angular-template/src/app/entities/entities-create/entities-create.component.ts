@@ -6,6 +6,7 @@ import {Entities} from "../../model/entities";
 import {checkInDate} from "../../validator/check-indate";
 import {checkOutDate} from "../../validator/check-outDate";
 import validate = WebAssembly.validate;
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-entities-create',
@@ -17,9 +18,12 @@ export class EntitiesCreateComponent implements OnInit {
   entities : Entities;
   cageList=[];
   entitiesId :string ;
+  more :boolean=false;
+  wasEdit : boolean=false;
+
   validationMessages= {
     entitiesId:[
-      {type: 'required',message: 'Id người ta đã render ra rồi dô sửa hả mày ai rảnh!!!'}
+      {type: 'required',message: ''}
     ],
     inDate:[
       {type: 'required',message: 'Ngày vào chuồng không được trống!'}
@@ -41,10 +45,11 @@ export class EntitiesCreateComponent implements OnInit {
     cageId:[
       {type: 'required',message: 'Mã chuồng không được trống!'},
       {type: 'minlength',message: 'Trạng thái không nhỏ hơn 3 kí tự !'}
-    ]
+    ],
   }
-  constructor(private entitiesService: EntitiesService, private router: Router ) {
+  constructor(private entitiesService: EntitiesService, private router: Router, private toast : ToastrService) {
     this.entitiesService.getListCage().subscribe((data)=>{
+
     this.cageList=data;
       this.entitiesForm = new FormGroup({
         entitiesId: new FormControl("",
@@ -74,20 +79,30 @@ export class EntitiesCreateComponent implements OnInit {
           Validators.required,
           Validators.minLength(1)
         ]),
+        isDelete: new FormControl(false)
       })
-
-    })
-
+      })
   }
 
   ngOnInit(): void {
   }
 
   createEntities() {
-    this.entitiesService.createEntities(this.entitiesForm.value).subscribe((data) => {
-      this.entities = data['content'];
-      this.router.navigateByUrl("/entities");
-    });
+    if(!this.more) {
+      this.entitiesService.createEntities(this.entitiesForm.value).subscribe((data) => {
+        this.entities = data['content'];
+        this.router.navigateByUrl("/employee/entities");
+        this.toast.success("Thêm mới cá thể thành công!", "Thành công: ", {
+          timeOut: 4000,
+          extendedTimeOut: 1000
+        })
+      });
+    }else{
+      this.toast.error("Thông tin cá thể không hợp lệ!", "Lỗi: ", {
+        timeOut: 4000,
+        extendedTimeOut: 1000
+      })
+    }
   }
   getEntitiesId() {
     this.entitiesService.getEntitiesId(this.entitiesForm.value.cageId).subscribe((data) => {
@@ -113,8 +128,20 @@ export class EntitiesCreateComponent implements OnInit {
   }
 
   destroyHacker() {
-    this.entitiesForm.patchValue({
-      entitiesId:this.entitiesId,
+    this.wasEdit=true;
+      this.entitiesForm.patchValue({
+      entitiesId:this.entitiesId
     })
+
+  }
+  compare(){
+    console.log(Date.parse(this.entitiesForm.value.inDate));
+    console.log(Date.parse(this.entitiesForm.value.outDate));
+    if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
+      this.more=true;
+    }
+    else {
+      this.more=false;
+    }
   }
 }

@@ -3,12 +3,25 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 
+import { Error404Component } from './error404/error404.component';
+import {EntitiesModule} from "../entities/entities.module";
+
+import {RouterModule} from "@angular/router";
+
+
 
 
 @NgModule({
-  declarations: [FooterComponent, HeaderComponent],
+
+  declarations: [FooterComponent, HeaderComponent, Error404Component],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    EntitiesModule,
+    RouterModule
+  ],
+  exports: [
+    FooterComponent,
+    HeaderComponent
+  ],
 })
 export class ComponentModule { }
