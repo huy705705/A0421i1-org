@@ -160,10 +160,10 @@
               <!--                <label class="form-check-label" for="inlineRadio2">Nữ</label>-->
               <!--              </div>-->
 
-              <div class="form-check form-check-inline" *ngFor="let gender of genderList">
-                <input class="form-check-input" id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
+              <div class="form-check form-check-inline" style="padding-top: 3px" *ngFor="let gender of genderList">
+                <input class="form-check-input"  id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
                        formControlName="{{gender.name}}">
-                <label class="form-check-input" for="gender-{{gender.id}}">{{gender.label}}</label>
+                <label class="form-check-input" style="padding-top: 2px" for="gender-{{gender.id}}">{{gender.label}}</label>
               </div>
 
             </div>

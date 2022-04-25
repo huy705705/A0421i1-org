@@ -13,7 +13,7 @@ export class EmployeeListComponent implements OnInit {
   private page:number= 0;
   employeePage:Array<any>;
   pages:Array<number>;
-  currentPage:number;
+  currentPage:number =1;
   public searchName ="";
   public searchId   ="";
   isSubmitted=false;
@@ -26,11 +26,8 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllPageable();
+    console.log(this.isTrue);
     this.search();
-    // this.employeeService.findAll().subscribe((data) => {
-    //   console.log(data);
-    //   this.employeeList = data['content'];
-    // });
   }
 
   findAllPageable(){
@@ -41,7 +38,7 @@ export class EmployeeListComponent implements OnInit {
       data=>{
         this.employeePage=data['content']
         this.pages=new Array(data['totalPages'])
-        this.currentPage= data['pageNumber']
+        this.currentPage= data['currentPage']
       },
       (error) => {
         console.log(error.error.message);
@@ -49,9 +46,9 @@ export class EmployeeListComponent implements OnInit {
     )
   }
 
-  setPage(i, event: any) {
+  setPage(page, event: any) {
     event.preventDefault();
-    this.page= i;
+    this.page= page;
     this.findAllPageable();
   }
 
@@ -72,7 +69,7 @@ export class EmployeeListComponent implements OnInit {
       if (data) {
         this.employeePage = data['content']
         this.pages = new Array(data['totalPages'])
-        this.currentPage = data['pageNumber']
+        this.currentPage = data['currentPage']
         this.isSubmitted=true;
         this.isTrue2=true;
       }

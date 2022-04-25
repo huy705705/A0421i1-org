@@ -12,6 +12,9 @@
   font-weight: bolder;
 }
 
+form-check form-check-inline {
+  padding-top: 20px !important;
+}
 form {
   vertical-align: middle;
 }

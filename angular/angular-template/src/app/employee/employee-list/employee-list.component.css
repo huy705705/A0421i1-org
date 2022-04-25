@@ -1,14 +1,6 @@
-/* body {
-    background: #35a367;
-    background: -webkit-linear-gradient(to right,  #2e8c59, #66c992);
-    background: linear-gradient(to right, #2e8c59, #66c992);
-
-  } */
-/* nav{
-  background: #35a367;
-  background: -webkit-linear-gradient(to right,  #66c992, #66c992);
-  background: linear-gradient(to right, #66c992, #66c992);
-} */
+.nav .current{
+  background-color: #66c992;
+}
 #content{
   min-height: 100vh;
 }
