@@ -7,13 +7,14 @@ import { Error404Component } from './error404/error404.component';
 import {EntitiesModule} from "../entities/entities.module";
 
 import {RouterModule} from "@angular/router";
+import { ContactComponent } from './contact/contact.component';
 
 
 
 
 @NgModule({
 
-  declarations: [FooterComponent, HeaderComponent, Error404Component],
+  declarations: [FooterComponent, HeaderComponent, Error404Component, ContactComponent],
   imports: [
     CommonModule,
     EntitiesModule,
@@ -21,7 +22,8 @@ import {RouterModule} from "@angular/router";
   ],
   exports: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContactComponent
   ],
 })
 export class ComponentModule { }

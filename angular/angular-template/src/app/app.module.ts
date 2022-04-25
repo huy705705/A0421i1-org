@@ -16,6 +16,8 @@ import { authInterceptorProviders } from './sercurity/auth.interceptor ';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
+import {CageModule} from "./cage/cage.module";
+import {ContactComponent} from "./component/contact/contact.component";
 
 
 
@@ -34,6 +36,7 @@ import {EmployeeModule} from "./employee/employee.module";
     HttpClientModule,
     CommonModule,
     EntitiesModule,
+    CageModule,
     MatDialogModule,
     BrowserAnimationsModule,
     ComponentModule,

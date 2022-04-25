@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cage-list.component.css']
 })
 export class CageListComponent implements OnInit {
+  pages: Array<number>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    this.pages=[1,2,3];
   }
 
+  ngOnInit(): void {
+
+  }
+  setPage(i, event: any) {
+    event.preventDefault();
+
+  }
 }
