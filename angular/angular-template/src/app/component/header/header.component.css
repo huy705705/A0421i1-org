@@ -1,3 +1,100 @@
 .dropdown-item:hover{
     cursor: pointer;
 }
+.nav-bg{
+    background-color: rgb(255, 255, 255);
+}
+/* .nav-link:hover {
+    border-radius: 5px;
+    background: #66c992;
+  } */
+  .nav-link{
+    background-image: linear-gradient(
+      to right,
+      #54b3d6,
+      #54b3d6 50%,
+      rgb(0, 0, 0) 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    /* padding: 5px 0; */
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+    font-weight: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1.5px;
+  }
+  
+  .nav-link:before {
+    content: '';
+    background: #54b3d6;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover {
+   background-position: 0;
+  }
+  
+  .nav-link:hover::before {
+    width:100%;
+  }
+  .btn-fun{
+      background-color: #99E2B4;
+  }
+  .btn-fun:hover{
+    background-color: #78C6A3;
+}
+.navbar-brand{
+  font-weight: bolder;
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1.5px;
+
+}
+.btn{
+  border-radius: 0;
+}
+.btn-nav {
+  background-color: transparent;
+  letter-spacing: 1.5px;
+}
+
+.btn-nav:hover {
+  background-color: transparent;
+
+  color: rgb(255, 255, 255);
+}
+
+.btn-confirm-logout {
+  background-color: #66c992;
+}
+
+.btn-confirm-logout:hover {
+  background-color: #2e8c59;
+
+  color: rgb(255, 255, 255);
+}
+
+.btn-confirm-logout-cancel:hover {
+  background-color: #0000;
+
+  color: rgb(255, 255, 255);
+}
+
+.btn-confirm-logout-cancel {
+  background-color: #0000;
+
+  color: rgb(255, 255, 255);
+}
+nav{
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}

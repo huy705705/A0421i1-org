@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg fixed-top nav-bg">
+  <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="../../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      BREEDER
+      <!-- <img src="../../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+      BREEDER 
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
       aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,23 +12,23 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+          <a class="nav-link text-uppercase text-nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-uppercase" href="#">Tin tức</a>
+          <a class="nav-link text-uppercase text-nav-link" href="#">Tin tức</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>
+          <a class="nav-link text-uppercase text-nav-link" href="#">Về chúng tôi</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-uppercase" href="#">Liên Hệ</a>
+          <a class="nav-link text-uppercase text-nav-link" href="#">Liên Hệ</a>
         </li>
       </ul>
       
-      <div ngbDropdown  class="dropleft ">
-        <button ngbDropdownToggle type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+      <div ngbDropdown  class="dropdown ">
+        <button ngbDropdownToggle type="button" class="btn btn-nav dropdown-toggle btn-fun" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Putin <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+          <a href="" class="nav-link">Putin <i class="fa-solid fa-circle-user" aria-hidden="true"></i></a>
         </button>
         <div ngbDropdownMenu  class="dropdown-menu " aria-labelledby="dropdownMenuButton">
           <a ngbDropdownItem class="dropdown-item item-function-1"  (click)="pageEmployee()" >
@@ -68,4 +69,5 @@
         </div>
       </div>
     </div>
+  </div>
   </nav>

@@ -17,6 +17,8 @@ export class NewListComponent implements OnInit {
   pagesHL:Array<number>;
 
   searchForm: FormGroup;
+  newsListM : String = '';
+  newsListN : Array<any>;
 
   private name:String = '';
   constructor(private newsService: NewsService, private router: Router, private fb: FormBuilder){
@@ -49,6 +51,10 @@ findAllPageableHl(){
     data=>{
       this.newsPageHl=data['content']
       console.log(data);
+      this.newsPageHl.forEach(element => {
+        this.newsListM +=  " | " + element.newsName;
+      });
+      console.log(this.newsListM);
       
       this.pagesHL=new Array(data['totalPages'])
       // console.log(data['totalPages']);

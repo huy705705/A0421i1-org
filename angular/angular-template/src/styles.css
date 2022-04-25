@@ -58,43 +58,10 @@
   footer {
     background-color: rgb(226, 225, 225);
   }
+
+
   
-  .btn-nav {
-    background-color: #66c992;
-  }
-  
-  .btn-nav:hover {
-    background-color: #2e8c59;
-  
-    color: rgb(255, 255, 255);
-  }
-  
-  .btn-confirm-logout {
-    background-color: #66c992;
-  }
-  
-  .btn-confirm-logout:hover {
-    background-color: #2e8c59;
-  
-    color: rgb(255, 255, 255);
-  }
-  
-  .btn-confirm-logout-cancel:hover {
-    background-color: #0000;
-  
-    color: rgb(255, 255, 255);
-  }
-  
-  .btn-confirm-logout-cancel {
-    background-color: #0000;
-  
-    color: rgb(255, 255, 255);
-  }
-  
-  .nav-link:hover {
-    border-radius: 5px;
-    background: #66c992;
-  }
+ 
   /* .i-header{
     font-size: large;
   } */

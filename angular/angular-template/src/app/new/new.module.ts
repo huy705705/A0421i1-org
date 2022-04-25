@@ -16,7 +16,8 @@ import {NewsService} from '../service/news.service'
   imports: [
     CommonModule,
     NewRoutingModule,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers:[NewsService]
 })
