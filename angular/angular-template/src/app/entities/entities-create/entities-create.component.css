@@ -2021,6 +2021,7 @@ textarea.form-control {
 }
 
 .form-group {
+  padding-left: 200px;
   margin-bottom: 1rem;
 }
 

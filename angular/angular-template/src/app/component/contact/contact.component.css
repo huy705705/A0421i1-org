@@ -1,5 +1,5 @@
 body {
-  margin: auto;
+  margin-top: 4%;
   background: #eaeaea;
   font-family: 'Open Sans', sans-serif;
 }
@@ -29,7 +29,7 @@ form h1 {
 
 form {
   border-radius: 5px;
-  max-width:700px;
+  max-width:900px;
   width:100%;
   margin: 5% auto;
   background-color: #FFFFFF;
@@ -103,7 +103,7 @@ i {
 }
 
 .bouton-contact{
-  background-color: #81BDA4;
+  background-color: green;
   color: #FFF;
   text-align: center;
   width: 100%;
@@ -131,7 +131,7 @@ i {
 }
 
 .validation {
-  display:none;
+  display:inline-block;
   margin: 0 0 10px;
   font-weight:400;
   font-size:13px;
