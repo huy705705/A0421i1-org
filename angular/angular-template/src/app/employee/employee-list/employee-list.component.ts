@@ -26,7 +26,6 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllPageable();
-    console.log(this.isTrue);
     this.search();
   }
 
@@ -62,8 +61,7 @@ export class EmployeeListComponent implements OnInit {
 
   search() {
     this.isTrue=true;
-    console.log(this.isTrue)
-    console.log(this.isSubmitted)
+    console.log(this.currentPage)
     this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim()).toPromise().then(data => {
       console.log(data);
       if (data) {

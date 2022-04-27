@@ -156,9 +156,15 @@
 
                   <ul *ngIf="pages && pages.length" class="nav nav-pills">
                     <li class="nav-link">Trang</li>
-                    <li class="nav-item" *ngFor="let p of pages;let i=index">
-                      <a class="nav-link" href="" (click)="setPage(i,$event)" [ngClass]="{active:currentPage === p}">{{i+1}}</a>
+<!--                    <li [ngClass]="{disabled:currentPage === 1}" class="page-item previous-item">-->
+<!--                      <a routerLink [queryParams]="{ page:currentPage - 1 }" class="page-link">Previous</a>-->
+<!--                    </li>-->
+                    <li class="nav-item" *ngFor="let p of pages;let i=index" [ngClass]="{active:currentPage === i}">
+                      <a class="nav-link" href="" (click)="setPage(i,$event)">{{i+1}}</a>
                     </li>
+<!--                    <li [ngClass]="{disabled:currentPage === pages}" class="page-item next-item">-->
+<!--                      <a routerLink [queryParams]="{ page:currentPage + 1}" class="page-link">Next</a>-->
+<!--                    </li>-->
                   </ul>
 
               </div>
