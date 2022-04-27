@@ -1,38 +1,4 @@
-<!--<body>-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
 
-<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
-<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--    <div class="dropleft">-->
-<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
-<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
 <div class="container-fluid" id="content">
   <div class="row">
     <div class="col-lg-2 ml-0">
@@ -121,7 +87,7 @@
               </thead>
 
               <tbody>
-              <tr *ngFor="let employee of employeePage">
+              <tr *ngFor="let employee of employeeList">
                 <td>{{employee.employeeId}}</td>
                 <td>{{employee.employeeName| uppercase}}</td>
                 <td hidden>{{employee.accountId}}</td>
@@ -152,22 +118,27 @@
               </a>
             </div>
             <div class="col-sm-12 col-md-7">
-              <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-
-                  <ul *ngIf="pages && pages.length" class="nav nav-pills">
-                    <li class="nav-link">Trang</li>
-<!--                    <li [ngClass]="{disabled:currentPage === 1}" class="page-item previous-item">-->
-<!--                      <a routerLink [queryParams]="{ page:currentPage - 1 }" class="page-link">Previous</a>-->
-<!--                    </li>-->
-                    <li class="nav-item" *ngFor="let p of pages;let i=index" [ngClass]="{active:currentPage === i}">
-                      <a class="nav-link" href="" (click)="setPage(i,$event)">{{i+1}}</a>
-                    </li>
-<!--                    <li [ngClass]="{disabled:currentPage === pages}" class="page-item next-item">-->
-<!--                      <a routerLink [queryParams]="{ page:currentPage + 1}" class="page-link">Next</a>-->
-<!--                    </li>-->
-                  </ul>
-
-              </div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex justify-content-md-end justify-content-center">
+                  <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = 0; search()">Đầu</button></li>
+                  <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = page - 1; search()">Trang trước</button></li>
+                  <li class="page-item col-md-1 col-2  px-0">
+                    <div class="input-group">
+                      <input  #pageInput (change)="page = $event.target.value - 1" type="text" class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                  </li>
+                  <li>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">/{{totalPages}}</span>
+                    </div>
+                  </li>
+                  <li class="page-item">
+                    <button (click)="search()" class="btn btn-primary rounded-0">Đi</button>
+                  </li>
+                  <li class="page-item"><button class="page-link" [hidden]="page >=  totalPages - 1" (click)="page = page + 1; search()">Trang kế</button></li>
+                  <li class="page-item"><button class="page-link" [hidden]="page >=  totalPages - 1 && page < totalPages"  (click)="page = totalPages - 1; search()">Cuối</button></li>
+                </ul>
+              </nav>
             </div>
           </div>
 

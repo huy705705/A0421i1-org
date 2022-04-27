@@ -10,10 +10,10 @@ import {Employee} from "../../model/employee";
 })
 export class EmployeeListComponent implements OnInit {
 
-  private page:number= 0;
-  employeePage:Array<any>;
-  pages:Array<number>;
-  currentPage:number =1;
+  public page = 0;
+  employeeList:Array<any>;
+  pages: any;
+  totalPages: number;
   public searchName ="";
   public searchId   ="";
   isSubmitted=false;
@@ -25,55 +25,54 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.findAllPageable();
+    // this.findAllPageable();
     this.search();
   }
 
-  findAllPageable(){
+  // findAllPageable(){
+  //
+  //   this.isTrue2 = true;
+  //
+  //   this.employeeService.findAllPageable(this.page).subscribe(
+  //     data=>{
+  //       this.employeeList=data['content']
+  //       this.pages= new Array(data['totalPages'])
+  //       this.currentPage= data['currentPage']
+  //     },
+  //     (error) => {
+  //       console.log(error.error.message);
+  //     }
+  //   )
+  // }
 
-    this.isTrue2 = true;
-
-    this.employeeService.findAllPageable(this.page).subscribe(
-      data=>{
-        this.employeePage=data['content']
-        this.pages=new Array(data['totalPages'])
-        this.currentPage= data['currentPage']
-      },
-      (error) => {
-        console.log(error.error.message);
-      }
-    )
-  }
-
-  setPage(page, event: any) {
-    event.preventDefault();
-    this.page= page;
-    this.findAllPageable();
-  }
-
-  detailCustomer(employee: any) {
-    this.router.navigate(['/admin/employee', employee.employeeId]);
-  }
+  // setPage(page, event: any) {
+  //   event.preventDefault();
+  //   this.page= page;
+  //   this.search();
+  // }
 
   updateEmployee(employee: any) {
     this.router.navigate(['/admin/employee/update', employee.employeeId]);
   }
 
   search() {
+    if (!Number(this.page) || Number(this.page) < 0) {
+      this.page = 0;
+    }
+
     this.isTrue=true;
-    console.log(this.currentPage)
-    this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim()).toPromise().then(data => {
-      console.log(data);
-      if (data) {
-        this.employeePage = data['content']
-        this.pages = new Array(data['totalPages'])
-        this.currentPage = data['currentPage']
+    this.employeeService.findAllEmployeeName(this.searchName.trim(),this.searchId.trim(),this.page).toPromise().then(data => {
+        console.log(data.length);
+        this.employeeList = data['content']
+        this.pages = data;
+        this.totalPages= data['totalPages'];
+        console.log(data);
         this.isSubmitted=true;
         this.isTrue2=true;
-      }
     },
       (error) => {
         console.log(error.error.message);
+        this.pages = [];
         this.isSubmitted=false;
         this.isTrue2=false;
       }
