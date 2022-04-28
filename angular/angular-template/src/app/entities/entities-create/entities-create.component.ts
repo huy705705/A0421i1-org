@@ -89,6 +89,7 @@ export class EntitiesCreateComponent implements OnInit {
 
   createEntities() {
     if(!this.more) {
+      console.log(this.entitiesForm.value.cageId)
       this.entitiesService.createEntities(this.entitiesForm.value).subscribe((data) => {
         this.entities = data['content'];
         this.router.navigateByUrl("/employee/entities");

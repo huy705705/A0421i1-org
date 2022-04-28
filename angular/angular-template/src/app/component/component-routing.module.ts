@@ -6,7 +6,6 @@ import {ContactComponent} from "./contact/contact.component";
 
 
 const routes: Routes = [
-  {path:'employee/contact',component: ContactComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
 ];
 
 @NgModule({

@@ -17,7 +17,6 @@ const routes: Routes = [
   {path:'employee/entities/delete/:id',component: EntitiesDeleteComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
   {path:'employee/entities/create',component: EntitiesCreateComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
   {path: '404', component: Error404Component},
-  {path: 'contact', component: ContactComponent},
 
 ];
 

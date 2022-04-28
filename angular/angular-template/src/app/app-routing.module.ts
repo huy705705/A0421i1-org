@@ -1,10 +1,12 @@
 
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import {ContactComponent} from "./component/contact/contact.component";
 
 
 const routes: Routes = [
-  // {path: '', component: NewListComponent}
+  {path: 'contact', component: ContactComponent},
+
 ]
 
 
