@@ -12,8 +12,12 @@
   background: -webkit-linear-gradient(to right,  #66c992, #66c992);
   background: linear-gradient(to right, #66c992, #66c992);
 } */
+th {
+  text-align: center;
+}
 tr, td{
   vertical-align: middle;
+  padding-left: 30px;
 }
 #content{
   min-height: 100vh;
