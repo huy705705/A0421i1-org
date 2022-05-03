@@ -16,6 +16,8 @@ import { authInterceptorProviders } from './sercurity/auth.interceptor ';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
+import {NewModule} from "./new/new.module";
+import {NewsService} from "./service/news.service";
 
 
 
@@ -27,6 +29,7 @@ import {EmployeeModule} from "./employee/employee.module";
   providers: [
     EntitiesService,
     authInterceptorProviders,
+    NewsService
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import {EmployeeModule} from "./employee/employee.module";
     ComponentModule,
     AppRoutingModule,
     SecurityModule,
-    EmployeeModule
+    EmployeeModule,
+    NewModule,
   ],
   bootstrap: [AppComponent]
 })

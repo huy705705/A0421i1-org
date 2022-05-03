@@ -15,6 +15,7 @@ export class VerifyPasswordComponent implements OnInit {
   formGroup: FormGroup;
   isSuccessful: boolean;
   token: string;
+  isValid = true;
 
   validation_messages = {
     'password': [
@@ -65,13 +66,20 @@ export class VerifyPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+  if(this.formGroup.get('newPassword').hasError('required') == true
+    || this.formGroup.get('newPassword').hasError('minlength')== true
+    || this.formGroup.get('newPassword').hasError('maxlength') == true){
+    this.isValid = false;
+  }
+
     // mới thêm
-      if (this.formGroup.value.newPassword !== this.formGroup.value.confirmNewPassword){
+      if (this.formGroup.value.newPassword !== this.formGroup.value.confirmNewPassword || this.isValid == false){
       this.toastr.error("Trường nhập lại mật khẩu và mật khẩu không giống nhau!", "Lỗi: ", {
         timeOut: 5000,
         extendedTimeOut: 1500
       })
-    } else {
+    } else
+    {
       this.authService.doResetPassword(this.formGroup.value.newPassword, this.token).subscribe(data => {
         this.toastr.success('Mật khẩu đã được thay đổi!', "Thành công");
         this.router.navigate(["/login"])

@@ -101,14 +101,21 @@ export class EntitiesEditComponent implements OnInit {
   }
 
   updateEntities() {
-    this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
-      this.entities = data['content'];
+    if(!this.more) {
+      this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
+        this.entities = data['content'];
         this.route.navigate(['/employee/entities']);
         this.toast.success("Cập nhật cá thể thành công!", "Thành công: ", {
           timeOut: 4000,
           extendedTimeOut: 1000
         })
-    });
+      });
+    } else{
+      this.toast.error("Thông tin cá thể không hợp lệ!", "Lỗi: ", {
+        timeOut: 4000,
+        extendedTimeOut: 1000
+      })
+    }
   }
   compare(){
     console.log(Date.parse(this.entitiesForm.value.inDate));

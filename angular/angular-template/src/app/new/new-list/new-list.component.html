@@ -1,72 +1,160 @@
-<!--<div class="container-fluid  mt-4 mb-5 min-vh-100" id="content">-->
-
-<!--  <div class="row">-->
-<!--    <div class="col-lg-3 ">-->
-<!--      &lt;!&ndash; <div class="list-group">-->
-<!--        <a href="#" class="list-group-item list-group-item-action ">  Nhu cầu dùng gạo làm thức ăn chăn nuôi ở châu Á-->
-<!--          tăng mạnh</a>-->
-<!--        <a href="#" class="list-group-item list-group-item-action">Rất nhiều “nút thắt” lớn cần tháo gỡ để cứu ngành-->
-<!--          chăn nuôi-->
-<!--          lợn</a>-->
-<!--        <a href="#" class="list-group-item list-group-item-action">Quảng Trị: Gỡ vướng cho các dự án chăn nuôi lợn-->
-<!--          công nghệ cao</a>-->
-<!--        <a href="#" class="list-group-item list-group-item-action disabled">Bức tranh ngành thức ăn chăn nuôi trong-->
-<!--          bối cảnh bão giá nguyên-->
-<!--          liệu đầu vào</a>-->
-<!--      </div> &ndash;&gt;-->
-
-<!--      &lt;!&ndash; <form class="form-inline my-lg-0 mr-lg-2 ">-->
-<!--        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--      </form> &ndash;&gt;-->
-<!--      <ul class="list-group">-->
-<!--        <li class="list-group-item d-flex justify-content-between align-items-center" >-->
-<!--          <div class="container-fluid">-->
-<!--            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()"  class="form-inline my-lg-0 mr-lg-2 form-group row">-->
-<!--              <input class="form-control mr-sm-2 col-xl-7 col-lg-12 " name="nameInput" type="search" placeholder="" aria-label="Search" formControlName="nameInput">-->
-<!--              <button class="btn btn-outline-search my-2 my-sm-0 col-xl-4" id='btnSearch' type="submit">Tìm Kiếm</button>-->
-<!--            </form>-->
-<!--          </div>-->
-
-<!--        </li>-->
-<!--        <li class="list-group-item d-flex justify-content-between align-items-center list-news-left" *ngFor="let newsHl of newsPage">-->
-<!--          <img src="https://www.itourvn.com/images/easyblog_articles/645/b2ap3_large_the-pig-in-traditional-asian-belief-cover.jpg" width="80" height="50" class="mr-2" alt="">-->
-<!--          <a href=" " class="list-group-item-action" >{{newsHl.newsName}}</a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--      <nav aria-label="Page navigation example">-->
-<!--        <ul class="pagination justify-content-end">-->
-<!--          <li class="nav-item" *ngFor="let p of pages;let i=index">-->
-<!--            <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}</a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </nav>-->
-<!--    </div>-->
-<!--    <div class="col-lg-9">-->
-<!--      <div class=" mt-3">-->
-<!--        <h3 class="text-uppercase">Tin tức nổi bật</h3>-->
-<!--        <div class="row" >-->
-<!--          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let news of newsPageHl">-->
-<!--            <div class="card h-100">-->
-<!--              <a href=""><img class="card-img-top" src="https://www.itourvn.com/images/easyblog_articles/645/b2ap3_large_the-pig-in-traditional-asian-belief-cover.jpg" alt=""></a>-->
-<!--              <div class="card-body">-->
-<!--                <a href="#" class="font-weight-bold news-hightlight-name">{{news.newsName}}</a>-->
-<!--                <p class="card-text">{{news.detailDescription}}</p>-->
-<!--                <p class="card-text"><i class="fa-regular fa-clock"></i> {{news.createdDate}}</p>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      <nav aria-label="Page navigation example">-->
-<!--        <ul class="pagination justify-content-end">-->
-<!--          <li class="nav-item" *ngFor="let p of pagesHL;let i=index">-->
-<!--            <a class="nav-link " href="" (click)="setPageHL(i,$event)">{{i+1}}</a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </nav>-->
-
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="container mb-5 min-vh-100 content-news" id="content">
+  <div class="contact-div">
+    <div class="m-auto text-center center-contact">
+      <H1 class=" text-center text-white"><span class="sp-text-mid">Nâng Cao</span> Kiến Thức Chăn Nuôi</H1>
+      <!-- <button class="btn btn-contact text-uppercase" id="btn-contact">Contact <i class="fa-solid fa-arrow-right-long"></i></button> -->
+      <a class="text-uppercase a-contact" href="#">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-8 ">
+      <H4 class="name-list-news"><p class="p-1 text-uppercase">Tin mới nhất</p></H4>
+      <div class="row mt-2 mb-2" *ngFor="let newsHl of newsPage">
+        <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{newsHl.image}}" alt=""></div>
+        <div class="col-lg-6">
+          <h4 id="new-name-left" class="text-uppercase">{{newsHl.newsName}}</h4>
+          <p class="card-text">{{newsHl.detailDescription}}</p>
+          <p class="card-text"> {{newsHl.createdDate}}</p>
+        </div>
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="nav-item " *ngFor="let p of pages;let i=index">
+            <a [ngClass]="{'nav-link-true': i == page, 'nav-link-false ': i != page}" href="" (click)="setPage(i,$event)">{{i+1}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-lg-4">
+      <div class="container-fluid mb-2">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()"  class="form-inline my-lg-0 form-group row">
+          <input class="form-control col-xl-8 col-lg-12 input-search-2" name="nameInput" type="search" placeholder="Nhập nội dung cần tìm" aria-label="Search" formControlName="nameInput" aria-describedby="validationTooltipUsernamePrepend" >
+          <button class="btn btn-outline-search2 my-2 my-sm-0 col-xl-4" id='btnSearch' type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+      <div class="row mb-3">
+        <div class="col-lg-6 "><img class="w-100 h-100" src="https://firebasestorage.googleapis.com/v0/b/sprint-affd0.appspot.com/o/53483532.jpg?alt=media&token=938145ba-a2e2-47d5-844f-e6b3926cd5b9" alt=""> </div>
+        <div class="col-lg-6">
+          <div id="carouselExampleIndicators" class="carousel slide pb-2" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="https://browsecat.net/sites/default/files/low-poly-animal-wallpapers-113628-336198-9020366.png" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                  <!-- <h5 class="text-dark">Via data attributes</h5>
+                  <p class="text-dark">Via data attributes</p> -->
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <img class="w-100 h-100" src="https://i.pinimg.com/564x/80/98/a6/8098a68f593bc5a8b6503020d6aae4b9.jpg" alt="">
+            </div>
+            <div class="col-lg-6">
+              <img class="w-100 h-100" src="https://i.pinimg.com/564x/80/98/a6/8098a68f593bc5a8b6503020d6aae4b9.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <H4 class="name-list-news"><p class="p-1 text-uppercase">Tin xem nhiều nhất</p> </H4>
+      <div class="row mt-2 mb-2" *ngFor="let news of newsPageHl">
+        <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
+        <div class="col-lg-6">
+          <h4 id="new-name-left" class="">{{news.newsName}}</h4>
+          <p class="card-text"><i class="fa-regular fa-clock"></i> {{news.createdDate}}</p>
+        </div>
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="nav-item" *ngFor="let p of pagesHL;let i=index">
+            <a [ngClass]="{'nav-link-true': i == pageHl, 'nav-link-false ': i != pageHl}" href="" (click)="setPageHL(i,$event)">{{i+1}}</a>
+          </li>
+        </ul>
+      </nav>
+      <hr>
+      <marquee> {{newsListM}} </marquee>
+      <hr>
+      <H4 class="name-list-news"><p class="p-1 text-uppercase">Tin nổi bật</p></H4>
+      <div class="row mt-2 mb-2" *ngFor="let news of newsPageHl">
+        <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
+        <div class="col-lg-6">
+          <h4 id="new-name-left" class="">{{news.newsName}}</h4>
+          <p class="card-text"><i class="fa-regular fa-clock"></i> {{news.createdDate}}</p>
+        </div>
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="nav-item" *ngFor="let p of pagesHL;let i=index">
+            <a [ngClass]="{'nav-link-true': i == pageHl, 'nav-link-false ': i != pageHl}" href="" (click)="setPageHL(i,$event)">{{i+1}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- <div class="row mt-3">
+    <div class="col-lg-3 ">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" >
+          <div class="container-fluid">
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()"  class="form-inline my-lg-0 mr-lg-2 form-group row">
+              <input class="form-control mr-sm-2 col-xl-7 col-lg-12 " name="nameInput" type="search" placeholder="" aria-label="Search" formControlName="nameInput">
+              <button class="btn btn-outline-search my-2 my-sm-0 col-xl-4" id='btnSearch' type="submit">Tìm Kiếm</button>
+            </form>
+          </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center list-news-left" *ngFor="let newsHl of newsPage">
+          <img src="
+https://www.itourvn.com/images/easyblog_articles/645/b2ap3_large_the-pig-in-traditional-asian-belief-cover.jpg
+" width="80" height="50" class="mr-2" alt="">
+          <a href=" " class="list-group-item-action" >{{newsHl.newsName}}</a>
+        </li>
+      </ul>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="nav-item" *ngFor="let p of pages;let i=index">
+             <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-lg-9">
+      <div class=" mt-3">
+        <h3 class="text-uppercase">Tin tức nổi bật</h3>
+        <div class="row" >
+          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let news of newsPageHl">
+            <div class="card h-100">
+              <a href=""><img class="card-img-top" src="
+https://www.itourvn.com/images/easyblog_articles/645/b2ap3_large_the-pig-in-traditional-asian-belief-cover.jpg
+" alt=""></a>
+              <div class="card-body">
+                  <a href="#" class="font-weight-bold news-hightlight-name">{{news.newsName}}</a>
+                  <p class="card-text">{{news.detailDescription}}</p>
+                  <p class="card-text"><i class="fa-regular fa-clock"></i> {{news.createdDate}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="nav-item" *ngFor="let p of pagesHL;let i=index">
+             <a class="nav-link " href="" (click)="setPageHL(i,$event)">{{i+1}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div> -->
+</div>
