@@ -3,21 +3,20 @@ import {NgModule} from '@angular/core';
 import {SecurityModule} from "./sercurity/security.module";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-
 import {EntitiesModule} from "./entities/entities.module";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
-
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-// import {ComponentModule} from "./component/component.module";
 import { authInterceptorProviders } from './sercurity/auth.interceptor ';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
+import {NewModule} from "./new/new.module";
+import {NewsService} from "./service/news.service";
 import {CageModule} from "./cage/cage.module";
-import {ContactComponent} from "./component/contact/contact.component";
+
 
 
 
@@ -29,6 +28,7 @@ import {ContactComponent} from "./component/contact/contact.component";
   providers: [
     EntitiesService,
     authInterceptorProviders,
+    NewsService
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,8 @@ import {ContactComponent} from "./component/contact/contact.component";
     ComponentModule,
     AppRoutingModule,
     SecurityModule,
-    EmployeeModule
+    EmployeeModule,
+    NewModule,
   ],
   bootstrap: [AppComponent]
 })

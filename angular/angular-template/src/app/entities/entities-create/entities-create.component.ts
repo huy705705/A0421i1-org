@@ -89,7 +89,6 @@ export class EntitiesCreateComponent implements OnInit {
 
   createEntities() {
     if(!this.more) {
-      console.log(this.entitiesForm.value.cageId)
       this.entitiesService.createEntities(this.entitiesForm.value).subscribe((data) => {
         this.entities = data['content'];
         this.router.navigateByUrl("/employee/entities");
@@ -136,8 +135,6 @@ export class EntitiesCreateComponent implements OnInit {
 
   }
   compare(){
-    console.log(Date.parse(this.entitiesForm.value.inDate));
-    console.log(Date.parse(this.entitiesForm.value.outDate));
     if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
       this.more=true;
     }

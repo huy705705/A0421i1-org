@@ -5,15 +5,9 @@ import { HeaderComponent } from './header/header.component';
 
 import { Error404Component } from './error404/error404.component';
 import {EntitiesModule} from "../entities/entities.module";
-
 import {RouterModule} from "@angular/router";
 import { ContactComponent } from './contact/contact.component';
-
-
-
-
 @NgModule({
-
   declarations: [FooterComponent, HeaderComponent, Error404Component, ContactComponent],
   imports: [
     CommonModule,

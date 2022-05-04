@@ -7,7 +7,6 @@ import {EntitiesEditComponent} from "./entities-edit/entities-edit.component";
 import {Error404Component} from "../component/error404/error404.component";
 import {EntitiesDeleteComponent} from "./entities-delete/entities-delete.component";
 import {EntitiesCreateComponent} from "./entities-create/entities-create.component";
-import {ContactComponent} from "../component/contact/contact.component";
 
 
 
@@ -17,7 +16,6 @@ const routes: Routes = [
   {path:'employee/entities/delete/:id',component: EntitiesDeleteComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
   {path:'employee/entities/create',component: EntitiesCreateComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
   {path: '404', component: Error404Component},
-
 ];
 
 @NgModule({

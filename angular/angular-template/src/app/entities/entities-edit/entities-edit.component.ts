@@ -110,9 +110,8 @@ export class EntitiesEditComponent implements OnInit {
           extendedTimeOut: 1000
         })
       });
-    }
-    else {
-      this.toast.error("Thông tin cá thể không hợp lệ", "Thất bại ", {
+    } else{
+      this.toast.error("Thông tin cá thể không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,
         extendedTimeOut: 1000
       })

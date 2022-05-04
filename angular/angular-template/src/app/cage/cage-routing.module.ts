@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {EntitiesListComponent} from "../entities/entities-list/entities-list.component";
+
 import {AuthGuard} from "../sercurity/auth.guard";
 import {CageListComponent} from "./cage-list/cage-list.component";
 

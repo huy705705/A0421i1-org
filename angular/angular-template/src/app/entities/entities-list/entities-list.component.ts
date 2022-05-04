@@ -20,7 +20,8 @@ export class EntitiesListComponent implements OnInit {
   entities2: Array<any>;
   pages: Array<number>;
   entities: any;
-  inDate = '';
+  inDateMin = '';
+  inDateMax = '';
   emptyMessenger = '';
   cage = '';
   isSubmitted=false;
@@ -88,9 +89,9 @@ export class EntitiesListComponent implements OnInit {
     this.isTrue=true;
     console.log(this.isTrue)
     console.log(this.isSubmitted)
-
-    console.log(this.inDate)
-    this.entitiesService.searchEntities(this.inDate, this.cage).subscribe(
+    console.log(this.inDateMin)
+    console.log(this.inDateMax)
+    this.entitiesService.searchEntities(this.inDateMin,this.inDateMax, this.cage).subscribe(
       data => {
         console.log(data);
         if (data) {

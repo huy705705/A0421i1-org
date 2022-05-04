@@ -9,7 +9,6 @@ import {Entities} from "../model/entities";
 })
 export class EntitiesService {
   public apiURL = 'http://localhost:8080/employee/entities';
-
   constructor(private http: HttpClient) {
   }
 
@@ -47,17 +46,13 @@ export class EntitiesService {
     return this.http.get<Entities>(this.apiURL + "/delete/" + id);
   }
 
-
   deleteEntitiesById(id: string) {
     console.log("2: " + id)
     // let entities:Observable<Entities>;
     // entities =this.findById(id);
     return this.http.patch(this.apiURL + "/delete/" + id, null);
-
-
   }
-
-  searchEntities(inDate: string,cageId: string) {
-    return this.http.get(this.apiURL + "/search?inDate="+inDate+"&cage="+cageId );
+  searchEntities(inDateMin: string,inDateMax:string,cageId: string) {
+    return this.http.get(this.apiURL + "/search?inDateMin="+inDateMin+"&inDateMax="+inDateMax+"&cage="+cageId );
   }
 }
