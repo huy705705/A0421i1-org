@@ -16,13 +16,16 @@ export class NewsService {
     console.log( this.http.get(this.apiURL+'?page='+page).subscribe);
     return this.http.get(this.apiURL+'?page='+page);
   }
-  findByName(name: String): Observable<any> {
-    console.log(this.apiURL +'?search='+ name);
-    console.log(this.http.get<News[]>(this.apiURL +'?search='+ name));
-    return this.http.get<News[]>(this.apiURL +'?search='+ name);
+  findByName(name: String, page: number): Observable<any> {
+    console.log(this.http.get<News[]>(this.apiURL +'?search='+ name + "&page=" + page));
+    return this.http.get<News[]>(this.apiURL +'?search='+ name+ "&page=" + page);
   }
   findAllHightLight(page:number): Observable<News[]> {
     console.log((this.apiURL+ '/hl?page='+page));
     return this.http.get<News[]>(`${this.apiURL+ '/hl?page='+page}`);
+  }
+  findByTotalView(page:number): Observable<News[]> {
+    console.log((this.apiURL+ '/view?page='+page));
+    return this.http.get<News[]>(`${this.apiURL+ '/view?page='+page}`);
   }
 }

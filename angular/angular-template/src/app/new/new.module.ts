@@ -8,14 +8,15 @@ import { NewEditComponent } from './new-edit/new-edit.component';
 import { NewDeleteComponent } from './new-delete/new-delete.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NewListComponent} from "./new-list/new-list.component";
-
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [NewListComponent, NewCreateComponent, NewEditComponent, NewDeleteComponent],
     imports: [
         CommonModule,
         NewRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatCarouselModule,
     ]
 })
 export class NewModule { }

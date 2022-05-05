@@ -5,7 +5,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { Error404Component } from './error404/error404.component';
 import {EntitiesModule} from "../entities/entities.module";
-
+import { NewModule } from '../new/new.module';
 import {RouterModule} from "@angular/router";
 
 
@@ -21,7 +21,8 @@ import {RouterModule} from "@angular/router";
   ],
   exports: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    NewModule
   ],
 })
 export class ComponentModule { }
