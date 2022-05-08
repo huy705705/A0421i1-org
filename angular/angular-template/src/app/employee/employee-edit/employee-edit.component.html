@@ -1,38 +1,3 @@
-<!--<link rel="stylesheet" href="employee-edit.component.css">-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-
-<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
-<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--    <div class="dropleft">-->
-<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
-<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
 <div class="container-fluid" id="content" style="margin-top: 58px">
   <div class="row">
     <div class="col-lg-3 ml-0">
@@ -66,10 +31,10 @@
     </div>
     <div class="col-lg-9">
 
-      <strong class="SL">Cập nhật danh sách nhân viên</strong>
+      <strong style="font-size: larger;margin-top: 10px; height: 20px">Chỉnh sửa thông tin nhân viên: {{employee.employeeId}}</strong>
 
       <hr/>
-      <form style="max-width: 700px;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()" *ngIf="employeeForm">
+      <form style="max-width: 100%;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()" *ngIf="employeeForm">
         <div class="container-fluid">
 
           <div class="form-group row">
@@ -155,11 +120,6 @@
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 150px;">Giới tính<span class="text-danger">*</span></label>
             <div class="col-sm-7">
-              <!--              <div class="form-check form-check-inline">-->
-              <!--                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2" value="Nữ">-->
-              <!--                <label class="form-check-label" for="inlineRadio2">Nữ</label>-->
-              <!--              </div>-->
-
               <div class="form-check form-check-inline" style="padding-top: 3px" *ngFor="let gender of genderList">
                 <input class="form-check-input"  id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
                        formControlName="{{gender.name}}">
@@ -196,7 +156,7 @@
           </div>
 
           <div class="text-center">
-            <button type="submit" class="btn btn-warning m-2">Cập nhật</button>
+            <button type="submit" class="btn btn-info m-2">Cập nhật</button>
             <button type="button" class="btn btn-success m-2" [routerLink]="['/admin/employee']">Huỷ bỏ</button>
           </div>
 

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Employee} from "../../model/employee";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {ToastrService} from "ngx-toastr";
+import {EmployeeService} from "../../service/employee.service";
 
 @Component({
   selector: 'app-employee-delete',
@@ -7,9 +12,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeDeleteComponent implements OnInit {
 
-  constructor() { }
+  employee: Employee;
+
+  constructor( private employeeService: EmployeeService,
+               private router: Router,
+               private activatedRoute: ActivatedRoute,public dialogRef: MatDialogRef<EmployeeDeleteComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: any,
+               private toast : ToastrService) {
+    console.log("data la:"+data)
+    employeeService.findById(data).subscribe(
+      value => {
+        console.log(value)
+        this.employee = value;
+      }
+    )
+  }
 
   ngOnInit(): void {
   }
 
+  deleteEmployee(id: string) {
+    console.log(id)
+    this.employeeService.deleteEmployeeById(id).subscribe();
+    this.dialogRef.close({event: true});
+    this.toast.warning("Xóa nhân viên thành công!", "Thành công: ", {
+      timeOut: 4000,
+      extendedTimeOut: 1000
+    })
+  }
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }

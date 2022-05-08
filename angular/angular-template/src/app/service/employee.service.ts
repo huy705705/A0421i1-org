@@ -31,4 +31,9 @@ export class EmployeeService {
     console.log(searchName+ "   " + searchId);
     return this.http.get<any>(this.apiURL + '?searchName=' + searchName + '&searchId=' + searchId + '&page=' + page);
   }
+
+  deleteEmployeeById(id: string) {
+    console.log("2: " + id)
+    return this.http.patch(this.apiURL + "/delete/" + id, null);
+  }
 }

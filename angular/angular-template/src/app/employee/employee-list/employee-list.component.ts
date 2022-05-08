@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from '../../service/employee.service';
 import {Router} from '@angular/router';
-import {Employee} from "../../model/employee";
+import {EntitiesDeleteComponent} from "../../entities/entities-delete/entities-delete.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {EmployeeDeleteComponent} from "../employee-delete/employee-delete.component";
 
 @Component({
   selector: 'app-employee-list',
@@ -11,6 +13,8 @@ import {Employee} from "../../model/employee";
 export class EmployeeListComponent implements OnInit {
 
   public page = 0;
+  dialogRef: MatDialogRef<EmployeeDeleteComponent>;
+  deleteMessenger;
   employeeList:Array<any>;
   pages: any;
   totalPages: number;
@@ -21,7 +25,7 @@ export class EmployeeListComponent implements OnInit {
   isTrue2=true;
 
 
-  constructor(private employeeService: EmployeeService, private router: Router){
+  constructor(private employeeService: EmployeeService, private router: Router,  public dialog: MatDialog){
   }
 
   ngOnInit(): void {
@@ -50,6 +54,21 @@ export class EmployeeListComponent implements OnInit {
   //   this.page= page;
   //   this.search();
   // }
+
+  openDialog(id) {
+    console.log("Id "+id)
+    this.dialogRef = this.dialog.open(EmployeeDeleteComponent, {
+      width: '600px',
+      data: id,
+    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteMessenger = 'Nhân viên ' + id + ' đã được xoá thành công';
+        this.page = 0;
+        this.ngOnInit();
+      }
+    });
+  }
 
   updateEmployee(employee: any) {
     this.router.navigate(['/admin/employee/update', employee.employeeId]);
