@@ -1,9 +1,9 @@
 
-<div class="container-fluid" id="content">
+<div class="container-fluid" id="content" style="margin-top: 40px">
   <div class="row">
     <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 236px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
@@ -20,7 +20,7 @@
           <li>
             <a [routerLink]="['/employee/entities']"class="nav-link active">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-              Quản lý cá thể
+              Quản lý chuồng nuôi
             </a>
           </li>
 
@@ -35,15 +35,14 @@
         <div class="card-header py-3">
           <div class="d-flex flex-row  d-flex justify-content-center">
             <div class="col-6">
-              <div class="input-group">
-                <!--                <div class="form-outline">-->
-                <!--                  <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Nhập mã cá thể" />-->
-
-                <!--                </div>-->
-                <!--                <button type="button" class="btn btn-primary">-->
-                <!--                  Tìm kiếm-->
-                <!--                </button>-->
-                <div class="form-outline">
+              <div class="input-group" style="padding-left: 120px">
+                <p style="    margin-top: 5px;">Khoảng ngày vào chuồng từ  </p>
+                <div class="form-outline" style="    margin-left: 10px;  margin-right: 10px;">
+                  <input type="date" class="form-control"
+                         placeholder="Nhập ngày vào" />
+                </div>
+                <p style="    margin-top: 5px;">đến</p>
+                <div class="form-outline" style=" margin-left: 10px;">
                   <input type="date" class="form-control"
                          placeholder="Nhập ngày vào" />
                 </div>
@@ -100,7 +99,23 @@
                 <!--                </td>-->
                 <!--                [routerLink]="['delete/'+entity.entitiesId]"-->
               </tr>
+              <tr >
+                <td>C001</td>
+                <td>NV002</td>
+                <td>12/10/2020</td>
+                <td>15/09/2021</td>
+                <td>10/15</td>
+                <td>
 
+                  <button class="btn"><i class="fa-solid fa-pen-clip"
+                                         style="color: blue;"></i></button>
+                </td>
+                <!--                <td>-->
+                <!--                  -->
+                <!--                  <i class="fa-solid fa-trash-can" style="color: red;"></i>-->
+                <!--                </td>-->
+                <!--                [routerLink]="['delete/'+entity.entitiesId]"-->
+              </tr>
               </tbody>
             </table>
           </div>

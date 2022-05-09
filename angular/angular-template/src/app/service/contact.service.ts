@@ -6,16 +6,16 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ContactService {
-  public apiURL = 'http://localhost:8080/contact';
+  public apiURL = 'http://localhost:8080/api/public/contact';
   constructor(private http: HttpClient) {}
 
   getProvinceList() : Observable<any>{
     return this.http.get(this.apiURL);
 }
   getDistrictList(provinceId : number): Observable<any>{
-    return this.http.get(this.apiURL+"?provinceId="+provinceId)
+    return this.http.get(this.apiURL+"/district/"+provinceId)
   }
-  getWardList(provinceId : number,districtId :number): Observable<any>{
-    return this.http.get(this.apiURL+"?provinceId="+provinceId+"&districtId="+districtId)
+  getWardList(districtId :number): Observable<any>{
+    return this.http.get(this.apiURL+"/ward/"+districtId)
   }
 }

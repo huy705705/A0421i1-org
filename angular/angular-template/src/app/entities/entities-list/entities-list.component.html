@@ -37,14 +37,6 @@
           <div class="d-flex flex-row  d-flex justify-content-center">
             <div class="col-6">
               <div class="input-group" style="padding-left: 120px">
-                <!--                <div class="form-outline">-->
-                <!--                  <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Nhập mã cá thể" />-->
-
-                <!--                </div>-->
-                <!--                <button type="button" class="btn btn-primary">-->
-                <!--                  Tìm kiếm-->
-                <!--                </button>-->
-
                 <p style="    margin-top: 5px;">Khoảng ngày vào chuồng từ  </p>
                 <div class="form-outline" style="    margin-left: 10px;    margin-right: 10px;">
                   <input type="date" class="form-control" [(ngModel)]="inDateMin"
@@ -134,14 +126,7 @@
               <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
 
                 <ul class="nav nav-pills">
-                  <!--                  <div>-->
-                  <!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
-                  <!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
-                  <!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
-                  <!--                  </div>-->
-
                   <li class="nav-item" *ngFor="let p of pages;let i=index">
-                    <!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
                     <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
                   </li>
                 </ul>

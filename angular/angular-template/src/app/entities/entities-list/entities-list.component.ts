@@ -59,15 +59,11 @@ export class EntitiesListComponent implements OnInit {
   }
 
   findAllPageable() {
-
-
     this.isTrue2 = true;
-
     this.entitiesService.findAllPageable(this.page).subscribe(
       data => {
         this.entities2 = data['content']
         this.pages = new Array(data['totalPages'])
-
       },
       (error) => {
         console.log(error.error.message);
@@ -81,9 +77,6 @@ export class EntitiesListComponent implements OnInit {
 
   }
 
-  updateEntities(entity: any) {
-
-  }
 
   search() {
     this.isTrue=true;

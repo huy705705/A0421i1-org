@@ -3,7 +3,7 @@
 <h1>A04 logo in here.</h1>
 <div class="info"><a href="https://www.grandvincent-marion.fr" target="_blank"><p> From A0421I1 <i class="fa fa-heart"></i> with love </p></a></div>
 
-<form>
+<form [formGroup]="contactForm">
   <h1>Nếu bạn có thắc mắc vui lòng gọi đến số hotline: 19008198 để được hỗ trợ!  </h1>
 
   <div class="contentform">
@@ -33,6 +33,21 @@
         <div class="validation">Số điện thoại sai định dạng!</div>
       </div>
     </div>
+
+    <div class="form-group">
+      <span>Tỉnh</span>
+      <select style="width: 160px" (change)="getDistrict()" formControlName="province">
+        <option style="width: 160px" *ngFor="let province of provinceList" value="{{province.provinceId}}">{{province.provinceName}}</option>
+      </select>
+      <span>Huyện </span>
+      <select style="width: 160px" formControlName="district" (change)="getWard()">
+        <option style="width: 160px" *ngFor="let district of districtList" value="{{district.districtId}}">{{district.districtName}}</option>
+      </select>
+      <span>Xã/Phường</span>
+      <select style="width: 160px" formControlName="ward">
+        <option style="width: 160px" *ngFor="let ward of wardlList" value="{{ward.wardId}}">{{ward.wardName}}</option>
+      </select>
+  </div>
 
     <div class="form-group" style="width: 100%">
       <p>Lời nhắn <span>*</span></p>
