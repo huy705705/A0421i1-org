@@ -19,18 +19,18 @@
           <p class="name-title-news p-1">TIN MỚI NHẤT</p>
         </div>
         <div class="col-lg-8">
-          <marquee class="name-title-news-marquee align-middle"> {{newsListM}} </marquee>
+          <marquee class="name-title-news-marquee align-middle"> {{newsListMarquee}} </marquee>
         </div>
       </div>
-      <div class="row mt-2 mb-2" *ngFor="let newsHl of newsPage">
-        <div class="col-lg-4"><img class="img-fluid img-thumbnail" src="{{newsHl.image}}" alt=""></div>
+      <div class="row mt-2 mb-2" *ngFor="let news of newsPage">
+        <div class="col-lg-4"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-8">
-          <h4 id="new-name-left" class="text-uppercase">{{newsHl.newsName}}</h4>
+          <a id="new-name-left" class="text-uppercase" (click)="showDetail(news.newsId)">{{news.newsName}}</a>
           <div class="text card-text">
-            {{newsHl.detailDescription}}
+            {{news.detailDescription}}
           </div>
-          <p class="type-news-left">{{newsHl.type}}</p>
-          <p class="card-text"> {{newsHl.createdDate}} <span style="text-align: right;">{{newsHl.employee.employeeName}}</span></p>
+          <p class="type-news-left">{{news.type}}</p>
+          <p class="card-text"> {{news.createdDate}} <span style="text-align: right;">{{news.employee.employeeName}}</span></p>
         </div>
       </div>
       <nav aria-label="Page navigation example">
@@ -53,6 +53,7 @@
     </div>
 
     <div class="col-lg-4">
+      <p class="mt-1 text-right">{{today| date: 'EEEE d/M/y H:mm:ss'}}</p>
       <div class="contact-div mb-3 mt-1">
         <div class="m-auto text-center center-contact">
           <div>
@@ -84,12 +85,19 @@
               class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
+      <select class="form-control my-3" *ngIf = "pagesSearchEmpty" class="form-control" (change)="onEditClick($event.target.value)">
+        <option>Sắp Xếp</option>
+        <option value="desc">Mới Nhất</option>
+        <option value="asc">Cũ Nhất</option>
+        <option value="views">Lượt Xem Nhiều</option>
+
+      </select>
       <div class="row mt-2 mb-2" *ngFor="let news of newsPageSearch">
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
           <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
-          <p class="card-text">{{news.createdDate}}</p>
+          <p class="card-text">{{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
         </div>
 
       </div>
@@ -127,7 +135,7 @@
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
           <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
-          <p class="card-text">{{news.createdDate}}</p>
+          <p class="card-text"> {{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
         </div>
       </div>
       <!-- <nav aria-label="Page navigation example">

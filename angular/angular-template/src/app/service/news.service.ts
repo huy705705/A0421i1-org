@@ -17,8 +17,20 @@ export class NewsService {
     return this.http.get(this.apiURL+'?page='+page);
   }
   findByName(name: String, page: number): Observable<any> {
-    console.log(this.http.get<News[]>(this.apiURL +'?search='+ name + "&page=" + page));
-    return this.http.get<News[]>(this.apiURL +'?search='+ name+ "&page=" + page);
+    console.log(this.apiURL +'?search='+ name + "&page=" + page);
+    return this.http.get<News[]>(this.apiURL +'?search='+ name+ "&page=" + page + '&type=nor');
+  }
+  findByNameDesc(name: String, page: number): Observable<any> {
+    console.log(this.apiURL +'?search='+ name + "&page=" + page);
+    return this.http.get<News[]>(this.apiURL +'?search='+ name+ "&page=" + page + '&type=date');
+  }
+  findByNameAsc(name: String, page: number): Observable<any> {
+    console.log(this.apiURL +'?search='+ name + "&page=" + page);
+    return this.http.get<News[]>(this.apiURL +'?search='+ name+ "&page=" + page + '&type=asc');
+  }
+  findByNameTotalView(name: String, page: number): Observable<any> {
+    console.log(this.apiURL +'?search='+ name + "&page=" + page);
+    return this.http.get<News[]>(this.apiURL +'?search='+ name+ "&page=" + page + '&type=views');
   }
   findAllHightLight(page:number): Observable<News[]> {
     console.log((this.apiURL+ '/hl?page='+page));
@@ -27,5 +39,10 @@ export class NewsService {
   findByTotalView(page:number): Observable<News[]> {
     console.log((this.apiURL+ '/view?page='+page));
     return this.http.get<News[]>(`${this.apiURL+ '/view?page='+page}`);
+  }
+  showDetailNews(id:String): Observable<News[]> {
+    console.log((this.apiURL+ '/detail/'+id));
+    // console.log(this.http.get<News[]>(`${this.apiURL+ '/detail/'+id }`));
+    return this.http.get<News[]>(`${this.apiURL+ '/detail/'+id }`);
   }
 }

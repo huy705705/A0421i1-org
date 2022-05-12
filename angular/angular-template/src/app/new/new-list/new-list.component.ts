@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {News} from '../../model/news';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {ToastrService} from "ngx-toastr";
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-new-list',
@@ -22,6 +23,8 @@ export class NewListComponent implements OnInit {
   searchForm: FormGroup;
   newsListM : String = '';
   private name:String = '';
+  newsListMarquee : String = '';
+  private nameMarquee:String = '';
   pageTotalView:number= 0;
   newsPageTotalView:Array<any>;
   pageSearch: number = 0;
@@ -29,6 +32,8 @@ export class NewListComponent implements OnInit {
   newsPageSearch:Array<any>;
   pagesSearch:Array<number>;
   pagesSearchEmpty: boolean = false;
+  today= new Date();
+  jstoday = '';
   constructor(private newsService: NewsService, private router: Router, private fb: FormBuilder, private toastr: ToastrService,){
   }
   ngOnInit(): void {
@@ -38,12 +43,19 @@ export class NewListComponent implements OnInit {
     this.searchForm = this.fb.group({
       nameInput: [''],
     });
+    setInterval(() => {
+      this.today = new Date();
+    }, 1);
+    // this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
   }
   findAllPageable(){
     this.newsService.findAllPageable(this.page).subscribe(
       data=>{
         this.newsPage=data['content']
         console.log(data);
+        this.newsPage.forEach(element => {
+          this.newsListMarquee +=  " | " + element.newsName + " | ";
+        });
         this.pages=new Array(data['totalPages'])
         this.pageTotal = data['totalPages']
         console.log(this.pageTotal);
@@ -91,7 +103,7 @@ export class NewListComponent implements OnInit {
           this.newsPageSearch = null;
           this.pagesSearch = null;
           this.pagesSearchEmpty = false;
-          this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy têb bài viết", {
+          this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
             timeOut: 3000,
             extendedTimeOut: 1500
           });
@@ -109,6 +121,19 @@ export class NewListComponent implements OnInit {
       (error) => {
         // this.newsPage=[]
         // this.pages = null
+        console.log(error.error.message);
+      }
+    )
+  }
+  showDetail(id){
+    console.log(id);
+    this.newsService.showDetailNews(id).subscribe(
+      data=>{
+        // this.newsPageTotalView=data['content']
+        console.log(data['content']);
+        
+      },
+      (error) => {
         console.log(error.error.message);
       }
     )
@@ -143,4 +168,188 @@ export class NewListComponent implements OnInit {
     this.searchForm.reset()
     console.log(this.searchForm.value.nameInput);
   }
+  sortByDesc(event: any){
+    console.log("mới nhất");
+    
+    this.newsService.findByNameDesc(this.name, this.pageSearch).subscribe(
+      data=>{
+        if (data == null) {
+          this.newsPageSearch = null;
+          this.pagesSearch = null;
+          this.pagesSearchEmpty = false;
+          this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+            timeOut: 3000,
+            extendedTimeOut: 1500
+          });
+          return
+        }else{
+          this.newsPageSearch=data['content']
+          console.log(data);
+          this.pagesSearch=new Array(data['totalPages'])
+          this.pageSearchTotal = data['totalPages'];
+          this.pagesSearchEmpty = true;
+          console.log(data['totalPages']);
+        }
+
+      },
+      (error) => {
+        // this.newsPage=[]
+        // this.pages = null
+        console.log(error.error.message);
+      }
+    )
+  }
+  sortByAsc(){
+    this.newsService.findByName(this.name, this.pageSearch).subscribe(
+      data=>{
+        if (data == null) {
+          this.newsPageSearch = null;
+          this.pagesSearch = null;
+          this.pagesSearchEmpty = false;
+          this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+            timeOut: 3000,
+            extendedTimeOut: 1500
+          });
+          return
+        }else{
+          this.newsPageSearch=data['content']
+          console.log(data);
+          this.pagesSearch=new Array(data['totalPages'])
+          this.pageSearchTotal = data['totalPages'];
+          this.pagesSearchEmpty = true;
+          console.log(data['totalPages']);
+        }
+
+      },
+      (error) => {
+        // this.newsPage=[]
+        // this.pages = null
+        console.log(error.error.message);
+      }
+    )
+  }
+  sortByViews(){
+    this.newsService.findByName(this.name, this.pageSearch).subscribe(
+      data=>{
+        if (data == null) {
+          this.newsPageSearch = null;
+          this.pagesSearch = null;
+          this.pagesSearchEmpty = false;
+          this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+            timeOut: 3000,
+            extendedTimeOut: 1500
+          });
+          return
+        }else{
+          this.newsPageSearch=data['content']
+          console.log(data);
+          this.pagesSearch=new Array(data['totalPages'])
+          this.pageSearchTotal = data['totalPages'];
+          this.pagesSearchEmpty = true;
+          console.log(data['totalPages']);
+        }
+
+      },
+      (error) => {
+        // this.newsPage=[]
+        // this.pages = null
+        console.log(error.error.message);
+      }
+    )
+  }
+  onEditClick(type: any) {
+    console.log('skill name', type);
+    switch (type) {
+      case "desc":
+    
+        this.newsService.findByNameDesc(this.name, this.pageSearch).subscribe(
+          data=>{
+            if (data == null) {
+              this.newsPageSearch = null;
+              this.pagesSearch = null;
+              this.pagesSearchEmpty = false;
+              this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+                timeOut: 3000,
+                extendedTimeOut: 1500
+              });
+              return
+            }else{
+              this.newsPageSearch=data['content']
+              console.log(data);
+              this.pagesSearch=new Array(data['totalPages'])
+              this.pageSearchTotal = data['totalPages'];
+              this.pagesSearchEmpty = true;
+              console.log(data['totalPages']);
+            }
+    
+          },
+          (error) => {
+            // this.newsPage=[]
+            // this.pages = null
+            console.log(error.error.message);
+          }
+        )
+        break;
+      case "asc":
+        this.newsService.findByNameAsc(this.name, this.pageSearch).subscribe(
+          data=>{
+            if (data == null) {
+              this.newsPageSearch = null;
+              this.pagesSearch = null;
+              this.pagesSearchEmpty = false;
+              this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+                timeOut: 3000,
+                extendedTimeOut: 1500
+              });
+              return
+            }else{
+              this.newsPageSearch=data['content']
+              console.log(data);
+              this.pagesSearch=new Array(data['totalPages'])
+              this.pageSearchTotal = data['totalPages'];
+              this.pagesSearchEmpty = true;
+              console.log(data['totalPages']);
+            }
+    
+          },
+          (error) => {
+            // this.newsPage=[]
+            // this.pages = null
+            console.log(error.error.message);
+          }
+        )
+        break;
+      case "views":
+        this.newsService.findByNameTotalView(this.name, this.pageSearch).subscribe(
+          data=>{
+            if (data == null) {
+              this.newsPageSearch = null;
+              this.pagesSearch = null;
+              this.pagesSearchEmpty = false;
+              this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+                timeOut: 3000,
+                extendedTimeOut: 1500
+              });
+              return
+            }else{
+              this.newsPageSearch=data['content']
+              console.log(data);
+              this.pagesSearch=new Array(data['totalPages'])
+              this.pageSearchTotal = data['totalPages'];
+              this.pagesSearchEmpty = true;
+              console.log(data['totalPages']);
+            }
+    
+          },
+          (error) => {
+            // this.newsPage=[]
+            // this.pages = null
+            console.log(error.error.message);
+          }
+        )
+        break;
+      default:
+        break;
+    }
+}
 }
