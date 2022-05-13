@@ -100,11 +100,6 @@
                   <button class="btn" [routerLink]="['update/'+entity.entitiesId]"><i class="fa-solid fa-pen-clip"
                                                                           style="color: blue;"></i></button>
                 </td>
-                <!--                <td>-->
-                <!--                  -->
-                <!--                  <i class="fa-solid fa-trash-can" style="color: red;"></i>-->
-                <!--                </td>-->
-<!--                [routerLink]="['delete/'+entity.entitiesId]"-->
                 <td>
                   <button class="btn" (click)="openDialog(entity.entitiesId)"><i class="fa-solid fa-trash-can"
                                                                                       style="color: red;"></i></button>
@@ -130,27 +125,6 @@
                     <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
                   </li>
                 </ul>
-
-
-                <!--                <ul class="pagination"><li class="paginate_button page-item previous" id="dataTable_previous">-->
-                <!--                  <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Trước</a>-->
-                <!--                </li>-->
-                <!--                  <li class="paginate_button page-item ">-->
-                <!--                    <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>-->
-                <!--                  </li>-->
-                <!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>-->
-                <!--                  </li>-->
-                <!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>-->
-                <!--                  </li>-->
-                <!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>-->
-                <!--                  </li>-->
-                <!--                  <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>-->
-                <!--                  </li>-->
-                <!--                  <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next">-->
-
-                <!--                    <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Sau</a>-->
-                <!--                  </li>-->
-                <!--                </ul>-->
               </div>
             </div>
           </div>

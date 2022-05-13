@@ -108,13 +108,7 @@ export class EntitiesCreateComponent implements OnInit {
     this.entitiesService.getEntitiesId(this.entitiesForm.value.cageId).subscribe((data) => {
       console.log(this.entitiesForm.value.cageId);
       if(data<10){
-        this.entitiesId=this.entitiesForm.value.cageId+"-000"+data;
-      }
-      else if(data<100) {
-        this.entitiesId = this.entitiesForm.value.cageId+"-00" + data;
-      }
-      else if(data<1000) {
-        this.entitiesId = this.entitiesForm.value.cageId+"-0" + data;
+        this.entitiesId=this.entitiesForm.value.cageId+"-0"+data;
       }
       else {
         this.entitiesId = this.entitiesForm.value.cageId+"-"+data;

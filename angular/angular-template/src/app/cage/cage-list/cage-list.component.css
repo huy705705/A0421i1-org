@@ -22,7 +22,6 @@
 .i-footer {
   color: #66c992;
 }
-
 .form-control::placeholder {
   font-size: 0.95rem;
   color: rgb(201, 200, 200);
@@ -52,5 +51,34 @@ element.style {
   flex: 0 0 100%;
   max-width: 100%;
 }
-
+.nav-link-lr-true{
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  color: black;
+  pointer-events: none;
+}
+.nav-link-lr-false{
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  color: black;
+}
+.nav-link-true{
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: blue;
+  color: #EDEDED;
+  pointer-events: none;
+}
+.nav-link-false{
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  color: black;
+}
 

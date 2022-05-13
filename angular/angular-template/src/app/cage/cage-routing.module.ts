@@ -6,7 +6,8 @@ import {CageListComponent} from "./cage-list/cage-list.component";
 
 
 const routes: Routes = [
-  {path:'employee/cage',component: CageListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
+  // {path:'employee/cage',component: CageListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
+  // {path:'employee/cage',component: CageListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE', 'ROLE_ADMIN']}},
 
 ];
 

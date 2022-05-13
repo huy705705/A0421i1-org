@@ -6,6 +6,7 @@ import {FormGroup} from "@angular/forms";
 import {EntitiesDeleteComponent} from "../entities-delete/entities-delete.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TokenStorageService} from "../../service/token-storage.service";
+import {CageService} from "../../service/cage.service";
 
 
 @Component({
@@ -28,9 +29,7 @@ export class EntitiesListComponent implements OnInit {
   isTrue=false;
   isTrue2=true;
   deleteMessenger;
-
-
-
+  findEntitiesByCage: string;
 
   openDialog(id) {
     console.log("Id "+id)
@@ -48,13 +47,20 @@ export class EntitiesListComponent implements OnInit {
   }
 
 
-  constructor(private entitiesService: EntitiesService, private router: Router, public dialog: MatDialog) {
-
+  constructor(private entitiesService: EntitiesService, private router: Router, public dialog: MatDialog,private cageService :CageService) {
   }
 
   ngOnInit(): void {
-    this.findAllPageable()
-    console.log(this.isTrue)
+    this.cageService.getCageIdFromCageComponent().subscribe((data)=>{
+      this.cage=data;
+    })
+    if(this.cage!=null && this.cage!=""){
+      this.search();
+    }
+    else {
+    this.findAllPageable();
+    console.log(this.isTrue);
+    }
 
   }
 
@@ -74,16 +80,11 @@ export class EntitiesListComponent implements OnInit {
     event.preventDefault();
     this.page = i;
     this.findAllPageable();
-
   }
 
 
   search() {
     this.isTrue=true;
-    console.log(this.isTrue)
-    console.log(this.isSubmitted)
-    console.log(this.inDateMin)
-    console.log(this.inDateMax)
     this.entitiesService.searchEntities(this.inDateMin,this.inDateMax, this.cage).subscribe(
       data => {
         console.log(data);
@@ -103,5 +104,6 @@ export class EntitiesListComponent implements OnInit {
       }
     );
   }
+
 
 }
