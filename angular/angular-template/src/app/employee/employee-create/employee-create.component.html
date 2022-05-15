@@ -1,1 +1,193 @@
-<h1>Đây là trang khởi tạo</h1>
+<div class="container-fluid" id="content" style="margin-top: 58px">
+  <div class="row">
+    <div class="col-lg-3 ml-0">
+      <!-- Sidebar -->
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a [routerLink]="['/admin/employee']" class="nav-link active" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Quản lý nhân viên
+            </a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/employee/entities']"class="nav-link link-dark">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+              Quản lý cá thể
+            </a>
+          </li>
+
+        </ul>
+        <hr>
+
+        <!-- Sidebar -->
+      </div>
+    </div>
+    <div class="col-lg-9">
+
+      <strong style="font-size: larger;margin-top: 10px; height: 20px">Thêm mới nhân viên:</strong>
+
+      <hr/>
+      <form style="max-width: 100%;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="createEmployee()" *ngIf="employeeForm">
+        <div class="container-fluid">
+
+          <div class="form-group row">
+            <label class="col-form-label ml-3" style="width: 150px;">Mã nhân viên<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp1" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="employeeId">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Tên nhân viên<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp2" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="employeeName">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.employeeName">
+                <span *ngIf="employeeForm.get('employeeName').hasError(validation.type) && (employeeForm.get('employeeName').dirty || employeeForm.get('employeeName').touched)">
+                {{validation.message}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--          <div class="form-group row" >-->
+          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Account ID<span class="text-danger">*</span></label>-->
+          <!--            <div class="col-sm-8">-->
+          <!--              <div class="input-append date" id="dp20" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+          <!--                <input disable class="span2 form-control" size="16" type="text" formControlName="accountId">-->
+          <!--                <span style="color: red;"></span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+
+          <input hidden class="span2 form-control" size="16" type="text" formControlName="accountId">
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="password" formControlName="password">
+                <span style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+
+          <!--          <div class="form-group row" >-->
+          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
+          <!--            <div class="col-sm-8">-->
+          <!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+          <!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
+          <!--                <span style="color: red;"></span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Email<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp6" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="email">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.email">
+                <span *ngIf="employeeForm.get('email').hasError(validation.type) && (employeeForm.get('email').dirty || employeeForm.get('email').touched)">
+                {{validation.message}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label  class="col-form-label ml-3" style="width: 150px;">Ngày sinh<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp7" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="date" formControlName="birthday">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.birthday">
+                  <span *ngIf="employeeForm.get('birthday').hasError(validation.type) && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched|| employeeForm.get('birthday').untouched)">
+                  {{validation.message}}</span>
+                  <span *ngIf="employeeForm.get('birthday').hasError('flag')">Ngày sinh không được lớn hơn ngày hiện tại!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label  class="col-form-label ml-3" style="width: 150px;">Giới tính<span class="text-danger">*</span></label>
+            <div class="col-sm-7">
+              <div class="form-check form-check-inline" style="padding-top: 3px" *ngFor="let gender of genderList">
+                <input class="form-check-input"  id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
+                       formControlName="{{gender.name}}">
+                <label class="form-check-input" style="padding-top: 2px" for="gender-{{gender.id}}">{{gender.label}}</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">CMND<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp10" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="idCard">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.idCard">
+                <span *ngIf="employeeForm.get('idCard').hasError(validation.type) && (employeeForm.get('idCard').dirty || employeeForm.get('idCard').touched)">
+                {{validation.message}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Địa chỉ<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp11" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="text" formControlName="address">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.address">
+                <span *ngIf="employeeForm.get('address').hasError(validation.type) && (employeeForm.get('address').dirty || employeeForm.get('address').touched)">
+                {{validation.message}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!--          <div class="form-group row" >-->
+<!--            <label  class="col-form-label ml-3" style="width: 150px;">Ảnh nhân viên<span class="text-danger">*</span></label>-->
+<!--            <div class="col-sm-8">-->
+<!--              <div class="input-append date" id="dp17" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+<!--                <input class="span2 form-control" size="16" type="text" formControlName="avatar">-->
+<!--                <div style="color: red;"  *ngFor="let validation of validationMessages.employeeName">-->
+<!--                <span *ngIf="employeeForm.get('avatar').hasError(validation.type) && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched)">-->
+<!--                {{validation.message}}</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-info m-2">Thêm mới</button>
+            <button type="button" class="btn btn-success m-2" [routerLink]="['/admin/employee']">Huỷ bỏ</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</div>

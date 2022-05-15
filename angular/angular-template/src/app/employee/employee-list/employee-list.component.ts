@@ -4,6 +4,9 @@ import {Router} from '@angular/router';
 import {EntitiesDeleteComponent} from "../../entities/entities-delete/entities-delete.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {EmployeeDeleteComponent} from "../employee-delete/employee-delete.component";
+import {IEmployeeDTO} from "../../model/IEmployeeDTO";
+import {IAccount} from "../../model/IAccount";
+import {AccountService} from "../../service/account.service";
 
 @Component({
   selector: 'app-employee-list',
@@ -15,7 +18,8 @@ export class EmployeeListComponent implements OnInit {
   public page = 0;
   dialogRef: MatDialogRef<EmployeeDeleteComponent>;
   deleteMessenger;
-  employeeList:Array<any>;
+  employeeList:IEmployeeDTO[];
+  accountList: IAccount[];
   pages: any;
   totalPages: number;
   public searchName ="";
@@ -25,12 +29,20 @@ export class EmployeeListComponent implements OnInit {
   isTrue2=true;
 
 
-  constructor(private employeeService: EmployeeService, private router: Router,  public dialog: MatDialog){
+  constructor(private employeeService: EmployeeService,
+              private accountService: AccountService,
+              private router: Router,
+              public dialog: MatDialog){
   }
 
   ngOnInit(): void {
     // this.findAllPageable();
     this.search();
+    // this.accountService.findAll().toPromise().then(r => {
+    //   this.accountList = r;
+    //   console.log(r);
+    //   console.log(this.accountList);
+    // });
   }
 
   // findAllPageable(){
