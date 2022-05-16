@@ -7,7 +7,6 @@ import {CageListComponent} from "./cage/cage-list/cage-list.component";
 
 const routes: Routes = [
   {path: 'contact', component: ContactComponent},
-  {path: 'cage', component: CageListComponent},
   {path: '', component: NewListComponent},
 ]
 

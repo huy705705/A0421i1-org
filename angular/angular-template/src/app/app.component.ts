@@ -16,7 +16,7 @@ export class AppComponent {
     this.route.queryParams.subscribe(params => {
       this.token = params['token'];
     });
-    console.log(this.token)
+
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         if (event.url === '/login' || event.url === '/forgot-password' || event.url === '/verify-reset-password?token=' + this.token) {

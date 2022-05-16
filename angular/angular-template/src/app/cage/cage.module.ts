@@ -7,6 +7,7 @@ import { CageCreateComponent } from './cage-create/cage-create.component';
 import { CageEditComponent } from './cage-edit/cage-edit.component';
 import { CageDeleteComponent } from './cage-delete/cage-delete.component';
 import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {FormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         CageRoutingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class CageModule { }

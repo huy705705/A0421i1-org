@@ -18,8 +18,6 @@ import {NewsService} from "./service/news.service";
 import {CageModule} from "./cage/cage.module";
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent
@@ -44,6 +42,7 @@ import {CageModule} from "./cage/cage.module";
     SecurityModule,
     EmployeeModule,
     NewModule,
+    CageModule
   ],
   bootstrap: [AppComponent]
 })
