@@ -42,24 +42,18 @@
                   <option value="closedDate">Ngày đóng</option>
                 </select>
                 <p style="  margin-top: 5px;margin-left: 8px">Từ</p>
-                <div class="form-outline" style=" margin-left: 10px;  margin-right: 10px;max-width: 135px">
+                <div class="form-outline" style=" margin-left: 10px;  margin-right: 10px;">
                   <input type="date" class="form-control" placeholder="Nhập ngày vào" [(ngModel)]="dateFrom"/>
                 </div>
-                <p style=" margin-top: 5px;">đến</p>
-                <div class="form-outline" style=" margin-left: 10px;max-width: 135px">
+                <p style="  margin-top: 5px;">đến</p>
+                <div class="form-outline" style=" margin-left: 10px;">
                   <input type="date" class="form-control" placeholder="Nhập ngày vào" [(ngModel)]="dateTo"/>
                 </div>
-                <div class="form-outline"style="margin-left: 10px;max-width: 135px" >
+                <div class="form-outline"style="margin-left: 10px;" >
                   <input type="search" class="form-control"
-                         placeholder="Mã chuồng" [(ngModel)]="searchCageId"/>
+                         placeholder="Nhập mã chuồng nuôi" [(ngModel)]="searchCageId"/>
                 </div>
-                <div class="form-outline"style="margin-left: 10px;max-width: 145px" >
-                  <select style="font-size: smaller;min-height: 36px" class="form-control" [(ngModel)]="employee">
-                    <option  value="">-Chọn nhân viên-</option>
-                    <option *ngFor="let employee of employeeList" value="{{employee.employeeId}}">{{employee.employeeName}}</option>
-                  </select>
-                </div>
-                <button type="submit" (click)="search()" class="btn btn-primary" style="margin-left: 10px;max-height: 36px">
+                <button type="submit" (click)="search()" class="btn btn-primary" style="margin-left: 10px;">
                   Tìm kiếm
                 </button>
               </div>
@@ -116,8 +110,8 @@
                 <td>{{cage.cageId}}</td>
                 <td>{{cage.employeeName}}</td>
                 <td>{{cage.entitiesQuantity}}/{{cage.quantity}}</td>
-                <td>{{cage.createdDate|date:"dd-MM-yyyy"}}</td>
-                <td>{{cage.closedDate|date:"dd-MM-yyyy"}}</td>
+                <td>{{cage.createdDate}}</td>
+                <td>{{cage.closedDate}}</td>
                 <td>
                   <button class="btn"><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>
                 </td>
@@ -152,7 +146,7 @@
                   </li>
                 </ul>
 
-<!--                Phan trang khi tim kiem-->
+                <!--                Phan trang khi tim kiem-->
 
                 <ul class="pagination justify-content-end" style="justify-content: center" *ngIf="isSearch==true" >
                   <li class="nav-item">

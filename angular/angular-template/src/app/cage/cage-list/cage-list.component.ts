@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {Cage} from "../../model/cage";
 import {EntitiesService} from "../../service/entities.service";
 import {BehaviorSubject} from "rxjs";
+import {EmployeeNameDTO} from "../../model/dto/employee-name-dto";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-cage-list',
@@ -17,7 +19,7 @@ export class CageListComponent implements OnInit {
   pages: Array<number>;
   page :number=0;
   pageTotal:number=0;
-
+  sortBy :string="cageId";
   // Cac bien cho seacrh
   pageSearch :Array<number>;
   pageSearchCurrent :number=0;
@@ -28,15 +30,17 @@ export class CageListComponent implements OnInit {
   searchCageId: string='';
   dateFrom:string='';
   dateTo:string='';
+  employee:string='';
+  employeeList:EmployeeNameDTO[];
 
   // Bien check xem da tim kiem chua
   isSearch : boolean=false;
-  constructor(private cageService: CageService, private route: Router,private entitiesService : EntitiesService) {
-    const subject= new BehaviorSubject("");
-    this.pages=[1,2,3];
-    subject.subscribe((data) => {
-      console.log('Subscriber A:', data);
+  isAcsSort: boolean=true;
+  constructor(private cageService: CageService, private route: Router,private entitiesService : EntitiesService,private toast : ToastrService) {
+    this.cageService.getAllEmployeeName().subscribe((data)=>{
+      this.employeeList=data;
     });
+    const subject= new BehaviorSubject("");
   }
 
   ngOnInit(): void {
@@ -48,10 +52,9 @@ export class CageListComponent implements OnInit {
     this.findAllPageable();
   }
   findAllPageable(){
-  this.cageService.findAllPageAble(this.page).subscribe(
+  this.cageService.findAllPageAble(this.page,this.sortBy,this.isAcsSort).subscribe(
     data=>{
       this.listCage=data['content']
-      console.log(data);
       this.pages=new Array(data['totalPages'])
       this.pageTotal = data['totalPages']
   },
@@ -62,13 +65,18 @@ export class CageListComponent implements OnInit {
   search(){
     this.pageSearchCurrent=0;
     this.isSearch=true;
-    this.cageService.findCage(this.pageSearchCurrent,this.dateType,this.dateFrom,this.dateTo,this.searchCageId).subscribe((data)=>{
+    this.cageService.findCage(this.pageSearchCurrent,this.dateType,this.dateFrom,this.dateTo,this.searchCageId,this.employee,this.isAcsSort,this.sortBy).subscribe((data)=>{
       this.listCage=data['content'];
-      console.log(data)
-      // this.pageSearchCurrent = data['page'];
       this.pageSearch=new Array(data['totalPages']);
       this.pageSearchTotal=data['totalPages'];
-    })
+    },
+      (error)=>{
+        this.listCage=null;
+        this.toast.warning('Không tồn tại thông tin cần tìm kiếm','Thất bại',{
+          timeOut:7000,
+          extendedTimeOut:1000
+        })
+      })
   }
    getListEntitiesByCage(cageId : string){
      this.cageService.findAllEntitiesInCage(cageId);
@@ -77,11 +85,24 @@ export class CageListComponent implements OnInit {
   setSearch(i: number , event: any) {
     event.preventDefault();
     this.pageSearchCurrent = i;
-    this.cageService.findCage(this.pageSearchCurrent,this.dateType,this.dateFrom,this.dateTo,this.searchCageId).subscribe((data)=>{
+    this.cageService.findCage(this.pageSearchCurrent,this.dateType,this.dateFrom,this.dateTo,this.searchCageId,this.employee,this.isAcsSort,this.sortBy).subscribe((data)=>{
       this.listCage=data['content'];
       this.pageSearch=new Array(data['totalPages']);
       this.pageSearchTotal=data['totalPages'];
-    })
+    },
+      (error)=>{
+        this.listCage=null;
+        this.toast.warning('Không tồn tại thông tin cần tìm kiếm','Thất bại',{
+          timeOut:5000,
+          extendedTimeOut:1000
+        })
+      })
+
+  }
+  setSortBy(sort : string){
+    this.sortBy=sort;
+    this.isAcsSort=!this.isAcsSort;
+    this.search();
   }
 
 
