@@ -18,6 +18,7 @@ import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
 import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
+import {CageModule} from "./cage/cage.module";
 
 
 
@@ -44,6 +45,7 @@ import {NewsService} from "./service/news.service";
     SecurityModule,
     EmployeeModule,
     NewModule,
+    CageModule
   ],
   bootstrap: [AppComponent]
 })
