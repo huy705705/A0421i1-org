@@ -27,6 +27,7 @@ export class CageCreateComponent implements OnInit {
   employee: EmployeeDto;
   wasEdit: boolean=false;
 
+
   constructor(private cageService: CageService,
               private router: Router,
               private toast : ToastrService,
@@ -62,19 +63,27 @@ export class CageCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.cageService.createCage(this.formGroup.value).subscribe(data =>{
-      this.cage = data['content'];
-      // this.router.navigateByUrl("/employee/cageList")
-      this.toast.success("Tạo mới chuồng nuôi thành công!", "Thành công: ", {
-        timeOut: 4000,
-        extendedTimeOut:1000
-      })
-    }, error => {
+    if (this.formGroup.invalid){
       this.toast.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,
         extendedTimeOut: 1000
       })
-    })
+    }
+    else {
+      this.cageService.createCage(this.formGroup.value).subscribe(data =>{
+        this.cage = data;
+        this.router.navigateByUrl("/employee/cage")
+        this.toast.success("Tạo mới chuồng nuôi thành công!", "Thành công: ", {
+          timeOut: 4000,
+          extendedTimeOut:1000
+        })
+      }, error => {
+        this.toast.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
+          timeOut: 4000,
+          extendedTimeOut: 1000
+        })
+      })
+    }
   }
 
 
@@ -85,7 +94,9 @@ export class CageCreateComponent implements OnInit {
       if(data < 10){
         this.cageIdRendered=  "CN-00"+data;
       }
-      else {
+      else if(data < 100){
+        this.cageIdRendered = "CN-0" + data;
+      } else {
         this.cageIdRendered = "CN-" + data;
       }
 
