@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class WeatherComponent implements OnInit {
   WeatherData:any;
   constructor() { }
-
+  today= new Date();
   ngOnInit() {
+    setInterval(() => {
+      this.today = new Date();
+    }, 1);
     this.WeatherData = {
       main : {},
       isDay: true

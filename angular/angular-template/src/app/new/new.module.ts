@@ -11,7 +11,6 @@ import {NewListComponent} from "./new-list/new-list.component";
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { WeatherComponent } from './weather/weather.component';
 import { StatiticalComponent } from './statitical/statitical.component';
-
 @NgModule({
   declarations: [NewListComponent, NewCreateComponent, NewEditComponent, NewDeleteComponent, WeatherComponent, StatiticalComponent],
     imports: [

@@ -18,12 +18,14 @@ import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
 import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
+import { TempConverterPipe } from './temp-converter.pipe';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    TempConverterPipe,
   ],
 
   providers: [
