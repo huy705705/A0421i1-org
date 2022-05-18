@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IEmployeeDTO} from "../model/IEmployeeDTO";
-import {Employee} from "../model/Employee";
-import {Entities} from "../model/entities";
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +39,9 @@ export class EmployeeService {
   deleteEmployeeById(id: string) {
     console.log("id: " + id)
     return this.http.patch(this.apiURL + "/delete/" + id, null);
+  }
+
+  getEmployeeId(): Observable<Number> {
+    return this.http.get<Number>(this.apiURL + "/createId/");
   }
 }

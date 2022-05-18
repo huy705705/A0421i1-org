@@ -25,9 +25,19 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'minlength', message: 'Tên nhân viên không nhỏ hơn 3 kí tự !'},
       {type: 'pattern', message: 'Tên nhân viên không được chứa ký tự đặc biệt!'}
     ],
+    accountName: [
+      {type: 'required', message: 'Tên tài khoản không được trống!'},
+      {type: 'maxlength', message: 'Tên tài khoản không dài hơn 40 kí tự !'},
+      {type: 'minlength', message: 'Tên tài khoản không nhỏ hơn 3 kí tự !'},
+      {type: 'pattern', message: 'Tên tài khoản không được chứa ký tự đặc biệt!'}
+    ],
+    password: [
+      {type: 'required', message: 'Mật khẩu không được trống!'},
+      {type: 'maxlength', message: 'Mật khẩu khoản không dài hơn 40 kí tự !'},
+      {type: 'minlength', message: 'Mật khẩu khoản không nhỏ hơn 3 kí tự !'}
+    ],
     birthday: [
       {type: 'required', message: 'Ngày sinh không được trống!'}
-
     ],
     email: [
       {type: 'required', message: 'Email không được trống!'},
@@ -36,6 +46,9 @@ export class EmployeeEditComponent implements OnInit {
     idCard: [
       {type: 'required', message: 'CMND không được trống!'},
       {type: 'pattern', message: 'CMND phải là 9 số!'}
+    ],
+    gender: [
+      {type: 'required', message: 'Giới tính không được trống!'},
     ],
     address: [
       {type: 'required', message: 'Địa chỉ không được trống!'},
@@ -81,20 +94,25 @@ export class EmployeeEditComponent implements OnInit {
           employeeName    : new FormControl('', [
             Validators.required,
             Validators.minLength(3),
-            Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
-              'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
+            Validators.pattern('^[a-zA-Z\'-\'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóêòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝỶỸửữựỵ ỷỹ]*$'),
             Validators.maxLength(40)]),
           accountId       : new FormControl(),
-          accountName     : new FormControl(),
-          password        : new FormControl(),
+          accountName     : new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(40)]),
+          password        : new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(10)]),
           birthday        : new FormControl('', [
             Validators.required,
             birthdayValidator()]),
-          avatar         : new FormControl(),
+          // avatar         : new FormControl(),
           email           : new FormControl('', [
             Validators.required,
             Validators.email]),
-          gender          : new FormControl(),
+          gender          : new FormControl(Validators.required),
           idCard          : new FormControl('', [
             Validators.required,
             Validators.pattern('^[0-9]{9}$')]),
@@ -117,10 +135,10 @@ export class EmployeeEditComponent implements OnInit {
 
   updateEmployee() {
     console.log(this.employeeForm);
-    // if (this.employeeForm.invalid) {
-    //   this.toast.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
-    //   return;
-    // }
+    if (this.employeeForm.invalid) {
+      this.toast.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
+      return;
+    }
     this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe(() => {
       this.router.navigate(['/admin/employee']);
       this.toast.success("Cập nhật nhân viên thành công!", "Thành công: ", {

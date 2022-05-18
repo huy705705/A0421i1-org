@@ -76,7 +76,10 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">
-                <span style="color: red;"></span>
+                <div style="color: red;"  *ngFor="let validation of validationMessages.accountName">
+                <span *ngIf="employeeForm.get('accountName').hasError(validation.type) && (employeeForm.get('accountName').dirty || employeeForm.get('accountName').touched)">
+                {{validation.message}}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -86,12 +89,16 @@
             <div class="col-sm-8">
               <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="password" formControlName="password">
-                <span style="color: red;"></span>
+                <div style="color: red;"  *ngFor="let validation of validationMessages.password">
+                <span *ngIf="employeeForm.get('password').hasError(validation.type) && (employeeForm.get('password').dirty || employeeForm.get('password').touched)">
+                {{validation.message}}</span>
+                </div>
               </div>
             </div>
           </div>
 
-<!--          <div class="form-group row" >-->
+
+          <!--          <div class="form-group row" >-->
 <!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
 <!--            <div class="col-sm-8">-->
 <!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
@@ -135,8 +142,11 @@
                 <input class="form-check-input"  id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
                        formControlName="{{gender.name}}">
                 <label class="form-check-input" style="padding-top: 2px" for="gender-{{gender.id}}">{{gender.label}}</label>
+                <div style="color: red;"  *ngFor="let validation of validationMessages.gender">
+                <span *ngIf="employeeForm.get('gender').hasError(validation.type) && (employeeForm.get('gender').dirty || employeeForm.get('gender').untouched)">
+                {{validation.message}}</span>
+                </div>
               </div>
-
             </div>
           </div>
 
