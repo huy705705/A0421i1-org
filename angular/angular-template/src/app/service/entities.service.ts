@@ -63,7 +63,7 @@ export class EntitiesService {
 
   }
 
-  searchEntities(inDate: string,cageId: string) {
-    return this.http.get(this.apiURL + "/search?inDate="+inDate+"&cage="+cageId );
+  searchEntities(inDateMin: string,inDateMax:string,cageId: string,page : number) {
+    return this.http.get(this.apiURL + "/search?inDateMin="+inDateMin+"&inDateMax="+inDateMax+"&cage="+cageId +'&page='+page);
   }
 }

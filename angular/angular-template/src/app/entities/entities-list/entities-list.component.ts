@@ -20,16 +20,22 @@ export class EntitiesListComponent implements OnInit {
   entities2: Array<any>;
   pages: Array<number>;
   entities: any;
-  inDate = '';
+  inDateMin = '';
+  inDateMax = '';
   emptyMessenger = '';
   cage = '';
   isSubmitted=false;
   isTrue=false;
   isTrue2=true;
   deleteMessenger;
+  isSearch : boolean=false;
 
 
-
+  pageTotal:number=0;
+  // Cac bien cho seacrh
+  pageSearch :Array<number>;
+  pageSearchCurrent :number=0;
+  pageSearchTotal :number=0;
 
   openDialog(id) {
     console.log("Id "+id)
@@ -66,6 +72,7 @@ export class EntitiesListComponent implements OnInit {
       data => {
         this.entities2 = data['content']
         this.pages = new Array(data['totalPages'])
+        this.pageTotal = data['totalPages']
 
       },
       (error) => {
@@ -77,7 +84,6 @@ export class EntitiesListComponent implements OnInit {
     event.preventDefault();
     this.page = i;
     this.findAllPageable();
-
   }
 
   updateEntities(entity: any) {
@@ -85,17 +91,21 @@ export class EntitiesListComponent implements OnInit {
   }
 
   search() {
+    this.pageSearchCurrent=0;
+    this.isSearch=true;
     this.isTrue=true;
     console.log(this.isTrue)
     console.log(this.isSubmitted)
 
-    console.log(this.inDate)
-    this.entitiesService.searchEntities(this.inDate, this.cage).subscribe(
+    console.log(this.inDateMin)
+    console.log(this.inDateMax)
+    this.entitiesService.searchEntities(this.inDateMin,this.inDateMax, this.cage,this.pageSearchCurrent).subscribe(
       data => {
         console.log(data);
         if (data) {
           this.entities2 = data['content']
-          this.pages = new Array(data['totalPages'])
+          this.pageSearch = new Array(data['totalPages'])
+          this.pageSearchTotal=data['totalPages'];
           this.isSubmitted=true;
           this.isTrue2=true;
 
@@ -109,5 +119,28 @@ export class EntitiesListComponent implements OnInit {
       }
     );
   }
+  setSearch(i: number , event: any) {
+    event.preventDefault();
+    this.pageSearchCurrent = i;
+    console.log(this.pageSearchCurrent)
+    this.entitiesService.searchEntities(this.inDateMin,this.inDateMax, this.cage,this.pageSearchCurrent).subscribe(
+      data => {
+        console.log(data);
+        if (data) {
+          this.entities2 = data['content']
+          this.pageSearch = new Array(data['totalPages'])
+          this.pageSearchTotal=data['totalPages'];
+          this.isSubmitted=true;
+          this.isTrue2=true;
 
+
+        }
+      },
+      (error) => {
+        console.log(error.message)
+        this.isSubmitted=false;
+        this.isTrue2=false;
+      }
+    );
+  }
 }

@@ -12,10 +12,15 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 // import {ComponentModule} from "./component/component.module";
+
+
 import { authInterceptorProviders } from './sercurity/auth.interceptor ';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
+import {NotificationModule} from "./notification/notification.module";
+import {environment} from "../environments/environment";
+import {AngularFireModule} from "@angular/fire";
 
 
 
@@ -39,7 +44,10 @@ import {EmployeeModule} from "./employee/employee.module";
     ComponentModule,
     AppRoutingModule,
     SecurityModule,
-    EmployeeModule
+    EmployeeModule,
+    NotificationModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+
   ],
   bootstrap: [AppComponent]
 })

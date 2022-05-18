@@ -38,7 +38,7 @@
   <div class="row">
     <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 235px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
@@ -58,7 +58,12 @@
               Quản lý cá thể
             </a>
           </li>
-
+          <li class="nav-item">
+            <a [routerLink]="['/notification']" class="nav-link" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Thông báo
+            </a>
+          </li>
         </ul>
         <hr>
 
@@ -70,7 +75,7 @@
         <div class="card-header py-3">
           <div class="d-flex flex-row  d-flex justify-content-center">
             <div class="col-6">
-              <div class="input-group">
+              <div class="input-group" style="padding-left: 150px;">
                 <!--                <div class="form-outline">-->
                 <!--                  <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Nhập mã cá thể" />-->
 
@@ -78,8 +83,14 @@
                 <!--                <button type="button" class="btn btn-primary">-->
                 <!--                  Tìm kiếm-->
                 <!--                </button>-->
-                <div class="form-outline">
-                  <input type="date" class="form-control" [(ngModel)]="inDate"
+                <p style="    margin-top: 5px;">Khoảng ngày vào chuồng từ  </p>
+                <div class="form-outline" style="    margin-left: 10px;    margin-right: 10px;">
+                  <input type="date" class="form-control" [(ngModel)]="inDateMin"
+                         placeholder="Nhập ngày vào" />
+                </div>
+                <p style="    margin-top: 5px;">đến</p>
+                <div class="form-outline" style=" margin-left: 10px;">
+                  <input type="date" class="form-control" [(ngModel)]="inDateMax"
                          placeholder="Nhập ngày vào" />
                 </div>
                 <div class="form-outline"style="margin-left: 10px;" >
@@ -160,20 +171,31 @@
             <div class="col-sm-12 col-md-7">
               <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
 
-                <ul class="nav nav-pills">
+                <ul class="nav nav-pills" *ngIf="isSearch==false">
                   <!--                  <div>-->
                   <!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
                   <!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
                   <!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
                   <!--                  </div>-->
 
-                  <li class="nav-item" *ngFor="let p of pages;let i=index">
+                  <li class="nav-item" *ngFor="let p of pages;let i=index" >
                     <!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
                     <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
                   </li>
                 </ul>
 
+                <ul class="nav nav-pills" *ngIf="isSearch==true">
+                  <!--                  <div>-->
+                  <!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
+                  <!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
+                  <!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
+                  <!--                  </div>-->
 
+                  <li class="nav-item" *ngFor="let p of pageSearch;let i=index" >
+                    <!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
+                    <a class="nav-link " href="" (click)="setSearch(i,$event)">{{i + 1}}</a>
+                  </li>
+                </ul>
                 <!--                <ul class="pagination"><li class="paginate_button page-item previous" id="dataTable_previous">-->
                 <!--                  <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Trước</a>-->
                 <!--                </li>-->

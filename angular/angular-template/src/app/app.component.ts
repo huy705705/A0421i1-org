@@ -1,6 +1,9 @@
 import {Component, NgZone} from '@angular/core';
 import {HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
+import {Observable} from "rxjs";
+// import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -27,5 +30,7 @@ export class AppComponent {
       }
     });
   }
+
+
 
 }
