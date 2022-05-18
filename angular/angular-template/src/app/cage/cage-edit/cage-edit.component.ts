@@ -89,19 +89,27 @@ export class CageEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.cageService.updateCage(this.formGroup.value.cageId, this.formGroup.value).subscribe(data =>{
-      this.cage = data['content'];
-      // this.router.navigateByUrl("/employee/cageList")
-      this.toast.success("Cập nhật chuồng nuôi thành công!", "Thành công: ", {
-        timeOut: 4000,
-        extendedTimeOut:1000
-      })
-    }, error => {
+    
+    if (this.formGroup.invalid){
       this.toast.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,
         extendedTimeOut: 1000
       })
-    })
+    } else {
+      this.cageService.updateCage(this.formGroup.value.cageId, this.formGroup.value).subscribe(data =>{
+        this.cage = data['content'];
+        this.router.navigateByUrl("/employee/cage")
+        this.toast.success("Cập nhật chuồng nuôi thành công!", "Thành công: ", {
+          timeOut: 4000,
+          extendedTimeOut:1000
+        })
+      }, error => {
+        this.toast.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
+          timeOut: 4000,
+          extendedTimeOut: 1000
+        })
+      })
+    }
   }
 
 
