@@ -4,7 +4,7 @@ import {CageCreateComponent} from "./cage-create/cage-create.component";
 import {AuthGuard} from "../sercurity/auth.guard";
 import {CageEditComponent} from "./cage-edit/cage-edit.component";
 
-import {AuthGuard} from "../sercurity/auth.guard";
+
 import {CageListComponent} from "./cage-list/cage-list.component";
 
 
