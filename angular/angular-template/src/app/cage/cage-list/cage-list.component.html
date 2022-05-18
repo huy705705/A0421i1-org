@@ -119,7 +119,7 @@
                 <td>{{cage.createdDate|date:"dd-MM-yyyy"}}</td>
                 <td>{{cage.closedDate|date:"dd-MM-yyyy"}}</td>
                 <td>
-                  <button class="btn"><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>
+                  <button class="btn" [routerLink]="['edit/'+ cage.cageId]"><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>
                 </td>
                 <td>
                   <button class="btn" (click)="getListEntitiesByCage(cage.cageId)"><i class="fa-solid fa-eye" style="color: blue;"></i></button>
@@ -131,7 +131,7 @@
           <div class="row">
             <div class="col-sm-12 col-md-5">
 
-              <a routerLink="/employee/entities/create">
+              <a routerLink="/employee/cage/create">
                 <button class="btn btn-primary">Khởi tạo</button>
               </a>
             </div>
