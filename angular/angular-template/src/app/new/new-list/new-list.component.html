@@ -54,7 +54,7 @@
 
     <div class="col-lg-4">
       <p class="mt-1 text-right">{{today| date: 'EEEE d/M/y H:mm:ss'}}</p>
-      <div class="contact-div mb-3 mt-1">
+      <!-- <div class="contact-div mb-3 mt-1">
         <div class="m-auto text-center center-contact">
           <div>
             <div class="halo"></div>
@@ -67,16 +67,11 @@
               <p class="vintage vintage__top">BREEDER</p>
               <p class="vintage vintage__bot">BREEDER</p>
             </div>
-            <!-- <div>
-          <span class="outro">NO.01</span>
-          <span class="outro outro--big">LIVESTOCK WEBSITE</span>
-          <span class="outro outro--smart">smart cookie</span>
-        </div> -->
           </div>
         </div>
-      </div>
-
-      <div class="container-fluid mb-2 mt-">
+      </div> -->
+    <app-weather></app-weather>
+      <div class="container-fluid my-3">
         <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="form-inline my-lg-0 form-group row">
           <input class="form-control col-xl-8 col-lg-12 input-search-2" name="nameInput" type="search"
             placeholder="Nhập nội dung cần tìm" aria-label="Search" formControlName="nameInput"
@@ -96,7 +91,7 @@
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
+          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
           <p class="card-text">{{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
         </div>
 
@@ -134,7 +129,7 @@
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
+          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
           <p class="card-text"> {{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
         </div>
       </div>
@@ -148,6 +143,22 @@
       <hr>
       <marquee> {{newsListM}} </marquee>
       <hr>
+      <div class="contact-div mb-3 mt-1">
+        <div class="m-auto text-center center-contact">
+          <div>
+            <div class="halo"></div>
+            <div>
+              <span class="intro intro--the">Top</span>
+              <span class="intro intro--num"> #1</span>
+              <marquee class="intro">livestock website</marquee>
+            </div>
+            <div class="vintage__container">
+              <p class="vintage vintage__top">BREEDER</p>
+              <p class="vintage vintage__bot">BREEDER</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <p class="name-title-news p-1">TIN NỔI BẬT</p>
       <!-- <H4 class="name-list-news m-0 font-weight-bold">
         <p class="p-1 text-uppercase">Tin nổi bật</p>
@@ -157,7 +168,7 @@
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
+          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
           <p class="card-text"> {{news.createdDate}}</p>
         </div>
       </div>
@@ -181,7 +192,10 @@
     </div>
 
   </div>
-
+  <app-statitical></app-statitical>
+  <!-- <div id="divChart">
+    <canvas id="myChart"></canvas>
+  </div> -->
   <div class="" >
      <!-- <div class=""> 
       <div class="" *ngFor="let news of newsPageHl;let i=index">
