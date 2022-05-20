@@ -42,7 +42,8 @@ import {CageModule} from "./cage/cage.module";
     SecurityModule,
     EmployeeModule,
     NewModule,
-    CageModule
+    CageModule,
+
   ],
   bootstrap: [AppComponent]
 })

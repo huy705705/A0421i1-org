@@ -89,7 +89,7 @@ export class CageEditComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
     if (this.formGroup.invalid){
       this.toast.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,
