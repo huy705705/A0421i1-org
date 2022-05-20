@@ -54,9 +54,9 @@ export class EntitiesListComponent implements OnInit {
     this.cageService.getCageIdFromCageComponent().subscribe((data)=>{
       this.cage=data;
     })
-    if(this.cage!=null && this.cage!=""){
-      this.search();
-    }
+      if(this.cage!=null && this.cage!=""){
+        this.search();
+      }
     else {
     this.findAllPageable();
     console.log(this.isTrue);

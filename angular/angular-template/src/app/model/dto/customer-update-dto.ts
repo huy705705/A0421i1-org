@@ -2,17 +2,16 @@ import {Province} from "../category/province";
 import {District} from "../category/district";
 import {Ward} from "../category/ward";
 
-export class CustomerListDTO {
+export class CustomerUpdateDto {
+  customerId :string;
   fullName: string;
   address: string;
-  createDate: string;
+  createdDate: string;
   phone: string;
   email: string;
   gender: boolean;
   message: string;
-  province : Province;
-  district: District;
-  ward: Ward;
-
-
+  provinceId : number;
+  districtId: Number;
+  wardId: Number;
 }
