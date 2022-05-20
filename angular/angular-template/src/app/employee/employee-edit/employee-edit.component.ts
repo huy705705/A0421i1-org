@@ -54,7 +54,9 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'required', message: 'Địa chỉ không được trống!'},
       {type: 'maxlength', message: 'Địa chỉ không dài hơn 40 kí tự !'}
     ],
-
+    avatar: [
+      {type: 'required', message: 'Ảnh nhân viên không được trống!'},
+    ],
   }
 
   genderList = [
@@ -99,8 +101,9 @@ export class EmployeeEditComponent implements OnInit {
           accountId       : new FormControl(),
           accountName     : new FormControl('', [
             Validators.required,
+            // Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"),
             Validators.minLength(3),
-            Validators.maxLength(40)]),
+            Validators.maxLength(10)]),
           password        : new FormControl('', [
             Validators.required,
             Validators.minLength(3),

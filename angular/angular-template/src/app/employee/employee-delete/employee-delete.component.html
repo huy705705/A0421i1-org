@@ -9,12 +9,12 @@
   </button>
 </div>
 <div class="modal-body" *ngIf="employee !== null" >
-  <p>Bạn có chắc muốn xóa nhân viên có mã là {{employee.employeeId}} </p>
+  <p>Bạn có chắc muốn xóa nhân viên {{employee.employeeName}} </p>
   <h6>(Hành động này sẽ không thể hoàn tác)</h6>
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="deleteEmployee(employee.employeeId)">Có </button>
+  <button type="button" class="btn btn-primary" (click)="deleteEmployee(employee.employeeName)">Có </button>
   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeDialog()">Không</button>
 </div>
 

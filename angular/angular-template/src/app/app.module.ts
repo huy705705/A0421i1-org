@@ -18,7 +18,8 @@ import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
 import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
-
+import { environment } from 'src/environments/environment';
+import {AngularFireModule} from "@angular/fire";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {NewsService} from "./service/news.service";
     SecurityModule,
     EmployeeModule,
     NewModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   bootstrap: [AppComponent]
 })

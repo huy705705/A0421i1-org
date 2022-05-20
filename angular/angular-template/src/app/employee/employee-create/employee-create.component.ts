@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeService} from "../../service/employee.service";
 import {ToastrService} from "ngx-toastr";
 import {IEmployeeDTO} from "../../model/IEmployeeDTO";
 import {birthdayValidator} from "../validate";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-employee-create',
@@ -12,7 +14,7 @@ import {birthdayValidator} from "../validate";
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
-
+  selectedImage: any = null;
   employee: IEmployeeDTO;
   employeeIdRendered: string;
   employeeForm: FormGroup;
@@ -54,7 +56,9 @@ export class EmployeeCreateComponent implements OnInit {
       {type: 'required', message: 'Địa chỉ không được trống!'},
       {type: 'maxlength', message: 'Địa chỉ không dài hơn 40 kí tự !'}
     ],
-
+    avatar: [
+      {type: 'required', message: 'Ảnh nhân viên không được trống!'},
+    ],
   }
 
   genderList = [
@@ -78,7 +82,8 @@ export class EmployeeCreateComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private employeeService: EmployeeService,
               private router: Router,
-              private toast : ToastrService) {
+              private toast : ToastrService,
+              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
   }
 
   ngOnInit(): void {
@@ -92,7 +97,7 @@ export class EmployeeCreateComponent implements OnInit {
       accountName     : new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(40)]),
+        Validators.maxLength(10)]),
       password        : new FormControl('', [
         Validators.required,
         Validators.minLength(3),
@@ -100,7 +105,7 @@ export class EmployeeCreateComponent implements OnInit {
       birthday        : new FormControl('', [
         Validators.required,
         birthdayValidator()]),
-      // avatar         : new FormControl(),
+      avatar         : new FormControl(Validators.required),
       email           : new FormControl('', [
         Validators.required,
         Validators.email]),
@@ -123,13 +128,34 @@ export class EmployeeCreateComponent implements OnInit {
       this.toast.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
       return;
     }
-    this.employeeService.createEmployee(this.employeeForm.value).subscribe(() => {
-      this.router.navigate(['/admin/employee']);
-      this.toast.success("Thêm mới nhân viên thành công!", "Thành công: ", {
-        timeOut: 4000,
-        extendedTimeOut: 1000
+    console.log("save(): ")
+    console.log(this.employeeForm.value)
+    // upload image to firebase
+    // const nameImg = this.getCurrentDateTime();
+    const nameImg = this.selectedImage.name;
+    const fileRef = this.storage.ref(nameImg);
+    console.log("nameImg " + nameImg)
+    console.log("fileRef " + fileRef)
+
+    console.log(fileRef)
+
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+
+          this.employeeForm.patchValue({avatar: url});
+
+          // Call API to create notification
+          this.employeeService.createEmployee(this.employeeForm.value).subscribe(() => {
+            this.router.navigate(['/admin/employee']);
+            this.toast.success("Thêm mới nhân viên thành công!", "Thành công: ", {
+              timeOut: 4000,
+              extendedTimeOut: 1000
+            })
+          })
+        });
       })
-    });
+    ).subscribe();
   }
 
   getEmployeeId() {
@@ -152,4 +178,15 @@ export class EmployeeCreateComponent implements OnInit {
     })
   }
 
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+    if (event.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.selectedImage = event.target.result;
+      };
+    }
+    console.log(this.selectedImage);
+  }
 }

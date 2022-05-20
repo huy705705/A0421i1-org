@@ -165,18 +165,17 @@
             </div>
           </div>
 
-<!--          <div class="form-group row" >-->
-<!--            <label  class="col-form-label ml-3" style="width: 150px;">Ảnh nhân viên<span class="text-danger">*</span></label>-->
-<!--            <div class="col-sm-8">-->
-<!--              <div class="input-append date" id="dp17" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
-<!--                <input class="span2 form-control" size="16" type="text" formControlName="avatar">-->
-<!--                <div style="color: red;"  *ngFor="let validation of validationMessages.employeeName">-->
-<!--                <span *ngIf="employeeForm.get('avatar').hasError(validation.type) && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched)">-->
-<!--                {{validation.message}}</span>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Ảnh nhân viên<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <img style="width: 150px; height: 150px" alt="avatar" *ngIf="selectedImage" [src]="selectedImage">
+              <input class="" id="imgNotification" type="file" style="width: 400px; padding-top: 3px" (change)="showPreview($event)"/>
+                <div style="color: red;" *ngFor="let validation of validationMessages.avatar">
+                <span *ngIf="employeeForm.get('avatar').hasError(validation.type) && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched)">
+                {{validation.message}}</span>
+                </div>
+            </div>
+          </div>
 
           <div class="text-center">
             <button type="submit" class="btn btn-info m-2">Thêm mới</button>
