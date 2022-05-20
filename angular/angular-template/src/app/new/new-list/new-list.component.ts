@@ -40,57 +40,28 @@ export class NewListComponent implements OnInit {
   coinName: any;
   chart: any = [];
   newsTypeStatisticalData: any = [];
+  idNews: string;
+  showDetailBl: boolean = false;
+  parentMessage: string = "Message from parent";
   constructor(private newsService: NewsService, private router: Router, private fb: FormBuilder, private toastr: ToastrService,){
     Chart.register(...registerables);
   }
   ngOnInit(): void {
+   
     this.findAllPageable()
     this.findAllPageableHl()
     this.findAllByTotalView()
-    // this.statisticalTotalViewsByType()
     this.searchForm = this.fb.group({
       nameInput: [''],
     });
     setInterval(() => {
       this.today = new Date();
     }, 1);
-    var myChart = new Chart("myChart", {
-      type: 'bar',
-      data: {
-          // labels: ['Tin Tức Chăn Nuôi', 'Tạp Chí', 'Luật Chăn Nuôi', 'Thị Trường', 'Bí Kíp Chăn Nuôi'],
-          labels: [] = [],
-          datasets: [{
-            label: '# of Total Messages',
-            data: [] = [], // <== note this part, the initialization
-              // data: this.setDataStatical,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
+
     // this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+  }
+  backListParent() {
+    this.showDetailBl = false;
   }
   findAllPageable(){
     this.newsService.findAllPageable(this.page).subscribe(
@@ -170,73 +141,19 @@ export class NewListComponent implements OnInit {
 
       },
       (error) => {
-        // this.newsPage=[]
-        // this.pages = null
         console.log(error.error.message);
       }
     )
   }
-  // statisticalTotalViewsByType(){
-  //   this.newsService.statisticalTotalViewsByType().subscribe(
-  //     data=>{
-  //       console.log(data['content']);
-        
-  //       data['content'].forEach(element => {
-  //         this.newsTypeStatisticalData.push(element.totalViews)
-  //       });
-  //       this.addData(Chart,this.newsTypeStatisticalData, ["1", "2" , "3" , "4" , "5"] )
-  //       console.log(this.newsTypeStatisticalData);
-        
-  //     },
-  //     (error) => {
-  //       console.log(error.error.message);
-  //     }
-  //   )
-  // }
-  addData(chart, 
-        labels_builds = [], // See comment below
-        labels_data = [] // added this as an alternative null check for your server data.
-){
-     chart.data.labels = [
-        ...chart.data.labels, // Check the ES6 spread operator, you'll like it.
-        ...labels_builds      // In essence in this case it means "every element of"
-     ];
-     chart.data.datasets.data = [
-        ...chart.data.datasets.data,
-        ...labels_data
-     ];
-     chart.update();
- }
-  setDataStatical(){
-    this.newsService.statisticalTotalViewsByType().subscribe(
-      data=>{
-        console.log(data['content']);
-        
-        data['content'].forEach(element => {
-          this.newsTypeStatisticalData.push(element.totalViews)
-        });
-        console.log(this.newsTypeStatisticalData);
-        
-        return this.newsTypeStatisticalData
-        
-      },
-      (error) => {
-        return this.newsTypeStatisticalData
-      }
-    )
-  }
+
   showDetail(id){
-    console.log(id);
-    this.newsService.showDetailNews(id).subscribe(
-      data=>{
-        // this.newsPageTotalView=data['content']
-        console.log(data['content']);
-        
-      },
-      (error) => {
-        console.log(error.error.message);
-      }
-    )
+    this.parentMessage = id
+    this.showDetailBl = true;
+  }
+  public theCallback(){
+    console.log("hehe");
+    
+    
   }
   setPage(i: number, event: any) {
     event.preventDefault();

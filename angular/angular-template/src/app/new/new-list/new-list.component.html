@@ -10,7 +10,7 @@
   </div>
 
   <div class="row mt-3 mb-3">
-    <div class="col-lg-8 ">
+    <div *ngIf = "!showDetailBl" class="col-lg-8 ">
       <!-- <H4 class="name-list-news m-0 font-weight-bold">
         <p class="p-1 text-uppercase">Tin mới nhất</p>
       </H4> -->
@@ -19,7 +19,7 @@
           <p class="name-title-news p-1">TIN MỚI NHẤT</p>
         </div>
         <div class="col-lg-8">
-          <marquee class="name-title-news-marquee align-middle"> {{newsListMarquee}} </marquee>
+          <marquee class="name-title-news-marquee align-middle"  onmouseover="this.stop();" onmouseout="this.start();"> {{newsListMarquee}} </marquee>
         </div>
       </div>
       <div class="row mt-2 mb-2" *ngFor="let news of newsPage">
@@ -51,7 +51,7 @@
       </nav>
 
     </div>
-
+    <app-new-details *ngIf = "showDetailBl" [childMessage]="parentMessage" class="col-lg-8" (backList)="backListParent()"></app-new-details>
     <div class="col-lg-4">
       <!-- <p class="mt-1 text-right">{{today| date: 'EEEE d/M/y H:mm:ss'}}</p> -->
       <!-- <div class="contact-div mb-3 mt-1">
@@ -141,7 +141,7 @@
           </ul>
         </nav> -->
       <hr>
-      <marquee> {{newsListM}} </marquee>
+      <marquee  onmouseover="this.stop();" onmouseout="this.start();"> {{newsListM}} </marquee>
       <hr>
       <div class="contact-div mb-3 mt-1">
         <div class="m-auto text-center center-contact">

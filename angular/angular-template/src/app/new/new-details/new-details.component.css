@@ -1,0 +1,8 @@
+.progress {
+    height: 20px;
+  }
+.img-news-detail{
+    height:300px;
+    width: 100%;
+    object-fit:cover;
+  }

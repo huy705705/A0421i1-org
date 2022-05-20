@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { NewsService } from 'src/app/service/news.service';
 
@@ -7,7 +7,7 @@ import { NewsService } from 'src/app/service/news.service';
   templateUrl: './statitical.component.html',
   styleUrls: ['./statitical.component.css']
 })
-export class StatiticalComponent implements OnInit {
+export class StatiticalComponent implements OnInit, OnChanges {
   result: any;
   coinPrice: any;
   coinName: any;
@@ -15,6 +15,9 @@ export class StatiticalComponent implements OnInit {
   newsTypeStatisticalData: any = [];
   constructor(private newsService: NewsService) {
     Chart.register(...registerables);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit
   }
 
   ngOnInit() {
