@@ -21,6 +21,7 @@ export class EntitiesCreateComponent implements OnInit {
   more :boolean=false;
   wasEdit : boolean=false;
 
+
   validationMessages= {
     entitiesId:[
       {type: 'required',message: ''}
@@ -117,7 +118,16 @@ export class EntitiesCreateComponent implements OnInit {
           entitiesId:this.entitiesId,
         })
       }
-    })
+    },
+      (error)=>{
+      this.entitiesForm.patchValue({
+        entitiesId:null
+      })
+      this.toast.error('Chuồng nuôi đã quá tải, không thể thêm vật nuôi!', 'Thất bại',{
+        timeOut:5000,
+        extendedTimeOut:1000
+      })
+      })
   }
 
   destroyHacker() {

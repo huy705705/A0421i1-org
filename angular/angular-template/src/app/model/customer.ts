@@ -1,3 +1,7 @@
+import {Province} from "./category/province";
+import {District} from "./category/district";
+import {Ward} from "./category/ward";
+
 export class Customer {
   fullName: string;
   address: string;
@@ -6,7 +10,7 @@ export class Customer {
   message: string;
   gender: true;
   isDelete: null;
-  province: number;
-  district: number;
-  ward: number
+  province: Province;
+  district: District;
+  ward: Ward
 }
