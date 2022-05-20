@@ -15,7 +15,7 @@ import {NotificationDeleteComponent} from "../notification-delete/notification-d
 export class NotificationListComponent implements OnInit {
   entitiesForm: FormGroup;
   dialogRef: MatDialogRef<NotificationDeleteComponent>;
-  private page: number = 0;
+     page: number = 0;
   entities2: Array<any>;
   notification: Array<any>;
   pages: Array<number>;
@@ -62,7 +62,11 @@ export class NotificationListComponent implements OnInit {
       }
     )
   }
-
+  setPage(i, event: any) {
+    event.preventDefault();
+    this.page = i;
+    this.findAllPageable();
+  }
   openDialog(notificationId: any) {
     console.log("Id "+notificationId)
     this.dialogRef = this.dialog.open(NotificationDeleteComponent, {

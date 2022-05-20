@@ -7,7 +7,7 @@ import {NotificationCreateComponent} from "./notification-create/notification-cr
 
 const routes: Routes = [
   {path:'notification',component:NotificationListComponent},
-  {path:'notification/update',component:NotificationEditComponent},
+  {path:'notification/update/:id',component:NotificationEditComponent},
   {path:'notification/create',component:NotificationCreateComponent},
 ];
 

@@ -40,7 +40,7 @@
       <strong style="font-size: larger;margin-top: 10px; height: 20px">Cập nhật thông tin thông báo: </strong>
 
       <hr/>
-<!--      <form [formGroup]="formgroup" ]style="max-width: 100%;" class="bg-light">-->
+      <form [formGroup]="notificationForm" style="max-width: 100%;" class="bg-light" (ngSubmit)="updateNotification()" >
         <div class="container-fluid">
 
 <!--          <label>Ảnh đã có</label>-->
@@ -52,10 +52,50 @@
 
 <!--          <label for="formFileLg" class="form-label"> Cập nhật ảnh</label>-->
 <!--          <input class="form-control form-control-lg" id="formFileLg" type="file" style="   height: 51px"/>-->
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Nội dung</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+<!--          <div class="form-group">-->
+<!--            <label for="exampleFormControlTextarea1">Nội dung</label>-->
+<!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+<!--          </div>-->
+
+          <div class="form-group row">
+            <label class="col-form-label ml-3" style="width: 130px;">Ảnh minh họa<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-group mb-3">
+                <img  class="" id="files" src="{{notification.image}}" style="height: 120px;margin-top: 10px">
+                <!--                <div class="input-group-append">-->
+                <!--                  <span class="input-group-text" id="basic-addon2">kg</span>-->
+                <!--                </div>-->
+              </div>
+              <label for="imgNotification" class="form-label"> Chọn ảnh minh họa</label>
+              <input class="form-control form-control-lg" id="imgNotification" type="file" style="   height: 51px"
+                     (change)="showPreview($event)"/>
+
+            </div>
           </div>
+
+
+          <div class="form-group row">
+            <label class="col-form-label ml-3" style="width: 130px;">Nội dung<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-group mb-3">
+                <textarea type="text" class="form-control" min="1" type="text" value="1" rows="6"
+                          formControlName="content"></textarea>
+                <!--                <div class="input-group-append">-->
+                <!--                  <span class="input-group-text" id="basic-addon2">kg</span>-->
+                <!--                </div>-->
+              </div>
+              <div style="color: red;" *ngFor="let validation of validationMessages.content">
+              <span
+                *ngIf="notificationForm.get('content').hasError(validation.type) && (notificationForm.get('content').dirty || notificationForm.get('content').touched)">
+              {{validation.message}}</span>
+              </div>
+
+            </div>
+          </div>
+          <input class="span2 form-control" size="16" formControlName="uploadDate" type="date" hidden>
+          <input class="span2 form-control" size="16" formControlName="delete" type="text" hidden>
+          <input class="span2 form-control" size="16" formControlName="image" type="text" hidden>
+
 
 
           <div class="text-center">
@@ -63,7 +103,7 @@
             <button type="button" class="btn btn-success m-2" [routerLink]="['/notification/']">Huỷ bỏ</button>
           </div>
         </div>
-<!--      </form>-->
+      </form>
     </div>
   </div>
   <footer class="">

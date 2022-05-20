@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Notification} from "../model/notification";
+import {Entities} from "../model/entities";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,8 @@ export class NotificationService {
 
   createNotification(notification: Notification): Observable<any> {
     return this.http.post<any>(this.apiURL + '/create/', JSON.stringify(notification), this.httpOptions)
+  }
+  updateNotification(id: number, notification: Notification): Observable<any> {
+    return this.http.patch<Notification>(this.apiURL + "/update/" + id, notification);
   }
 }

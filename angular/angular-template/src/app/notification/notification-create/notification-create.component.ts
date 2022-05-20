@@ -60,6 +60,8 @@ export class NotificationCreateComponent implements OnInit {
 
   save() {
     if (this.contentIsFalse) {
+      console.log(this.notificationForm.value.image)
+
       this.toast.error("Thông tin thông báo không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,
         extendedTimeOut: 1000
@@ -71,8 +73,12 @@ export class NotificationCreateComponent implements OnInit {
       console.log(this.notificationForm.value)
       // upload image to firebase
       // const nameImg = this.getCurrentDateTime();
+      if (this.selectedImage.name==""){
+        this.selectedImage.name="homeeasdad.png"
+      }
       const nameImg = this.selectedImage.name;
       const fileRef = this.storage.ref(nameImg);
+
       console.log("nameImg " + nameImg)
       console.log("fileRef " + fileRef)
 
@@ -107,6 +113,15 @@ export class NotificationCreateComponent implements OnInit {
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
     console.log(this.selectedImage)
+    console.log(this.notificationForm.value.image)
+    if (event.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.selectedImage = event.target.result;
+      };
+    }
+    console.log(this.selectedImage);
   }
 
   getCurrentDateTime(): string {
