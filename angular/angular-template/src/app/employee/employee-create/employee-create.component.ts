@@ -152,6 +152,11 @@ export class EmployeeCreateComponent implements OnInit {
               timeOut: 4000,
               extendedTimeOut: 1000
             })
+          }, error => {
+            this.toast.error("Tài khoản đã được sử dụng!","Thất bại: ",{
+              timeOut: 4000,
+              extendedTimeOut: 1000
+            })
           })
         });
       })
@@ -180,13 +185,16 @@ export class EmployeeCreateComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
-    if (event.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        this.selectedImage = event.target.result;
-      };
-    }
-    console.log(this.selectedImage);
+    // if (event.target.files) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(event.target.files[0]);
+    //   reader.onload = (event: any) => {
+    //     this.selectedImage = event.target.result;
+    //   };
+    // }
+    // console.log(this.selectedImage);
   }
+
 }
+
+

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Employee} from "../../model/employee";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ToastrService} from "ngx-toastr";
 import {EmployeeService} from "../../service/employee.service";
+import {IEmployeeDTO} from "../../model/IEmployeeDTO";
 
 @Component({
   selector: 'app-employee-delete',
@@ -12,7 +12,7 @@ import {EmployeeService} from "../../service/employee.service";
 })
 export class EmployeeDeleteComponent implements OnInit {
 
-  employee: Employee;
+  employee: IEmployeeDTO;
 
   constructor( private employeeService: EmployeeService,
                private router: Router,
