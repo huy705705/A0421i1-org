@@ -100,7 +100,7 @@
       <form [formGroup]="notificationForm" *ngIf="notificationForm" (ngSubmit)="save()" class="bg-form">
 
         <label for="imgNotification" class="form-label"> Chọn ảnh minh họa</label><br>
-        <img style="width: 200px;height: 200px" alt="" [src]="selectedImage" *ngIf="selectedImage">
+<!--        <img style="width: 200px;height: 200px" alt="" [src]="selectedImage" *ngIf="selectedImage">-->
 <!--        <img  class="" id="files" src="{{notification.image}}" style="height: 120px;margin-top: 10px">-->
         <input class="form-control form-control-lg" id="imgNotification" type="file" style="   height: 51px"
                (change)="showPreview($event)"/>

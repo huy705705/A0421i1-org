@@ -50,7 +50,7 @@ export class EntitiesCreateComponent implements OnInit {
   constructor(private entitiesService: EntitiesService, private router: Router, private toast : ToastrService) {
     this.entitiesService.getListCage().subscribe((data)=>{
 
-    this.cageList=data;
+      this.cageList=data;
       this.entitiesForm = new FormGroup({
         entitiesId: new FormControl("",
           [Validators.required]),
@@ -81,7 +81,7 @@ export class EntitiesCreateComponent implements OnInit {
         ]),
         isDelete: new FormControl(false)
       })
-      })
+    })
   }
 
   ngOnInit(): void {
@@ -129,7 +129,7 @@ export class EntitiesCreateComponent implements OnInit {
 
   destroyHacker() {
     this.wasEdit=true;
-      this.entitiesForm.patchValue({
+    this.entitiesForm.patchValue({
       entitiesId:this.entitiesId
     })
 

@@ -7,6 +7,8 @@ import {EntitiesDeleteComponent} from "../entities-delete/entities-delete.compon
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TokenStorageService} from "../../service/token-storage.service";
 
+import {CageService} from "../../service/cage.service";
+
 
 @Component({
   selector: 'app-entities-list',
@@ -36,6 +38,7 @@ export class EntitiesListComponent implements OnInit {
   pageSearch :Array<number>;
   pageSearchCurrent :number=0;
   pageSearchTotal :number=0;
+  findEntitiesByCage: string;
 
   openDialog(id) {
     console.log("Id "+id)
@@ -53,26 +56,33 @@ export class EntitiesListComponent implements OnInit {
   }
 
 
-  constructor(private entitiesService: EntitiesService, private router: Router, public dialog: MatDialog) {
 
+  constructor(private entitiesService: EntitiesService, private router: Router, public dialog: MatDialog,private cageService :CageService) {
   }
 
   ngOnInit(): void {
-    this.findAllPageable()
-    console.log(this.isTrue)
+    this.cageService.getCageIdFromCageComponent().subscribe((data)=>{
+      this.cage=data;
+    })
+      if(this.cage!=null && this.cage!=""){
+        this.search();
+      }
+    else {
+    this.findAllPageable();
+    console.log(this.isTrue);
+    }
 
   }
 
   findAllPageable() {
 
-
     this.isTrue2 = true;
-
     this.entitiesService.findAllPageable(this.page).subscribe(
       data => {
         this.entities2 = data['content']
         this.pages = new Array(data['totalPages'])
         this.pageTotal = data['totalPages']
+
 
       },
       (error) => {
@@ -100,12 +110,14 @@ export class EntitiesListComponent implements OnInit {
     console.log(this.inDateMin)
     console.log(this.inDateMax)
     this.entitiesService.searchEntities(this.inDateMin,this.inDateMax, this.cage,this.pageSearchCurrent).subscribe(
+
       data => {
         console.log(data);
         if (data) {
           this.entities2 = data['content']
           this.pageSearch = new Array(data['totalPages'])
           this.pageSearchTotal=data['totalPages'];
+
           this.isSubmitted=true;
           this.isTrue2=true;
 
@@ -143,4 +155,5 @@ export class EntitiesListComponent implements OnInit {
       }
     );
   }
+
 }

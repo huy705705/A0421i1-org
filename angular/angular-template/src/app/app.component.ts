@@ -1,9 +1,7 @@
 import {Component, NgZone} from '@angular/core';
 import {HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
-import {Observable} from "rxjs";
-// import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {finalize} from "rxjs/operators";
+
 
 @Component({
   selector: 'app-root',
@@ -20,6 +18,7 @@ export class AppComponent {
       this.token = params['token'];
     });
     console.log(this.token)
+
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         if (event.url === '/login' || event.url === '/forgot-password' || event.url === '/verify-reset-password?token=' + this.token) {
@@ -30,7 +29,6 @@ export class AppComponent {
       }
     });
   }
-
 
 
 }

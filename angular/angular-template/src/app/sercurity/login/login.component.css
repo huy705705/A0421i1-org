@@ -172,37 +172,26 @@ input[type="password"] {
 }
 
 .check-remember{
-  margin-right: 20%;
+
+  margin-right: 25%;
   vertical-align: bottom!important;
-  /*align-items: center;*/
-  /*height: auto;*/
-  width: auto;
 }
+
 input[type="checkbox"] {
-  height: 1.20em;
-  width: 1.20em;
-  margin-right: 2px;
-  margin-bottom: 2px;
+  height: 1.0em;
+  width: 1.0em;
+  margin-right: 3px;
 }
-/*label, input {*/
-/*  vertical-align: top;*/
-/*}*/
-.check-remember label{
-  color: #262525;
-  margin-left: 3px;
+
+.checkbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  word-wrap: break-word;
 }
-/*input[type="checkbox"] {*/
-/*  width: 20px;*/
-/*  height: 20px;*/
-/*  vertical-align: bottom;*/
-/*}*/
-/*label.checkbox {*/
-/*  vertical-align: top;*/
-/*  line-height: 10px;*/
-/*  margin: 2px 0;*/
-/*  display: block;*/
-/*  height: 10px;*/
-/*}*/
+
+
 .link a {
   color: blue;
   text-decoration: none;
@@ -304,6 +293,5 @@ input[type="checkbox"] {
     margin-top: 16%;
   }
 }
-
 
 

@@ -114,13 +114,13 @@ export class NotificationCreateComponent implements OnInit {
     this.selectedImage = event.target.files[0];
     console.log(this.selectedImage)
     console.log(this.notificationForm.value.image)
-    if (event.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        this.selectedImage = event.target.result;
-      };
-    }
+    // if (event.target.files) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(event.target.files[0]);
+    //   reader.onload = (event: any) => {
+    //     this.selectedImage = event.target.result;
+    //   };
+    // }
     console.log(this.selectedImage);
   }
 

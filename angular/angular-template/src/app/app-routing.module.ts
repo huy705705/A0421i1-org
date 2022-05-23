@@ -4,13 +4,17 @@ import { Routes, RouterModule } from "@angular/router";
 import {NotificationListComponent} from "./notification/notification-list/notification-list.component";
 
 
+
+import {NewListComponent} from "./new/new-list/new-list.component";
+import {ContactComponent} from "./component/contact/contact.component";
+import {CageListComponent} from "./cage/cage-list/cage-list.component";
+
 const routes: Routes = [
-  // {path: '', component: NewListComponent}
-  {path:'notification',component:NotificationListComponent},
+  {path: 'contact', component: ContactComponent},
+  {path: '', component: NewListComponent},
+    {path:'notification',component:NotificationListComponent},
 
-]
-
-
+  ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

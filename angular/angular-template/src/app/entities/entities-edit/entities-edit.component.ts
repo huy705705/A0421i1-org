@@ -19,6 +19,9 @@ export class EntitiesEditComponent implements OnInit {
   entities: Entities;
   cageList: String[];
   more :boolean=false;
+
+  selectCage : string;
+  flag: boolean=true;
   validationMessages = {
     entitiesId: [
       {type: 'required', message: 'Id không được trống!'}
@@ -47,18 +50,16 @@ export class EntitiesEditComponent implements OnInit {
 
   constructor(private entitiesService: EntitiesService, private route: Router, private activatedRoute: ActivatedRoute, private toast: ToastrService) {
 
-    console.log("messsageArray:" + this.validationMessages);
+
     this.entitiesService.getListCage().subscribe(cage => {
       this.cageList = cage;
     })
     this.activatedRoute.paramMap.subscribe(next => {
       const id = next.get("id");
-      console.log(id);
+
       this.entitiesService.findById(id).subscribe((data) => {
-
-
           this.entities = data;
-          console.log(this.entities);
+          this.selectCage=data.cageId;
           this.entitiesForm = new FormGroup({
             entitiesId: new FormControl("",
               [Validators.required]),
@@ -81,7 +82,9 @@ export class EntitiesEditComponent implements OnInit {
               Validators.max(500),
               Validators.min(0.01),
             ]),
-            cageId: new FormControl("", [
+
+            cageId: new FormControl(this.entities.cage, [
+
               Validators.required,
               Validators.maxLength(2)
             ]),
@@ -101,24 +104,37 @@ export class EntitiesEditComponent implements OnInit {
   }
 
   updateEntities() {
-    this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
-      this.entities = data['content'];
+
+    if (!this.more && this.flag) {
+      this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
+        this.entities = data['content'];
         this.route.navigate(['/employee/entities']);
         this.toast.success("Cập nhật cá thể thành công!", "Thành công: ", {
           timeOut: 4000,
           extendedTimeOut: 1000
         })
-    });
+      });
+    }
   }
   compare(){
-    console.log(Date.parse(this.entitiesForm.value.inDate));
-    console.log(Date.parse(this.entitiesForm.value.outDate));
     if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
       this.more=true;
     }
     else {
       this.more=false;
     }
+  }
+
+  checkQuantity(cageId : string){
+    this.entitiesService.getEntitiesId(cageId).subscribe((data)=>{
+
+    },
+      (error)=>{
+        this.flag=false;
+        this.toast.error('Chuồng nuôi đã quá tải, không thể thêm vật nuôi!', 'Thất bại',{
+          timeOut:1000,
+        })
+      })
   }
 
 }
