@@ -168,7 +168,8 @@
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Ảnh nhân viên<span class="text-danger">*</span></label>
             <div class="col-sm-8">
-              <img style="width: 150px; height: 150px" alt="avatar" *ngIf="selectedImage" [src]="selectedImage">
+<!--              <img style="width: 150px; height: 150px" alt="avatar" *ngIf="selectedImage" [src]="selectedImage">-->
+              <img style="width: 150px; height: 150px" alt="avatar" [src]="selectedImage">
               <input class="" id="imgNotification" type="file" style="width: 400px; padding-top: 3px" (change)="showPreview($event)"/>
                 <div style="color: red;" *ngFor="let validation of validationMessages.avatar">
                 <span *ngIf="employeeForm.get('avatar').hasError(validation.type) && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched)">

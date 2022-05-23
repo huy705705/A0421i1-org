@@ -73,11 +73,12 @@ export class EmployeeListComponent implements OnInit {
       width: '600px',
       data: id,
     });
+    this.deleteSuccess();
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.ngOnInit();
         this.deleteMessenger = 'Nhân viên ' + id + ' đã được xoá thành công';
         this.page = 0;
-        this.ngOnInit();
       }
     });
   }
@@ -108,5 +109,9 @@ export class EmployeeListComponent implements OnInit {
         this.isTrue2=false;
       }
     );
+  }
+
+  deleteSuccess() {
+    this.ngOnInit();
   }
 }

@@ -51,6 +51,7 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'required', message: 'Giới tính không được trống!'},
     ],
     address: [
+      {type: 'pattern', message: 'Địa chỉ không được chứa ký tự đặc biệt!'},
       {type: 'required', message: 'Địa chỉ không được trống!'},
       {type: 'maxlength', message: 'Địa chỉ không dài hơn 40 kí tự !'}
     ],
@@ -121,6 +122,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.pattern('^[0-9]{9}$')]),
           address         : new FormControl('', [
             Validators.required,
+            Validators.pattern('^[a-zA-Z\'-\'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóêòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝýỶỸửữựỵ ỷỹ]*$'),
             Validators.maxLength(40)]),
           isDelete        : new FormControl(),
         });

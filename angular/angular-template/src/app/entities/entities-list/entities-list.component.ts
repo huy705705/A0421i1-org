@@ -39,6 +39,7 @@ export class EntitiesListComponent implements OnInit {
       data: id,
     });
     this.dialogRef.afterClosed().subscribe(result => {
+      console.log("checking: "+ result)
       if (result) {
         this.deleteMessenger = 'Nhân viên ' + id + ' đã được xoá thành công';
         this.page = 0;
