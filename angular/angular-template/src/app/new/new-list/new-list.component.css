@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Satisfy);
+@import url(https://fonts.googleapis.com/css?family=Satisfy); 
 @import url(https://fonts.googleapis.com/css?family=Six+Caps);
 @font-face {
   font-family: Mukta;
@@ -10,7 +10,7 @@
   background-color: #EDEDED;
 }
 .card{
-
+  
 }
 .news-hightlight-name, .name-new-left{
   color: black ;
@@ -20,7 +20,7 @@
 }
 .list-news-left:hover{
   background-color: #EDEDED;
-
+  
 }
 .btn-outline-search{
   background-color: #66c992;
@@ -65,39 +65,39 @@ height: 50px; */
 }
 .btn-contact:hover{
   background-color: transparent;
-  border: 1px solid #ffffff;
+  border: 1px solid #ffffff; 
   color: #EDEDED;
 }
 #btn-contact{
-
+  
 }
 .btn-contact{
-
+  
 }
 .center-contact{
-  /* align-content: center ; */
+/* align-content: center ; */
 }
 .sp-text-mid{
   color: #F47F24;
 }
 .a-contact{
   background-image: linear-gradient(
-    to right,
-    #54b3d6,
-    #54b3d6 50%,
-    rgb(255, 255, 255) 50%
-  );
-  background-size: 200% 100%;
-  background-position: -100%;
-  display: inline-block;
-  /* padding: 5px 0; */
-  position: relative;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease-in-out;
-  font-weight: 500px;
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-  letter-spacing: 1.5px;
+      to right,
+      #54b3d6,
+      #54b3d6 50%,
+      rgb(255, 255, 255) 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    /* padding: 5px 0; */
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+    font-weight: 500px;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    letter-spacing: 1.5px;
 }
 .a-contact:before {
   content: '';
@@ -112,7 +112,7 @@ height: 50px; */
 }
 
 .a-contact:hover {
-  background-position: 0;
+ background-position: 0;
 }
 
 .a-contact:hover::before {
@@ -122,7 +122,7 @@ height: 50px; */
   border-radius: 0;
 }
 .input-search-2::after{
-
+  
 }
 .btn-outline-search2{
   background-color: #54b3d6;
@@ -141,8 +141,14 @@ height: 50px; */
 }
 #new-name-left{
   font-size: 20px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
   /* font-family: 'Libre Bodoni', serif;
 font-family: 'News Cycle', sans-serif; */
+}
+#new-name-left:hover{
+  color: #54b3d6;
 }
 .btn:focus {
   outline: none;
@@ -152,7 +158,7 @@ font-family: 'News Cycle', sans-serif; */
     background-color: black;
 } */
 .pagination-news{
-  color: black;
+    color: black;
 }
 .pagination-news:hover{
   color: rgb(255, 255, 255);
@@ -272,7 +278,7 @@ font-family: 'News Cycle', sans-serif; */
 }
 
 .vintage__bot {
-  text-shadow:
+  text-shadow: 
     2px 1px rgb(85, 10, 0),
     4px 2px rgb(90, 15, 5),
     6px 4px rgb(100, 20, 15),
@@ -308,15 +314,15 @@ font-family: 'News Cycle', sans-serif; */
   display: block;
 }
 .text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-height: 18px;     /* fallback */
-  max-height: 72px;      /* fallback */
-  -webkit-line-clamp: 4; /* number of lines to show */
-  -webkit-box-orient: vertical;
-  margin-bottom: 15px;
-  /* font-family: inherit; */
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 18px;     /* fallback */
+   max-height: 72px;      /* fallback */
+   -webkit-line-clamp: 4; /* number of lines to show */
+   -webkit-box-orient: vertical;
+   margin-bottom: 15px;
+   /* font-family: inherit; */
 }
 .name-title-news{
   background-color: #F47F24;
@@ -328,6 +334,7 @@ font-family: 'News Cycle', sans-serif; */
 
   border-radius: 50% 50% 0 0 ;
 }
+
 .img-carosel-2{
   height:300px;
   object-fit:cover;
@@ -355,8 +362,8 @@ font-family: 'News Cycle', sans-serif; */
 
 }
 .name-news-1{
-  font-family: 'Libre Bodoni', serif;
-  font-weight: bold;
+font-family: 'Libre Bodoni', serif;
+font-weight: bold;
 }
 .content-news-1, .date-news-1{
   font-family: 'Heebo', sans-serif;
@@ -369,4 +376,58 @@ font-family: 'News Cycle', sans-serif; */
 
 .quotes-1{
   font-size: 30px;
+}
+#divChart{
+  display: block;
+  width: 400;
+  height: 400;
+}
+
+
+#divWeatherMain{
+  display: block;
+  /* border-radius: 10px; */
+  width: 100%;
+  height: 220px;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(8,7,42,1) 75%, rgb(8, 10, 63) 100%);
+  color: white;;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.weatherWidgetRow{
+  display:block;
+  margin:0 auto;
+  width: fit-content;
+}
+
+.sun{
+  margin-top: 10px;
+  color: yellow;
+  filter: drop-shadow( 1px 1px 10px yellow);
+}
+
+.moon{
+  margin-top: 10px;
+  color: white;
+  filter: drop-shadow( 1px 1px 10px white);
+}
+
+.cloudDiv{
+  margin-top: -40px;
+}
+
+.cloud{
+  color: rgb(104, 175, 197);
+  filter: drop-shadow( 1px 1px 5px rgb(104, 175, 197));
+  animation-name: cloudMovement;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes cloudMovement{
+  from{margin-left: -55px;}
+  to{margin-left: 65px;}
 }
