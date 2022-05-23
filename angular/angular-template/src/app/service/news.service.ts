@@ -15,7 +15,7 @@ export class NewsService {
   findAllPageable(page:number){
     console.log( this.http.get(this.apiURL+'?page='+page).subscribe);
     console.log(typeof(this.http.get(this.apiURL+'?page='+page).subscribe));
-    
+
     return this.http.get(this.apiURL+'?page='+page);
   }
   findByName(name: String, page: number): Observable<any> {
@@ -50,7 +50,7 @@ export class NewsService {
   statisticalTotalViewsByType(): Observable<Object[]> {
     console.log((this.apiURL+ '/statistical'));
     console.log(typeof(this.http.get<Object[]>(`${this.apiURL+ '/statistical' }`)));
-    
+
     // console.log(this.http.get<News[]>(`${this.apiURL+ '/detail/'+id }`));
     return this.http.get<Object[]>(`${this.apiURL+ '/statistical' }`);
   }

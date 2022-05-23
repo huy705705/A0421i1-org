@@ -48,7 +48,7 @@ export class NewListComponent implements OnInit {
     Chart.register(...registerables);
   }
   ngOnInit(): void {
-   
+
     this.findAllPageable()
     this.findAllPageableHl()
     this.findAllByTotalView()
@@ -105,7 +105,7 @@ export class NewListComponent implements OnInit {
       data=>{
         this.newsPageTotalView=data['content']
         console.log(data['content']);
-        
+
       },
       (error) => {
         console.log(error.error.message);
@@ -114,7 +114,7 @@ export class NewListComponent implements OnInit {
   }
   findAllName(){
     console.log(this.searchButton);
-    
+
     if (this.searchButton) {
       this.pageSearch = 0;
     }
@@ -122,7 +122,7 @@ export class NewListComponent implements OnInit {
       data=>{
         if (data == null) {
           console.log(this.pageSearch);
-          
+
           this.newsPageSearch = null;
           this.pagesSearch = null;
           this.pagesSearchEmpty = false;
@@ -153,8 +153,8 @@ export class NewListComponent implements OnInit {
   }
   public theCallback(){
     console.log("hehe");
-    
-    
+
+
   }
   setPage(i: number, event: any) {
     event.preventDefault();
@@ -190,7 +190,7 @@ export class NewListComponent implements OnInit {
   }
   sortByDesc(event: any){
     console.log("mới nhất");
-    
+
     this.newsService.findByNameDesc(this.name, this.pageSearch).subscribe(
       data=>{
         if (data == null) {
@@ -281,7 +281,7 @@ export class NewListComponent implements OnInit {
     console.log('skill name', type);
     switch (type) {
       case "desc":
-    
+
         this.newsService.findByNameDesc(this.name, this.pageSearch).subscribe(
           data=>{
             if (data == null) {
@@ -301,7 +301,7 @@ export class NewListComponent implements OnInit {
               this.pagesSearchEmpty = true;
               console.log(data['totalPages']);
             }
-    
+
           },
           (error) => {
             // this.newsPage=[]
@@ -330,7 +330,7 @@ export class NewListComponent implements OnInit {
               this.pagesSearchEmpty = true;
               console.log(data['totalPages']);
             }
-    
+
           },
           (error) => {
             // this.newsPage=[]
@@ -359,7 +359,7 @@ export class NewListComponent implements OnInit {
               this.pagesSearchEmpty = true;
               console.log(data['totalPages']);
             }
-    
+
           },
           (error) => {
             // this.newsPage=[]
@@ -371,6 +371,6 @@ export class NewListComponent implements OnInit {
       default:
         break;
     }
-}
+  }
 
 }

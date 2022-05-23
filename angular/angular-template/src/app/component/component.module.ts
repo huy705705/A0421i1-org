@@ -8,6 +8,7 @@ import {EntitiesModule} from "../entities/entities.module";
 import {RouterModule} from "@angular/router";
 import { ContactComponent } from './contact/contact.component';
 import {ReactiveFormsModule} from "@angular/forms";
+
 @NgModule({
   declarations: [FooterComponent, HeaderComponent, Error404Component, ContactComponent],
   imports: [
@@ -20,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     FooterComponent,
     HeaderComponent,
     ContactComponent
+
   ],
 })
 export class ComponentModule { }

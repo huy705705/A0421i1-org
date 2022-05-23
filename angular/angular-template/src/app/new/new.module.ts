@@ -11,6 +11,7 @@ import { StatiticalComponent } from './statitical/statitical.component';
 import { NewDetailsComponent } from './new-details/new-details.component';
 
 
+
 @NgModule({
   declarations: [NewListComponent, NewCreateComponent, NewEditComponent, NewDeleteComponent, WeatherComponent, StatiticalComponent, NewDetailsComponent],
   imports: [

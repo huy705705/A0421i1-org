@@ -1,14 +1,12 @@
-/* body {
-    background: #35a367;
-    background: -webkit-linear-gradient(to right,  #2e8c59, #66c992);
-    background: linear-gradient(to right, #2e8c59, #66c992);
 
-  } */
 /* nav{
   background: #35a367;
   background: -webkit-linear-gradient(to right,  #66c992, #66c992);
   background: linear-gradient(to right, #66c992, #66c992);
 } */
+tr, td{
+  vertical-align: middle;
+}
 #content{
   min-height: 100vh;
 }
@@ -38,6 +36,16 @@ footer{
 .nav-link:hover{
   border-radius: 5px;
   background: #66c992;
+}
+
+body{
+  text-align: center;
+}
+element.style {
+  margin-left: 10px;
+}
+th{
+  text-align: center;
 }
 /*!
  * Start Bootstrap - SB Admin 2 v4.1.3 (https://startbootstrap.com/theme/sb-admin-2)
@@ -11320,3 +11328,4 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+

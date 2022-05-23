@@ -42,6 +42,18 @@ form {
   border-color: #41B675;
 }
 
+.btn-info {
+  color: #fff;
+  background-color: #36b9cc;
+  border-color: #36b9cc;
+}
+
+.btn-info:hover {
+  color: #fff;
+  background-color: #2c9faf;
+  border-color: #2a96a5;
+}
+
 .form-control {
   display: block;
   width: 100%;

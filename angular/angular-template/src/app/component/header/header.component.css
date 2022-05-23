@@ -92,6 +92,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.3s ease-in-out;
+
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   letter-spacing: 1.5px;
 }
@@ -156,3 +157,4 @@ nav{
 .dropbtn{
   border: none;
 }
+

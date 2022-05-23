@@ -24,13 +24,6 @@
             </a>
           </li>
 
-          <li>
-            <a [routerLink]="['/employee/cage']" class="nav-link ">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-              Quản lý chuồng nuôi
-            </a>
-          </li>
-
         </ul>
         <hr>
 
@@ -82,7 +75,7 @@
               <tr>
                 <th>Mã nhân viên</th>
                 <th>Họ và tên</th>
-                <!--                <th>Tên tài khoản</th>-->
+                <th>Tên tài khoản</th>
                 <th>Email</th>
                 <th>Ngày sinh</th>
                 <th>Giới tính</th>
@@ -97,9 +90,7 @@
               <tr *ngFor="let employee of employeeList">
                 <td>{{employee.employeeId}}</td>
                 <td>{{employee.employeeName| uppercase}}</td>
-                <td hidden>{{employee.accountId}}</td>
-                <td hidden>{{employee.accountName}}</td>
-                <td hidden>{{employee.avartar}}</td>
+                <td>{{employee.accountName}}</td>
                 <td>{{employee.email}}</td>
                 <td>{{employee.birthday | date: "yyyy-MM-dd"}}</td>
                 <td>{{employee.gender}}</td>
@@ -107,10 +98,10 @@
                 <td>{{employee.address}}</td>
                 <td hidden>{{employee.isDelete}}</td>
                 <td>
-                  <button class="btn"(click)="updateEmployee(employee)"><i class="fa-solid fa-pen-clip" style="color: blue;padding-left: 25px"></i></button>
+                  <button class="btn"(click)="updateEmployee(employee)"><i class="fa-solid fa-pen-clip" style="color: blue;padding-left: 15px"></i></button>
                 </td>
                 <td>
-                  <i class="fa-solid fa-trash-can" style="color: red;padding-left: 25px"></i>
+                  <button class="btn" (click)="openDialog(employee.employeeId)"><i class="fa-solid fa-trash-can" style="color: red;padding-left: 15px" ></i></button>
                 </td>
               </tr>
 

@@ -5,6 +5,7 @@ import {EmployeeService} from '../../service/employee.service';
 import {birthdayValidator, checkDuplicateEmail} from "../validate";
 import {Employee} from "../../model/employee";
 import {ToastrService} from "ngx-toastr";
+import {IEmployeeDTO} from "../../model/IEmployeeDTO";
 
 @Component({
   selector: 'app-employee-edit',
@@ -13,7 +14,7 @@ import {ToastrService} from "ngx-toastr";
 })
 export class EmployeeEditComponent implements OnInit {
 
-  employee: Employee;
+  employee: IEmployeeDTO;
   employeeId;
   employeeForm: FormGroup;
 
@@ -24,9 +25,19 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'minlength', message: 'Tên nhân viên không nhỏ hơn 3 kí tự !'},
       {type: 'pattern', message: 'Tên nhân viên không được chứa ký tự đặc biệt!'}
     ],
+    accountName: [
+      {type: 'required', message: 'Tên tài khoản không được trống!'},
+      {type: 'maxlength', message: 'Tên tài khoản không dài hơn 40 kí tự !'},
+      {type: 'minlength', message: 'Tên tài khoản không nhỏ hơn 3 kí tự !'},
+      {type: 'pattern', message: 'Tên tài khoản không được chứa ký tự đặc biệt!'}
+    ],
+    password: [
+      {type: 'required', message: 'Mật khẩu không được trống!'},
+      {type: 'maxlength', message: 'Mật khẩu khoản không dài hơn 40 kí tự !'},
+      {type: 'minlength', message: 'Mật khẩu khoản không nhỏ hơn 3 kí tự !'}
+    ],
     birthday: [
       {type: 'required', message: 'Ngày sinh không được trống!'}
-
     ],
     email: [
       {type: 'required', message: 'Email không được trống!'},
@@ -36,11 +47,17 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'required', message: 'CMND không được trống!'},
       {type: 'pattern', message: 'CMND phải là 9 số!'}
     ],
+    gender: [
+      {type: 'required', message: 'Giới tính không được trống!'},
+    ],
     address: [
+      {type: 'pattern', message: 'Địa chỉ không được chứa ký tự đặc biệt!'},
       {type: 'required', message: 'Địa chỉ không được trống!'},
       {type: 'maxlength', message: 'Địa chỉ không dài hơn 40 kí tự !'}
     ],
-
+    avatar: [
+      {type: 'required', message: 'Ảnh nhân viên không được trống!'},
+    ],
   }
 
   genderList = [
@@ -62,8 +79,7 @@ export class EmployeeEditComponent implements OnInit {
     }
   ]
 
-  constructor(private formBuilder: FormBuilder,
-              private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private employeeService: EmployeeService,
               private router: Router,
               private toast : ToastrService) {
@@ -81,26 +97,34 @@ export class EmployeeEditComponent implements OnInit {
           employeeName    : new FormControl('', [
             Validators.required,
             Validators.minLength(3),
-            Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
-              'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
+            Validators.pattern('^[a-zA-Z\'-\'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóêòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝỶỸửữựỵ ỷỹ]*$'),
             Validators.maxLength(40)]),
           accountId       : new FormControl(),
+          accountName     : new FormControl({value: '', disabled: true}, [
+            Validators.required,
+            // Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"),
+            Validators.minLength(3),
+            Validators.maxLength(10)]),
+          password        : new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(10)]),
           birthday        : new FormControl('', [
             Validators.required,
             birthdayValidator()]),
-          avartar         : new FormControl(),
+          // avatar         : new FormControl(),
           email           : new FormControl('', [
             Validators.required,
             Validators.email]),
-          gender          : new FormControl(),
+          gender          : new FormControl(Validators.required),
           idCard          : new FormControl('', [
             Validators.required,
             Validators.pattern('^[0-9]{9}$')]),
           address         : new FormControl('', [
             Validators.required,
+            Validators.pattern('^[a-zA-Z\'-\'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóêòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝýỶỸửữựỵ ỷỹ]*$'),
             Validators.maxLength(40)]),
           isDelete        : new FormControl(),
-
         });
         this.employeeForm.patchValue(this.employee);
       });
@@ -115,9 +139,12 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   updateEmployee() {
-    this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe((data) => {
-      console.log(data);
-      this.employee = data['content'];
+    console.log(this.employeeForm);
+    if (this.employeeForm.invalid) {
+      this.toast.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
+      return;
+    }
+    this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe(() => {
       this.router.navigate(['/admin/employee']);
       this.toast.success("Cập nhật nhân viên thành công!", "Thành công: ", {
         timeOut: 4000,
@@ -126,4 +153,3 @@ export class EmployeeEditComponent implements OnInit {
     });
   }
 }
-
