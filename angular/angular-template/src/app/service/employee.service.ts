@@ -27,6 +27,7 @@ export class EmployeeService {
     return this.http.patch<Employee>(this.apiURL + '/update/' + id, employee);
   }
 
+
   findAllEmployeeName(searchName: string, searchId: string, page:number): Observable<any>{
     console.log(searchName+ "   " + searchId);
     return this.http.get<any>(this.apiURL + '?searchName=' + searchName + '&searchId=' + searchId + '&page=' + page);

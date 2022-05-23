@@ -3,16 +3,22 @@ import {NgModule} from '@angular/core';
 import {SecurityModule} from "./sercurity/security.module";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+
 import {EntitiesModule} from "./entities/entities.module";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {EntitiesService} from "./service/entities.service";
 import {ReactiveFormsModule} from "@angular/forms";
+
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { authInterceptorProviders } from './sercurity/auth.interceptor ';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import { ComponentModule } from './component/component.module';
 import {EmployeeModule} from "./employee/employee.module";
+import {NotificationModule} from "./notification/notification.module";
+import {environment} from "../environments/environment";
+import {AngularFireModule} from "@angular/fire";
+
 import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
 import {CageModule} from "./cage/cage.module";
@@ -26,6 +32,7 @@ import {CageModule} from "./cage/cage.module";
   providers: [
     EntitiesService,
     authInterceptorProviders,
+
     NewsService
   ],
   imports: [
@@ -34,6 +41,7 @@ import {CageModule} from "./cage/cage.module";
     HttpClientModule,
     CommonModule,
     EntitiesModule,
+
     CageModule,
     MatDialogModule,
     BrowserAnimationsModule,
@@ -41,6 +49,9 @@ import {CageModule} from "./cage/cage.module";
     AppRoutingModule,
     SecurityModule,
     EmployeeModule,
+    NotificationModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+
     NewModule,
     CageModule
   ],

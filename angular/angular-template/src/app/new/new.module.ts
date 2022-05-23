@@ -10,10 +10,10 @@ import {NewListComponent} from "./new-list/new-list.component";
 
 @NgModule({
   declarations: [NewListComponent, NewCreateComponent, NewEditComponent, NewDeleteComponent],
-    imports: [
-        CommonModule,
-        NewRoutingModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    NewRoutingModule,
+    ReactiveFormsModule
+  ]
 })
 export class NewModule { }

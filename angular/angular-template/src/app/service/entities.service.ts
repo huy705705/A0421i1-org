@@ -9,10 +9,17 @@ import {Entities} from "../model/entities";
 })
 export class EntitiesService {
   public apiURL = 'http://localhost:8080/employee/entities';
+
+  entitiesList = [];
+
+
   constructor(private http: HttpClient) {
   }
 
+
   createEntities(value: Entities): Observable<any> {
+    console.log(value);
+
     return this.http.post<any>(this.apiURL + "/create", value);
   }
 
@@ -20,6 +27,7 @@ export class EntitiesService {
   findById(id: String): Observable<any> {
     return this.http.get<any>(this.apiURL + "/update/" + id);
   }
+
 
   updateEntities(id: number, entities: Entities): Observable<any> {
     return this.http.patch<Entities>(this.apiURL + "/update/" + id, entities);
@@ -46,13 +54,18 @@ export class EntitiesService {
     return this.http.get<Entities>(this.apiURL + "/delete/" + id);
   }
 
+
   deleteEntitiesById(id: string) {
     console.log("2: " + id)
     // let entities:Observable<Entities>;
     // entities =this.findById(id);
     return this.http.patch(this.apiURL + "/delete/" + id, null);
+
+
   }
-  searchEntities(inDateMin: string,inDateMax:string,cageId: string) {
-    return this.http.get(this.apiURL + "/search?inDateMin="+inDateMin+"&inDateMax="+inDateMax+"&cage="+cageId );
+
+  searchEntities(inDateMin: string,inDateMax:string,cageId: string,page : number) {
+    return this.http.get(this.apiURL + "/search?inDateMin="+inDateMin+"&inDateMax="+inDateMax+"&cage="+cageId +'&page='+page);
+
   }
 }

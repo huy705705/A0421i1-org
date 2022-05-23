@@ -19,6 +19,7 @@ export class EntitiesEditComponent implements OnInit {
   entities: Entities;
   cageList: String[];
   more :boolean=false;
+
   selectCage : string;
   flag: boolean=true;
   validationMessages = {
@@ -49,11 +50,13 @@ export class EntitiesEditComponent implements OnInit {
 
   constructor(private entitiesService: EntitiesService, private route: Router, private activatedRoute: ActivatedRoute, private toast: ToastrService) {
 
+
     this.entitiesService.getListCage().subscribe(cage => {
       this.cageList = cage;
     })
     this.activatedRoute.paramMap.subscribe(next => {
       const id = next.get("id");
+
       this.entitiesService.findById(id).subscribe((data) => {
           this.entities = data;
           this.selectCage=data.cageId;
@@ -79,7 +82,9 @@ export class EntitiesEditComponent implements OnInit {
               Validators.max(500),
               Validators.min(0.01),
             ]),
+
             cageId: new FormControl(this.entities.cage, [
+
               Validators.required,
               Validators.maxLength(2)
             ]),
@@ -99,7 +104,8 @@ export class EntitiesEditComponent implements OnInit {
   }
 
   updateEntities() {
-    if(!this.more&&this.flag) {
+
+    if (!this.more && this.flag) {
       this.entitiesService.updateEntities(this.entitiesForm.value.entitiesId, this.entitiesForm.value).subscribe((data) => {
         this.entities = data['content'];
         this.route.navigate(['/employee/entities']);
@@ -108,11 +114,6 @@ export class EntitiesEditComponent implements OnInit {
           extendedTimeOut: 1000
         })
       });
-    } else{
-      this.toast.error("Thông tin cá thể không hợp lệ!", "Lỗi: ", {
-        timeOut: 4000,
-        extendedTimeOut: 1000
-      })
     }
   }
   compare(){
@@ -123,6 +124,7 @@ export class EntitiesEditComponent implements OnInit {
       this.more=false;
     }
   }
+
   checkQuantity(cageId : string){
     this.entitiesService.getEntitiesId(cageId).subscribe((data)=>{
 

@@ -21,7 +21,6 @@ export class EntitiesCreateComponent implements OnInit {
   more :boolean=false;
   wasEdit : boolean=false;
 
-
   validationMessages= {
     entitiesId:[
       {type: 'required',message: ''}
@@ -50,7 +49,8 @@ export class EntitiesCreateComponent implements OnInit {
   }
   constructor(private entitiesService: EntitiesService, private router: Router, private toast : ToastrService) {
     this.entitiesService.getListCage().subscribe((data)=>{
-    this.cageList=data;
+
+      this.cageList=data;
       this.entitiesForm = new FormGroup({
         entitiesId: new FormControl("",
           [Validators.required]),
@@ -81,7 +81,7 @@ export class EntitiesCreateComponent implements OnInit {
         ]),
         isDelete: new FormControl(false)
       })
-      })
+    })
   }
 
   ngOnInit(): void {
@@ -108,7 +108,13 @@ export class EntitiesCreateComponent implements OnInit {
     this.entitiesService.getEntitiesId(this.entitiesForm.value.cageId).subscribe((data) => {
       console.log(this.entitiesForm.value.cageId);
       if(data<10){
-        this.entitiesId=this.entitiesForm.value.cageId+"-0"+data;
+        this.entitiesId=this.entitiesForm.value.cageId+"-000"+data;
+      }
+      else if(data<100) {
+        this.entitiesId = this.entitiesForm.value.cageId+"-00" + data;
+      }
+      else if(data<1000) {
+        this.entitiesId = this.entitiesForm.value.cageId+"-0" + data;
       }
       else {
         this.entitiesId = this.entitiesForm.value.cageId+"-"+data;
@@ -118,26 +124,19 @@ export class EntitiesCreateComponent implements OnInit {
           entitiesId:this.entitiesId,
         })
       }
-    },
-      (error)=>{
-      this.entitiesForm.patchValue({
-        entitiesId:null
-      })
-      this.toast.error('Chuồng nuôi đã quá tải, không thể thêm vật nuôi!', 'Thất bại',{
-        timeOut:5000,
-        extendedTimeOut:1000
-      })
-      })
+    })
   }
 
   destroyHacker() {
     this.wasEdit=true;
-      this.entitiesForm.patchValue({
+    this.entitiesForm.patchValue({
       entitiesId:this.entitiesId
     })
 
   }
   compare(){
+    console.log(Date.parse(this.entitiesForm.value.inDate));
+    console.log(Date.parse(this.entitiesForm.value.outDate));
     if(Date.parse(this.entitiesForm.value.inDate)>Date.parse(this.entitiesForm.value.outDate)){
       this.more=true;
     }

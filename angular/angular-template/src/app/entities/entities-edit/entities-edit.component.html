@@ -1,5 +1,4 @@
 
-
 <div class="container-fluid" id="content" style="margin-top: 58px">
   <div class="row">
     <div class="col-lg-3 ml-0">
@@ -33,6 +32,7 @@
     </div>
     <div class="col-lg-9 ">
 
+
       <strong style="font-size: larger;margin-top: 10px; height: 20px">Cập nhật thông tin cá thể: {{this.entities.entitiesId}}</strong>
 
       <hr/>
@@ -42,6 +42,7 @@
           <div class="form-group row">
             <label  class="col-form-label ml-3"  style="width: 130px;">Mã chuồng nuôi<span class="text-danger">*</span></label>
             <div class="col-sm-8">
+
               <select class="span2 form-control" formControlName="cageId" (change)="checkQuantity(entitiesForm.value.cageId)">
                 <option [selected]="selectCage==cage" class="span2 form-control" size="16" *ngFor="let cage of cageList">{{cage}}</option>
               </select>
@@ -91,6 +92,7 @@
               </div>
             </div>
           </div>
+
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 130px;">Cân nặng<span class="text-danger">*</span></label>
             <div class="col-sm-8">

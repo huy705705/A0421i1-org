@@ -9,9 +9,6 @@
   background: -webkit-linear-gradient(to right,  #66c992, #66c992);
   background: linear-gradient(to right, #66c992, #66c992);
 } */
-span{
-  margin-left: 10px;
-}
 #content{
   min-height: 100vh;
 }
@@ -1870,9 +1867,8 @@ pre code {
 }
 
 .form-control {
-
   display: block;
-  width: 98%;
+  width: 100%;
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -1962,7 +1958,6 @@ select.form-control:focus::-ms-value {
 }
 
 .col-form-label {
-  text-align: left;
   margin-left: 10em;
   padding-top: calc(0.375rem + 1px);
   padding-bottom: calc(0.375rem + 1px);
@@ -2028,7 +2023,6 @@ textarea.form-control {
 }
 
 .form-group {
-  padding-left: 200px;
   margin-bottom: 1rem;
 }
 
