@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ShareService} from "../../service/share.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LogOutComponent} from "../../sercurity/log-out/log-out.component";
+import {CageService} from "../../service/cage.service";
 
 
 @Component({
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router,
               private tokenStorageService: TokenStorageService,
               private shareService : ShareService,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private cageService: CageService
   ) {
     this.shareService.getClickEvent().subscribe(() => {
       this.loadHeader();
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHeader()
+    // this.cageService.sendUsernameForCreateCage(this.username)
   }
 
   private loadHeader():void {
@@ -52,4 +55,6 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
+
 }

@@ -49,11 +49,11 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</nav>-->
-<div class="container-fluid" id="content"style="margin-top: 58px">
+<div class="container-fluid" id="content">
   <div class="row">
     <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 236px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
@@ -146,7 +146,7 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Cân nặng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
-                <input  class="span2 form-control" size="16" min="1" type="number" value="1" formControlName="weight" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'">
+                <input type="text" class="form-control" min="1" type="number" value="1" formControlName="weight" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'">
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">kg</span>
                 </div>
@@ -163,7 +163,7 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Trạng thái<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
-                <input class="span2 form-control" min="1" type="text" value="" formControlName="status">
+                <input type="text" class="form-control" min="1" type="text" value="" formControlName="status">
               </div>
               <div style="color: red;text-align: left"  *ngFor="let validation of validationMessages.status">
               <span *ngIf="entitiesForm.get('status').hasError(validation.type) && (entitiesForm.get('status').dirty || entitiesForm.get('status').touched ||entitiesForm.get('status').untouched)">
@@ -178,6 +178,58 @@
       </form>
     </div>
   </div>
+  <footer class="">
+    <div class="container py-5">
+      <div class="row py-4">
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+          <p class="font-italic text-muted">Kết nối với chúng tôi.</p>
+          <ul class="list-inline mt-4">
+            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest i-footer"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo i-footer"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Sản phẩm</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Thức Ăn</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Thuốc</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Giống</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Cá Thể</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Hệ thống</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Đăng nhập</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Đăng ký</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Gửi ý kiến</h6>
+          <p class="text-muted mb-4">Mọi thắc mắc xin liên hệ cho chúng tôi.</p>
+          <div class="p-1 rounded border">
+            <div class="input-group">
+              <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyrights -->
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-muted mb-0 py-2">© 2019 Bootstrapious All rights reserved.</p>
+      </div>
+    </div>
+
+  </footer>
 </div>
 <!--</body>-->
 <!--</html>-->

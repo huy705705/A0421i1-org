@@ -2,6 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +18,7 @@ export class AppComponent {
       this.token = params['token'];
     });
     console.log(this.token)
+
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         if (event.url === '/login' || event.url === '/forgot-password' || event.url === '/verify-reset-password?token=' + this.token) {
@@ -27,5 +29,4 @@ export class AppComponent {
       }
     });
   }
-
 }

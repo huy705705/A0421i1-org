@@ -19,6 +19,7 @@ export class EntitiesService {
 
   createEntities(value: Entities): Observable<any> {
     console.log(value);
+
     return this.http.post<any>(this.apiURL + "/create", value);
   }
 
@@ -63,7 +64,8 @@ export class EntitiesService {
 
   }
 
-  searchEntities(inDateMin: string,inDateMax:string,cageId: string) {
-    return this.http.get(this.apiURL + "/search?inDateMin="+inDateMin+"&inDateMax="+inDateMax+"&cage="+cageId );
+  searchEntities(inDateMin: string,inDateMax:string,cageId: string,page : number) {
+    return this.http.get(this.apiURL + "/search?inDateMin="+inDateMin+"&inDateMax="+inDateMax+"&cage="+cageId +'&page='+page);
+
   }
 }

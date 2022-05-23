@@ -1,3 +1,4 @@
+
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
@@ -49,6 +50,7 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</nav>-->
+
 <div class="container-fluid" id="content" style="margin-top: 58px">
   <div class="row">
     <div class="col-lg-3 ml-0">
@@ -82,7 +84,8 @@
     </div>
     <div class="col-lg-9 ">
 
-      <strong style="font-size: larger;margin-top: 10px; height: 20px">Cập nhật thông tin cá thể: {{entities.entitiesId}}</strong>
+
+      <strong style="font-size: larger;margin-top: 10px; height: 20px">Cập nhật thông tin cá thể: {{this.entities.entitiesId}}</strong>
 
       <hr/>
       <form style="max-width: 100%;" [formGroup]="entitiesForm" *ngIf="entitiesForm" (ngSubmit)="updateEntities()" class="bg-light">
@@ -91,8 +94,9 @@
           <div class="form-group row">
             <label  class="col-form-label ml-3"  style="width: 130px;">Mã chuồng nuôi<span class="text-danger">*</span></label>
             <div class="col-sm-8">
-              <select class="span2 form-control" formControlName="cageId">
-                <option class="span2 form-control" size="16" *ngFor="let cage of cageList">{{cage}}</option>
+
+              <select class="span2 form-control" formControlName="cageId" (change)="checkQuantity(entitiesForm.value.cageId)">
+                <option [selected]="selectCage==cage" class="span2 form-control" size="16" *ngFor="let cage of cageList">{{cage}}</option>
               </select>
               <div *ngFor="let validation of validationMessages.cageId">
               <span style="color: red;", *ngIf="entitiesForm.get('cageId').hasError(validation.type) && (entitiesForm.get('cageId').dirty || entitiesForm.get('cageId').touched)">
@@ -140,7 +144,6 @@
               </div>
             </div>
           </div>
-
 
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 130px;">Cân nặng<span class="text-danger">*</span></label>
