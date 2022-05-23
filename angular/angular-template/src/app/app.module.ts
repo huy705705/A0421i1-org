@@ -16,11 +16,13 @@ import {EmployeeModule} from "./employee/employee.module";
 import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
 import {CageModule} from "./cage/cage.module";
+import { WeatherComponent } from './weather/weather.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WeatherComponent
   ],
 
   providers: [
