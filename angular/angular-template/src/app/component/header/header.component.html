@@ -1,7 +1,7 @@
 
-<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+<nav class="navbar navbar-expand-lg fixed-top bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">BREEDER </a>
+    <a class="navbar-brand" href="#">BREEDER </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link text-uppercase" href="">Trang chủ <span
+          <a class="nav-link text-uppercase" href="#">Trang chủ <span
             class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
@@ -22,7 +22,7 @@
         <li
           class
             ="nav-item active">
-          <a class="nav-link text-uppercase" href="#">Liên Hệ</a>
+          <a class="nav-link text-uppercase" href="#" [routerLink]="['/contact']">Liên Hệ</a>
         </li>
       </ul>
       <div
@@ -49,8 +49,8 @@
                 ="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>
             <a
               class
-                ="dropdown-item"
-              href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>
+                ="dropdown-item" [routerLink]="['/admin/notification']"
+              href="#"> <i class="fa fa-bell"></i> Quản lý thông báo</a>
             <a
               class
                 ="dropdown-item" [routerLink]="['/employee/cage']">

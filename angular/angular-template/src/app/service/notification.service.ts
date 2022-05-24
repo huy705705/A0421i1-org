@@ -8,7 +8,7 @@ import {Entities} from "../model/entities";
   providedIn: 'root'
 })
 export class NotificationService {
-  public apiURL = 'http://localhost:8080/api/public/notification';
+  public apiURL = 'http://localhost:8080/admin/notification';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

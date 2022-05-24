@@ -35,6 +35,7 @@ body{
 element.style {
   margin-left: 10px;
 }
+
 .col-6 {
   flex: 0 0 100%;
   max-width: 100%;
@@ -42,4 +43,19 @@ element.style {
 
 th,td{
   text-align: center;
+}
+.nav-link-true{
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: #66c992;
+  color: #EDEDED;
+  pointer-events: none;
+}
+.nav-link-false{
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  color: black;
 }
