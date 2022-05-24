@@ -5,6 +5,7 @@ import {EmployeeService} from '../../service/employee.service';
 import {ToastrService} from "ngx-toastr";
 import {IEmployeeDTO} from "../../model/IEmployeeDTO";
 import {checkBirthDay} from "../../validator/checkBirthDay";
+import {checkPassword} from "../../validator/check-password";
 
 @Component({
   selector: 'app-employee-edit',
@@ -34,6 +35,9 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'required', message: 'Mật khẩu không được trống!'},
       {type: 'maxlength', message: 'Mật khẩu khoản không dài hơn 40 kí tự !'},
       {type: 'minlength', message: 'Mật khẩu khoản không nhỏ hơn 3 kí tự !'}
+    ],
+    confirmPassword: [
+      {type: 'required', message: 'Xác nhận mật khẩu không được trống!'},
     ],
 
     birthday: [
@@ -109,6 +113,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(10)]),
+          confirmPassword : new FormControl('', [Validators.required]),
           birthday        : new FormControl('', [
             Validators.required,
             checkBirthDay]),
@@ -125,7 +130,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.pattern('^[a-zA-Z\'-\'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóêòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝýỶỸửữựỵ ỷỹ]*$'),
             Validators.maxLength(40)]),
           isDelete        : new FormControl(),
-        });
+        },{validators: checkPassword});
         this.employeeForm.patchValue(this.employee);
       });
     }, error => {

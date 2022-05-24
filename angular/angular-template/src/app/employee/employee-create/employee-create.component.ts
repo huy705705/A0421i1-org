@@ -8,6 +8,7 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {checkBirthDay} from "../../validator/checkBirthDay";
 import {formatDate} from "@angular/common";
+import {checkPassword} from "../../validator/check-password";
 
 @Component({
   selector: 'app-employee-create',
@@ -39,6 +40,11 @@ export class EmployeeCreateComponent implements OnInit {
       {type: 'maxlength', message: 'Mật khẩu khoản không dài hơn 40 kí tự !'},
       {type: 'minlength', message: 'Mật khẩu khoản không nhỏ hơn 3 kí tự !'}
     ],
+
+    confirmPassword: [
+      {type: 'required', message: 'Xác nhận mật khẩu không được trống!'},
+    ],
+
     birthday: [
       {type: 'required', message: 'Ngày sinh không được trống!'}
 
@@ -105,7 +111,7 @@ export class EmployeeCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(10)]),
-
+      confirmPassword : new FormControl('', [Validators.required]),
       birthday        : new FormControl('', [
         Validators.required,
         checkBirthDay]),
@@ -123,7 +129,7 @@ export class EmployeeCreateComponent implements OnInit {
         Validators.maxLength(40)]),
       isDelete        : new FormControl(),
 
-    });
+    },{validators: checkPassword});
     this.getEmployeeId();
   }
 

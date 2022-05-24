@@ -87,15 +87,17 @@
             </div>
           </div>
 
-          <!--          <div class="form-group row" >-->
-          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
-          <!--            <div class="col-sm-8">-->
-          <!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
-          <!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
-          <!--                <span style="color: red;"></span>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Xac nhận mật khẩu<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="password" formControlName="confirmPassword">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.confirmPassword">
+                  <span *ngIf="employeeForm.hasError('notMatch') && (employeeForm.touched)"> Mật khẩu không trùng khớp, vui lòng nhập lại!</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Email<span class="text-danger">*</span></label>
