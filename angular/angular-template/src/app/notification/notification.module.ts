@@ -6,7 +6,7 @@ import { NotificationListComponent } from './notification-list/notification-list
 import { NotificationEditComponent } from './notification-edit/notification-edit.component';
 import { NotificationCreateComponent } from './notification-create/notification-create.component';
 import { NotificationDeleteComponent } from './notification-delete/notification-delete.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     NotificationRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class NotificationModule { }

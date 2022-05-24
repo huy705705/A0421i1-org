@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EntitiesService} from "../../service/entities.service";
 import {Router} from "@angular/router";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -13,29 +13,30 @@ import {NotificationDeleteComponent} from "../notification-delete/notification-d
   styleUrls: ['./notification-list.component.css']
 })
 export class NotificationListComponent implements OnInit {
-  entitiesForm: FormGroup;
+  notificationForm: FormGroup;
   dialogRef: MatDialogRef<NotificationDeleteComponent>;
-     page: number = 0;
-  entities2: Array<any>;
+  page: number = 0;
+  notification2: Array<any>;
   notification: Array<any>;
   pages: Array<number>;
   entities: any;
-  inDateMin = '';
-  inDateMax = '';
+  uploadDateMin = '';
+  uploadDateMax = '';
   emptyMessenger = '';
   cage = '';
-  isSubmitted=false;
-  isTrue=false;
-  isTrue2=true;
+  isSubmitted = false;
+  isTrue = false;
+  isTrue2 = true;
   deleteMessenger;
-  isSearch : boolean=false;
+  isSearch: boolean = false;
 
 
-  pageTotal:number=0;
+  pageTotal: number = 0;
   // Cac bien cho seacrh
-  pageSearch :Array<number>;
-  pageSearchCurrent :number=0;
-  pageSearchTotal :number=0;
+  pageSearch: Array<number>;
+  pageSearchCurrent: number = 0;
+  pageSearchTotal: number = 0;
+
   constructor(private notificationService: NotificationService, private router: Router, public dialog: MatDialog) {
     this.findAllPageable();
   }
@@ -44,6 +45,7 @@ export class NotificationListComponent implements OnInit {
     this.findAllPageable()
     console.log(this.isTrue)
   }
+
   findAllPageable() {
     this.isTrue2 = true;
 
@@ -62,13 +64,15 @@ export class NotificationListComponent implements OnInit {
       }
     )
   }
+
   setPage(i, event: any) {
     event.preventDefault();
     this.page = i;
     this.findAllPageable();
   }
+
   openDialog(notificationId: any) {
-    console.log("Id "+notificationId)
+    console.log("Id " + notificationId)
     this.dialogRef = this.dialog.open(NotificationDeleteComponent, {
       width: '600px',
       data: notificationId,
@@ -80,5 +84,37 @@ export class NotificationListComponent implements OnInit {
         this.ngOnInit();
       }
     });
+  }
+
+  search() {
+    this.pageSearchCurrent = 0;
+    this.isSearch = true;
+    this.isTrue = true;
+    console.log(this.isTrue)
+    console.log(this.isSubmitted)
+    console.log("uploadDateMin")
+    console.log(this.uploadDateMin)
+    console.log("uploadDateMax")
+    console.log(this.uploadDateMax)
+    this.notificationService.searchNotification(this.uploadDateMin, this.uploadDateMax, this.pageSearchCurrent).subscribe(
+      data => {
+        console.log(data);
+        if (data) {
+          this.notification2 = data['content']
+          this.pageSearch = new Array(data['totalPages'])
+          this.pageSearchTotal = data['totalPages'];
+
+          this.isSubmitted = true;
+          this.isTrue2 = true;
+
+
+        }
+      },
+      (error) => {
+        console.log(error.message)
+        this.isSubmitted = false;
+        this.isTrue2 = false;
+      }
+    );
   }
 }

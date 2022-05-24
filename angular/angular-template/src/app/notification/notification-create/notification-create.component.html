@@ -106,7 +106,7 @@
                (change)="showPreview($event)"/>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Nội dung</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="content" (change)="compare()">></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="content" (change)="compare()"></textarea>
         </div>
         <div style="color: red;text-align: left" *ngFor="let validation of validationMessages.content">
               <span
@@ -116,7 +116,7 @@
         <div class="container-fluid">
         </div>
         <input class="span2 form-control" size="16" formControlName="uploadDate" type="date" hidden>
-        <button type="submit" class="btn btn-info m-2" (click)="save()">Tạo mới</button>
+        <button type="submit" class="btn btn-info m-2">Tạo mới</button>
         <button type="button" class="btn btn-success m-2" [routerLink]="['/employee/entities/']">Huỷ bỏ</button>
       </form>
     </div>

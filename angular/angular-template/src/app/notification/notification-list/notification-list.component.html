@@ -34,7 +34,7 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</nav>-->
-<div class="container-fluid" id="content">
+<div class="container-fluid" style="margin-top: 50px" id="content">
   <div class="row">
     <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
@@ -83,7 +83,25 @@
         <div class="card-header py-3">
           <div class="d-flex flex-row  d-flex justify-content-center">
             <div class="col-6">
-              <div class="input-group">
+              <div class="input-group" style="padding-left: 260px">
+
+
+                <p style="    margin-top: 5px;">Khoảng ngày tạo thông báo:  </p>
+                <div class="form-outline" style="margin-left: 10px; margin-right: 10px;">
+                  <input type="date" class="form-control" [(ngModel)]="uploadDateMin"
+                         placeholder="Nhập ngày vào" />
+                </div>
+                <p style="    margin-top: 5px;">đến</p>
+                <div class="form-outline" style=" margin-left: 10px;">
+                  <input type="date" class="form-control" [(ngModel)]="uploadDateMax"
+                         placeholder="Nhập ngày vào" />
+                </div>
+
+                <button type="submit" class="btn btn-primary" (click)="search()" style="margin-left: 10px;">
+                  Tìm kiếm
+                </button>
+
+
 
               </div>
             </div>
@@ -91,7 +109,17 @@
         </div>
 
 
-        <div class="card-body">
+        <div *ngIf="isTrue">
+          <div *ngIf="isSubmitted then submited else notSubmited"></div>
+          <ng-template #notSubmited>
+            <h5>Không có kết quả nào để hiển thị</h5>
+          </ng-template>
+          <ng-template #submited>
+            <h5></h5>
+          </ng-template>
+        </div>
+
+        <div class="card-body" *ngIf="isTrue2">
 
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

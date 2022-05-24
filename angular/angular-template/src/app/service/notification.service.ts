@@ -37,4 +37,9 @@ export class NotificationService {
   updateNotification(id: number, notification: Notification): Observable<any> {
     return this.http.patch<Notification>(this.apiURL + "/update/" + id, notification);
   }
+
+  searchNotification(uploadDateMin: string, uploadDateMax: string, page: number) {
+    return this.http.get(this.apiURL + "/search?uploadDateMin="+uploadDateMin+"&uploadDateMax="+uploadDateMax+'&page='+page);
+
+  }
 }

@@ -56,6 +56,7 @@ export class NotificationCreateComponent implements OnInit {
       uploadDate: formatDate(Date.now(), "yyyy-MM-dd", this.locale)
     })
     console.log()
+    this.compare()
   }
 
   save() {
@@ -93,11 +94,10 @@ export class NotificationCreateComponent implements OnInit {
             // Call API to create notification
             this.notificationService.createNotification(this.notificationForm.value).subscribe(() => {
                 console.log("123")
-                this.router.navigateByUrl('/notification').then(r => this.toast.warning("Tạo thông báo thành công!", "Thành công: ", {
+                this.router.navigateByUrl('/notification').then(r => this.toast.success("Tạo thông báo thành công!", "Thành công: ", {
                   timeOut: 4000,
                   extendedTimeOut: 1000
                 }));
-                console.log("123")
 
               }, error => {
                 console.log(error.message)

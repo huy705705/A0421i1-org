@@ -15,6 +15,8 @@ import {finalize} from "rxjs/operators";
   styleUrls: ['./notification-edit.component.css']
 })
 export class NotificationEditComponent implements OnInit {
+  contentIsFalse: boolean = false;
+
   notificationForm: FormGroup;
   notification:Notification;
   validationMessages = {
@@ -55,20 +57,32 @@ export class NotificationEditComponent implements OnInit {
           this.route.navigateByUrl("/404")
         })
     })
+    // this.compare()
 
   }
 
   ngOnInit(): void {
   }
   updateNotification() {
-    this.notificationService.updateNotification(this.notificationForm.value.notificationId, this.notificationForm.value).subscribe((data) => {
-      this.notification = data['content'];
-      this.route.navigate(['/notification']);
-      this.toast.success("Cập nhật cá thể thành công!", "Thành công: ", {
+    if (this.contentIsFalse) {
+      console.log(this.notificationForm.value.image)
+
+      this.toast.error("Thông tin thông báo không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,
         extendedTimeOut: 1000
       })
-    });
+    } else {
+
+
+      this.notificationService.updateNotification(this.notificationForm.value.notificationId, this.notificationForm.value).subscribe((data) => {
+        this.notification = data['content'];
+        this.route.navigate(['/notification']);
+        this.toast.success("Cập nhật cá thể thành công!", "Thành công: ", {
+          timeOut: 4000,
+          extendedTimeOut: 1000
+        })
+      });
+    }
   }
 
   selectedImage: any = null;
@@ -92,5 +106,13 @@ export class NotificationEditComponent implements OnInit {
         });
       })
     ).subscribe();
+  }
+
+  compare() {
+    if (this.notificationForm.value.content.length < 30) {
+      this.contentIsFalse = true;
+    }else {
+      this.contentIsFalse=false;
+    }
   }
 }
