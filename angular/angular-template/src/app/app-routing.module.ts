@@ -12,9 +12,9 @@ import {CageListComponent} from "./cage/cage-list/cage-list.component";
 const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: '', component: NewListComponent},
-  {path:'notification',component:NotificationListComponent},
+    {path:'notification',component:NotificationListComponent},
 
-]
+  ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

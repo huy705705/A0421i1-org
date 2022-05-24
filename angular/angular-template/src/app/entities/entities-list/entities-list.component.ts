@@ -18,7 +18,7 @@ import {CageService} from "../../service/cage.service";
 export class EntitiesListComponent implements OnInit {
   entitiesForm: FormGroup;
   dialogRef: MatDialogRef<EntitiesDeleteComponent>;
-  private page: number = 0;
+  page: number = 0;
   entities2: Array<any>;
   pages: Array<number>;
   entities: any;

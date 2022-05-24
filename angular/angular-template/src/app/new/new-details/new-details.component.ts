@@ -8,20 +8,20 @@ import {NewsService} from '../../service/news.service';
 })
 export class NewDetailsComponent implements OnInit, OnChanges {
 
-	@Input() childMessage: string;
+  @Input() childMessage: string;
   news:any;
   @Output() backList = new EventEmitter();
   constructor(private newsService: NewsService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.showDetail(this.childMessage)
-    
-    
+
+
   }
 
   ngOnInit() {
     // console.log(this.childMessage);
     // this.showDetail(this.childMessage)
-    
+
   }
   showDetail(id){
     this.newsService.showDetailNews(id).subscribe(

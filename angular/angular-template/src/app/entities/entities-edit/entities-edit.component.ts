@@ -91,7 +91,7 @@ export class EntitiesEditComponent implements OnInit {
             isDelete: new FormControl(0, [])
           })
           this.entitiesForm.patchValue(this.entities);
-        },
+      },
         (error)=>{
           console.log(error.message);
           this.route.navigateByUrl("/404")
@@ -128,7 +128,7 @@ export class EntitiesEditComponent implements OnInit {
   checkQuantity(cageId : string){
     this.entitiesService.getEntitiesId(cageId).subscribe((data)=>{
 
-      },
+    },
       (error)=>{
         this.flag=false;
         this.toast.error('Chuồng nuôi đã quá tải, không thể thêm vật nuôi!', 'Thất bại',{

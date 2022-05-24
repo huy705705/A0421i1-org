@@ -7,6 +7,7 @@ import {IEmployeeDTO} from "../model/IEmployeeDTO";
   providedIn: 'root'
 })
 export class EmployeeService {
+
   public apiURL = 'http://localhost:8080/admin/employee';
 
   constructor(private http: HttpClient) { }

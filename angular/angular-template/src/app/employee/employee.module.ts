@@ -14,12 +14,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   exports: [
     EmployeeListComponent
   ],
-    imports: [
-        CommonModule,
-        EmployeeRoutingModule,
-        ReactiveFormsModule,
-        FormsModule
-    ],
+  imports: [
+    CommonModule,
+    EmployeeRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   providers:[]
 })
 export class EmployeeModule { }
