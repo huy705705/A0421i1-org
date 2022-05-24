@@ -1,4 +1,4 @@
-<div class="container-fluid" id="content" style="margin-top: 58px">
+<div class="container-fluid" id="content" style="margin-top: 58px" xmlns="http://www.w3.org/1999/html">
   <div class="row">
     <div class="col-lg-3 ml-0">
       <!-- Sidebar -->
@@ -118,7 +118,7 @@
                 <div style="color: red;"  *ngFor="let validation of validationMessages.birthday">
                   <span *ngIf="employeeForm.get('birthday').hasError(validation.type) && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched|| employeeForm.get('birthday').untouched)">
                   {{validation.message}}</span>
-                  <span *ngIf="employeeForm.get('birthday').hasError('flag')">Ngày sinh không được lớn hơn ngày hiện tại!</span>
+                  <span *ngIf="employeeForm.get('birthday').hasError('flag') && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched)">Nhân viên phải trên 18 tuổi và dưới 100 tuổi!</span>
                 </div>
               </div>
             </div>
@@ -166,15 +166,15 @@
           </div>
 
           <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Ảnh nhân viên<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" style="width: 150px;padding-top: 65px">Ảnh nhân viên<span class="text-danger">*</span></label>
             <div class="col-sm-8">
-<!--              <img style="width: 150px; height: 150px" alt="avatar" *ngIf="selectedImage" [src]="selectedImage">-->
-              <img style="width: 150px; height: 150px" alt="avatar" [src]="selectedImage">
-              <input class="" id="imgNotification" type="file" style="width: 400px; padding-top: 3px" (change)="showPreview($event)"/>
-                <div style="color: red;" *ngFor="let validation of validationMessages.avatar">
-                <span *ngIf="employeeForm.get('avatar').hasError(validation.type) && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched)">
+              <img style="width: 150px; height: 150px" alt="avatar" [src]="imageThis">
+              <label for="image" class="btn" style="font-weight: 200;text-decoration: underline;">Thêm ảnh đại diện</label>
+              <input class="form-control-file" id="image" type="file" style="visibility:hidden" (change)="showPreview($event)"/>
+              <div style="color: red;" *ngFor="let validation of validationMessages.avatar">
+                <span *ngIf="employeeForm.get('avatar').hasError('required') && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched|| employeeForm.get('avatar').untouched)">
                 {{validation.message}}</span>
-                </div>
+              </div>
             </div>
           </div>
 
@@ -190,4 +190,4 @@
 
 
 </div>
-<h1>Đây là trang khởi tạo</h1>
+

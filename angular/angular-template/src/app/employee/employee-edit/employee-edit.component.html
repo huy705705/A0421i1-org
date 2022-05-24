@@ -134,47 +134,18 @@
             </div>
           </div>
 
-
-          <!--          <div class="form-group row" >-->
+<!--          <div class="form-group row" >-->
 <!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
 <!--            <div class="col-sm-8">-->
-<!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
-<!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
-<!--                <span style="color: red;"></span>-->
+<!--              <div class="input-append date" id="" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+<!--                <input class="span2 form-control" size="16" type="password" formControlName="password">-->
+<!--                <div style="color: red;"  *ngFor="let validation of validationMessages.password">-->
+<!--                <span *ngIf="employeeForm.get('password').hasError(validation.type) && (employeeForm.get('password').dirty || employeeForm.get('password').touched)">-->
+<!--                {{validation.message}}</span>-->
+<!--                </div>-->
 <!--              </div>-->
 <!--            </div>-->
 <!--          </div>-->
-
-          <!--          <div class="form-group row" >-->
-          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>-->
-          <!--            <div class="col-sm-8">-->
-          <!--              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
-          <!--                <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">-->
-          <!--                <span style="color: red;"></span>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
-
-          <!--          <div class="form-group row" >-->
-          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>-->
-          <!--            <div class="col-sm-8">-->
-          <!--              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
-          <!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
-          <!--                <span style="color: red;"></span>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
-
-          <!--          <div class="form-group row" >-->
-          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
-          <!--            <div class="col-sm-8">-->
-          <!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
-          <!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
-          <!--                <span style="color: red;"></span>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
-
 
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Email<span class="text-danger">*</span></label>
@@ -197,7 +168,7 @@
                 <div style="color: red;"  *ngFor="let validation of validationMessages.birthday">
                   <span *ngIf="employeeForm.get('birthday').hasError(validation.type) && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched|| employeeForm.get('birthday').untouched)">
                   {{validation.message}}</span>
-                  <span *ngIf="employeeForm.get('birthday').hasError('flag')">Ngày sinh không được lớn hơn ngày hiện tại!</span>
+                  <span *ngIf="employeeForm.get('birthday').hasError('flag') && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched)">Nhân viên phải trên 18 tuổi và dưới 100 tuổi!</span>
                 </div>
               </div>
             </div>

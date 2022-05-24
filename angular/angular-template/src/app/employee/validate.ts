@@ -1,7 +1,7 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Employee} from "../model/employee";
 
-export function birthdayValidator(): ValidatorFn {
+export function checkBirthDay(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: boolean} | null => {
     const today = new Date().getFullYear();
     const birthday = parseDate(control.value).getFullYear();

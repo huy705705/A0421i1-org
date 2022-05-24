@@ -4,9 +4,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeService} from "../../service/employee.service";
 import {ToastrService} from "ngx-toastr";
 import {IEmployeeDTO} from "../../model/IEmployeeDTO";
-import {birthdayValidator} from "../validate";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
+import {checkBirthDay} from "../../validator/checkBirthDay";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-employee-create',
@@ -14,10 +15,11 @@ import {finalize} from "rxjs/operators";
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
-  selectedImage: any = null;
+  selectedImage: any = "";
   employee: IEmployeeDTO;
   employeeIdRendered: string;
   employeeForm: FormGroup;
+  imageThis = "assets/image/register.jpg";
 
   validationMessages = {
     employeeName: [
@@ -103,10 +105,11 @@ export class EmployeeCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(10)]),
+
       birthday        : new FormControl('', [
         Validators.required,
-        birthdayValidator()]),
-      avatar         : new FormControl(Validators.required),
+        checkBirthDay]),
+      avatar          : new FormControl(Validators.required),
       email           : new FormControl('', [
         Validators.required,
         Validators.email]),
@@ -134,7 +137,7 @@ export class EmployeeCreateComponent implements OnInit {
     console.log(this.employeeForm.value)
     // upload image to firebase
     // const nameImg = this.getCurrentDateTime();
-    const nameImg = this.selectedImage.name;
+    const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
     const fileRef = this.storage.ref(nameImg);
     console.log("nameImg " + nameImg)
     console.log("fileRef " + fileRef)
@@ -187,14 +190,18 @@ export class EmployeeCreateComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
-    // if (event.target.files) {
-    //   const reader = new FileReader();
-    //   reader.readAsDataURL(event.target.files[0]);
-    //   reader.onload = (event: any) => {
-    //     this.selectedImage = event.target.result;
-    //   };
-    // }
-    // console.log(this.selectedImage);
+    if (event.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.imageThis = event.target.result;
+      };
+    }
+    console.log(this.selectedImage);
+  }
+
+  getCurrentDateTime(): string {
+    return formatDate(new Date(), 'dd-MM-yyyy', 'en-US');
   }
 
 }

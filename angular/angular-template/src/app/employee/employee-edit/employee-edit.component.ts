@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../service/employee.service';
-import {birthdayValidator, checkDuplicateEmail} from "../validate";
-import {Employee} from "../../model/employee";
 import {ToastrService} from "ngx-toastr";
 import {IEmployeeDTO} from "../../model/IEmployeeDTO";
+import {checkBirthDay} from "../../validator/checkBirthDay";
 
 @Component({
   selector: 'app-employee-edit',
@@ -36,6 +35,7 @@ export class EmployeeEditComponent implements OnInit {
       {type: 'maxlength', message: 'Mật khẩu khoản không dài hơn 40 kí tự !'},
       {type: 'minlength', message: 'Mật khẩu khoản không nhỏ hơn 3 kí tự !'}
     ],
+
     birthday: [
       {type: 'required', message: 'Ngày sinh không được trống!'}
     ],
@@ -111,7 +111,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.maxLength(10)]),
           birthday        : new FormControl('', [
             Validators.required,
-            birthdayValidator()]),
+            checkBirthDay]),
           // avatar         : new FormControl(),
           email           : new FormControl('', [
             Validators.required,
