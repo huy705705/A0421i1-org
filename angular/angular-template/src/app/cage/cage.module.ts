@@ -12,11 +12,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [CageListComponent, CageCreateComponent, CageEditComponent, CageDeleteComponent],
-    imports: [
-        CommonModule,
-        CageRoutingModule,
-        FormsModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    CageRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class CageModule { }

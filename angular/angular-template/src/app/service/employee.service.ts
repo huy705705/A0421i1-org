@@ -1,34 +1,48 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Employee} from '../model/employee';
 import {Observable} from 'rxjs';
+import {IEmployeeDTO} from "../model/IEmployeeDTO";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+
   public apiURL = 'http://localhost:8080/admin/employee';
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiURL}`);
-  }
+  // findAll(): Observable<IEmployeeDTO> {
+  //   return this.http.get<IEmployeeDTO[]>(`${this.apiURL}`);
+  // }
 
   findAllPageable(page:number){
     return this.http.get(this.apiURL+'?page='+page);
   }
 
   findById(id: string): Observable<any> {
-    return this.http.get<Employee[]>(this.apiURL + '/update/' + id);
+    return this.http.get<IEmployeeDTO[]>(this.apiURL + '/update/' + id);
   }
 
-  updateEmployee(id: string, employee: Employee): Observable<any> {
-    return this.http.patch<Employee>(this.apiURL + '/update/' + id, employee);
+  createEmployee(employee: IEmployeeDTO[]): Observable<any>{
+    return this.http.post<IEmployeeDTO[]>(this.apiURL + '/create/', employee);
+  }
+
+  updateEmployee(id: string, employee: IEmployeeDTO[]): Observable<any> {
+    return this.http.patch<IEmployeeDTO[]>(this.apiURL + '/update/' + id, employee);
   }
 
   findAllEmployeeName(searchName: string, searchId: string, page:number): Observable<any>{
     console.log(searchName+ "   " + searchId);
     return this.http.get<any>(this.apiURL + '?searchName=' + searchName + '&searchId=' + searchId + '&page=' + page);
+  }
+
+  deleteEmployeeById(id: string) {
+    console.log("id: " + id)
+    return this.http.patch(this.apiURL + "/delete/" + id, null);
+  }
+
+  getEmployeeId(): Observable<Number> {
+    return this.http.get<Number>(this.apiURL + "/createId/");
   }
 }

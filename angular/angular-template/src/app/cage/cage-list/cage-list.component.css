@@ -84,4 +84,6 @@ element.style {
 .span-header{
   margin-right: 9px;
 }
-
+th{
+  text-align: center;
+}

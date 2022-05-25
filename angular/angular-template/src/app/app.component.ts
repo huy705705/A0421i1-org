@@ -2,6 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +17,7 @@ export class AppComponent {
     this.route.queryParams.subscribe(params => {
       this.token = params['token'];
     });
+    console.log(this.token)
 
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
@@ -27,5 +29,6 @@ export class AppComponent {
       }
     });
   }
+
 
 }

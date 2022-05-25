@@ -5,12 +5,12 @@
     <div class="m-auto text-center center-contact">
       <H1 class=" text-center text-white"><span class="sp-text-mid">Nâng Cao</span> Kiến Thức Chăn Nuôi</H1>
       <!-- <button class="btn btn-contact text-uppercase" id="btn-contact">Contact <i class="fa-solid fa-arrow-right-long"></i></button> -->
-      <a class="text-uppercase a-contact" href="#">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
+      <a class="text-uppercase a-contact" href="#" [routerLink]="['/contact']">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
     </div>
   </div>
 
   <div class="row mt-3 mb-3">
-    <div class="col-lg-8 ">
+    <div *ngIf = "!showDetailBl" class="col-lg-8 ">
       <!-- <H4 class="name-list-news m-0 font-weight-bold">
         <p class="p-1 text-uppercase">Tin mới nhất</p>
       </H4> -->
@@ -19,18 +19,18 @@
           <p class="name-title-news p-1">TIN MỚI NHẤT</p>
         </div>
         <div class="col-lg-8">
-          <marquee class="name-title-news-marquee align-middle"> {{newsListM}} </marquee>
+          <marquee class="name-title-news-marquee align-middle"  onmouseover="this.stop();" onmouseout="this.start();"> {{newsListMarquee}} </marquee>
         </div>
       </div>
-      <div class="row mt-2 mb-2" *ngFor="let newsHl of newsPage">
-        <div class="col-lg-4"><img class="img-fluid img-thumbnail" src="{{newsHl.image}}" alt=""></div>
+      <div class="row mt-2 mb-2" *ngFor="let news of newsPage">
+        <div class="col-lg-4"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-8">
-          <h4 id="new-name-left" class="text-uppercase">{{newsHl.newsName}}</h4>
+          <a id="new-name-left" class="text-uppercase" (click)="showDetail(news.newsId)">{{news.newsName}}</a>
           <div class="text card-text">
-            {{newsHl.detailDescription}}
+            {{news.detailDescription}}
           </div>
-          <p class="type-news-left">{{newsHl.type}}</p>
-          <p class="card-text"> {{newsHl.createdDate}} <span style="text-align: right;">{{newsHl.employee.employeeName}}</span></p>
+          <p class="type-news-left">{{news.type}}</p>
+          <p class="card-text"> {{news.createdDate}} <span style="text-align: right;">{{news.employee.employeeName}}</span></p>
         </div>
       </div>
       <nav aria-label="Page navigation example">
@@ -51,9 +51,10 @@
       </nav>
 
     </div>
-
+    <app-new-details *ngIf = "showDetailBl" [childMessage]="parentMessage" class="col-lg-8" (backList)="backListParent()"></app-new-details>
     <div class="col-lg-4">
-      <div class="contact-div mb-3 mt-1">
+      <!-- <p class="mt-1 text-right">{{today| date: 'EEEE d/M/y H:mm:ss'}}</p> -->
+      <!-- <div class="contact-div mb-3 mt-1">
         <div class="m-auto text-center center-contact">
           <div>
             <div class="halo"></div>
@@ -66,16 +67,11 @@
               <p class="vintage vintage__top">BREEDER</p>
               <p class="vintage vintage__bot">BREEDER</p>
             </div>
-            <!-- <div>
-          <span class="outro">NO.01</span>
-          <span class="outro outro--big">LIVESTOCK WEBSITE</span>
-          <span class="outro outro--smart">smart cookie</span>
-        </div> -->
           </div>
         </div>
-      </div>
-
-      <div class="container-fluid mb-2 mt-">
+      </div> -->
+      <app-weather></app-weather>
+      <div class="container-fluid my-3">
         <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="form-inline my-lg-0 form-group row">
           <input class="form-control col-xl-8 col-lg-12 input-search-2" name="nameInput" type="search"
                  placeholder="Nhập nội dung cần tìm" aria-label="Search" formControlName="nameInput"
@@ -84,12 +80,19 @@
             class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
+      <select class="form-control my-3" *ngIf = "pagesSearchEmpty" class="form-control" (change)="onEditClick($event.target.value)">
+        <option>Sắp Xếp</option>
+        <option value="desc">Mới Nhất</option>
+        <option value="asc">Cũ Nhất</option>
+        <option value="views">Lượt Xem Nhiều</option>
+
+      </select>
       <div class="row mt-2 mb-2" *ngFor="let news of newsPageSearch">
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
-          <p class="card-text">{{news.createdDate}}</p>
+          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
+          <p class="card-text">{{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
         </div>
 
       </div>
@@ -126,8 +129,8 @@
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
-          <p class="card-text">{{news.createdDate}}</p>
+          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
+          <p class="card-text"> {{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
         </div>
       </div>
       <!-- <nav aria-label="Page navigation example">
@@ -138,8 +141,24 @@
           </ul>
         </nav> -->
       <hr>
-      <marquee> {{newsListM}} </marquee>
+      <marquee  onmouseover="this.stop();" onmouseout="this.start();"> {{newsListM}} </marquee>
       <hr>
+      <div class="contact-div mb-3 mt-1">
+        <div class="m-auto text-center center-contact">
+          <div>
+            <div class="halo"></div>
+            <div>
+              <span class="intro intro--the">Top</span>
+              <span class="intro intro--num"> #1</span>
+              <marquee class="intro">livestock website</marquee>
+            </div>
+            <div class="vintage__container">
+              <p class="vintage vintage__top">BREEDER</p>
+              <p class="vintage vintage__bot">BREEDER</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <p class="name-title-news p-1">TIN NỔI BẬT</p>
       <!-- <H4 class="name-list-news m-0 font-weight-bold">
         <p class="p-1 text-uppercase">Tin nổi bật</p>
@@ -149,7 +168,7 @@
         <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
           <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right">{{news.newsName}}</p>
+          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
           <p class="card-text"> {{news.createdDate}}</p>
         </div>
       </div>
@@ -173,7 +192,10 @@
     </div>
 
   </div>
-
+  <app-statitical></app-statitical>
+  <!-- <div id="divChart">
+    <canvas id="myChart"></canvas>
+  </div> -->
   <div class="" >
     <!-- <div class="">
      <div class="" *ngFor="let news of newsPageHl;let i=index">
@@ -397,7 +419,7 @@
     <div class="m-auto text-center center-contact">
       <H1 class=" text-center text-white"><span class="sp-text-mid">Nâng Cao</span> Kiến Thức Chăn Nuôi</H1>
       <!-- <button class="btn btn-contact text-uppercase" id="btn-contact">Contact <i class="fa-solid fa-arrow-right-long"></i></button> -->
-      <a class="text-uppercase a-contact" href="#">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
+      <a class="text-uppercase a-contact" href="#" [routerLink]="['/contact']">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
     </div>
   </div>
 

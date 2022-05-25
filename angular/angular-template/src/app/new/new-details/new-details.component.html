@@ -1,0 +1,14 @@
+<div class="mt-1">
+  <div >
+    <img class="d-block w-100s img-news-detail" src="{{news.image}}" alt="Third slide">
+  </div>
+  <H2 class="name-news-1">{{news.type}}</H2>
+  <p class="content-news-1">{{news.newsName}}</p>
+  <p class="content-news-1">{{news.content}}</p>
+  <p class="card-text"> {{news.createdDate}}
+    <span style="text-align: right;">{{news.employee.employeeName}} | </span>
+    <span style="text-align: right;"> Total Views: {{news.totalView}}</span>
+  </p>
+  <!-- <p class="content-news-1">Total Views: {{news.totalView}}</p> -->
+  <button class="btn btn-primary" (click)="backListViews()">Quay lại</button>
+</div>

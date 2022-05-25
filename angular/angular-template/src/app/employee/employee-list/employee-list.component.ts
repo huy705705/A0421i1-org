@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from '../../service/employee.service';
 import {Router} from '@angular/router';
-import {Employee} from "../../model/employee";
+import {EntitiesDeleteComponent} from "../../entities/entities-delete/entities-delete.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {EmployeeDeleteComponent} from "../employee-delete/employee-delete.component";
+import {IEmployeeDTO} from "../../model/IEmployeeDTO";
+import {IAccount} from "../../model/IAccount";
+import {AccountService} from "../../service/account.service";
 
 @Component({
   selector: 'app-employee-list',
@@ -11,7 +16,10 @@ import {Employee} from "../../model/employee";
 export class EmployeeListComponent implements OnInit {
 
   public page = 0;
-  employeeList:Array<any>;
+  dialogRef: MatDialogRef<EmployeeDeleteComponent>;
+  deleteMessenger;
+  employeeList:IEmployeeDTO[];
+  accountList: IAccount[];
   pages: any;
   totalPages: number;
   public searchName ="";
@@ -21,12 +29,20 @@ export class EmployeeListComponent implements OnInit {
   isTrue2=true;
 
 
-  constructor(private employeeService: EmployeeService, private router: Router){
+  constructor(private employeeService: EmployeeService,
+              private accountService: AccountService,
+              private router: Router,
+              public dialog: MatDialog){
   }
 
   ngOnInit(): void {
     // this.findAllPageable();
     this.search();
+    // this.accountService.findAll().toPromise().then(r => {
+    //   this.accountList = r;
+    //   console.log(r);
+    //   console.log(this.accountList);
+    // });
   }
 
   // findAllPageable(){
@@ -51,12 +67,27 @@ export class EmployeeListComponent implements OnInit {
   //   this.search();
   // }
 
+  openDialog(id) {
+    console.log("Id "+id)
+    this.dialogRef = this.dialog.open(EmployeeDeleteComponent, {
+      width: '600px',
+      data: id,
+    });
+    this.deleteSuccess();
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.ngOnInit();
+        this.deleteMessenger = 'Nhân viên ' + id + ' đã được xoá thành công';
+        this.page = 0;
+      }
+    });
+  }
+
   updateEmployee(employee: any) {
     this.router.navigate(['/admin/employee/update', employee.employeeId]);
   }
 
   search() {
-
     if (!Number(this.page) || Number(this.page) < 0) {
       this.page = 0;
     }
@@ -78,6 +109,9 @@ export class EmployeeListComponent implements OnInit {
         this.isTrue2=false;
       }
     );
+  }
 
+  deleteSuccess() {
+    this.ngOnInit();
   }
 }

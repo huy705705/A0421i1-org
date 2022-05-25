@@ -52,24 +52,24 @@ export class CageListComponent implements OnInit {
     this.findAllPageable();
   }
   findAllPageable(){
-  this.cageService.findAllPageAble(this.page,this.sortBy,this.isAcsSort).subscribe(
-    data=>{
-      this.listCage=data['content']
-      this.pages=new Array(data['totalPages'])
-      this.pageTotal = data['totalPages']
-  },
-    (error) =>{
-      console.log(error.error.message)
-    })
+    this.cageService.findAllPageAble(this.page,this.sortBy,this.isAcsSort).subscribe(
+      data=>{
+        this.listCage=data['content']
+        this.pages=new Array(data['totalPages'])
+        this.pageTotal = data['totalPages']
+      },
+      (error) =>{
+        console.log(error.error.message)
+      })
   }
   search(){
     this.pageSearchCurrent=0;
     this.isSearch=true;
     this.cageService.findCage(this.pageSearchCurrent,this.dateType,this.dateFrom,this.dateTo,this.searchCageId,this.employee,this.isAcsSort,this.sortBy).subscribe((data)=>{
-      this.listCage=data['content'];
-      this.pageSearch=new Array(data['totalPages']);
-      this.pageSearchTotal=data['totalPages'];
-    },
+        this.listCage=data['content'];
+        this.pageSearch=new Array(data['totalPages']);
+        this.pageSearchTotal=data['totalPages'];
+      },
       (error)=>{
         this.listCage=null;
         this.toast.warning('Không tồn tại thông tin cần tìm kiếm','Thất bại',{
@@ -78,18 +78,18 @@ export class CageListComponent implements OnInit {
         })
       })
   }
-   getListEntitiesByCage(cageId : string){
-     this.cageService.findAllEntitiesInCage(cageId);
-     this.route.navigate(["/employee/entities"])
+  getListEntitiesByCage(cageId : string){
+    this.cageService.findAllEntitiesInCage(cageId);
+    this.route.navigate(["/employee/entities"])
   }
   setSearch(i: number , event: any) {
     event.preventDefault();
     this.pageSearchCurrent = i;
     this.cageService.findCage(this.pageSearchCurrent,this.dateType,this.dateFrom,this.dateTo,this.searchCageId,this.employee,this.isAcsSort,this.sortBy).subscribe((data)=>{
-      this.listCage=data['content'];
-      this.pageSearch=new Array(data['totalPages']);
-      this.pageSearchTotal=data['totalPages'];
-    },
+        this.listCage=data['content'];
+        this.pageSearch=new Array(data['totalPages']);
+        this.pageSearchTotal=data['totalPages'];
+      },
       (error)=>{
         this.listCage=null;
         this.toast.warning('Không tồn tại thông tin cần tìm kiếm','Thất bại',{

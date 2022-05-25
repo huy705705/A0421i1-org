@@ -50,7 +50,7 @@ export class EntitiesCreateComponent implements OnInit {
   }
   constructor(private entitiesService: EntitiesService, private router: Router, private toast : ToastrService) {
     this.entitiesService.getListCage().subscribe((data)=>{
-    this.cageList=data;
+      this.cageList=data;
       this.entitiesForm = new FormGroup({
         entitiesId: new FormControl("",
           [Validators.required]),
@@ -81,7 +81,7 @@ export class EntitiesCreateComponent implements OnInit {
         ]),
         isDelete: new FormControl(false)
       })
-      })
+    })
   }
 
   ngOnInit(): void {
@@ -106,33 +106,33 @@ export class EntitiesCreateComponent implements OnInit {
   }
   getEntitiesId() {
     this.entitiesService.getEntitiesId(this.entitiesForm.value.cageId).subscribe((data) => {
-      console.log(this.entitiesForm.value.cageId);
-      if(data<10){
-        this.entitiesId=this.entitiesForm.value.cageId+"-0"+data;
-      }
-      else {
-        this.entitiesId = this.entitiesForm.value.cageId+"-"+data;
-      }
-      if(data!=null){
-        this.entitiesForm.patchValue({
-          entitiesId:this.entitiesId,
-        })
-      }
-    },
+        console.log(this.entitiesForm.value.cageId);
+        if(data<10){
+          this.entitiesId=this.entitiesForm.value.cageId+"-0"+data;
+        }
+        else {
+          this.entitiesId = this.entitiesForm.value.cageId+"-"+data;
+        }
+        if(data!=null){
+          this.entitiesForm.patchValue({
+            entitiesId:this.entitiesId,
+          })
+        }
+      },
       (error)=>{
-      this.entitiesForm.patchValue({
-        entitiesId:null
-      })
-      this.toast.error('Chuồng nuôi đã quá tải, không thể thêm vật nuôi!', 'Thất bại',{
-        timeOut:5000,
-        extendedTimeOut:1000
-      })
+        this.entitiesForm.patchValue({
+          entitiesId:null
+        })
+        this.toast.error('Chuồng nuôi đã quá tải, không thể thêm vật nuôi!', 'Thất bại',{
+          timeOut:5000,
+          extendedTimeOut:1000
+        })
       })
   }
 
   destroyHacker() {
     this.wasEdit=true;
-      this.entitiesForm.patchValue({
+    this.entitiesForm.patchValue({
       entitiesId:this.entitiesId
     })
 

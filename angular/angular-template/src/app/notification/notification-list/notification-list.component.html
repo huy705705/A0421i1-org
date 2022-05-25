@@ -1,0 +1,280 @@
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"-->
+<!--          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+
+<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
+<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <div class="dropleft">-->
+<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"-->
+<!--              aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
+<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
+<!--        <a class="dropdown-item" (click)="logOut()"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+<div class="container-fluid" id="content">
+  <div class="row">
+    <div class="col-lg-2 ml-0">
+      <!-- Sidebar -->
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 235px; height: 1000px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"/>
+          </svg>
+          <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a [routerLink]="['/admin/employee']" class="nav-link" aria-current="page">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#home"/>
+              </svg>
+              Quản lý nhân viên
+            </a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/employee/entities']" class="nav-link ">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#speedometer2"/>
+              </svg>
+              Quản lý cá thể
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/admin/employee']" class="nav-link active" aria-current="page">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#home"/>
+              </svg>
+              Thông báo
+            </a>
+          </li>
+        </ul>
+        <hr>
+
+        <!-- Sidebar -->
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <div class="card shadow ">
+        <div class="card-header py-3">
+          <div class="d-flex flex-row  d-flex justify-content-center">
+            <div class="col-6">
+              <div class="input-group">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+
+                <th style="text-align: center;width: 146px">Mã thông báo</th>
+                <th style="text-align: center">Thông báo</th>
+                <th style="text-align: center;width: 206px">Ngày tạo thông báo</th>
+
+                <th style="text-align: center">Sửa</th>
+                <th style="text-align: center">Xoá</th>
+
+              </tr>
+              </thead>
+
+              <tbody>
+
+
+              <tr *ngFor="let notification1 of notification">
+                <td style="text-align: center">{{notification1.notificationId}}</td>
+                <td><img src="{{notification1.image}}" alt=""
+                         style="width: 150px; float: left;margin-right: 10px;margin-top: 8px">
+
+                  <span> {{notification1.content}}</span>
+
+                </td>
+
+                <td style="text-align: center"> {{notification1.uploadDate|date:"dd-MM-yyyy"}}</td>
+                <td style="   width: 34.5px;">
+
+                  <button class="btn" [routerLink]="['update/'+notification1.notificationId]"><i
+                    class="fa-solid fa-pen-clip"
+                    style="color: blue;"></i></button>
+                </td>
+                <!--                <td>-->
+                <!--                  -->
+                <!--                  <i class="fa-solid fa-trash-can" style="color: red;"></i>-->
+                <!--                </td>-->
+                <!--                [routerLink]="['delete/'+entity.entitiesId]"-->
+                <td style="   width: 34.5px;">
+                  <button class="btn" (click)="openDialog(notification1.notificationId)"><i
+                    class="fa-solid fa-trash-can"
+                    style="color: red;"></i></button>
+                </td>
+
+              </tr>
+
+
+              <!--              <tr>-->
+              <!--                <td >-->
+              <!--                  <img src="https://vnn-imgs-f.vgcloud.vn/2019/10/22/10/tiet-lo-bi-mat-ve-qua-bom-nguyen-tu-dau-tien-cua-lien-xo-4.jpg"-->
+              <!--                          style="width: 150px; float: left;margin-right: 10px;margin-top: 8px" alt="Bom">-->
+
+              <!--                  <span style="align-content: start;font-weight: bolder">Kịch tính vòng chung kết cuộc thi sáng tạo robocar – 2022</span>-->
+              <!--                  <br>-->
+              <!--                <span>Ngày 23/4/2022, tại sân đấu Trung tâm Sinh viên Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn (VKU), Đại học Đà Nẵng đã diễn ra Vòng chung kết Cuộc thi Sáng tạo RoboCar 2022 – Lần thứ 3 với chủ đề Chinh phục thử thách. Cuộc thi do Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn chủ trì tổ chức thường niên bắt đầu từ năm 2018, đây là cuộc thi sáng tạo robot dành cho sinh viên các ngành Công nghệ thông tin và Công nghệ kỹ thuật máy tính, Điện tử các trường đại học khu vực Miền </span>-->
+              <!--                </td>-->
+
+
+              <!--                <td style="   width: 34.5px;">-->
+
+              <!--                  <button class="btn" ><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>-->
+              <!--                </td>-->
+              <!--                &lt;!&ndash;                <td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                  &ndash;&gt;-->
+              <!--                &lt;!&ndash;                  <i class="fa-solid fa-trash-can" style="color: red;"></i>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                </td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                [routerLink]="['delete/'+entity.entitiesId]"&ndash;&gt;-->
+              <!--                <td style="    width: 34.5px;">-->
+              <!--                  <button class="btn" ><i class="fa-solid fa-trash-can" style="color: red;"></i></button>-->
+              <!--                </td>-->
+
+              <!--              </tr>-->
+              <!--              <tr >-->
+              <!--                <td >-->
+              <!--                  <img src="https://vnn-imgs-f.vgcloud.vn/2019/10/22/10/tiet-lo-bi-mat-ve-qua-bom-nguyen-tu-dau-tien-cua-lien-xo-4.jpg"-->
+              <!--                       style="width: 150px; float: left;margin-right: 10px;margin-top: 8px" alt="Bom">-->
+
+              <!--                  <span style="align-content: start;font-weight: bolder">Kịch tính vòng chung kết cuộc thi sáng tạo robocar – 2022</span>-->
+              <!--                  <br>-->
+              <!--                  <span>Ngày 23/4/2022, tại sân đấu Trung tâm Sinh viên Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn (VKU), Đại học Đà Nẵng đã diễn ra Vòng chung kết Cuộc thi Sáng tạo RoboCar 2022 – Lần thứ 3 với chủ đề Chinh phục thử thách. Cuộc thi do Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn chủ trì tổ chức thường niên bắt đầu từ năm 2018, đây là cuộc thi sáng tạo robot dành cho sinh viên các ngành Công nghệ thông tin và Công nghệ kỹ thuật máy tính, Điện tử các trường đại học khu vực Miền </span>-->
+              <!--                </td>-->
+
+
+              <!--                <td style="   width: 34.5px;">-->
+
+              <!--                  <button class="btn" ><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>-->
+              <!--                </td>-->
+              <!--                &lt;!&ndash;                <td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                  &ndash;&gt;-->
+              <!--                &lt;!&ndash;                  <i class="fa-solid fa-trash-can" style="color: red;"></i>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                </td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                [routerLink]="['delete/'+entity.entitiesId]"&ndash;&gt;-->
+              <!--                <td style="    width: 34.5px;">-->
+              <!--                  <button class="btn" ><i class="fa-solid fa-trash-can" style="color: red;"></i></button>-->
+              <!--                </td>-->
+
+              <!--              </tr>-->
+              <!--              <tr >-->
+              <!--                <td >-->
+              <!--                  <img src="https://vnn-imgs-f.vgcloud.vn/2019/10/22/10/tiet-lo-bi-mat-ve-qua-bom-nguyen-tu-dau-tien-cua-lien-xo-4.jpg"-->
+              <!--                       style="width: 150px; float: left;margin-right: 10px;margin-top: 8px" alt="Bom">-->
+
+              <!--                  <span style="align-content: start;font-weight: bolder">Kịch tính vòng chung kết cuộc thi sáng tạo robocar – 2022</span>-->
+              <!--                  <br>-->
+              <!--                  <span>Ngày 23/4/2022, tại sân đấu Trung tâm Sinh viên Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn (VKU), Đại học Đà Nẵng đã diễn ra Vòng chung kết Cuộc thi Sáng tạo RoboCar 2022 – Lần thứ 3 với chủ đề Chinh phục thử thách. Cuộc thi do Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn chủ trì tổ chức thường niên bắt đầu từ năm 2018, đây là cuộc thi sáng tạo robot dành cho sinh viên các ngành Công nghệ thông tin và Công nghệ kỹ thuật máy tính, Điện tử các trường đại học khu vực Miền </span>-->
+              <!--                </td>-->
+
+
+              <!--                <td style="   width: 34.5px;"  style="align-items: flex-end ;display: flex ">-->
+
+              <!--                  <button class="btn" style="align-items: flex-end ;display: flex " ><i class="fa-solid fa-pen-clip" style="align-items: flex-end ;display: flex "  ></i></button>-->
+              <!--                </td>-->
+              <!--                &lt;!&ndash;                <td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                  &ndash;&gt;-->
+              <!--                &lt;!&ndash;                  <i class="fa-solid fa-trash-can" style="color: red;"></i>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                </td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                [routerLink]="['delete/'+entity.entitiesId]"&ndash;&gt;-->
+              <!--                <td style="    width: 34.5px;">-->
+              <!--                  <button class="btn" ><i class="fa-solid fa-trash-can" style="color: red;"></i></button>-->
+              <!--                </td>-->
+
+              <!--              </tr>-->
+              <!--              <tr >-->
+              <!--                <td >-->
+              <!--                  <img src="https://vnn-imgs-f.vgcloud.vn/2019/10/22/10/tiet-lo-bi-mat-ve-qua-bom-nguyen-tu-dau-tien-cua-lien-xo-4.jpg"-->
+              <!--                       style="width: 150px; float: left;margin-right: 10px;margin-top: 8px" alt="Bom">-->
+
+              <!--                  <span style="align-content: start;font-weight: bolder">Kịch tính vòng chung kết cuộc thi sáng tạo robocar – 2022</span>-->
+              <!--                  <br>-->
+              <!--                  <span>Ngày 23/4/2022, tại sân đấu Trung tâm Sinh viên Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn (VKU), Đại học Đà Nẵng đã diễn ra Vòng chung kết Cuộc thi Sáng tạo RoboCar 2022 – Lần thứ 3 với chủ đề Chinh phục thử thách. Cuộc thi do Trường Đại học Công nghệ thông tin và Truyền thông Việt – Hàn chủ trì tổ chức thường niên bắt đầu từ năm 2018, đây là cuộc thi sáng tạo robot dành cho sinh viên các ngành Công nghệ thông tin và Công nghệ kỹ thuật máy tính, Điện tử các trường đại học khu vực Miền </span>-->
+              <!--                </td>-->
+
+
+              <!--                <td style="   width: 34.5px;">-->
+
+              <!--                  <button class="btn" ><i class="fa-solid fa-pen-clip" style="color: blue;"></i></button>-->
+              <!--                </td>-->
+              <!--                &lt;!&ndash;                <td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                  &ndash;&gt;-->
+              <!--                &lt;!&ndash;                  <i class="fa-solid fa-trash-can" style="color: red;"></i>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                </td>&ndash;&gt;-->
+              <!--                &lt;!&ndash;                [routerLink]="['delete/'+entity.entitiesId]"&ndash;&gt;-->
+              <!--                <td style="    width: 34.5px;">-->
+              <!--                  <button class="btn" ><i class="fa-solid fa-trash-can" style="color: red;"></i></button>-->
+              <!--                </td>-->
+
+              <!--              </tr>-->
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-5">
+
+              <a routerLink="/notification/create">
+                <button class="btn btn-primary">Khởi tạo</button>
+              </a>
+            </div>
+            <div class="col-sm-12 col-md-7">
+              <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+
+                <ul class="pagination  nav nav-pills"  *ngIf="isSearch==false">
+                  <!--                  <div>-->
+                  <!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
+                  <!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
+                  <!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
+                  <!--                  </div>-->
+
+                  <li class="nav-item" *ngFor="let p of pages;let i=index">
+                    <!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
+                    <a class="nav-link " href="" [ngClass]="{'nav-link-true': i == page, 'nav-link-false ': i != page}" (click)="setPage(i,$event)">{{i + 1}}</a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

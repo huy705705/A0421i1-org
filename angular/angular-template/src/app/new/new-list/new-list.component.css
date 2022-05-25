@@ -141,8 +141,14 @@ height: 50px; */
 }
 #new-name-left{
   font-size: 20px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
   /* font-family: 'Libre Bodoni', serif;
 font-family: 'News Cycle', sans-serif; */
+}
+#new-name-left:hover{
+  color: #54b3d6;
 }
 .btn:focus {
   outline: none;
@@ -328,6 +334,7 @@ font-family: 'News Cycle', sans-serif; */
 
   border-radius: 50% 50% 0 0 ;
 }
+
 .img-carosel-2{
   height:300px;
   object-fit:cover;
@@ -369,4 +376,58 @@ font-family: 'News Cycle', sans-serif; */
 
 .quotes-1{
   font-size: 30px;
+}
+#divChart{
+  display: block;
+  width: 400;
+  height: 400;
+}
+
+
+#divWeatherMain{
+  display: block;
+  /* border-radius: 10px; */
+  width: 100%;
+  height: 220px;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(8,7,42,1) 75%, rgb(8, 10, 63) 100%);
+  color: white;;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.weatherWidgetRow{
+  display:block;
+  margin:0 auto;
+  width: fit-content;
+}
+
+.sun{
+  margin-top: 10px;
+  color: yellow;
+  filter: drop-shadow( 1px 1px 10px yellow);
+}
+
+.moon{
+  margin-top: 10px;
+  color: white;
+  filter: drop-shadow( 1px 1px 10px white);
+}
+
+.cloudDiv{
+  margin-top: -40px;
+}
+
+.cloud{
+  color: rgb(104, 175, 197);
+  filter: drop-shadow( 1px 1px 5px rgb(104, 175, 197));
+  animation-name: cloudMovement;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes cloudMovement{
+  from{margin-left: -55px;}
+  to{margin-left: 65px;}
 }

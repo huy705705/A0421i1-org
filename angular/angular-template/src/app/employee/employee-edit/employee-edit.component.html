@@ -1,3 +1,4 @@
+
 <!--<link rel="stylesheet" href="employee-edit.component.css">-->
 <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
 <!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
@@ -33,6 +34,7 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</nav>-->
+
 <div class="container-fluid" id="content" style="margin-top: 58px">
   <div class="row">
     <div class="col-lg-3 ml-0">
@@ -66,10 +68,10 @@
     </div>
     <div class="col-lg-9">
 
-      <strong class="SL">Cập nhật danh sách nhân viên</strong>
+      <strong style="font-size: larger;margin-top: 10px; height: 20px">Chỉnh sửa thông tin nhân viên: {{employee.employeeId}}</strong>
 
       <hr/>
-      <form style="max-width: 700px;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()" *ngIf="employeeForm">
+      <form style="max-width: 100%;" class="bg-light" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()" *ngIf="employeeForm">
         <div class="container-fluid">
 
           <div class="form-group row">
@@ -80,7 +82,6 @@
               </div>
             </div>
           </div>
-
 
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Tên nhân viên<span class="text-danger">*</span></label>
@@ -94,6 +95,55 @@
               </div>
             </div>
           </div>
+
+          <!--          <div class="form-group row" >-->
+          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Account ID<span class="text-danger">*</span></label>-->
+          <!--            <div class="col-sm-8">-->
+          <!--              <div class="input-append date" id="dp20" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+          <!--                <input disable class="span2 form-control" size="16" type="text" formControlName="accountId">-->
+          <!--                <span style="color: red;"></span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+
+          <input hidden class="span2 form-control" size="16" type="text" formControlName="accountId">
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input disable class="span2 form-control" size="16" type="text" formControlName="accountName">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.accountName">
+                <span *ngIf="employeeForm.get('accountName').hasError(validation.type) && (employeeForm.get('accountName').dirty || employeeForm.get('accountName').touched)">
+                {{validation.message}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2 form-control" size="16" type="password" formControlName="password">
+                <div style="color: red;"  *ngFor="let validation of validationMessages.password">
+                <span *ngIf="employeeForm.get('password').hasError(validation.type) && (employeeForm.get('password').dirty || employeeForm.get('password').touched)">
+                {{validation.message}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--          <div class="form-group row" >-->
+          <!--            <label  class="col-form-label ml-3" style="width: 150px;">Xác nhận mật khẩu<span class="text-danger">*</span></label>-->
+          <!--            <div class="col-sm-8">-->
+          <!--              <div class="input-append date" id="dp5" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+          <!--                <input class="span2 form-control" size="16" type="password" formControlName="accountPassword">-->
+          <!--                <span style="color: red;"></span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
 
           <!--          <div class="form-group row" >-->
           <!--            <label  class="col-form-label ml-3" style="width: 150px;">Tên tài khoản<span class="text-danger">*</span></label>-->
@@ -124,6 +174,7 @@
           <!--              </div>-->
           <!--            </div>-->
           <!--          </div>-->
+
 
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Email<span class="text-danger">*</span></label>
@@ -164,8 +215,13 @@
                 <input class="form-check-input"  id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
                        formControlName="{{gender.name}}">
                 <label class="form-check-input" style="padding-top: 2px" for="gender-{{gender.id}}">{{gender.label}}</label>
-              </div>
 
+                <div style="color: red;"  *ngFor="let validation of validationMessages.gender">
+                <span *ngIf="employeeForm.get('gender').hasError(validation.type) && (employeeForm.get('gender').dirty || employeeForm.get('gender').untouched)">
+                {{validation.message}}</span>
+                </div>
+
+              </div>
             </div>
           </div>
 
@@ -196,7 +252,9 @@
           </div>
 
           <div class="text-center">
+
             <button type="submit" class="btn btn-warning m-2">Cập nhật</button>
+
             <button type="button" class="btn btn-success m-2" [routerLink]="['/admin/employee']">Huỷ bỏ</button>
           </div>
 

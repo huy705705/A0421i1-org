@@ -1,9 +1,59 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>-->
+<!--  <script src="https://kit.fontawesome.com/d3ad0e260e.js" crossorigin="anonymous"></script>-->
+<!--  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />-->
 
-<div class="container-fluid" id="content"style="margin-top: 58px">
+<!--  &lt;!&ndash; Custom styles for this page &ndash;&gt;-->
+<!--  &lt;!&ndash;  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">&ndash;&gt;-->
+<!--  <title>Danh sách chuồng nuôi</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+
+<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
+<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <div class="dropleft">-->
+<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
+<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
+<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+<div class="container-fluid" id="content">
   <div class="row">
     <div class="col-lg-2 ml-0">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 1000px;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 236px; height: 1000px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4"><strong>Quản lý hệ thống</strong></span>
@@ -47,7 +97,6 @@
               <span style="color: red;text-align: left", *ngIf="entitiesForm.get('cageId').hasError(validation.type) && (entitiesForm.get('cageId').dirty || entitiesForm.get('cageId').touched || entitiesForm.get('cageId').untouched)">
               {{validation.message}}</span>
               </div>
-
             </div>
           </div>
           <div class="form-group row">
@@ -97,8 +146,7 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Cân nặng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
-
-                <input  class="span2 form-control" size="16" min="1" type="number" value="1" formControlName="weight" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'">
+                <input type="text" class="form-control" min="1" type="number" value="1" formControlName="weight" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'">
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">kg</span>
                 </div>
@@ -115,7 +163,7 @@
             <label  class="col-form-label ml-3" style="width: 130px;">Trạng thái<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
-                <input class="span2 form-control" min="1" type="text" value="" formControlName="status">
+                <input type="text" class="form-control" min="1" type="text" value="" formControlName="status">
               </div>
               <div style="color: red;text-align: left"  *ngFor="let validation of validationMessages.status">
               <span *ngIf="entitiesForm.get('status').hasError(validation.type) && (entitiesForm.get('status').dirty || entitiesForm.get('status').touched ||entitiesForm.get('status').untouched)">

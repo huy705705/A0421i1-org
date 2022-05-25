@@ -6,14 +6,17 @@ import { NewEditComponent } from './new-edit/new-edit.component';
 import { NewDeleteComponent } from './new-delete/new-delete.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NewListComponent} from "./new-list/new-list.component";
+import { StatiticalComponent } from './statitical/statitical.component';
+import { WeatherComponent } from './weather/weather.component';
+import { NewDetailsComponent } from './new-details/new-details.component';
 
 
 @NgModule({
-  declarations: [NewListComponent, NewCreateComponent, NewEditComponent, NewDeleteComponent],
-    imports: [
-        CommonModule,
-        NewRoutingModule,
-        ReactiveFormsModule
-    ]
+  declarations: [NewListComponent, NewCreateComponent, NewEditComponent, NewDeleteComponent, StatiticalComponent, WeatherComponent, NewDetailsComponent],
+  imports: [
+    CommonModule,
+    NewRoutingModule,
+    ReactiveFormsModule
+  ]
 })
 export class NewModule { }
