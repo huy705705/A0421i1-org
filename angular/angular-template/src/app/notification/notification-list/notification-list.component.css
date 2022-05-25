@@ -51,7 +51,7 @@ element.style {
   display: block;
   padding: 0.5rem 1rem;
   text-decoration: none;
-  background-color: #66c992;
+  background-color: blue;
   color: #EDEDED;
   pointer-events: none;
 }

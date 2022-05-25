@@ -76,7 +76,7 @@ export class NotificationEditComponent implements OnInit {
 
       this.notificationService.updateNotification(this.notificationForm.value.notificationId, this.notificationForm.value).subscribe((data) => {
         this.notification = data['content'];
-        this.route.navigate(['/notification']);
+        this.route.navigate(['admin/notification']);
         this.toast.success("Cập nhật cá thể thành công!", "Thành công: ", {
           timeOut: 4000,
           extendedTimeOut: 1000
@@ -107,7 +107,7 @@ export class NotificationEditComponent implements OnInit {
       })
     ).subscribe();
   }
-
+// fix
   compare() {
     if (this.notificationForm.value.content.length < 30) {
       this.contentIsFalse = true;

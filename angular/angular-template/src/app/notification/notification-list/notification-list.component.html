@@ -85,16 +85,16 @@
             <div class="col-6">
               <div class="input-group" style="padding-left: 260px">
 
-
-                <p style="    margin-top: 5px;">Khoảng ngày tạo thông báo:  </p>
+                <!--fix-->
+                <p style="    margin-top: 5px;">Khoảng ngày tạo thông báo: </p>
                 <div class="form-outline" style="margin-left: 10px; margin-right: 10px;">
                   <input type="date" class="form-control" [(ngModel)]="uploadDateMin"
-                         placeholder="Nhập ngày vào" />
+                         placeholder="Nhập ngày vào"/>
                 </div>
                 <p style="    margin-top: 5px;">đến</p>
                 <div class="form-outline" style=" margin-left: 10px;">
                   <input type="date" class="form-control" [(ngModel)]="uploadDateMax"
-                         placeholder="Nhập ngày vào" />
+                         placeholder="Nhập ngày vào"/>
                 </div>
 
                 <button type="submit" class="btn btn-primary" (click)="search()" style="margin-left: 10px;">
@@ -102,13 +102,12 @@
                 </button>
 
 
-
               </div>
             </div>
           </div>
         </div>
 
-
+        <!--fix-->
         <div *ngIf="isTrue">
           <div *ngIf="isSubmitted then submited else notSubmited"></div>
           <ng-template #notSubmited>
@@ -120,7 +119,7 @@
         </div>
 
         <div class="card-body" *ngIf="isTrue2">
-
+          <!--fix-->
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -275,28 +274,69 @@
           <div class="row">
             <div class="col-sm-12 col-md-5">
 
-              <a routerLink="/notification/create">
+              <!--              fix-->
+              <a [routerLink]="['create/']">
                 <button class="btn btn-primary">Khởi tạo</button>
               </a>
             </div>
             <div class="col-sm-12 col-md-7">
-              <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+              <nav aria-label="Page navigation example">
 
-                <ul class="pagination  nav nav-pills"  *ngIf="isSearch==false">
-                  <!--                  <div>-->
-                  <!--                    <a href="@{'/customers'(page=${customers.number - 1})}" if="${customers.hasPrevious()}">Previous</a>-->
-                  <!--                    <span text="${customers.number + 1}"></span>/<span text="${customers.totalPages}"></span>-->
-                  <!--                    <a href="@{'/customers'(page=${customers.number + 1})}" if="${customers.hasNext()}">Next</a>-->
-                  <!--                  </div>-->
+                <!--                <ul class="pagination  nav nav-pills"  *ngIf="isSearch==false">-->
+                <!-- -->
 
+                <!--                  <li class="nav-item" *ngFor="let p of pages;let i=index">-->
+                <!--                    <a class="nav-link " href="" [ngClass]="{'nav-link-true': i == page, 'nav-link-false ': i != page}" (click)="setPage(i,$event)">{{i + 1}}</a>-->
+                <!--                  </li>-->
+                <!--                </ul>-->
+
+                <ul class="pagination justify-content-end" style="justify-content: center" *ngIf="isSearch==false">
+                  <li class="nav-item">
+                    <a [ngClass]="{'nav-link-lr-true': 0 == page, 'nav-link-lr-false ': 0 != page}" href=""
+                       (click)="setPage(page-1,$event)"><i class="fa-solid fa-caret-left"></i></a>
+                  </li>
                   <li class="nav-item" *ngFor="let p of pages;let i=index">
-                    <!--                    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i+1}}Trước</a>-->
-                    <a class="nav-link " href="" [ngClass]="{'nav-link-true': i == page, 'nav-link-false ': i != page}" (click)="setPage(i,$event)">{{i + 1}}</a>
+                    <a [ngClass]="{'nav-link-true': i == page, 'nav-link-false ': i != page}" href=""
+                       (click)="setPage(i,$event)">{{i + 1}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      [ngClass]="{'nav-link-lr-true': pageTotal - 1 == page, 'nav-link-lr-false': pageTotal  - 1 != page}"
+                      href=""
+                      (click)="setPage(page+1,$event)"><i class="fa-solid fa-caret-right"></i></a>
                   </li>
                 </ul>
 
-              </div>
+<!--                <ul class="nav nav-pills" *ngIf="isSearch==true">-->
+<!--      -->
+
+<!--                  <li class="nav-item" *ngFor="let p of pageSearch;let i=index">-->
+<!--                    <a class="nav-link " href=""-->
+<!--                       [ngClass]="{'nav-link-true': i == pageSearchCurrent, 'nav-link-false ': i != pageSearchCurrent}"-->
+<!--                       (click)="setSearch(i,$event)">{{i + 1}}</a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+
+                <ul class="pagination justify-content-end" style="justify-content: center" *ngIf="isSearch==true" >
+                  <li class="nav-item">
+                    <a [ngClass]="{'nav-link-lr-true': 0 == pageSearchCurrent, 'nav-link-lr-false ': 0 != pageSearchCurrent}" href=""
+                       (click)="setSearch(pageSearchCurrent-1,$event)" ><i class="fa-solid fa-caret-left"></i></a>
+                  </li>
+                  <li class="nav-item" *ngFor="let p of pageSearch;let i=index">
+                    <a [ngClass]="{'nav-link-true': i == pageSearchCurrent, 'nav-link-false ': i != pageSearchCurrent}" href=""
+                       (click)="setSearch(i,$event)">{{i+1}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a [ngClass]="{'nav-link-lr-true': pageSearchTotal - 1 == pageSearchCurrent, 'nav-link-lr-false': pageSearchTotal  - 1 != pageSearchCurrent}" href=""
+                       (click)="setSearch(pageSearchCurrent+1,$event)" ><i class="fa-solid fa-caret-right"></i></a>
+                  </li>
+                </ul>
+
+
+              </nav>
             </div>
+
+
           </div>
 
         </div>

@@ -86,6 +86,8 @@ export class NotificationListComponent implements OnInit {
     });
   }
 
+
+  //search
   search() {
     this.pageSearchCurrent = 0;
     this.isSearch = true;
@@ -100,7 +102,33 @@ export class NotificationListComponent implements OnInit {
       data => {
         console.log(data);
         if (data) {
-          this.notification2 = data['content']
+          this.notification = data['content']
+          this.pageSearch = new Array(data['totalPages'])
+          this.pageSearchTotal = data['totalPages'];
+
+          this.isSubmitted = true;
+          this.isTrue2 = true;
+
+
+        }
+      },
+      (error) => {
+        console.log(error.message)
+        this.isSubmitted = false;
+        this.isTrue2 = false;
+      }
+    );
+  }
+
+  setSearch(i: number , event: any) {
+    event.preventDefault();
+    this.pageSearchCurrent = i;
+    console.log(this.pageSearchCurrent)
+    this.notificationService.searchNotification(this.uploadDateMin, this.uploadDateMax, this.pageSearchCurrent).subscribe(
+      data => {
+        console.log(data);
+        if (data) {
+          this.notification = data['content']
           this.pageSearch = new Array(data['totalPages'])
           this.pageSearchTotal = data['totalPages'];
 
