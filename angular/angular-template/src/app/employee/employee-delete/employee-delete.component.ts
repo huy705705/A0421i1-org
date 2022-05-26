@@ -37,7 +37,7 @@ export class EmployeeDeleteComponent implements OnInit {
     this.employeeService.deleteEmployeeById(id).subscribe();
     this.dialogRef.close({event: true});
     this.deleteComplete.emit(true);
-    this.toast.warning("Xóa nhân viên thành công!", "Thành công: ", {
+    this.toast.success("Xóa nhân viên thành công!", "Thành công: ", {
       timeOut: 4000,
       extendedTimeOut: 1000
     })

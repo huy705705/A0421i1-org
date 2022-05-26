@@ -212,6 +212,19 @@
             </div>
           </div>
 
+          <div class="form-group row" >
+            <label  class="col-form-label ml-3" style="width: 150px;padding-top: 65px">Ảnh nhân viên<span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <img style="width: 150px; height: 150px" alt="avatar" [src]="employee.avatar">
+              <label for="image" class="btn" style="font-weight: 200;text-decoration: underline;">Thêm ảnh đại diện</label>
+              <input class="form-control-file" id="image" type="file" style="visibility:hidden" (change)="showPreview($event)"/>
+              <div style="color: red;" *ngFor="let validation of validationMessages.avatar">
+                <span *ngIf="employeeForm.get('avatar').hasError('required') && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched|| employeeForm.get('avatar').untouched)">
+                {{validation.message}}</span>
+              </div>
+            </div>
+          </div>
+
           <div class="text-center">
 
             <button type="submit" class="btn btn-warning m-2">Cập nhật</button>

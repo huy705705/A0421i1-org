@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../service/employee.service';
@@ -6,6 +6,8 @@ import {ToastrService} from "ngx-toastr";
 import {IEmployeeDTO} from "../../model/IEmployeeDTO";
 import {checkBirthDay} from "../../validator/checkBirthDay";
 import {checkPassword} from "../../validator/check-password";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-employee-edit',
@@ -86,7 +88,8 @@ export class EmployeeEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private employeeService: EmployeeService,
               private router: Router,
-              private toast : ToastrService) {
+              private toast : ToastrService,
+              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
 
     this.activatedRoute.paramMap.subscribe(next => {
       this.employeeId = next.get('employeeId');
@@ -129,6 +132,7 @@ export class EmployeeEditComponent implements OnInit {
             Validators.required,
             Validators.pattern('^[a-zA-Z\'-\'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóêòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝýỶỸửữựỵ ỷỹ]*$'),
             Validators.maxLength(40)]),
+          avatar          : new FormControl(Validators.required),
           isDelete        : new FormControl(),
         },{validators: checkPassword});
         this.employeeForm.patchValue(this.employee);
@@ -156,5 +160,28 @@ export class EmployeeEditComponent implements OnInit {
         extendedTimeOut: 1000
       })
     });
+  }
+
+  selectedImage: any = null;
+  loading = false;
+
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+    const nameImg = this.selectedImage.name;
+    const fileRef = this.storage.ref(nameImg);
+    this.loading = true;
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          console.log(url);
+          this.employeeForm.patchValue({image: url});
+          this.loading = false;
+          this.employee.avatar = url;
+
+          // Call API
+
+        });
+      })
+    ).subscribe();
   }
 }

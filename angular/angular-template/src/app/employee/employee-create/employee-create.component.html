@@ -118,7 +118,7 @@
               <div class="input-append date" id="dp7" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" type="date" formControlName="birthday">
                 <div style="color: red;"  *ngFor="let validation of validationMessages.birthday">
-                  <span *ngIf="employeeForm.get('birthday').hasError(validation.type) && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched|| employeeForm.get('birthday').untouched)">
+                  <span *ngIf="employeeForm.get('birthday').hasError(validation.type) && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched)">
                   {{validation.message}}</span>
                   <span *ngIf="employeeForm.get('birthday').hasError('flag') && (employeeForm.get('birthday').dirty || employeeForm.get('birthday').touched)">Nhân viên phải trên 18 tuổi và dưới 100 tuổi!</span>
                 </div>
@@ -174,7 +174,7 @@
               <label for="image" class="btn" style="font-weight: 200;text-decoration: underline;">Thêm ảnh đại diện</label>
               <input class="form-control-file" id="image" type="file" style="visibility:hidden" (change)="showPreview($event)"/>
               <div style="color: red;" *ngFor="let validation of validationMessages.avatar">
-                <span *ngIf="employeeForm.get('avatar').hasError('required') && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched|| employeeForm.get('avatar').untouched)">
+                <span *ngIf="employeeForm.get('avatar').hasError('required') && (employeeForm.get('avatar').dirty || employeeForm.get('avatar').touched)">
                 {{validation.message}}</span>
               </div>
             </div>

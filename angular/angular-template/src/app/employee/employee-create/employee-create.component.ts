@@ -141,8 +141,6 @@ export class EmployeeCreateComponent implements OnInit {
     }
     console.log("save(): ")
     console.log(this.employeeForm.value)
-    // upload image to firebase
-    // const nameImg = this.getCurrentDateTime();
     const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
     const fileRef = this.storage.ref(nameImg);
     console.log("nameImg " + nameImg)
