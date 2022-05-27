@@ -1,16 +1,6 @@
 <div class="container mb-5 min-vh-100 content-news" id="content">
-
-
-  <div class="contact-div">
-    <div class="m-auto text-center center-contact">
-      <H1 class=" text-center text-white"><span class="sp-text-mid">Nâng Cao</span> Kiến Thức Chăn Nuôi</H1>
-      <!-- <button class="btn btn-contact text-uppercase" id="btn-contact">Contact <i class="fa-solid fa-arrow-right-long"></i></button> -->
-      <a class="text-uppercase a-contact" href="#">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
-    </div>
-  </div>
-
   <div class="row mt-3 mb-3">
-    <div *ngIf = "!showDetailBl" class="col-lg-8 ">
+    <div *ngIf="!showDetailBl" class="col-lg-8">
       <!-- <H4 class="name-list-news m-0 font-weight-bold">
         <p class="p-1 text-uppercase">Tin mới nhất</p>
       </H4> -->
@@ -19,39 +9,84 @@
           <p class="name-title-news p-1">TIN MỚI NHẤT</p>
         </div>
         <div class="col-lg-8">
-          <marquee class="name-title-news-marquee align-middle"  onmouseover="this.stop();" onmouseout="this.start();"> {{newsListMarquee}} </marquee>
+          <marquee
+            class="name-title-news-marquee align-middle"
+            onmouseover="this.stop();"
+            onmouseout="this.start();"
+          >
+            {{ newsListMarquee }}
+          </marquee>
         </div>
       </div>
       <div class="row mt-2 mb-2" *ngFor="let news of newsPage">
-        <div class="col-lg-4"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
+        <div class="col-lg-4">
+          <img class="img-fluid img-thumbnail" src="{{ news.image }}" alt="" />
+        </div>
         <div class="col-lg-8">
-          <a id="new-name-left" class="text-uppercase" (click)="showDetail(news.newsId)">{{news.newsName}}</a>
+          <a
+            id="new-name-left"
+            class="text-uppercase"
+            (click)="showDetail(news.newsId)"
+            >{{ news.newsName }}</a
+          >
           <div class="text card-text">
-            {{news.detailDescription}}
+            {{ news.detailDescription }}
           </div>
-          <p class="type-news-left">{{news.type}}</p>
-          <p class="card-text"> {{news.createdDate}} <span style="text-align: right;">{{news.employee.employeeName}}</span></p>
+          <p class="type-news-left">{{ news.type }}</p>
+          <p class="card-text">
+            {{ news.createdDate | date: "dd/MM/yyyy" }}
+            <span style="text-align: right"
+              >Tác giả: {{ news.employee.employeeName }}</span
+            >
+          </p>
         </div>
       </div>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
-          <li class="nav-item ">
-            <a [ngClass]="{'nav-link-lr-true': 0 == page, 'nav-link-lr-false ': 0 != page}" href=""
-            (click)="setPage(page-1,$event)" ><i class="fa-solid fa-caret-left"></i></a>
+          <li class="nav-item">
+            <a
+              [ngClass]="{
+                'nav-link-lr-true': 0 == page,
+                'nav-link-lr-false ': 0 != page
+              }"
+              href=""
+              (click)="setPage(page - 1, $event)"
+              ><i class="fa-solid fa-caret-left"></i
+            ></a>
           </li>
-          <li class="nav-item " *ngFor="let p of pages;let i=index">
-            <a [ngClass]="{'nav-link-true': i == page, 'nav-link-false ': i != page}" href=""
-              (click)="setPage(i,$event)">{{i+1}}</a>
+          <li class="nav-item" *ngFor="let p of pages; let i = index">
+            <a
+              [ngClass]="{
+                'nav-link-true': i == page,
+                'nav-link-false ': i != page
+              }"
+              href=""
+              (click)="setPage(i, $event)"
+              >{{ i + 1 }}</a
+            >
           </li>
-          <li class="nav-item ">
-            <a [ngClass]="{'nav-link-lr-true': pageTotal - 1 == page, 'nav-link-lr-false': pageTotal  - 1 != page}" href=""
-            (click)="setPage(page+1,$event)" ><i class="fa-solid fa-caret-right"></i></a>
+          <li class="nav-item">
+            <a
+              [ngClass]="{
+                'nav-link-lr-true': pageTotal - 1 == page,
+                'nav-link-lr-false': pageTotal - 1 != page
+              }"
+              href=""
+              (click)="setPage(page + 1, $event)"
+              ><i class="fa-solid fa-caret-right"></i
+            ></a>
           </li>
         </ul>
       </nav>
-
     </div>
-    <app-new-details *ngIf = "showDetailBl" [childMessage]="parentMessage" class="col-lg-8" (backList)="backListParent()"></app-new-details>
+    <app-new-details
+      *ngIf="showDetailBl"
+      [childMessage]="prM"
+      [loadNewsCommentChilds]="loadNewsComment"
+      class="col-lg-8"
+      (backList)="backListParent()"
+      (reloadComment)="reloadCommentChild()"
+    ></app-new-details>
     <div class="col-lg-4">
       <!-- <p class="mt-1 text-right">{{today| date: 'EEEE d/M/y H:mm:ss'}}</p> -->
       <!-- <div class="contact-div mb-3 mt-1">
@@ -70,31 +105,60 @@
           </div>
         </div>
       </div> -->
-    <app-weather></app-weather>
+      <app-weather></app-weather>
       <div class="container-fluid my-3">
-        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="form-inline my-lg-0 form-group row">
-          <input class="form-control col-xl-8 col-lg-12 input-search-2" name="nameInput" type="search"
-            placeholder="Nhập nội dung cần tìm" aria-label="Search" formControlName="nameInput"
-            aria-describedby="validationTooltipUsernamePrepend">
-          <button class="btn btn-outline-search2 my-2 my-sm-0 col-xl-4" id='btnSearch' type="submit"><i
-              class="fa-solid fa-magnifying-glass"></i></button>
+        <form
+          [formGroup]="searchForm"
+          (ngSubmit)="onSubmit()"
+          class="form-inline my-lg-0 form-group row"
+        >
+          <input
+            class="form-control col-xl-8 col-lg-12 input-search-2"
+            name="nameInput"
+            type="search"
+            placeholder="Nhập nội dung cần tìm"
+            aria-label="Search"
+            formControlName="nameInput"
+            aria-describedby="validationTooltipUsernamePrepend"
+          />
+          <button
+            class="btn btn-outline-search2 my-2 my-sm-0 col-xl-4"
+            id="btnSearch"
+            type="submit"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </form>
       </div>
-      <select class="form-control my-3" *ngIf = "pagesSearchEmpty" class="form-control" (change)="onEditClick($event.target.value)">
+      <select
+        class="form-control my-3"
+        *ngIf="pagesSearchEmpty"
+        class="form-control"
+        (change)="onEditClick($event.target.value)"
+      >
         <option>Sắp Xếp</option>
         <option value="desc">Mới Nhất</option>
         <option value="asc">Cũ Nhất</option>
         <option value="views">Lượt Xem Nhiều</option>
-
       </select>
       <div class="row mt-2 mb-2" *ngFor="let news of newsPageSearch">
-        <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
-          <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
-          <p class="card-text">{{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
+          <img class="img-fluid img-thumbnail" src="{{ news.image }}" alt="" />
         </div>
-
+        <div class="col-lg-6">
+          <h4>{{ news.type }}</h4>
+          <p
+            id="new-name-left"
+            class="name-new-right"
+            (click)="showDetail(news.newsId)"
+          >
+            {{ news.newsName }}
+          </p>
+          <p class="card-text">
+            {{ news.createdDate | date: "dd/MM/yyyy" }}
+            <span style="text-align: right"> {{ news.totalView }} Views</span>
+          </p>
+        </div>
       </div>
       <!-- <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
@@ -105,18 +169,39 @@
         </ul>
       </nav> -->
       <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end" *ngIf = "pagesSearchEmpty">
-          <li class="nav-item" >
-            <a [ngClass]="{'nav-link-lr-true': 0 == pageSearch, 'nav-link-lr-false ': 0 != pageSearch}" href=""
-            (click)="setSearch(pageSearch-1,$event)" ><i class="fa-solid fa-caret-left"></i></a>
+        <ul class="pagination justify-content-end" *ngIf="pagesSearchEmpty">
+          <li class="nav-item">
+            <a
+              [ngClass]="{
+                'nav-link-lr-true': 0 == pageSearch,
+                'nav-link-lr-false ': 0 != pageSearch
+              }"
+              href=""
+              (click)="setSearch(pageSearch - 1, $event)"
+              ><i class="fa-solid fa-caret-left"></i
+            ></a>
           </li>
-          <li class="nav-item" *ngFor="let p of pagesSearch;let i=index">
-            <a [ngClass]="{'nav-link-true': i == pageSearch, 'nav-link-false ': i != pageSearch}" href=""
-              (click)="setSearch(i,$event)">{{i+1}}</a>
+          <li class="nav-item" *ngFor="let p of pagesSearch; let i = index">
+            <a
+              [ngClass]="{
+                'nav-link-true': i == pageSearch,
+                'nav-link-false ': i != pageSearch
+              }"
+              href=""
+              (click)="setSearch(i, $event)"
+              >{{ i + 1 }}</a
+            >
           </li>
           <li class="nav-item">
-            <a [ngClass]="{'nav-link-lr-true': pageSearchTotal - 1 == pageSearch, 'nav-link-lr-false': pageSearchTotal  - 1 != pageSearch}" href=""
-            (click)="setSearch(pageSearch+1,$event)" ><i class="fa-solid fa-caret-right"></i></a>
+            <a
+              [ngClass]="{
+                'nav-link-lr-true': pageSearchTotal - 1 == pageSearch,
+                'nav-link-lr-false': pageSearchTotal - 1 != pageSearch
+              }"
+              href=""
+              (click)="setSearch(pageSearch + 1, $event)"
+              ><i class="fa-solid fa-caret-right"></i
+            ></a>
           </li>
         </ul>
       </nav>
@@ -126,11 +211,22 @@
       </H4> -->
       <!-- <div class="hr-name"></div> -->
       <div class="row mt-2 mb-2" *ngFor="let news of newsPageTotalView">
-        <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
-          <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
-          <p class="card-text"> {{news.createdDate}} <span style="text-align: right;"> {{news.totalView}} Views</span></p>
+          <img class="img-fluid img-thumbnail" src="{{ news.image }}" alt="" />
+        </div>
+        <div class="col-lg-6">
+          <h4>{{ news.type }}</h4>
+          <p
+            id="new-name-left"
+            class="name-new-right"
+            (click)="showDetail(news.newsId)"
+          >
+            {{ news.newsName }}
+          </p>
+          <p class="card-text">
+            {{ news.createdDate | date: "dd/MM/yyyy" }}
+            <span style="text-align: right"> {{ news.totalView }} Views</span>
+          </p>
         </div>
       </div>
       <!-- <nav aria-label="Page navigation example">
@@ -140,9 +236,11 @@
             </li>
           </ul>
         </nav> -->
-      <hr>
-      <marquee  onmouseover="this.stop();" onmouseout="this.start();"> {{newsListM}} </marquee>
-      <hr>
+      <hr />
+      <marquee onmouseover="this.stop();" onmouseout="this.start();">
+        {{ newsListM }}
+      </marquee>
+      <hr />
       <div class="contact-div mb-3 mt-1">
         <div class="m-auto text-center center-contact">
           <div>
@@ -165,39 +263,66 @@
       </H4> -->
       <!-- <div class="hr-name"></div> -->
       <div class="row mt-2 mb-2" *ngFor="let news of newsPageHl">
-        <div class="col-lg-6"><img class="img-fluid img-thumbnail" src="{{news.image}}" alt=""></div>
         <div class="col-lg-6">
-          <h4>{{news.type}}</h4>
-          <p id="new-name-left" class="name-new-right" (click)="showDetail(news.newsId)">{{news.newsName}}</p>
-          <p class="card-text"> {{news.createdDate}}</p>
+          <img class="img-fluid img-thumbnail" src="{{ news.image }}" alt="" />
+        </div>
+        <div class="col-lg-6">
+          <h4>{{ news.type }}</h4>
+          <p
+            id="new-name-left"
+            class="name-new-right"
+            (click)="showDetail(news.newsId)"
+          >
+            {{ news.newsName }}
+          </p>
+          <p class="card-text">{{ news.createdDate | date: "dd/MM/yyyy" }}</p>
         </div>
       </div>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
-          <li class="nav-item" >
-            <a [ngClass]="{'nav-link-lr-true': 0 == pageHl, 'nav-link-lr-false ': 0 != pageHl}" href=""
-            (click)="setPageHL(pageHl-1,$event)" ><i class="fa-solid fa-caret-left"></i></a>
+          <li class="nav-item">
+            <a
+              [ngClass]="{
+                'nav-link-lr-true': 0 == pageHl,
+                'nav-link-lr-false ': 0 != pageHl
+              }"
+              href=""
+              (click)="setPageHL(pageHl - 1, $event)"
+              ><i class="fa-solid fa-caret-left"></i
+            ></a>
           </li>
-          <li class="nav-item" *ngFor="let p of pagesHL;let i=index">
-            <a [ngClass]="{'nav-link-true': i == pageHl, 'nav-link-false ': i != pageHl}" href=""
-              (click)="setPageHL(i,$event)">{{i+1}}</a>
+          <li class="nav-item" *ngFor="let p of pagesHL; let i = index">
+            <a
+              [ngClass]="{
+                'nav-link-true': i == pageHl,
+                'nav-link-false ': i != pageHl
+              }"
+              href=""
+              (click)="setPageHL(i, $event)"
+              >{{ i + 1 }}</a
+            >
           </li>
           <li class="nav-item">
-            <a [ngClass]="{'nav-link-lr-true': pageHlTotal - 1 == pageHl, 'nav-link-lr-false': pageHlTotal  - 1 != pageHl}" href=""
-            (click)="setPageHL(pageHl+1,$event)" ><i class="fa-solid fa-caret-right"></i></a>
+            <a
+              [ngClass]="{
+                'nav-link-lr-true': pageHlTotal - 1 == pageHl,
+                'nav-link-lr-false': pageHlTotal - 1 != pageHl
+              }"
+              href=""
+              (click)="setPageHL(pageHl + 1, $event)"
+              ><i class="fa-solid fa-caret-right"></i
+            ></a>
           </li>
         </ul>
       </nav>
-
     </div>
-
   </div>
   <app-statitical></app-statitical>
   <!-- <div id="divChart">
     <canvas id="myChart"></canvas>
   </div> -->
-  <div class="" >
-     <!-- <div class=""> 
+  <div class="">
+    <!-- <div class=""> 
       <div class="" *ngFor="let news of newsPageHl;let i=index">
         <div *ngIf = "i==0">
           <img class="d-block w-100 img-carosel" src="{{news.image}}" alt="First slide">
@@ -269,98 +394,132 @@
   <div class="container my-5">
     <div class="row">
       <div class="col-lg-6">
-        <div class="" *ngFor="let news of newsPage;let i=index">
-          <div *ngIf = "i==2">
-            <img class="d-block w-100 img-carosel" src="{{news.image}}" alt="Third slide">
+        <div class="" *ngFor="let news of newsPage; let i = index">
+          <div *ngIf="i == 2">
+            <img
+              class="d-block w-100 img-carosel"
+              src="{{ news.image }}"
+              alt="Third slide"
+            />
           </div>
-        <!-- <div class="text-img-left">{{news.createdDate}}</div> -->
-        </div> 
+          <!-- <div class="text-img-left">{{news.createdDate}}</div> -->
+        </div>
       </div>
-      <div class="col-lg-6 " >
-        <div class="container w-70" >
-          <div class="" *ngFor="let news of newsPage;let i=index">
-            <div *ngIf = "i==2">
-        <H2 class="name-news-1">{{news.type}}</H2>
-        <p class="content-news-1">{{news.newsName}}</p>
-        <p class="content-news-1">{{news.content}}</p>
+      <div class="col-lg-6">
+        <div class="container w-70">
+          <div class="" *ngFor="let news of newsPage; let i = index">
+            <div *ngIf="i == 2">
+              <p class="date-news-1">
+                {{ news.createdDate | date: "dd-MM-yyyy" }}
+              </p>
+              <H2 class="name-news-1">{{ news.type }}</H2>
+              <p class="content-news-1">{{ news.newsName }}</p>
+              <p class="content-news-1">{{ news.content }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
-    </div>
-    <pre class="container d-block text-center my-5 quotes"><span class="quotes-1">“</span> Chăn nuôi vừa khéo vừa khôn 
+      <pre
+        class="container d-block text-center my-5 quotes"
+      ><span class="quotes-1">“</span> Chăn nuôi vừa khéo vừa khôn 
       Quanh năm gà lợn xuất chuồng quanh năm. <span class="quotes-1">”</span></pre>
     </div>
-
   </div>
   <div class="container my-3">
     <div class="row">
-      <div class="col-lg-8 ">
-        <div class="" *ngFor="let news of newsPage;let i=index">
-          <div *ngIf = "i==1">
-        <div class="container w-70">
-        <p class="date-news-1">22-05-2001</p>
-        <H2 class="name-news-1">{{news.type}}</H2>
-        <p class="content-news-1">{{news.newsName}}</p>
-        <p class="content-news-1">{{news.content}}</p>
-        </div>
+      <div class="col-lg-8">
+        <div class="" *ngFor="let news of newsPage; let i = index">
+          <div *ngIf="i == 1">
+            <div class="container w-70">
+              <p class="date-news-1">
+                {{ news.createdDate | date: "dd-MM-yyyy" }}
+              </p>
+              <H2 class="name-news-1">{{ news.type }}</H2>
+              <p class="content-news-1">{{ news.newsName }}</p>
+              <p class="content-news-1">{{ news.content }}</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="" *ngFor="let news of newsPage;let i=index">
-        <div *ngIf = "i==1">
-          <img class="d-block w-100" src="{{news.image}}" alt="Third slide">
+      <div class="col-lg-4">
+        <div class="" *ngFor="let news of newsPage; let i = index">
+          <div *ngIf="i == 1">
+            <img
+              class="d-block w-100"
+              src="{{ news.image }}"
+              alt="Third slide"
+            />
+          </div>
+          <!-- <div class="text-img-left">{{news.createdDate}}</div> -->
         </div>
-      <!-- <div class="text-img-left">{{news.createdDate}}</div> -->
-      </div> 
-    </div>
+      </div>
     </div>
   </div>
   <div class="container my-3">
     <div class="row">
       <div class="col-lg-6">
-        <div class="" *ngFor="let news of newsPage;let i=index">
-          <div *ngIf = "i==0">
-            <img class="d-block w-100 img-carosel-2" src="{{news.image}}" alt="Third slide">
+        <div class="" *ngFor="let news of newsPage; let i = index">
+          <div *ngIf="i == 0">
+            <img
+              class="d-block w-100 img-carosel-2"
+              src="{{ news.image }}"
+              alt="Third slide"
+            />
           </div>
-        <!-- <div class="text-img-left">{{news.createdDate}}</div> -->
-        </div> 
+          <!-- <div class="text-img-left">{{news.createdDate}}</div> -->
+        </div>
       </div>
-      <div class="col-lg-6 ">
-        <div class="" *ngFor="let news of newsPage;let i=index">
-        <div class="container w-70" *ngIf = "i==0">
-        <p class="date-news-1">22-05-2001</p>
-        <H2 class="name-news-1">{{news.type}}</H2>
-        <p class="content-news-1">{{news.newsName}}</p>
-        <p class="content-news-1">{{news.content}}</p>
+      <div class="col-lg-6">
+        <div class="" *ngFor="let news of newsPage; let i = index">
+          <div class="container w-70" *ngIf="i == 0">
+            <p class="date-news-1">
+              {{ news.createdDate | date: "dd-MM-yyyy" }}
+            </p>
+            <H2 class="name-news-1">{{ news.type }}</H2>
+            <p class="content-news-1">{{ news.newsName }}</p>
+            <p class="content-news-1">{{ news.content }}</p>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-between">
+              <li class="nav-item">
+                <a
+                  [ngClass]="{
+                    'nav-link-lr-true': 0 == page,
+                    'nav-link-lr-false ': 0 != page
+                  }"
+                  href=""
+                  (click)="setPage(page - 1, $event)"
+                  ><i class="fa-solid fa-caret-left"></i> Trang Trước</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-6">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="nav-item">
+                <a
+                  [ngClass]="{
+                    'nav-link-lr-true': pageTotal - 1 == page,
+                    'nav-link-lr-false': pageTotal - 1 != page
+                  }"
+                  href=""
+                  (click)="setPage(page + 1, $event)"
+                  >Trang Sau <i class="fa-solid fa-caret-right"></i
+                ></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
-    </div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-6">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-between">
-          <li class="nav-item ">
-            <a [ngClass]="{'nav-link-lr-true': 0 == page, 'nav-link-lr-false ': 0 != page}" href=""
-            (click)="setPage(page-1,$event)" ><i class="fa-solid fa-caret-left"></i> Trang Trước</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="col-6">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="nav-item ">
-            <a [ngClass]="{'nav-link-lr-true': pageTotal - 1 == page, 'nav-link-lr-false': pageTotal  - 1 != page}" href=""
-            (click)="setPage(page+1,$event)" >Trang Sau <i class="fa-solid fa-caret-right"></i></a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</div>
   </div>
   <!-- <div class="row mt-3">  
       <div class="col-lg-3 ">
@@ -417,10 +576,13 @@
 
   <div class="contact-div">
     <div class="m-auto text-center center-contact">
-      <H1 class=" text-center text-white"><span class="sp-text-mid">Nâng Cao</span> Kiến Thức Chăn Nuôi</H1>
+      <H1 class="text-center text-white"
+        ><span class="sp-text-mid">Nâng Cao</span> Kiến Thức Chăn Nuôi</H1
+      >
       <!-- <button class="btn btn-contact text-uppercase" id="btn-contact">Contact <i class="fa-solid fa-arrow-right-long"></i></button> -->
-      <a class="text-uppercase a-contact" href="#">Contact <i class="fa-solid fa-arrow-right-long"></i></a>
+      <a class="text-uppercase a-contact" href="#"
+        >Contact <i class="fa-solid fa-arrow-right-long"></i
+      ></a>
     </div>
   </div>
-
 </div>

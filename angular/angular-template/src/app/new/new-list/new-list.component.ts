@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {ToastrService} from "ngx-toastr";
 import { formatDate } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { ParentMessageNewsDetail } from 'src/app/model/parentMessageNewsDetail';
 @Component({
   selector: 'app-new-list',
   templateUrl: './new-list.component.html',
@@ -43,14 +45,22 @@ export class NewListComponent implements OnInit {
   idNews: string;
   showDetailBl: boolean = false;
   parentMessage: string = "Message from parent";
-  constructor(private newsService: NewsService, private router: Router, private fb: FormBuilder, private toastr: ToastrService,){
+  username: string;
+  role: string;
+  isLoggedIn: boolean;
+  prM: ParentMessageNewsDetail = {parentMessage: "mess", isLoggin: false, nameUser : null,avatar :null, idEmployee : null }
+  reloadComment : boolean = false;
+  loadNewsComment : boolean = false;
+  constructor(private newsService: NewsService, private router: Router, private fb: FormBuilder, private toastr: ToastrService, private tokenStorageService: TokenStorageService, ){
     Chart.register(...registerables);
   }
   ngOnInit(): void {
    
+    this.loadHeader()
     this.findAllPageable()
     this.findAllPageableHl()
     this.findAllByTotalView()
+
     this.searchForm = this.fb.group({
       nameInput: [''],
     });
@@ -60,9 +70,51 @@ export class NewListComponent implements OnInit {
 
     // this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
   }
-  backListParent() {
-    this.showDetailBl = false;
+
+  private loadHeader():void {
+    if (this.tokenStorageService.getUser() !== null) {
+      this.username = this.tokenStorageService.getUser().name;
+      console.log(this.tokenStorageService.getUser());
+      this.findInforUser()
+    }else {
+      this.username = null;
+    }
+    this.isLoggedIn = (this.username !== null);
+    this.prM.isLoggin = this.isLoggedIn
   }
+
+  backListParent() {
+    console.log("hehes");
+    
+    this.showDetailBl = false;
+
+    
+  }
+
+  reloadCommentChild() {
+    
+    console.log("sdfadsf");
+    if (this.reloadComment==true) {
+      this.reloadComment =false
+    }else{
+      this.reloadComment = true
+    }
+  }
+
+  findInforUser(){
+    this.newsService.findUser(this.username).subscribe(
+      data=>{
+        this.prM.nameUser=data.employeeName;
+        this.prM.avatar = data.avatar;
+        this.prM.idEmployee = data.employeeId;
+        console.log(data);
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+    )
+  }
+
   findAllPageable(){
     this.newsService.findAllPageable(this.page).subscribe(
       data=>{
@@ -81,6 +133,7 @@ export class NewListComponent implements OnInit {
       }
     )
   }
+
   findAllPageableHl(){
     this.newsService.findAllHightLight(this.pageHl).subscribe(
       data=>{
@@ -148,7 +201,15 @@ export class NewListComponent implements OnInit {
 
   showDetail(id){
     this.parentMessage = id
+    this.prM.parentMessage = id;
     this.showDetailBl = true;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (this.loadNewsComment==true) {
+      this.loadNewsComment =false
+    }else{
+      this.loadNewsComment = true
+    }
+    
   }
   public theCallback(){
     console.log("hehe");
@@ -183,9 +244,18 @@ export class NewListComponent implements OnInit {
   onSubmit() {
     this.searchButton = true;
     this.name= this.searchForm.value.nameInput;
-    this.findAllName()
-    this.searchForm.reset()
-    console.log(this.searchForm.value.nameInput);
+    if (this.name == "") {
+      this.toastr.error("Hãy nhập lại tên khác", "Không tìm thấy tên bài viết", {
+        timeOut: 3000,
+        extendedTimeOut: 1500
+      });
+      this.searchForm.reset()
+    }else{
+      this.findAllName()
+      this.searchForm.reset()
+      console.log(this.searchForm.value.nameInput);
+    }
+
   }
   sortByDesc(event: any){
     console.log("mới nhất");
