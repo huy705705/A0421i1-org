@@ -23,6 +23,7 @@ import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
 import {CageModule} from "./cage/cage.module";
 import { WeatherComponent } from './weather/weather.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { WeatherComponent } from './weather/weather.component';
     SecurityModule,
     EmployeeModule,
     NotificationModule,
+    MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     NewModule,

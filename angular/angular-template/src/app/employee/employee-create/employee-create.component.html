@@ -184,7 +184,11 @@
             <button type="submit" class="btn btn-info m-2">Thêm mới</button>
             <button type="button" class="btn btn-success m-2" [routerLink]="['/admin/employee']">Huỷ bỏ</button>
           </div>
+          <div class="spinnerStyle" *ngIf="showSpinner" >
+            <mat-spinner class="spinner-trontron">
+            </mat-spinner>
 
+          </div>
         </div>
       </form>
     </div>

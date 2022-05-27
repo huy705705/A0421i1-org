@@ -19,7 +19,6 @@ export class EmployeeListComponent implements OnInit {
   dialogRef: MatDialogRef<EmployeeDeleteComponent>;
   deleteMessenger;
   employeeList:IEmployeeDTO[];
-  accountList: IAccount[];
   pages: any;
   totalPages: number;
   public searchName ="";

@@ -21,6 +21,7 @@ export class EmployeeCreateComponent implements OnInit {
   employeeIdRendered: string;
   employeeForm: FormGroup;
   imageThis = "assets/image/register.jpg";
+  showSpinner: boolean = false;
 
   validationMessages = {
     employeeName: [
@@ -139,6 +140,10 @@ export class EmployeeCreateComponent implements OnInit {
       this.toast.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
       return;
     }
+    this.showSpinner = true;
+    setTimeout(() => {
+      this.showSpinner = false;
+    }, 10000)
     console.log("save(): ")
     console.log(this.employeeForm.value)
     const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
