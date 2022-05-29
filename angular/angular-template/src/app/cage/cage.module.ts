@@ -8,10 +8,11 @@ import { CageEditComponent } from './cage-edit/cage-edit.component';
 import { CageDeleteComponent } from './cage-delete/cage-delete.component';
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
+import { CageHistoryComponent } from './cage-history/cage-history.component';
 
 
 @NgModule({
-  declarations: [CageListComponent, CageCreateComponent, CageEditComponent, CageDeleteComponent],
+  declarations: [CageListComponent, CageCreateComponent, CageEditComponent, CageDeleteComponent, CageHistoryComponent],
   imports: [
     CommonModule,
     CageRoutingModule,

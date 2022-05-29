@@ -10,9 +10,9 @@ import {EmployeeEditComponent} from "../employee/employee-edit/employee-edit.com
 
 
 const routes: Routes = [
-  {path:'admin/notification',component:NotificationListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
-  {path:'admin/notification/update/:id',component:NotificationEditComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
-  {path:'admin/notification/create',component:NotificationCreateComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}}
+  {path:'employee/notification',component:NotificationListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}},
+  {path:'employee/notification/update/:id',component:NotificationEditComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
+  {path:'employee/notification/create',component:NotificationCreateComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}}
 ];
 
 @NgModule({

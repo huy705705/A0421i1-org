@@ -6,6 +6,9 @@ import {EntitiesService} from "../../service/entities.service";
 import {BehaviorSubject} from "rxjs";
 import {EmployeeNameDTO} from "../../model/dto/employee-name-dto";
 import {ToastrService} from "ngx-toastr";
+import {NotificationDeleteComponent} from "../../notification/notification-delete/notification-delete.component";
+import {CageHistoryComponent} from "../cage-history/cage-history.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-cage-list',
@@ -36,7 +39,13 @@ export class CageListComponent implements OnInit {
   // Bien check xem da tim kiem chua
   isSearch : boolean=false;
   isAcsSort: boolean=true;
-  constructor(private cageService: CageService, private route: Router,private entitiesService : EntitiesService,private toast : ToastrService) {
+
+  // Bien cua ThangTD
+  dialogRef: MatDialogRef<CageHistoryComponent>;
+
+  constructor(private cageService: CageService,
+              private route: Router,private entitiesService : EntitiesService,
+              private toast : ToastrService, public dialog: MatDialog) {
     this.cageService.getAllEmployeeName().subscribe((data)=>{
       this.employeeList=data;
     });
@@ -106,4 +115,17 @@ export class CageListComponent implements OnInit {
   }
 
 
+  openDialog(cageId: string) {
+    console.log("Id "+cageId)
+    this.dialogRef = this.dialog.open(CageHistoryComponent, {
+      width: '1000px',
+      height: '500px',
+      data: cageId,
+    });
+
+  }
+
+  findAllLog(cageId: string){
+
+  }
 }

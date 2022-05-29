@@ -58,13 +58,8 @@ export class CageService {
     return this.http.get<any>(this.apiURL + "/username/" + user );
   }
 
-  sendUsernameForCreateCage(username: string){
-    this.subject.next(username)
+  getEditLog(id: string): Observable<any>{
+    return this.http.get<any>(this.apiURL + "/edit-detail/" + id)
   }
-
-  getUsernameForCageComponent(): Observable<string>{
-    return this.subject.asObservable();
-  }
-
 
 }

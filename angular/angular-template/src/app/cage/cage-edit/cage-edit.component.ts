@@ -21,6 +21,7 @@ export class CageEditComponent implements OnInit {
   employee: EmployeeDto;
   wasEdit: boolean=false;
   employeeList: EmployeeDto[];
+  private user: string;
 
   constructor(private cageService: CageService,
               private router: Router,
@@ -29,10 +30,6 @@ export class CageEditComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private activatedRoute: ActivatedRoute) {
 
-    // get listEmp for edit
-    this.cageService.getListEmployee().subscribe(data =>{
-      this.employeeList = data;
-    })
 
     this.activatedRoute.paramMap.subscribe(next =>{
       const id = next.get('id');
@@ -44,16 +41,25 @@ export class CageEditComponent implements OnInit {
         this.formGroup = new FormGroup({
           cageId: new FormControl('', [Validators.required]),
           employeeId: new FormControl('', [Validators.required]),
-          createdDate: new FormControl("", [Validators.required, checkCreatedDate]),
+          createdDate: new FormControl("",),
           closedDate: new FormControl("", [Validators.required]),
           quantity: new FormControl("", [Validators.required,Validators.max(50), Validators.min(1), Validators.pattern("-?[0-9]+(\.[0-9][0-9]?)?")]),
         }, {validators: checkClosedDate})
 
         this.formGroup.patchValue(data);
 
-        this.formGroup.patchValue({
-          employeeId: data.employeeId + " - " + data.employeeName
-        })
+        // this.formGroup.patchValue({
+        //   employeeId: data.employeeId + " - " + data.employeeName
+        // })
+
+        this.cageService.getCurrentEmployeeCreateCage(this.username).subscribe(data =>{
+          this.employee = data;
+          console.log("user infor: " + data.employeeId+ ' - ' + data.employeeName)
+          this.user = data.employeeId + ' - ' + data.employeeName
+          this.formGroup.patchValue({
+            employeeId: this.user
+          })
+        });
 
       }, error => {
         this.router.navigateByUrl("/404")
@@ -66,12 +72,7 @@ export class CageEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cageService.getCurrentEmployeeCreateCage(this.username).subscribe(data =>{
-      this.employee = data;
-      this.formGroup.patchValue({
-        employeeId: data.employeeId+ ' - ' + data.employeeName
-      })
-    });
+
 
     this.activatedRoute.paramMap.subscribe(next =>{
       const id = next.get('id');
@@ -89,7 +90,6 @@ export class CageEditComponent implements OnInit {
   }
 
   onSubmit() {
-
     if (this.formGroup.invalid){
       this.toast.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
         timeOut: 4000,

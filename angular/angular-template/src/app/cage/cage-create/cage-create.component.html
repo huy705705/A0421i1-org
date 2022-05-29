@@ -38,7 +38,7 @@
         <div class="container-fluid">
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3"  style="width: 130px;">Mã chuồng nuôi<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" >Mã chuồng nuôi<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
                 <input class="form-control" formControlName="cageId" type="text" disabled (change)="preventEdit()" >
@@ -51,7 +51,7 @@
           </div>
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 130px;">Mã nhân viên<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" >Mã nhân viên<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
                 <input class="form-control" formControlName="employeeId" type="text" disabled (change)="preventEdit()">
@@ -67,7 +67,7 @@
           </div>
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 130px;">Ngày tạo chuồng<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" >Ngày tạo chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" formControlName="createdDate" type="date">
@@ -87,7 +87,7 @@
           </div>
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 130px;">Ngày đóng chuồng<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" >Ngày đóng chuồng<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
                 <input class="span2 form-control" size="16" formControlName="closedDate" type="date">
@@ -109,10 +109,10 @@
 
 
           <div class="form-group row">
-            <label  class="col-form-label ml-3" style="width: 130px;">Số lượng cá thể<span class="text-danger">*</span></label>
+            <label  class="col-form-label ml-3" >Số lượng cá thể<span class="text-danger">*</span></label>
             <div class="col-sm-8">
               <div class="input-group mb-3">
-                <input  class="form-control" type="number" formControlName="quantity">
+                <input  class="form-control" type="number" formControlName="quantity" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'">
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">cá thể</span>
                 </div>

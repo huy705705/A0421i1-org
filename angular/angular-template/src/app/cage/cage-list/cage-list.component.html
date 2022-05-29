@@ -107,6 +107,7 @@
                 </th>
                 <th>Sửa</th>
                 <th>Danh sách cá thể</th>
+                <th>Chi tiết chỉnh sửa</th>
               </tr>
               </thead>
 
@@ -122,6 +123,10 @@
                 </td>
                 <td class="text-center">
                   <button class="btn" (click)="getListEntitiesByCage(cage.cageId)"><i class="fa-solid fa-eye" style="color: blue;"></i></button>
+                </td>
+
+                <td class="text-center">
+                  <button class="btn" (click)="openDialog(cage.cageId)"><i class="fa fa-history" style="color: blue;"></i></button>
                 </td>
               </tr>
               </tbody>
@@ -176,3 +181,6 @@
     </div>
   </div>
 </div>
+
+
+
