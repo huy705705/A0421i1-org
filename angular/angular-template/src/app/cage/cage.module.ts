@@ -9,15 +9,18 @@ import { CageDeleteComponent } from './cage-delete/cage-delete.component';
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import { CageHistoryComponent } from './cage-history/cage-history.component';
+import {AppModule} from "../app.module";
+import {ValidatorModule} from "../validator/validator.module";
 
 
 @NgModule({
   declarations: [CageListComponent, CageCreateComponent, CageEditComponent, CageDeleteComponent, CageHistoryComponent],
-  imports: [
-    CommonModule,
-    CageRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        CageRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ValidatorModule,
+    ]
 })
 export class CageModule { }

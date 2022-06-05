@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {NotificationService} from "../../service/notification.service";
 import {Router} from "@angular/router";
 import {CageService} from "../../service/cage.service";
 import {LogCage} from "../../model/logCage";
@@ -12,20 +11,23 @@ import {LogCage} from "../../model/logCage";
 })
 export class CageHistoryComponent implements OnInit {
   logList: Array<LogCage>;
-  isEmpty = true;
-  result: string
-
+  right= true;
+  result: any[]
   constructor(private cageService: CageService, private router: Router,
               public dialogRef: MatDialogRef<CageHistoryComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,) {
-    console.log("cageID la: "+data)
-    cageService.getEditLog(data).subscribe(next=> {
+
+    cageService.getEditLog(data).subscribe((next) => {
       console.log("logList: " + next)
       this.logList = next;
-      if (this.logList !== null){
-        this.isEmpty = false;
+      if (next !== null){
+        for (let i =0; i < next[i].length; i++) {
+          this.result.push(next[i].editedFields)
+        }
       }
     })
+
+    console.log(this.result)
   }
 
   ngOnInit(): void {
