@@ -35,7 +35,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.findAllPageable();
+    this.findAllPageable();
     this.search();
     // this.accountService.findAll().toPromise().then(r => {
     //   this.accountList = r;
@@ -44,21 +44,21 @@ export class EmployeeListComponent implements OnInit {
     // });
   }
 
-  // findAllPageable(){
-  //
-  //   this.isTrue2 = true;
-  //
-  //   this.employeeService.findAllPageable(this.page).subscribe(
-  //     data=>{
-  //       this.employeeList=data['content']
-  //       this.pages= new Array(data['totalPages'])
-  //       this.currentPage= data['currentPage']
-  //     },
-  //     (error) => {
-  //       console.log(error.error.message);
-  //     }
-  //   )
-  // }
+  findAllPageable(){
+
+    this.isTrue2 = true;
+
+    this.employeeService.findAllPageable(this.page).subscribe(
+      data=>{
+        this.employeeList=data['content']
+        this.pages= new Array(data['totalPages'])
+        this.totalPages= data['totalPages'];
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+    )
+  }
 
   // setPage(page, event: any) {
   //   event.preventDefault();
@@ -97,6 +97,7 @@ export class EmployeeListComponent implements OnInit {
         this.employeeList = data['content']
         this.pages = data;
         this.totalPages= data['totalPages'];
+        console.log(this.totalPages);
         console.log(data);
         this.isSubmitted=true;
         this.isTrue2=true;

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, TemplateRef} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../service/employee.service';
@@ -8,6 +8,7 @@ import {checkBirthDay} from "../../validator/checkBirthDay";
 import {checkPassword} from "../../validator/check-password";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-employee-edit',
@@ -19,6 +20,9 @@ export class EmployeeEditComponent implements OnInit {
   employee: IEmployeeDTO;
   employeeId;
   employeeForm: FormGroup;
+  currentPass: string;
+  changePass: boolean = true;
+  ref: TemplateRef<any>;
 
   validationMessages = {
     employeeName: [
@@ -89,8 +93,8 @@ export class EmployeeEditComponent implements OnInit {
               private employeeService: EmployeeService,
               private router: Router,
               private toast : ToastrService,
+              private dialog: MatDialog,
               @Inject(AngularFireStorage) private storage: AngularFireStorage) {
-
     this.activatedRoute.paramMap.subscribe(next => {
       this.employeeId = next.get('employeeId');
       console.log(this.employeeId);
@@ -98,7 +102,8 @@ export class EmployeeEditComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       employeeService.findById(this.employeeId).subscribe( next => {
         this.employee = next;
-        console.log(this.employee);
+        this.currentPass = this.employee.password;
+        console.log(this.currentPass);
         this.employeeForm = new FormGroup({
           employeeId      : new FormControl({value: '', disabled: true}, [Validators.required]),
           employeeName    : new FormControl('', [
@@ -114,13 +119,11 @@ export class EmployeeEditComponent implements OnInit {
             Validators.maxLength(10)]),
           password        : new FormControl('', [
             Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(10)]),
+            Validators.minLength(3)]),
           confirmPassword : new FormControl('', [Validators.required]),
           birthday        : new FormControl('', [
             Validators.required,
             checkBirthDay]),
-          // avatar         : new FormControl(),
           email           : new FormControl('', [
             Validators.required,
             Validators.email]),
@@ -136,6 +139,8 @@ export class EmployeeEditComponent implements OnInit {
           isDelete        : new FormControl(),
         },{validators: checkPassword});
         this.employeeForm.patchValue(this.employee);
+        this.cancelChange();
+        console.log(this.employeeForm.value.password);
       });
     }, error => {
 
@@ -144,11 +149,38 @@ export class EmployeeEditComponent implements OnInit {
     });
   }
 
+  openDialogWithRef(ref) {
+    this.dialog.open(ref);
+  }
+
+  changePassWord() {
+    this.changePass = true;
+  }
+
+  cancelChange() {
+    this.changePass = false;
+  }
+
   ngOnInit(): void {
   }
 
+  confirmChange() {
+    if (this.currentPass == this.employeeForm.value.password){
+      this.toast.warning("Trùng khớp với mật khẩu cũ, vui lòng nhập mật khẩu mới!", "Cảnh báo: ");
+      return;
+    } else {
+      this.toast.success("Mật khẩu thoả mãn yêu cầu!", "Thành công: ", {
+        timeOut: 4000,
+        extendedTimeOut: 1000
+      })
+    }
+  }
+
   updateEmployee() {
-    console.log(this.employeeForm);
+    if (this.changePass == true && this.currentPass == this.employeeForm.value.password){
+      this.toast.warning("Trùng khớp với mật khẩu cũ, vui lòng nhập mật khẩu mới!", "Cảnh báo: ");
+      return;
+    }
     if (this.employeeForm.invalid) {
       this.toast.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
       return;

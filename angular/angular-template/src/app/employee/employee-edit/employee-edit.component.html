@@ -1,39 +1,24 @@
-
-<!--<link rel="stylesheet" href="employee-edit.component.css">-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-
-<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
-<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--    <div class="dropleft">-->
-<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
-<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
-<!--      </div>-->
-<!--    </div>-->
+<!--<ng-template #content let-c="close" let-d="dismiss">-->
+<!--  <div class="modal-header">-->
+<!--    <h4 class="modal-title" id="modal-basic-title">Bạn có muốn đổi mật khẩu không?</h4>-->
+<!--    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>-->
 <!--  </div>-->
-<!--</nav>-->
+<!--  <div class="modal-body">-->
+<!--    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Có, tôi muốn đổi!</button>-->
+<!--    <button *ngIf="changePass ==false" type="button" class="btn btn-dark m-2" (click)="changePassWord()">Có, tôi muốn đổi</button>-->
+<!--    <button *ngIf="changePass==true" type="button" class="btn btn-success m-2" (click)="cancelChange()">Không đổi</button>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
+
+
+<!--<ng-template #firstDialog>-->
+<!--  <h2 matDialogTitle>Bạn muốn đổi mật khẩu không?</h2>-->
+<!--  <mat-dialog-actions align="center">-->
+<!--    <button type="button" class="btn btn-info m-2" (click)="changePassWord()" matDialogClose>Có, tôi muốn đổi</button>-->
+<!--    <button type="button" class="btn btn-success m-2" (click)="cancelChange()" matDialogClose>Không đổi</button>-->
+<!--  </mat-dialog-actions>-->
+<!--</ng-template>-->
 
 <div class="container-fluid" id="content" style="margin-top: 58px">
   <div class="row">
@@ -54,6 +39,7 @@
           </li>
 
           <li>
+<!--            <button mat-button (click)="openDialogWithRef(firstDialog)">Open dialog with reference</button>-->
             <a [routerLink]="['/employee/entities']"class="nav-link link-dark">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
               Quản lý cá thể
@@ -112,6 +98,7 @@
             </div>
           </div>
 
+          <div *ngIf="changePass==true">
           <div class="form-group row" >
             <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
             <div class="col-sm-8">
@@ -135,6 +122,12 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-info m-2" (click)="confirmChange()">Kiểm tra mật khẩu</button>
+            <button type="button" class="btn btn-success m-2" (click)="cancelChange()">Hoàn tác</button>
+          </div>
+
           </div>
 
           <div class="form-group row" >
@@ -167,11 +160,6 @@
           <div class="form-group row">
             <label  class="col-form-label ml-3" style="width: 150px;">Giới tính<span class="text-danger">*</span></label>
             <div class="col-sm-7">
-              <!--              <div class="form-check form-check-inline">-->
-              <!--                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2" value="Nữ">-->
-              <!--                <label class="form-check-label" for="inlineRadio2">Nữ</label>-->
-              <!--              </div>-->
-
               <div class="form-check form-check-inline" style="padding-top: 3px" *ngFor="let gender of genderList">
                 <input class="form-check-input"  id="gender-{{gender.id}}" type="radio" selected value="{{gender.value}}" name="{{gender.name}}"
                        formControlName="{{gender.name}}">
@@ -227,9 +215,12 @@
 
           <div class="text-center">
 
-            <button type="submit" class="btn btn-warning m-2">Cập nhật</button>
+            <button type="submit" class="btn btn-info m-2">Cập nhật</button>
 
             <button type="button" class="btn btn-success m-2" [routerLink]="['/admin/employee']">Huỷ bỏ</button>
+
+            <button *ngIf="changePass ==false" type="button" class="btn btn-dark m-2" (click)="changePassWord()">Đổi mật khẩu</button>
+
           </div>
 
         </div>

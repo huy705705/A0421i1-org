@@ -8,6 +8,7 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -16,11 +17,12 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     EmployeeListComponent
   ],
     imports: [
-      CommonModule,
-      EmployeeRoutingModule,
-      ReactiveFormsModule,
-      MatProgressSpinnerModule,
-      FormsModule
+        CommonModule,
+        EmployeeRoutingModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        FormsModule,
+        MatDialogModule
     ],
   providers:[]
 })
