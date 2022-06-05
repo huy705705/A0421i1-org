@@ -6,6 +6,7 @@ import {Entities} from "../model/entities";
 import {Cage} from "../model/cage";
 import {Employee} from "../model/employee";
 import {EmployeeDto} from "../model/employeeDto";
+import {LogCage} from "../model/logCage";
 
 @Injectable({
   providedIn: 'root'
@@ -58,8 +59,8 @@ export class CageService {
     return this.http.get<any>(this.apiURL + "/username/" + user );
   }
 
-  getEditLog(id: string): Observable<any>{
-    return this.http.get<any>(this.apiURL + "/edit-detail/" + id)
+  getEditLog(id: string): Observable<Array<LogCage>>{
+    return this.http.get<Array<LogCage>>(this.apiURL + "/edit-detail/" + id)
   }
 
 }

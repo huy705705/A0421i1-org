@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContentPipePipe } from './content-pipe.pipe';
+
 
 
 
 @NgModule({
-    declarations: [ContentPipePipe],
+    declarations: [],
     exports: [
-        ContentPipePipe
+
     ],
     imports: [
         CommonModule

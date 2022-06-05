@@ -20,10 +20,11 @@
               <tr *ngFor="let log of logList">
                 <td class="text-center">{{log.cageId}}</td>
                 <td class="text-center" >{{log.editDate|date:"dd/MM/yyy"}}</td>
-                <td >
-                  {{log.editedFields|contentPipe}}
+                <td>
+                  <p *ngFor="let des of editDes">- {{des}}</p>
                 </td>
                 <td >{{log.employeeId}}</td>
+
               </tbody>
             </table>
           </div>

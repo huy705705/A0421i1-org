@@ -13,21 +13,26 @@ export class CageHistoryComponent implements OnInit {
   logList: Array<LogCage>;
   right= true;
   result: any[]
+  editDes: string[] = [];
+
   constructor(private cageService: CageService, private router: Router,
               public dialogRef: MatDialogRef<CageHistoryComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,) {
 
     cageService.getEditLog(data).subscribe((next) => {
-      console.log("logList: " + next)
       this.logList = next;
-      if (next !== null){
-        for (let i =0; i < next[i].length; i++) {
-          this.result.push(next[i].editedFields)
+
+      for (let log of this.logList){
+        let desArr: string[]=[];
+        desArr = log.editedFields.split(";")
+        for (let desResult of desArr){
+          this.editDes.push(desResult);
         }
       }
+
     })
 
-    console.log(this.result)
+
   }
 
   ngOnInit(): void {
