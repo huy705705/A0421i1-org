@@ -25,6 +25,13 @@ export class NewDetailsComponent implements OnInit, OnChanges {
     employeeId: '',
     isDelete: false,
   });
+  editForm = this.fb.group({
+    commentId:'',
+    content: '',
+    newsId: '',
+    employeeId: '',
+    isDelete: false,
+  });
   searchButton: boolean = false;
   name: String;
   username: string;
@@ -32,11 +39,21 @@ export class NewDetailsComponent implements OnInit, OnChanges {
   isLoggedIn: boolean;
   avartar: String;
   sizeComment: number;
+  showFormEdit: Boolean = false;
+  commentEditId: number;
+  commentOldValue: String;
   constructor(private toastr: ToastrService, private newsService: NewsService,  private fb: FormBuilder, private tokenStorageService: TokenStorageService,) { }
   ngOnChanges(): void {
     this.showDetail(this.childMessage.parentMessage)
     this.getListComment(this.childMessage.parentMessage)
     this.commentForm = this.fb.group({
+      content: '',
+      newsId: '',
+      employeeId: '',
+      isDelete: false,
+    });
+    this.editForm = this.fb.group({
+      commentId:'',
       content: '',
       newsId: '',
       employeeId: '',
@@ -118,11 +135,72 @@ export class NewDetailsComponent implements OnInit, OnChanges {
         })
         this.ngOnChanges();
       }, error => {
-        this.toastr.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
+        this.toastr.error("Thông tin không hợp lệ!", "Lỗi: ", {
           timeOut: 4000,
           extendedTimeOut: 1000
         })
       })
     }
+  }
+
+  onSubmitEdit() {
+    this.searchButton = true;
+    
+    if (this.editForm.value.content == "" || this.editForm.value == null) {
+      this.toastr.error("Hãy nhập comment khác", "Không được để trống", {
+        timeOut: 3000,
+        extendedTimeOut: 1500
+      });
+      this.editForm.reset()
+    }else{
+      this.editForm.value.newsId = this.childMessage.parentMessage;
+      this.editForm.value.employeeId = this.childMessage.idEmployee;
+      this.editForm.value.commentId = this.commentEditId;
+      console.log(this.editForm.value);
+      this.newsService.editComent(this.editForm.value).subscribe(data =>{
+        console.log(data);
+        this.commentForm.reset()
+        this.showFormEdit = false;
+        this.commentEditId = -1;
+        this.toastr.success("Bạn đã tạo mới một bình luận", "Thành công: ", {
+          timeOut: 4000,
+          extendedTimeOut:1000
+        })
+        this.ngOnChanges();
+        this.ngOnInit();
+      }, error => {
+        this.toastr.error("Thông tin không hợp lệ!", "Lỗi: ", {
+          timeOut: 4000,
+          extendedTimeOut: 1000
+        })
+      })
+    }
+  }
+  editComment(id: number, oldValue: String){
+    
+    this.commentOldValue = oldValue;
+    this.editForm.get("content").setValue(oldValue)
+    
+    this.showFormEdit = true;
+    console.log(this.commentOldValue);
+    
+    this.commentEditId = id;
+  }
+  closeEditForm(){
+    this.showFormEdit = false
+    this.commentEditId = -1
+  }
+
+  deleteComment(id: number){
+    this.newsService.deleteComment(id).subscribe(data =>{
+      console.log(data);
+      this.ngOnChanges();
+    }, error => {
+      this.toastr.error("Thông tin chuồng nuôi không hợp lệ!", "Lỗi: ", {
+        timeOut: 4000,
+        extendedTimeOut: 1000
+      })
+    })
+    console.log(id);
   }
 }

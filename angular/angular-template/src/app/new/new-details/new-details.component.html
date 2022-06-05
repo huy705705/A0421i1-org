@@ -1,4 +1,4 @@
-<div class="mt-1" *ngIf = "news">
+<div class="mt-1 mb-5" *ngIf = "news">
     <div >
         <img  class="d-block w-100s img-news-detail" src="{{news.image}}">
       </div>
@@ -25,12 +25,24 @@
           </div>
 
         </div>
-        <div class="row mt-4" *ngFor="let cmt of comment">
+        <div class="row mt-4 mb-2" *ngFor="let cmt of comment">
           <div class="col-2"> <img class="img-user-login" src="{{cmt.avatar}}" style="" alt=""></div>
           <div class="col-10">
-            <div class="font-weight-bold" style="">{{cmt.employeeName}}</div>
-            <div>{{cmt.content}}</div>
-            <hr>
+            <div class="font-weight-bold" style="">{{cmt.employeeName}}
+              <span *ngIf="cmt.employeeId == childMessage.idEmployee">
+                <button class="delete-comment-btn" (click)="editComment(cmt.commentId, cmt.content)">Chỉnh sửa</button>
+                <button class="delete-comment-btn" (click)="deleteComment(cmt.commentId)">Xóa</button>
+              </span>
+            </div>
+            <div *ngIf="cmt.commentId != commentEditId">{{cmt.content}}</div>
+                <form *ngIf="cmt.employeeId == childMessage.idEmployee && showFormEdit && cmt.commentId == commentEditId" [formGroup]="editForm" (ngSubmit)="onSubmitEdit()" class="form-inline my-lg-0 form-group w-100" >
+                  <input class="form-control col-12 input-comment" name="content" type="search"
+                    value="{{cmt.content}}" aria-label="Search" formControlName="content"
+                    aria-describedby="validationTooltipUsernamePrepend">
+                  <!-- <button class="btn btn-outline-search2 my-2 my-sm-0 col-2" id='btnSearch' type="submit">Gửi</button> -->
+                  <a class="" id='cancel-edit' (click)="closeEditForm()">Hủy</a>
+                </form>
+                
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { News } from '../model/news';
 import { Observable } from 'rxjs';
 import { NewsComment } from '../model/comment';
 import { NewsCreateCommentDTO } from '../model/dto/comment-create-dto';
+import { CommentEditDTO } from '../model/dto/comment-edit-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +69,13 @@ export class NewsService {
   createComent(value: NewsCreateCommentDTO): Observable<any> {
     console.log(this.apiURL + "/comment/create", value);
     return this.http.post<any>(this.apiURL + "/comment/create", value);
+  }
+  deleteComment(id: number): Observable<any> {
+    console.log(`${this.apiURL + '/comment/delete/' + id}`);
+    return this.http.get<any>(`${this.apiURL + '/comment/delete/' + id}`);
+  }
+  editComent(value: CommentEditDTO): Observable<any> {
+    console.log(this.apiURL + "/comment/edit", value);
+    return this.http.patch<any>(this.apiURL + "/comment/edit", value);
   }
 }
