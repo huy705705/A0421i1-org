@@ -8,7 +8,7 @@ import {Entities} from "../model/entities";
   providedIn: 'root'
 })
 export class NotificationService {
-  public apiURL = 'http://localhost:8080/admin/notification';
+  public apiURL = 'http://localhost:8080/employee/notification';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export class NotificationService {
   }
 
 
-  createNotification(notification: Notification): Observable<any> {
+  createNotification(notification: Notification): Observable<Notification> {
     return this.http.post<any>(this.apiURL + '/create/', JSON.stringify(notification), this.httpOptions)
   }
   updateNotification(id: number, notification: Notification): Observable<any> {

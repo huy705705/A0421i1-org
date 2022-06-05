@@ -22,6 +22,7 @@ import {AngularFireModule} from "@angular/fire";
 import {NewModule} from "./new/new.module";
 import {NewsService} from "./service/news.service";
 import {CageModule} from "./cage/cage.module";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -53,7 +54,9 @@ import {CageModule} from "./cage/cage.module";
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     NewModule,
-    CageModule
+    CageModule,
+    MatProgressSpinnerModule,
+
   ],
   bootstrap: [AppComponent]
 })

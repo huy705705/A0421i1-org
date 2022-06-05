@@ -7,6 +7,9 @@ import { NotificationEditComponent } from './notification-edit/notification-edit
 import { NotificationCreateComponent } from './notification-create/notification-create.component';
 import { NotificationDeleteComponent } from './notification-delete/notification-delete.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {FilesModule} from "../files/files.module";
+import {ImageCropperModule} from "ngx-image-cropper";
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     NotificationRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule,
+    FilesModule,
+    ImageCropperModule
   ]
 })
 export class NotificationModule { }

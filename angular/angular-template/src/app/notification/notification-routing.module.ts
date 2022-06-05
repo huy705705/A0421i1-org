@@ -7,12 +7,14 @@ import {EmployeeListComponent} from "../employee/employee-list/employee-list.com
 import {AuthGuard} from "../sercurity/auth.guard";
 import {EmployeeCreateComponent} from "../employee/employee-create/employee-create.component";
 import {EmployeeEditComponent} from "../employee/employee-edit/employee-edit.component";
+import {NotificationDeleteComponent} from "./notification-delete/notification-delete.component";
 
 
 const routes: Routes = [
-  {path:'admin/notification',component:NotificationListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
-  {path:'admin/notification/update/:id',component:NotificationEditComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
-  {path:'admin/notification/create',component:NotificationCreateComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}}
+  {path:'employee/notification',component:NotificationListComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_EMPLOYEE','ROLE_ADMIN']}},
+  {path:'employee/notification/update/:id',component:NotificationEditComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
+  {path:'employee/notification/create',component:NotificationCreateComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}},
+  {path:'employee/notification/delete/:id',component:NotificationDeleteComponent, canActivate: [AuthGuard], data:{expectedRole: ['ROLE_ADMIN']}}
 ];
 
 @NgModule({

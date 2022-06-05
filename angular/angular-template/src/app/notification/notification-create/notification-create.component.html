@@ -1,54 +1,4 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>-->
-<!--  <script src="https://kit.fontawesome.com/d3ad0e260e.js" crossorigin="anonymous"></script>-->
-<!--  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />-->
 
-<!--  &lt;!&ndash; Custom styles for this page &ndash;&gt;-->
-<!--  &lt;!&ndash;  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">&ndash;&gt;-->
-<!--  <title>Danh sách chuồng nuôi</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--  <a class="navbar-brand" href="#">LOGO-A04-PROJECT</a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-
-<!--  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
-<!--    <ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Trang chủ <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Tin tức</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Về chúng tôi</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link text-uppercase" href="#">Liên Hệ</a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--    <div class="dropleft">-->
-<!--      <button type="button" class="btn btn-nav dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Putin <i class="fa-solid fa-circle-user"></i></button>-->
-<!--      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-gears"></i> Quản lý hệ thống </a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-circle-info"></i> Quản lý thông tin đàn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-carrot"></i> Quản lý thức ăn</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-book-medical"></i> Quản lý bệnh lý</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-truck-moving"></i> Quản lý xuất chuồng</a>-->
-<!--        <a class="dropdown-item" href="#"> <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
 <div class="container-fluid" id="content">
   <div class="row">
     <div class="col-lg-2 ml-0">
@@ -97,31 +47,65 @@
     <div class="col-lg-10 " style="">
       <strong style="font-size: larger;margin-top: 10px; height: 20px">Khởi tạo thông báo</strong>
       <hr/>
-      <form [formGroup]="notificationForm" *ngIf="notificationForm" (ngSubmit)="save()" class="bg-form">
+      <form [formGroup]="notificationForm" *ngIf="notificationForm" (ngSubmit)="save1()" class="bg-form">
 
-        <label for="imgNotification" class="form-label"> Chọn ảnh minh họa</label><br>
-<!--        <img style="width: 200px;height: 200px" alt="" [src]="selectedImage" *ngIf="selectedImage">-->
-<!--        <img  class="" id="files" src="{{notification.image}}" style="height: 120px;margin-top: 10px">-->
-        <input class="form-control form-control-lg" id="imgNotification" type="file" style="   height: 51px"
-               (change)="showPreview($event)"/>
+
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Nội dung</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="content" (change)="compare()"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="content"
+                    (change)="compare()"></textarea>
         </div>
         <div style="color: red;text-align: left" *ngFor="let validation of validationMessages.content">
               <span
-                *ngIf="notificationForm.get('content').hasError(validation.type) && (notificationForm.get('content').dirty || notificationForm.get('content').touched ||notificationForm.get('content').untouched)">
+                *ngIf="notificationForm.get('content').hasError(validation.type) && (notificationForm.get('content').dirty || notificationForm.get('content').touched )">
               {{validation.message}}</span>
         </div>
-        <div class="container-fluid">
+        <!--        <label for="imgNotification" class="form-label"> Chọn ảnh minh họa</label><br>-->
+        <!--        <input class="form-control form-control-lg" id="imgNotification" type="file" style="   height: 51px"-->
+        <!--               (change)="showPreview($event)"/>-->
+        <!--        <br>-->
+        <!--        <img style="width: 150px; height: 150px;object-fit: cover" alt="avatar" [src]="imageThis">-->
+        <!--        <div class="container-fluid">-->
+        <!--        </div>-->
+        <label class="form-label"> Chọn ảnh minh họa</label><br>
+        <input type="file" (change)="uploadFile($event)" accept="image/*" style="margin-bottom: 10px">
+        <br>
+        <div>
+          <image-cropper
+            style="width: 512px; height: 512px;float:left;  display: inline"
+            [imageChangedEvent]="imageChangedEvent"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            [aspectRatio]="1/1"
+            [resizeToWidth]="128"
+            [onlyScaleDown]="true"
+            [cropperMinWidth]="128"
+            [roundCropper]="true"
+          ></image-cropper>
+          <img [src]="croppedImage"
+               style="width: 128px; height: 128px;float: left;border-radius: 50%;display: inline" >
         </div>
-        <input class="span2 form-control" size="16" formControlName="uploadDate" type="date" hidden>
-        <button type="submit" class="btn btn-info m-2">Tạo mới</button>
-        <button type="button" class="btn btn-success m-2" [routerLink]="['/employee/entities/']">Huỷ bỏ</button>
-      </form>
-    </div>
-  </div>
+        <br>
+        <br>
+        <br>
+        <br>        <br>
+        <br>
+        <br>
 
-</div>
-<!--</body>-->
-<!--</html>-->
+        <input class="span2 form-control" size="16" formControlName="uploadDate" type="date" hidden>
+        <button type="submit" class="btn btn-info m-2" [disabled]="btnStyle" style="display: inline">Tạo mới</button>
+        <button type="button" class="btn btn-success m-2" [routerLink]="['/employee/entities/']"  style="display: inline">Huỷ bỏ</button>
+      </form>
+      <div class="spinnerStyle" *ngIf="showSpinner">
+        <mat-spinner class="spinner-trontron">
+        </mat-spinner>
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <!--</body>-->
+  <!--</html>-->
+

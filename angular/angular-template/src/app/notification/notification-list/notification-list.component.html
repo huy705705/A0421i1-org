@@ -129,8 +129,8 @@
                 <th style="text-align: center">Thông báo</th>
                 <th style="text-align: center;width: 206px">Ngày tạo thông báo</th>
 
-                <th style="text-align: center">Sửa</th>
-                <th style="text-align: center">Xoá</th>
+                <th style="text-align: center" *ngIf="isAdminRole">Sửa</th>
+                <th style="text-align: center" *ngIf="isAdminRole">Xoá</th>
 
               </tr>
               </thead>
@@ -141,14 +141,14 @@
               <tr *ngFor="let notification1 of notification">
                 <td style="text-align: center">{{notification1.notificationId}}</td>
                 <td><img src="{{notification1.image}}" alt=""
-                         style="width: 150px; float: left;margin-right: 10px;margin-top: 8px">
+                         style="width: 150px;height: 150px;object-fit: cover; float: left;margin-right: 10px;margin-top: 8px">
 
                   <span> {{notification1.content}}</span>
 
                 </td>
 
                 <td style="text-align: center"> {{notification1.uploadDate|date:"dd-MM-yyyy"}}</td>
-                <td style="   width: 34.5px;">
+                <td style="   width: 34.5px;" *ngIf="isAdminRole">
 
                   <button class="btn" [routerLink]="['update/'+notification1.notificationId]"><i
                     class="fa-solid fa-pen-clip"
@@ -159,7 +159,7 @@
                 <!--                  <i class="fa-solid fa-trash-can" style="color: red;"></i>-->
                 <!--                </td>-->
                 <!--                [routerLink]="['delete/'+entity.entitiesId]"-->
-                <td style="   width: 34.5px;">
+                <td style="   width: 34.5px;" *ngIf="isAdminRole">
                   <button class="btn" (click)="openDialog(notification1.notificationId)"><i
                     class="fa-solid fa-trash-can"
                     style="color: red;"></i></button>

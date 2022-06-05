@@ -6,6 +6,7 @@ import {NotificationService} from "../../service/notification.service";
 import {FormGroup} from "@angular/forms";
 import {EntitiesDeleteComponent} from "../../entities/entities-delete/entities-delete.component";
 import {NotificationDeleteComponent} from "../notification-delete/notification-delete.component";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-notification-list',
@@ -29,6 +30,7 @@ export class NotificationListComponent implements OnInit {
   isTrue2 = true;
   deleteMessenger;
   isSearch: boolean = false;
+  isAdminRole: boolean = true;
 
 
   pageTotal: number = 0;
@@ -36,13 +38,13 @@ export class NotificationListComponent implements OnInit {
   pageSearch: Array<number>;
   pageSearchCurrent: number = 0;
   pageSearchTotal: number = 0;
-
-  constructor(private notificationService: NotificationService, private router: Router, public dialog: MatDialog) {
+  constructor(private notificationService: NotificationService, private router: Router, public dialog: MatDialog,  private tokenStorageService:TokenStorageService) {
     this.findAllPageable();
   }
 
   ngOnInit(): void {
     this.findAllPageable()
+    this.check()
     console.log(this.isTrue)
   }
 
@@ -144,5 +146,24 @@ export class NotificationListComponent implements OnInit {
         this.isTrue2 = false;
       }
     );
+  }
+
+  check() {
+    const currentUser = this.tokenStorageService.getUser();
+    let actualRole: string [] = [];
+    if (currentUser !== null) {
+
+      let roles = currentUser.roles;
+
+      for (let role of roles) {
+        actualRole.push(role['authority']);
+      }
+    }
+    actualRole.sort();
+    console.log("actualRole")
+    console.log(actualRole.indexOf("ROLE_ADMIN"))
+    if (actualRole.indexOf("ROLE_ADMIN")==-1){
+      this.isAdminRole=false;
+    }
   }
 }

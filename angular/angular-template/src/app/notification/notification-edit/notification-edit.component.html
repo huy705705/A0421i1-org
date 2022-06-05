@@ -40,40 +40,22 @@
       <strong style="font-size: larger;margin-top: 10px; height: 20px">Cập nhật thông tin thông báo: </strong>
 
       <hr/>
-      <form [formGroup]="notificationForm" style="max-width: 100%;" class="bg-light" (ngSubmit)="updateNotification()" >
+      <form [formGroup]="notificationForm" style="max-width: 100%;" class="bg-light" (ngSubmit)="save1()">
         <div class="container-fluid">
 
-<!--          <label>Ảnh đã có</label>-->
-<!--          <br>-->
-<!--          <img src="https://vnn-imgs-f.vgcloud.vn/2019/10/22/10/tiet-lo-bi-mat-ve-qua-bom-nguyen-tu-dau-tien-cua-lien-xo-4.jpg"-->
-<!--               style="width: 150px; float: none;margin-right: 10px;margin-top: 8px" alt="Bom">-->
-<!--          <br>-->
-<!--          <br>-->
+          <!--          <label>Ảnh đã có</label>-->
+          <!--          <br>-->
+          <!--          <img src="https://vnn-imgs-f.vgcloud.vn/2019/10/22/10/tiet-lo-bi-mat-ve-qua-bom-nguyen-tu-dau-tien-cua-lien-xo-4.jpg"-->
+          <!--               style="width: 150px; float: none;margin-right: 10px;margin-top: 8px" alt="Bom">-->
+          <!--          <br>-->
+          <!--          <br>-->
 
-<!--          <label for="formFileLg" class="form-label"> Cập nhật ảnh</label>-->
-<!--          <input class="form-control form-control-lg" id="formFileLg" type="file" style="   height: 51px"/>-->
-<!--          <div class="form-group">-->
-<!--            <label for="exampleFormControlTextarea1">Nội dung</label>-->
-<!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-<!--          </div>-->
-
-          <div class="form-group row">
-            <label class="col-form-label ml-3" style="width: 130px;">Ảnh minh họa<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-group mb-3">
-                <img  class="" id="files" src="{{notification.image}}" style="height: 120px;margin-top: 10px">
-                <!--                <div class="input-group-append">-->
-                <!--                  <span class="input-group-text" id="basic-addon2">kg</span>-->
-                <!--                </div>-->
-              </div>
-              <label for="imgNotification" class="form-label"> Chọn ảnh minh họa</label>
-              <input class="form-control form-control-lg" id="imgNotification" type="file" style="   height: 51px"
-                     (change)="showPreview($event)"/>
-
-            </div>
-          </div>
-
-
+          <!--          <label for="formFileLg" class="form-label"> Cập nhật ảnh</label>-->
+          <!--          <input class="form-control form-control-lg" id="formFileLg" type="file" style="   height: 51px"/>-->
+          <!--          <div class="form-group">-->
+          <!--            <label for="exampleFormControlTextarea1">Nội dung</label>-->
+          <!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+          <!--          </div>-->
           <div class="form-group row">
             <label class="col-form-label ml-3" style="width: 130px;">Nội dung<span class="text-danger">*</span></label>
             <div class="col-sm-8">
@@ -92,10 +74,45 @@
 
             </div>
           </div>
+          <div class="form-group row">
+            <label class="col-form-label ml-3" style="width: 130px;">Ảnh minh họa<span
+              class="text-danger">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-group mb-3">
+                <img class="" id="files" src="{{notification.image}}" style="height: 120px;margin-top: 10px">
+                <!--                <div class="input-group-append">-->
+                <!--                  <span class="input-group-text" id="basic-addon2">kg</span>-->
+                <!--                </div>-->
+              </div>
+              <!--              <label for="imgNotification" class="form-label"> Chọn ảnh minh họa</label>-->
+              <!--              <input class="form-control form-control-lg" id="imgNotification" type="file" style="   height: 51px"-->
+              <!--                     (change)="showPreview($event)"/>-->
+              <label class="form-label"> Chọn ảnh minh họa</label><br>
+              <input type="file" (change)="uploadFile($event)" accept="image/*" style="margin-bottom: 10px">
+              <br>
+              <div>
+                <image-cropper
+                  style="width: 512px; height: 512px;float:left;  display: inline"
+                  [imageChangedEvent]="imageChangedEvent"
+                  format="png"
+                  (imageCropped)="imageCropped($event)"
+                  [aspectRatio]="1/1"
+                  [resizeToWidth]="128"
+                  [onlyScaleDown]="true"
+                  [cropperMinWidth]="128"
+                  [roundCropper]="true"
+                ></image-cropper>
+                <img [src]="croppedImage"
+                     style="width: 128px; height: 128px;float: left;border-radius: 50%;display: inline">
+              </div>
+            </div>
+          </div>
+
+
+
           <input class="span2 form-control" size="16" formControlName="uploadDate" type="date" hidden>
           <input class="span2 form-control" size="16" formControlName="delete" type="text" hidden>
           <input class="span2 form-control" size="16" formControlName="image" type="text" hidden>
-
 
 
           <div class="text-center">
@@ -104,6 +121,11 @@
           </div>
         </div>
       </form>
+      <div class="spinnerStyle" *ngIf="showSpinner">
+        <mat-spinner class="spinner-trontron">
+        </mat-spinner>
+
+      </div>
     </div>
   </div>
 
