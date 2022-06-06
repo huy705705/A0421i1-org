@@ -48,8 +48,7 @@ export class EmployeeListComponent implements OnInit {
 
     this.isTrue2 = true;
 
-    this.employeeService.findAllPageable(this.page).subscribe(
-      data=>{
+    this.employeeService.findAllPageable(this.page).subscribe(data=>{
         this.employeeList=data['content']
         this.pages= new Array(data['totalPages'])
         this.totalPages= data['totalPages'];

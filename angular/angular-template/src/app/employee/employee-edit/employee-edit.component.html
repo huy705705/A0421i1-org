@@ -1,24 +1,3 @@
-<!--<ng-template #content let-c="close" let-d="dismiss">-->
-<!--  <div class="modal-header">-->
-<!--    <h4 class="modal-title" id="modal-basic-title">Bạn có muốn đổi mật khẩu không?</h4>-->
-<!--    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Có, tôi muốn đổi!</button>-->
-<!--    <button *ngIf="changePass ==false" type="button" class="btn btn-dark m-2" (click)="changePassWord()">Có, tôi muốn đổi</button>-->
-<!--    <button *ngIf="changePass==true" type="button" class="btn btn-success m-2" (click)="cancelChange()">Không đổi</button>-->
-<!--  </div>-->
-<!--</ng-template>-->
-
-
-
-<!--<ng-template #firstDialog>-->
-<!--  <h2 matDialogTitle>Bạn muốn đổi mật khẩu không?</h2>-->
-<!--  <mat-dialog-actions align="center">-->
-<!--    <button type="button" class="btn btn-info m-2" (click)="changePassWord()" matDialogClose>Có, tôi muốn đổi</button>-->
-<!--    <button type="button" class="btn btn-success m-2" (click)="cancelChange()" matDialogClose>Không đổi</button>-->
-<!--  </mat-dialog-actions>-->
-<!--</ng-template>-->
 
 <div class="container-fluid" id="content" style="margin-top: 58px">
   <div class="row">
@@ -39,13 +18,17 @@
           </li>
 
           <li>
-<!--            <button mat-button (click)="openDialogWithRef(firstDialog)">Open dialog with reference</button>-->
             <a [routerLink]="['/employee/entities']"class="nav-link link-dark">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
               Quản lý cá thể
             </a>
           </li>
-
+          <li class="nav-item">
+            <a [routerLink]="['/admin/notification']" class="nav-link" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Thông báo
+            </a>
+          </li>
         </ul>
         <hr>
 
@@ -96,38 +79,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div *ngIf="changePass==true">
-          <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="password" formControlName="password">
-                <div style="color: red;"  *ngFor="let validation of validationMessages.password">
-                <span *ngIf="employeeForm.get('password').hasError(validation.type) && (employeeForm.get('password').dirty || employeeForm.get('password').touched)">
-                {{validation.message}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group row" >
-            <label  class="col-form-label ml-3" style="width: 150px;">Xac nhận mật khẩu<span class="text-danger">*</span></label>
-            <div class="col-sm-8">
-              <div class="input-append date" id="" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2 form-control" size="16" type="password" formControlName="confirmPassword" [(ngModel)]="employee.password">
-                <div style="color: red;"  *ngFor="let validation of validationMessages.confirmPassword">
-                  <span *ngIf="employeeForm.hasError('notMatch') && (employeeForm.touched)"> Mật khẩu không trùng khớp, vui lòng nhập lại!</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="button" class="btn btn-info m-2" (click)="confirmChange()">Kiểm tra mật khẩu</button>
-            <button type="button" class="btn btn-success m-2" (click)="cancelChange()">Hoàn tác</button>
-          </div>
-
           </div>
 
           <div class="form-group row" >
@@ -212,15 +163,45 @@
               </div>
             </div>
           </div>
+          <div [ngStyle]="(changePass) ? {'visibility': 'visible'} : {'visibility': 'hidden'}">
+            <div class="form-group row" >
+              <label  class="col-form-label ml-3" style="width: 150px;">Mật khẩu<span class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                <div class="input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                  <input class="span2 form-control" size="16" type="password" formControlName="password">
+                  <div style="color: red;"  *ngFor="let validation of validationMessages.password">
+                <span *ngIf="employeeForm.get('password').hasError(validation.type) && (employeeForm.get('password').dirty || employeeForm.get('password').touched)">
+                {{validation.message}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="form-group row" >
+              <label  class="col-form-label ml-3" style="width: 150px;">Xac nhận mật khẩu<span class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                <div class="input-append date" id="" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                  <input class="span2 form-control" size="16" type="password" formControlName="confirmPassword" [(ngModel)]="employee.password">
+                  <div style="color: red;"  *ngFor="let validation of validationMessages.confirmPassword">
+                    <span *ngIf="employeeForm.hasError('notMatch') && (employeeForm.touched)"> Mật khẩu không trùng khớp, vui lòng nhập lại!</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!--            <div class="text-center">-->
+<!--              <button type="button" class="btn btn-info m-2" (click)="confirmChange()">Kiểm tra mật khẩu</button>-->
+<!--            </div>-->
+
+          </div>
           <div class="text-center">
 
             <button type="submit" class="btn btn-info m-2">Cập nhật</button>
 
             <button type="button" class="btn btn-success m-2" [routerLink]="['/admin/employee']">Huỷ bỏ</button>
 
-            <button *ngIf="changePass ==false" type="button" class="btn btn-dark m-2" (click)="changePassWord()">Đổi mật khẩu</button>
+            <button *ngIf="changePass ==false" type="button" class="btn btn-dark"  (click)="changePassWord()">Đổi mật khẩu</button>
 
+            <button *ngIf="changePass ==true" type="button" class="btn btn-dark" (click)="cancelChange()">Hoàn tác</button>
           </div>
 
         </div>

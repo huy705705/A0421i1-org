@@ -21,8 +21,7 @@ export class EmployeeEditComponent implements OnInit {
   employeeId;
   employeeForm: FormGroup;
   currentPass: string;
-  changePass: boolean = true;
-  ref: TemplateRef<any>;
+  changePass: boolean = false;
 
   validationMessages = {
     employeeName: [
@@ -103,7 +102,6 @@ export class EmployeeEditComponent implements OnInit {
       employeeService.findById(this.employeeId).subscribe( next => {
         this.employee = next;
         this.currentPass = this.employee.password;
-        console.log(this.currentPass);
         this.employeeForm = new FormGroup({
           employeeId      : new FormControl({value: '', disabled: true}, [Validators.required]),
           employeeName    : new FormControl('', [
@@ -139,18 +137,12 @@ export class EmployeeEditComponent implements OnInit {
           isDelete        : new FormControl(),
         },{validators: checkPassword});
         this.employeeForm.patchValue(this.employee);
-        this.cancelChange();
-        console.log(this.employeeForm.value.password);
       });
     }, error => {
 
     }, () => {
 
     });
-  }
-
-  openDialogWithRef(ref) {
-    this.dialog.open(ref);
   }
 
   changePassWord() {
@@ -164,17 +156,17 @@ export class EmployeeEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  confirmChange() {
-    if (this.currentPass == this.employeeForm.value.password){
-      this.toast.warning("Trùng khớp với mật khẩu cũ, vui lòng nhập mật khẩu mới!", "Cảnh báo: ");
-      return;
-    } else {
-      this.toast.success("Mật khẩu thoả mãn yêu cầu!", "Thành công: ", {
-        timeOut: 4000,
-        extendedTimeOut: 1000
-      })
-    }
-  }
+  // confirmChange() {
+  //   if (this.currentPass == this.employeeForm.value.password){
+  //     this.toast.warning("Trùng khớp với mật khẩu cũ, vui lòng nhập mật khẩu mới!", "Cảnh báo: ");
+  //     return;
+  //   } else {
+  //     this.toast.success("Mật khẩu thoả mãn yêu cầu!", "Thành công: ", {
+  //       timeOut: 4000,
+  //       extendedTimeOut: 1000
+  //     })
+  //   }
+  // }
 
   updateEmployee() {
     if (this.changePass == true && this.currentPass == this.employeeForm.value.password){
